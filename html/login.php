@@ -22,7 +22,7 @@
             <div class="row">
               
              <!--  <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>-->
-             <img src="<?php echo $img?>logoicon.jpg" alt="" class="col-lg-6 d-none d-lg-block bg-login-image">
+             <img src="<?php echo IMG?>logoicon.jpg" alt="" class="col-lg-6 d-none d-lg-block bg-login-image">
               <div class="col-lg-6">
                 <div class="p-5">
                 <br>
