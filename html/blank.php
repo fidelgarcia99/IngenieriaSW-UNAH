@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <?php include($secciones . 'head-general.php')?>
+  <?php include(SECCIONES . 'head-general.php')?>
 </head>
 
 <body id="page-top">
@@ -11,7 +11,7 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <?php include($secciones . 'sidebar.php')?>
+    <?php include(SECCIONES . 'sidebar.php')?>
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -21,7 +21,7 @@
       <div id="content">
 
         <!-- Topbar -->
-    <?php include($secciones . 'topnav.php')?>
+    <?php include(SECCIONES . 'topnav.php')?>
         <!-- End of Topbar -->
 
         <!-------------------------- Begin Page Content ------------------------------>
@@ -37,7 +37,7 @@
       <!-- End of Main Content -->
 
       <!-- Footer -->
-      <?php include($secciones . 'footer.php')?>
+      <?php include(SECCIONES . 'footer.php')?>
       <!-- End of Footer -->
 
     </div>
@@ -52,10 +52,10 @@
   </a>
 
   <!-- Logout Modal-->
-  <?php include($secciones . 'logout-modal.php')?>
+  <?php include(SECCIONES . 'logout-modal.php')?>
 
   <!-- Scripts-->
-  <?php include($secciones . 'scripts-generales.php')?>
+  <?php include(SECCIONES . 'scripts-generales.php')?>
   <!------------>
 </body>
 

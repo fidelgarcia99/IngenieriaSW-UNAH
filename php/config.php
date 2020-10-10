@@ -20,4 +20,9 @@
     define('VENDOR','vendor/');
     define('HTML','html/');
     define('SECCIONES','html/secciones/');
+
+//Generacion de tokens con JWT
+    define('SECRETKEY','IS-IIIPAC-2020');
+    define('TIEMPOTOKEN',3600);
+    $encrypt = ['HS256'];    
 ?>

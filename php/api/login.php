@@ -1,12 +1,14 @@
 <?php
     header("Content-Type: application/json");
 
-   include("../clases/class_conexion.php");
-   $conexion = new Conexion();    
+    require_once('../config.php');
+    require_once("../clases/class_conexion.php");
+    require_once("../clases/class_jwt.php");
+    $conexion = new Conexion();    
 
-   session_start();
+    session_start();
       
-   switch($_SERVER['REQUEST_METHOD']){
+    switch($_SERVER['REQUEST_METHOD']){
         case 'POST':
             $user = mysqli_real_escape_string($conexion->getLink(),$_POST['usuario']);
             $passwd = sha1(mysqli_real_escape_string($conexion->getLink(),$_POST['password'])); 
@@ -16,14 +18,21 @@
             
             $count = $conexion->cantidadRegistros($result);
               
-            if($count == 1) {
-               //session_register("username");
-               $_SESSION['login_user'] = $user;
-               echo '{"login":1,"token":"re1"}';
+            if($count == 1) {               
+               $token = JWTokens::generaToken([
+                'email' => "email@test.com",
+                'username' => $user
+                ]);
+
+                $_SESSION['token'] = $token;
+                setcookie("token",$token,time()+TIEMPOTOKEN,'/');
+
+               echo '{"res":"OK"}';
             }else {
-               echo '{"login":0}';
+                setcookie("token",'',time()-1,'/');
+                echo '{"res":"fail"}';
             }
         break;
-   }
+    }
      
 ?>
