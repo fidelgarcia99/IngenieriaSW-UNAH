@@ -1,3 +1,15 @@
+<?php 
+      session_start();
+      if(isset($_SESSION['token'])){
+        if(isset($_COOKIE['token'])){
+          if($_COOKIE['token'] == $_SESSION['token']){
+            header('Location: /');
+          }
+        }
+      }
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,16 +44,22 @@
                   </div>
                   <form class="user">
                     <div class="form-group">
-                      <input type="id" class="form-control form-control-user" id="exampleInputid" aria-describedby="idHelp" placeholder="Ingrese Id">
+                      <input type="id" class="form-control form-control-user" id="inputID" aria-describedby="idHelp" placeholder="Ingrese Id" onkeyup="isCamposLlenos();" onfocusout="isCamposLlenos();">
+                      <div class="invalid-feedback" style="display:none">
+                        Ingrese su identidad.
+                      </div>
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                      <input type="password" class="form-control form-control-user" id="inputPasswd" placeholder="Password" onkeyup="isCamposLlenos();" onfocusout="isCamposLlenos();">
+                      <div class="invalid-feedback" style="display:none">
+                        Ingrese su constraseña.
+                      </div>
                     </div>
-
-                    <hr>
-                    <a href="index.html" class="btn btn-primary btn-user btn-block">
-                      Login
-                    </a>
+                    <div id="errorMessage" class="alert alert-danger" style="display:none">
+                    Credenciales Incorrectas
+                    </div>
+                    <hr>    
+                    <button onclick="validaLogin();" class="btn btn-primary btn-user btn-block" type="button">Iniciar Sesion</button>
                     <hr>
                    
                 </div>
@@ -57,6 +75,7 @@
   </div>
 
   <?php include SECCIONES.'scripts-generales.php'?>
+  <script src="<?php echo JS?>login-controller.js"></script>
 
 </body>
 

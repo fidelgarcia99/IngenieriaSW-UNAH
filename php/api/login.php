@@ -26,11 +26,10 @@
 
                 $_SESSION['token'] = $token;
                 setcookie("token",$token,time()+TIEMPOTOKEN,'/');
-
-               echo '{"res":"OK"}';
+                echo '{"res":"OK"}';
             }else {
                 setcookie("token",'',time()-1,'/');
-                echo '{"res":"fail"}';
+                echo '{"res":"fail","mensaje":"Credenciales Incorrectas"}';
             }
         break;
     }

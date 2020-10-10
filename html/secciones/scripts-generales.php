@@ -7,3 +7,6 @@
 
   <!-- Custom scripts for all pages-->
   <script src="<?php echo JS?>sb-admin-2.min.js"></script>
+  
+  <!-- Axios -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

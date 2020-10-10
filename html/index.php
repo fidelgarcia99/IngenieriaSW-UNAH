@@ -1,3 +1,4 @@
+<?php include SECCIONES.'valida-acceso.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 
