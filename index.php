@@ -1,11 +1,12 @@
 <?php
     require('php/config.php');
+    require_once VENDOR.'autoload.php';
     if(isset($_GET['view']) && !empty($_GET['view'])){
-        $page = $html . $_GET['view'] . '.php';
+        $page = HTML . $_GET['view'] . '.php';
         if(!(include $page)){
-            include($html . '404.php');
+            include(HTML . '404.php');
         }
     }else{
-        include($html .'index.php');
+        include(HTML .'index.php');
     }
 ?>
