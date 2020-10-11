@@ -44,13 +44,13 @@
                   </div>
                   <form class="user">
                     <div class="form-group">
-                      <input type="id" class="form-control form-control-user" id="inputID" aria-describedby="idHelp" placeholder="Ingrese Id" onkeyup="isCamposLlenos();" onfocusout="isCamposLlenos();">
+                      <input type="id" class="form-control form-control-user" id="inputID" aria-describedby="idHelp" placeholder="Ingrese Id" onfocusin="teclea(this);" onfocusout="isCampoVacio(this);">
                       <div class="invalid-feedback" style="display:none">
                         Ingrese su identidad.
                       </div>
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="inputPasswd" placeholder="Password" onkeyup="isCamposLlenos();" onfocusout="isCamposLlenos();">
+                      <input type="password" class="form-control form-control-user" id="inputPasswd" placeholder="Password" onfocusin="teclea(this);" onfocusout="isCampoVacio(this);">
                       <div class="invalid-feedback" style="display:none">
                         Ingrese su constraseña.
                       </div>

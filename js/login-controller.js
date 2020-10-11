@@ -1,23 +1,32 @@
 
+var teclea = function(input){
+    input.classList='form-control form-control-user';
+}
+
+var isCampoVacio = function(input){
+    if(input.value=='')
+    input.classList='form-control form-control-user is-invalid';
+    else
+    input.classList='form-control form-control-user';
+
+    let userId = document.getElementById('inputID');
+    let passwd = document.getElementById('inputPasswd');
+    let errMes = document.getElementById('errorMessage');
+    if(userId.value!='' && passwd.value!=''){    
+        errMes.style='display:none';
+    }
+
+}
+
 var isCamposLlenos = function(){
     let userId = document.getElementById('inputID');
     let passwd = document.getElementById('inputPasswd');
     let errMes = document.getElementById('errorMessage');
 
-    if(userId.value=='')
-        userId.classList='form-control form-control-user is-invalid';
-        else
-        userId.classList='form-control form-control-user';
-
-    if(passwd.value=='')
-        passwd.classList='form-control form-control-user is-invalid';
-        else
-        passwd.classList='form-control form-control-user';
-
-    if(userId.value=='' && passwd.value==''){
+    if(userId.value=='' || passwd.value==''){
         errMes.innerHTML = 'Ingrese ambos campos.';
         errMes.style='display:block';
-    }else if(userId.value!='' && passwd.value!=''){        
+    }else{        
         errMes.style='display:none';
     }
 }
