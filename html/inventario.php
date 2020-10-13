@@ -1,3 +1,4 @@
+<?php include SECCIONES.'valida-acceso.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,13 +34,13 @@
          <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Inventario</h1>
+          <!--<h1 class="h3 mb-4 text-gray-800">Inventario</h1>-->
           
           </div>
           <!--------------------------- /.container-fluid -------------------------------->
 
         <!-- Begin Page Content -->
-        <?php include(SECCIONES . 'tablainventario.php')?>
+        <?php include(SECCIONES . 'tabla.php')?>
         <!-- /.container-fluid -->
 
       </div>
@@ -71,8 +72,7 @@
   <script src="<?php echo VENDOR?>datatables/jquery.dataTables.min.js"></script>
   <script src="<?php echo VENDOR?>datatables/dataTables.bootstrap4.min.js"></script>
 
-  <!-- Page level custom scripts -->
-  <script src="<?php echo JS?>demo/datatables-demo.js"></script>
+
 
 </body>
 

@@ -26,11 +26,9 @@
                 $resultado = $conexion->ejecutarInstruccion('select * from producto');
                 $res = array(); //creamos un array
             
-                 $i=0;
-                while($row = mysqli_fetch_array($resultado))
+                while($row = mysqli_fetch_assoc($resultado))
                 {
-                    $res[$i] = $row;
-                    $i++;
+                    $res[] = $row;                    
                 }
                 echo json_encode($res);
             }
