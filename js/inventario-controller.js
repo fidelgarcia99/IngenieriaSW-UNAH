@@ -1,1 +1,4 @@
-rellenaTabla(null,"inventario","get");
+$(document).ready(function() {
+    rellenaTabla(null,"inventario","get");
+    $('#dataTable').DataTable();
+  });
