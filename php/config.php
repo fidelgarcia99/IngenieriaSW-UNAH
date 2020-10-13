@@ -24,5 +24,6 @@
 //Generacion de tokens con JWT
     define('SECRETKEY','IS-IIIPAC-2020');
     define('TIEMPOTOKEN',3600);
-    $encrypt = ['HS256'];    
+    define('ENCRYPT',['HS256']);
+    //$encrypt = ['HS256'];    
 ?>

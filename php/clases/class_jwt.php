@@ -30,7 +30,7 @@ class JWTokens
         $decode = JWT::decode(
             $token,
             SECRETKEY,
-            self::$encrypt
+            ENCRYPT
         );
 
         if($decode->aud !== self::Aud())
@@ -44,7 +44,7 @@ class JWTokens
         return JWT::decode(
             $token,
             SECRETKEY,
-            self::$encrypt
+            ENCRYPT
         )->data;
     }
 

@@ -42,7 +42,7 @@ var validaLogin = function(){
         let urlEnconde = `usuario=${userId.value}&password=${passwd.value}`;
         axios({
             url:'http://localhost/IngenieriaSW/INGENIERIASW-UNAH/php/api/login.php',
-            method:'post',
+            method:'POST',
             responseType:'json',
             data:urlEnconde
         }).then(res=>{

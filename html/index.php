@@ -370,7 +370,6 @@
   <!-- Page level custom scripts -->
   <script src="<?php echo JS?>demo/chart-area-demo.js"></script>
   <script src="<?php echo JS?>demo/chart-pie-demo.js"></script>
-
 </body>
 
 </html>
