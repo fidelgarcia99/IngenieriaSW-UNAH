@@ -23,7 +23,37 @@
             if(isset($_GET['id'])){
 
             }else{
-                $resultado = $conexion->ejecutarInstruccion('select * from producto');
+                $resultado = $conexion->ejecutarInstruccion(`SELECT 
+                p.idProducto,
+                p.nombre_producto,
+                p.fechaElaboracion,
+                p.fechaVencimiento,
+                p.precioCosto,
+                p.precioVenta,
+                p.precioOferta,
+                p.cantidad,
+                p.Contenedor_idContenedor,
+                prov.nombre_proveedor,
+                prov.telefono_proveedor,
+                cont.descripcion_cont,
+                pas.descripcion_pasillo,
+                a.nombre_area
+            FROM
+                producto AS p
+                    INNER JOIN
+                producto_x_proveedor pxp ON p.idProducto = pxp.Producto_idProducto
+                    INNER JOIN
+                proveedor prov ON pxp.Proveedor_idProveedor = prov.idProveedor
+                    INNER JOIN
+                contenedor cont ON p.Contenedor_idContenedor = cont.idContenedor
+                    INNER JOIN
+                pasillo_x_contenedor pxc ON cont.idContenedor = pxc.Contenedor_idContenedor
+                    INNER JOIN
+                pasillo pas ON pxc.Pasillo_idPasillo = pas.idPasillo
+                    INNER JOIN
+                area a ON pas.Area_idArea = a.idArea
+            WHERE
+                p.cantidad > 0`);
                 $res = array(); //creamos un array
             
                 while($row = mysqli_fetch_assoc($resultado))

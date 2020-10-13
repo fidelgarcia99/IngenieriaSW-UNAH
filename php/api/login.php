@@ -13,7 +13,7 @@
             $user = mysqli_real_escape_string($conexion->getLink(),$_POST['usuario']);
             $passwd = sha1(mysqli_real_escape_string($conexion->getLink(),$_POST['password'])); 
             
-            $sql = "SELECT * FROM usuarios WHERE usuario = '$user' and password = '$passwd'";
+            $sql = "SELECT * FROM usuario WHERE nombre_usuario = '$user' and password = '$passwd'";
             $result = $conexion->ejecutarInstruccion($sql);
             
             $count = $conexion->cantidadRegistros($result);
@@ -21,7 +21,7 @@
             if($count == 1) {               
                $token = JWTokens::generaToken([
                 'email' => "email@test.com",
-                'username' => $user
+                'nombre_usuario' => $user
                 ]);
 
                 $_SESSION['token'] = $token;
