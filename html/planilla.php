@@ -1,4 +1,5 @@
 <?php
+  include SECCIONES.'valida-acceso.php';
   //incluimos la clase conexion para poder crear el objeto Conexion que enviaremos como parametro
   include_once("php/clases/class_conexion.php");
   //se incluye la clase personas parapoder llamar sus funciones desde el index
