@@ -1,6 +1,21 @@
 <div class="container-fluid">
+<<<<<<< Updated upstream
 <div class="card shadow mb-4">
 
+=======
+
+  <div class="row">
+    <div class="col-3">
+       <select class="form-control" id="fechas-planilla">
+          <option selected="">seleccionar fecha</option>
+          <?php Personas::llenarFechas($conexion); ?>
+       </select>
+    </div>
+    <div class="col-2">
+      <button type="button" class="btn btn-primary" onclick="planilla()">Mostrar</button>
+    </div>
+  </div>
+>>>>>>> Stashed changes
             <div class="card-body">
               <div class="table-responsive">
               
@@ -18,9 +33,9 @@
                     </tr>
                   </thead>
                   
-                  <tbody>
+                  <tbody class="tplanilla">
                    <?php
-                      Personas::empleados($conexion);
+                      Personas::empleados($conexion, 1);
                    ?>
                     
                   </tbody>
@@ -42,7 +57,7 @@
         <table class="table table-striped">
           <thead>
              <tr>
-          <th>Descripcion</th>
+          <th>fecha</th>
             <th>Monto</th>
           </tr>
           </thead>

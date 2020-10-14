@@ -7,19 +7,26 @@
   $conexion = new Conexion();
 
 switch ($_GET["accion"]) {
-		case '1'://agregar elemento  al JSON
-			$idEmpleado = $_POST["codigo"];
+		case '1':
+			$idEmpleado = $_POST["idEmpleado"];
+			$idPlanilla = $_POST["idPlanilla"];
 			
-			echo Personas::deducciones($conexion, $idEmpleado);
+			echo Personas::deducciones($conexion, $idEmpleado, $idPlanilla);
 
 		break;
-		case '2'://agregar elemento  al JSON
-			$idEmpleado = $_POST["codigo"];
+		case '2':
+			$idEmpleado = $_POST["idEmpleado"];
+			$idPlanilla = $_POST["idPlanilla"];
 			
-			echo Personas::bonos($conexion, $idEmpleado);
+			echo Personas::bonos($conexion, $idEmpleado, $idPlanilla);
 
 		break;
-		
+		case '3':
+			$idPlanilla = $_POST["codigo"];
+			
+			echo Personas::empleados($conexion, $idPlanilla);
+
+		break;
 	}
 ?>
 

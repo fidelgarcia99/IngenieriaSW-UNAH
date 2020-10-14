@@ -1,9 +1,9 @@
 <?php
 	class Personas{//se crea la clase persona
 		
-		public static function empleados($conexion){
+		public static function empleados($conexion, $idPlanilla){
 
-			$personas = $conexion->ejecutarInstruccion('
+			$personas = $conexion->ejecutarInstruccion("
 				SELECT  pnombre, 
 						papellido, 	
 						num_identidad,
@@ -11,7 +11,8 @@
 						idEmpleado,
 						sueldo_emp,
 						fechainicio,
-						fechafin
+						fechafin,
+						idPlanilla
 				FROM persona as A
 				INNER JOIN empleado as B
 				ON(A.idPersona=B.Persona_idPersona)
@@ -19,9 +20,9 @@
 				ON(C.Empleado_idEmpleado=B.idEmpleado)
 				INNER JOIN planilla as D
 				ON(D.idPlanilla=C.Planilla_idPlanilla)
-				WHERE fechainicio = "2019-12-09"
+				WHERE idPlanilla = '$idPlanilla'
 
-			');
+			");
 			
 			while ($fila_personas = $conexion->obtenerFila($personas)) {	
 			?>
@@ -31,11 +32,11 @@
 					<td><?php echo $fila_personas["num_identidad"];?></td>
 					<td><?php echo $fila_personas["direccion"];?></td>
 					<td>  <!-- Button trigger modal -->
-                      <div class="text-center"><button type="button" onclick="deducciones(<?php echo $fila_personas["idEmpleado"];?>)" class="btn btn-primary" data-toggle="modal" data-target="#deducciones">Deducciones
+                      <div class="text-center"><button type="button" onclick="deducciones(<?php echo $fila_personas["idEmpleado"];?>, <?php echo $idPlanilla; ?>)" class="btn btn-primary" data-toggle="modal" data-target="#deducciones">Deducciones
                       </button></div>
                     </td> 
                     <td>  <!-- Button trigger modal -->
-                      <div class="text-center"><button type="button" onclick="bonos(<?php echo $fila_personas["idEmpleado"];?>)"class="btn btn-primary" data-toggle="modal" data-target="#bonos">Bonos
+                      <div class="text-center"><button type="button" onclick="bonos(<?php echo $fila_personas["idEmpleado"];?>, <?php echo $idPlanilla; ?>)"class="btn btn-primary" data-toggle="modal" data-target="#bonos">Bonos
                       </button></div>
                     </td>
                     <td><?php echo $fila_personas["sueldo_emp"];?></td>  
@@ -45,12 +46,12 @@
 			 $conexion->liberarResultado($personas);
 		}
 
-		public static function deducciones($conexion, $idEmpleado){
+		public static function deducciones($conexion, $idEmpleado, $idPlanilla){
 
-			$personas = $conexion->ejecutarInstruccion("
+			$sql = $conexion->ejecutarInstruccion("
 				SELECT  
 						valor,
-						D.fechainicio
+						H.fechainicio
 
 				FROM persona as A
 				INNER JOIN empleado as B
@@ -63,33 +64,41 @@
 				ON(G.Empleado_idEmpleado=B.idEmpleado)
 				INNER JOIN deduccion as H
 				ON(H.idDeduccion=G.Deduccion_idDeduccion)
-				WHERE idEmpleado = '$idEmpleado' AND D.fechainicio = '2019-12-09'
+				WHERE idEmpleado = '$idEmpleado' AND G.Planilla_idPlanilla = '$idPlanilla' AND idPlanilla = '$idPlanilla' 
 
 			");
 
-			
-			$c = 0;
-			while ($fila_personas = $conexion->obtenerFila($personas)) {
-				
-			?>
+			$registros = $conexion->cantidadRegistros($sql);
+
+			if ($registros > 0) {
+				while ($fila_personas = $conexion->obtenerFila($sql)) {	
+					?>
+						<tr>
+							<td><?php echo $fila_personas["fechainicio"];?></td>
+							<td><?php echo $fila_personas["valor"];?></td>
+							
+						</tr>
+					<?php	
+				}
+			}else{
+				?>
 				<tr>
-					<td><?php echo "descripcion";?></td>
-					<td><?php echo $fila_personas["valor"];?></td>
-					
+					<td><?php echo "No tiene deducciones!";?></td>
 				</tr>
 			<?php	
 			}
-			 $conexion->liberarResultado($personas);
+
+			 $conexion->liberarResultado($sql);
 
 		}	
 
-		public static function bonos($conexion, $idEmpleado){
+		public static function bonos($conexion, $idEmpleado, $idPlanilla){
 
-			$personas = $conexion->ejecutarInstruccion("
+			$sql = $conexion->ejecutarInstruccion("
 				SELECT  
 						monto,
 						fecha_bono,
-						fechainicio
+						descripcion
 
 				FROM persona as A
 				INNER JOIN empleado as B
@@ -102,24 +111,62 @@
 				ON(E.Empleado_idEmpleado=B.idEmpleado)
 				INNER JOIN bono as F
 				ON(F.idBono=E.Bono_idBono)
-				WHERE idEmpleado = '$idEmpleado' AND fechainicio = '2019-12-09'
+				WHERE idEmpleado = '$idEmpleado' AND E.Planilla_idPlanilla = '$idPlanilla' AND idPlanilla = '$idPlanilla'  
 
 			");
 
+			$registros = $conexion->cantidadRegistros($sql);
+
+			if ($registros > 0) {
+				while ($fila_personas = $conexion->obtenerFila($sql)) {
+					?>
+						<tr>
+							<td><?php echo $fila_personas["descripcion"];?></td>
+							<td><?php echo $fila_personas["fecha_bono"];?></td>
+							<td><?php echo $fila_personas["monto"];?></td>
+							
+						</tr>
+
+					<?php	
+				}
+			}else{
+				?>
+					<tr>
+						<td><?php echo "No tiene bonos!";?></td>
+					</tr>
+				<?php	
+			}
 			
+			 $conexion->liberarResultado($sql);
+
+		}	
+
+		public static function llenarFechas($conexion){
+
+			$personas = $conexion->ejecutarInstruccion("
+				SELECT  idPlanilla, fechainicio, fechafin FROM planilla 
+			");
+
 			$c = 0;
 			while ($fila_personas = $conexion->obtenerFila($personas)) {
-				
-			?>
-
-				<tr>
-					<td><?php echo "descripcion";?></td>
-					<td><?php echo $fila_personas["fecha_bono"];?></td>
-					<td><?php echo $fila_personas["monto"];?></td>
-					
-				</tr>
-
-			<?php	
+				if ($c==0) {
+					?>
+					<option selected value="<?php echo $fila_personas["idPlanilla"];?>">
+						<?php echo $fila_personas["fechainicio"];?>
+						-
+						<?php echo $fila_personas["fechafin"];?>
+					</option>
+					<?php
+					$c=1;
+				}else{
+					?>
+					<option value="<?php echo $fila_personas["idPlanilla"];?>">
+						<?php echo $fila_personas["fechainicio"];?>
+						-
+						<?php echo $fila_personas["fechafin"];?>
+					</option>
+					<?php
+				}
 			}
 			
 			 $conexion->liberarResultado($personas);
