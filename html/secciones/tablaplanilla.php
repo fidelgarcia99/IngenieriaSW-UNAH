@@ -1,10 +1,7 @@
 <div class="container-fluid">
-<<<<<<< Updated upstream
 <div class="card shadow mb-4">
-
-=======
-
-  <div class="row">
+  <br>
+  <div class="row justify-content-center">
     <div class="col-3">
        <select class="form-control" id="fechas-planilla">
           <option selected="">seleccionar fecha</option>
@@ -15,7 +12,7 @@
       <button type="button" class="btn btn-primary" onclick="planilla()">Mostrar</button>
     </div>
   </div>
->>>>>>> Stashed changes
+
             <div class="card-body">
               <div class="table-responsive">
               
