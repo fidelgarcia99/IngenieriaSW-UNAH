@@ -8,6 +8,8 @@
 						papellido, 	
 						num_identidad,
 						direccion,
+						nombre_cargo,
+						fecha_nombramiento,
 						idEmpleado,
 						sueldo_emp,
 						fechainicio,
@@ -20,6 +22,10 @@
 				ON(C.Empleado_idEmpleado=B.idEmpleado)
 				INNER JOIN planilla as D
 				ON(D.idPlanilla=C.Planilla_idPlanilla)
+				INNER JOIN cargo_x_empleado as E
+				ON(E.Empleado_idEmpleado = B.idEmpleado)
+				INNER JOIN cargo as F
+				ON(F.idCargo=E.Cargo_idCargo)
 				WHERE idPlanilla = '$idPlanilla'
 
 			");
@@ -29,8 +35,8 @@
 				<tr>
 					<td><?php echo $fila_personas["pnombre"];?></td>
 					<td><?php echo $fila_personas["papellido"];?></td>
-					<td><?php echo $fila_personas["num_identidad"];?></td>
-					<td><?php echo $fila_personas["direccion"];?></td>
+					<td><?php echo $fila_personas["nombre_cargo"];?></td>
+					<td><?php echo $fila_personas["fecha_nombramiento"];?></td>
 					<td>  <!-- Button trigger modal -->
                       <div class="text-center"><button type="button" onclick="deducciones(<?php echo $fila_personas["idEmpleado"];?>, <?php echo $idPlanilla; ?>)" class="btn btn-primary" data-toggle="modal" data-target="#deducciones">Deducciones
                       </button></div>
