@@ -11,7 +11,7 @@ var rellenaTabla = function(id,api, method){
     }
 
     axios({
-            url:`http://localhost/IngenieriaSW/INGENIERIASW-UNAH/php/api/${api}.php`,
+            url:`http://localhost/IngenieriaSW-UNAH/php/api/${api}.php`,
             method:method,
             responseType:'json',
             params:params

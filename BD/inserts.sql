@@ -1,5 +1,5 @@
 /*Tabla Usuario*/
-insert into Usuario (idUsuario, nombre_usuario, password) values (1, 'jbasnett0', 'UmxrCcUp');
+insert into Usuario (idUsuario, nombre_usuario, password) values (1, 'admin123', 'UmxrCcUp');
 insert into Usuario (idUsuario, nombre_usuario, password) values (2, 'sdancy1', 'HppfRWpNc');
 insert into Usuario (idUsuario, nombre_usuario, password) values (3, 'jthyer2', 'DUNgRKpB8W2');
 insert into Usuario (idUsuario, nombre_usuario, password) values (4, 'hinkin3', '9NLzLEC');

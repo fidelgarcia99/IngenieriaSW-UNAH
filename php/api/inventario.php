@@ -23,7 +23,7 @@
             if(isset($_GET['id'])){
 
             }else{
-                $resultado = $conexion->ejecutarInstruccion(`SELECT 
+                $resultado = $conexion->ejecutarInstruccion('SELECT 
                 p.idProducto,
                 p.nombre_producto,
                 p.fechaElaboracion,
@@ -52,8 +52,7 @@
                 pasillo pas ON pxc.Pasillo_idPasillo = pas.idPasillo
                     INNER JOIN
                 area a ON pas.Area_idArea = a.idArea
-            WHERE
-                p.cantidad > 0`);
+            GROUP BY p.idProducto HAVING COUNT(*) > 1');
                 $res = array(); //creamos un array
             
                 while($row = mysqli_fetch_assoc($resultado))

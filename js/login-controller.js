@@ -41,13 +41,13 @@ var validaLogin = function(){
     if(userId.value!='' && passwd.value!=''){
         let urlEnconde = `usuario=${userId.value}&password=${passwd.value}`;
         axios({
-            url:'http://localhost/IngenieriaSW/INGENIERIASW-UNAH/php/api/login.php',
+            url:'http://localhost/IngenieriaSW-UNAH/php/api/login.php',
             method:'POST',
             responseType:'json',
             data:urlEnconde
         }).then(res=>{
              if (res.data.res=='OK') {
-                 window.location.href='/';
+                 window.location.href='/IngenieriaSW-UNAH/';
              }else{
                  errMes.innerHTML=res.data.mensaje;
                  document.getElementById('errorMessage').style.display='block';            

@@ -13,7 +13,7 @@
             $user = mysqli_real_escape_string($conexion->getLink(),$_POST['usuario']);
             $passwd = sha1(mysqli_real_escape_string($conexion->getLink(),$_POST['password'])); 
             
-            $sql = "SELECT * FROM usuario WHERE nombre_usuario = '$user' and password = '$passwd'";
+            $sql = "SELECT * FROM usuario WHERE nombre_usuario = '$user' AND password = '$passwd'";
             $result = $conexion->ejecutarInstruccion($sql);
             
             $count = $conexion->cantidadRegistros($result);
