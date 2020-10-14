@@ -41,7 +41,7 @@ var validaLogin = function(){
     if(userId.value!='' && passwd.value!=''){
         let urlEnconde = `usuario=${userId.value}&password=${passwd.value}`;
         axios({
-            url:'http://localhost/IngenieriaSW/INGENIERIASW-UNAH/php/api/login.php',
+            url:'http://localhost/IngenieriaSW-UNAH/php/api/login.php',
             method:'POST',
             responseType:'json',
             data:urlEnconde
