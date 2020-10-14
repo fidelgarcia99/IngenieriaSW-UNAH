@@ -46,6 +46,19 @@ insert into Ciudad (idCiudad, nom_ciudad, Departamento_idDepartamento) values (8
 insert into Ciudad (idCiudad, nom_ciudad, Departamento_idDepartamento) values (9, 'Tela', '3');
 insert into Ciudad (idCiudad, nom_ciudad, Departamento_idDepartamento) values (10, 'San Lorenzo', '10');
 
+/*Tabla Persona*/
+insert into Persona (idPersona, Ciudad_idCiudad, Ciudad_Departamento_idDepartamento, pnombre, snombre, papellido, sapellido, num_identidad, direccion) values (1, '1', '1', 'Leroy', 'Jsandye', 'Grahamslaw', 'Sorensen', '74-294-2589', '3280 Delladonna Street');
+insert into Persona (idPersona, Ciudad_idCiudad, Ciudad_Departamento_idDepartamento, pnombre, snombre, papellido, sapellido, num_identidad, direccion) values (2, '1', '1', 'Porty', 'Yule', 'Seers', 'Lettice', '12-507-7784', '0 Colorado Terrace');
+insert into Persona (idPersona, Ciudad_idCiudad, Ciudad_Departamento_idDepartamento, pnombre, snombre, papellido, sapellido, num_identidad, direccion) values (3, '2', '2', 'Mirella', 'Ches', 'Schoroder', 'O''Keevan', '72-675-6239', '543 Clemons Court');
+insert into Persona (idPersona, Ciudad_idCiudad, Ciudad_Departamento_idDepartamento, pnombre, snombre, papellido, sapellido, num_identidad, direccion) values (4, '3', '3', 'Packston', 'Kissiah', 'Licciardiello', 'Iddens', '83-842-4194', '05 Hanover Court');
+insert into Persona (idPersona, Ciudad_idCiudad, Ciudad_Departamento_idDepartamento, pnombre, snombre, papellido, sapellido, num_identidad, direccion) values (5, '7', '1', 'Godfree', 'Mano', 'O''Donegan', 'Ingley', '68-049-4030', '062 Beilfuss Point');
+insert into Persona (idPersona, Ciudad_idCiudad, Ciudad_Departamento_idDepartamento, pnombre, snombre, papellido, sapellido, num_identidad, direccion) values (6, '7', '1', 'Onfre', 'Toni', 'Gaitley', 'Feehan', '34-686-3082', '16 Sundown Park');
+insert into Persona (idPersona, Ciudad_idCiudad, Ciudad_Departamento_idDepartamento, pnombre, snombre, papellido, sapellido, num_identidad, direccion) values (7, '8', '2', 'Joell', 'Danella', 'Stallion', 'Oglethorpe', '34-553-4668', '7787 Everett Parkway');
+insert into Persona (idPersona, Ciudad_idCiudad, Ciudad_Departamento_idDepartamento, pnombre, snombre, papellido, sapellido, num_identidad, direccion) values (8, '4', '4', 'Codi', 'Clara', 'Wylder', 'Provest', '34-873-2486', '96778 Hanover Terrace');
+insert into Persona (idPersona, Ciudad_idCiudad, Ciudad_Departamento_idDepartamento, pnombre, snombre, papellido, sapellido, num_identidad, direccion) values (9, '1', '1', 'Dale', 'Johnathan', 'Ciardo', 'Narramor', '69-945-7802', '575 Morrow Junction');
+insert into Persona (idPersona, Ciudad_idCiudad, Ciudad_Departamento_idDepartamento, pnombre, snombre, papellido, sapellido, num_identidad, direccion) values (10, '10', '10', 'Hy', 'Grove', 'Ezzell', 'Paten', '75-703-4237', '9378 Vernon Street');
+
+
 /*Tabla Correo*/
 insert into Correo (idCorreo, dir_correo, Persona_idPersona) values (1, 'csimkiss0@fda.gov', 1);
 insert into Correo (idCorreo, dir_correo, Persona_idPersona) values (2, 'kcotilard1@desdev.cn', 2);
@@ -83,17 +96,6 @@ insert into Compania (idCompania, Telefono_idTelefono, Telefono_Persona_idPerson
 insert into Compania (idCompania, Telefono_idTelefono, Telefono_Persona_idPersona, nombre_compania) values (2, 10, 10, 'Rowe-Heathcote');
 
 
-/*Tabla Persona*/
-insert into Persona (idPersona, Ciudad_idCiudad, Ciudad_Departamento_idDepartamento, pnombre, snombre, papellido, sapellido, num_identidad, direccion) values (1, '1', '1', 'Leroy', 'Jsandye', 'Grahamslaw', 'Sorensen', '74-294-2589', '3280 Delladonna Street');
-insert into Persona (idPersona, Ciudad_idCiudad, Ciudad_Departamento_idDepartamento, pnombre, snombre, papellido, sapellido, num_identidad, direccion) values (2, '1', '1', 'Porty', 'Yule', 'Seers', 'Lettice', '12-507-7784', '0 Colorado Terrace');
-insert into Persona (idPersona, Ciudad_idCiudad, Ciudad_Departamento_idDepartamento, pnombre, snombre, papellido, sapellido, num_identidad, direccion) values (3, '2', '2', 'Mirella', 'Ches', 'Schoroder', 'O''Keevan', '72-675-6239', '543 Clemons Court');
-insert into Persona (idPersona, Ciudad_idCiudad, Ciudad_Departamento_idDepartamento, pnombre, snombre, papellido, sapellido, num_identidad, direccion) values (4, '3', '3', 'Packston', 'Kissiah', 'Licciardiello', 'Iddens', '83-842-4194', '05 Hanover Court');
-insert into Persona (idPersona, Ciudad_idCiudad, Ciudad_Departamento_idDepartamento, pnombre, snombre, papellido, sapellido, num_identidad, direccion) values (5, '7', '1', 'Godfree', 'Mano', 'O''Donegan', 'Ingley', '68-049-4030', '062 Beilfuss Point');
-insert into Persona (idPersona, Ciudad_idCiudad, Ciudad_Departamento_idDepartamento, pnombre, snombre, papellido, sapellido, num_identidad, direccion) values (6, '7', '1', 'Onfre', 'Toni', 'Gaitley', 'Feehan', '34-686-3082', '16 Sundown Park');
-insert into Persona (idPersona, Ciudad_idCiudad, Ciudad_Departamento_idDepartamento, pnombre, snombre, papellido, sapellido, num_identidad, direccion) values (7, '8', '2', 'Joell', 'Danella', 'Stallion', 'Oglethorpe', '34-553-4668', '7787 Everett Parkway');
-insert into Persona (idPersona, Ciudad_idCiudad, Ciudad_Departamento_idDepartamento, pnombre, snombre, papellido, sapellido, num_identidad, direccion) values (8, '4', '4', 'Codi', 'Clara', 'Wylder', 'Provest', '34-873-2486', '96778 Hanover Terrace');
-insert into Persona (idPersona, Ciudad_idCiudad, Ciudad_Departamento_idDepartamento, pnombre, snombre, papellido, sapellido, num_identidad, direccion) values (9, '1', '1', 'Dale', 'Johnathan', 'Ciardo', 'Narramor', '69-945-7802', '575 Morrow Junction');
-insert into Persona (idPersona, Ciudad_idCiudad, Ciudad_Departamento_idDepartamento, pnombre, snombre, papellido, sapellido, num_identidad, direccion) values (10, '10', '10', 'Hy', 'Grove', 'Ezzell', 'Paten', '75-703-4237', '9378 Vernon Street');
 
 /*Tabla Empleado*/
 insert into Empleado (idEmpleado, Persona_idPersona, Usuario_idUsuario, sueldo_emp) values (1, 1, 1, '8808.11');

@@ -45,9 +45,9 @@ var validaLogin = function(){
             method:'POST',
             responseType:'json',
             data:urlEnconde
-        }).then(res=>{
+        }).then(res=>{               
              if (res.data.res=='OK') {
-                 window.location.href='/IngenieriaSW-UNAH/';
+                 window.location.href='?view=index';
              }else{
                  errMes.innerHTML=res.data.mensaje;
                  document.getElementById('errorMessage').style.display='block';            

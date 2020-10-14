@@ -3,7 +3,7 @@
       if(isset($_SESSION['token'])){
         if(isset($_COOKIE['token'])){
           if($_COOKIE['token'] == $_SESSION['token']){
-            header('Location: /');
+            header('Location: ?view=index');
           }
         }
       }

@@ -1,6 +1,9 @@
 <div class="container-fluid">
+<div class="card shadow mb-4">
+
             <div class="card-body">
               <div class="table-responsive">
+              
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
@@ -25,8 +28,8 @@
               </div>
             </div>
           </div>
-          <!-- modal que muestra las deducciones -->
-          <div class="modal fade" id="deducciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- modal que muestra las deducciones -->
+  <div class="modal fade" id="deducciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
