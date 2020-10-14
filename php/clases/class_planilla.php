@@ -19,6 +19,7 @@
 				ON(C.Empleado_idEmpleado=B.idEmpleado)
 				INNER JOIN planilla as D
 				ON(D.idPlanilla=C.Planilla_idPlanilla)
+				WHERE fechainicio = "2019-12-09"
 
 			');
 			
@@ -46,9 +47,10 @@
 
 		public static function deducciones($conexion, $idEmpleado){
 
-			$personas = $conexion->ejecutarInstruccion('
+			$personas = $conexion->ejecutarInstruccion("
 				SELECT  
-						valor
+						valor,
+						D.fechainicio
 
 				FROM persona as A
 				INNER JOIN empleado as B
@@ -61,9 +63,9 @@
 				ON(G.Empleado_idEmpleado=B.idEmpleado)
 				INNER JOIN deduccion as H
 				ON(H.idDeduccion=G.Deduccion_idDeduccion)
-				WHERE idEmpleado = '.$idEmpleado.'
+				WHERE idEmpleado = '$idEmpleado' AND D.fechainicio = '2019-12-09'
 
-			');
+			");
 
 			
 			$c = 0;
@@ -83,10 +85,11 @@
 
 		public static function bonos($conexion, $idEmpleado){
 
-			$personas = $conexion->ejecutarInstruccion('
+			$personas = $conexion->ejecutarInstruccion("
 				SELECT  
 						monto,
-						fecha_bono
+						fecha_bono,
+						fechainicio
 
 				FROM persona as A
 				INNER JOIN empleado as B
@@ -99,9 +102,9 @@
 				ON(E.Empleado_idEmpleado=B.idEmpleado)
 				INNER JOIN bono as F
 				ON(F.idBono=E.Bono_idBono)
-				WHERE idEmpleado = '.$idEmpleado.'
+				WHERE idEmpleado = '$idEmpleado' AND fechainicio = '2019-12-09'
 
-			');
+			");
 
 			
 			$c = 0;
