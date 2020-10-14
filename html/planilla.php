@@ -45,11 +45,15 @@
         </div>
         <!--------------------------- /.container-fluid -------------------------------->
 
+        <!-- Begin Page Content -->
+        <?php include(SECCIONES . 'tablaplanilla.php')?>
+        <!-- /.container-fluid -->
+
       </div>
       <!-- End of Main Content -->
-
+      
       <!-- Footer -->
-      <?php include(SECCIONES . 'tablaplanilla.php')?>
+      <?php include(SECCIONES . 'footer.php')?>
       <!-- End of Footer -->
 
     </div>
