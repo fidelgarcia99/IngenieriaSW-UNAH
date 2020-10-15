@@ -1,9 +1,20 @@
-<?php include(SECCIONES . 'valida-acceso.php')?>
+<?php
+  include SECCIONES.'valida-acceso.php';
+  //incluimos la clase conexion para poder crear el objeto Conexion que enviaremos como parametro
+  include_once("php/clases/class_conexion.php");
+  //se incluye la clase personas parapoder llamar sus funciones desde el index
+  include_once("php/clases/class_planilla.php");
+  //objeto Conexion 
+  $conexion = new Conexion();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <?php include(SECCIONES . 'head-general.php')?>
+
+  <link href="<?php echo VENDOR?>datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
 </head>
 
 <body id="page-top">
@@ -29,14 +40,18 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
-
+          <h1 class="h3 mb-4 text-gray-800">Planilla De Empleados</h1>
+        <hr>
         </div>
         <!--------------------------- /.container-fluid -------------------------------->
 
+        <!-- Begin Page Content -->
+        <?php include(SECCIONES . 'tablaplanilla.php')?>
+        <!-- /.container-fluid -->
+
       </div>
       <!-- End of Main Content -->
-
+      
       <!-- Footer -->
       <?php include(SECCIONES . 'footer.php')?>
       <!-- End of Footer -->
@@ -58,6 +73,14 @@
   <!-- Scripts-->
   <?php include(SECCIONES . 'scripts-generales.php')?>
   <!------------>
+<!-- Page level plugins -->
+<script src="<?php echo VENDOR?>datatables/jquery.dataTables.min.js"></script>
+<script src="<?php echo VENDOR?>datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="<?php echo JS?>demo/datatables-demo.js"></script>
+<script src="js/planilla-controller.js"></script>
+
 </body>
 
 </html>

@@ -1,0 +1,1 @@
+rellenaTabla(null,"inventario","get");

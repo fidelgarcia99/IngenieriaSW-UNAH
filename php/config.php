@@ -1,21 +1,29 @@
 <?php
 //Configuracion del proyecto
-    $titulo = "Autoservicios el Boulevard";
+    define('TITULO','Autoservicios el Boulevard');
 
 //Base de datos
-    $user = "root";
-    $passwd = "";
-    $dbname = "";
-    $host = "127.0.0.1";
-    $port = "";
+    define('DB_USER','root');
+    define('DB_SERVER','localhost');
+    define('DB_PASSWORD','');
+    define('DB_NAME','modelosistema');
+    define('DB_PORT','3036');
+
 
 //Rutas para utilizar en las paginas
-    $css = "css/";
-    $img = "img/";
-    $js = "js/";
-    $api = "php/api/";
-    $scss = "scss/";
-    $vendor = "vendor/";
-    $html = "html/";
-    $secciones = "html/secciones/";
+    define('CSS','css/');
+    define('IMG','img/');
+    define('JS','js/');
+    define('APIS','php/api/');
+    define('CLASES','php/clases/');
+    define('SCSS','scss/');
+    define('VENDOR','vendor/');
+    define('HTML','html/');
+    define('SECCIONES','html/secciones/');
+
+//Generacion de tokens con JWT
+    define('SECRETKEY','IS-IIIPAC-2020');
+    define('TIEMPOTOKEN',3600);
+    define('ENCRYPT',['HS256']);
+    //$encrypt = ['HS256'];    
 ?>

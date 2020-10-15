@@ -1,4 +1,4 @@
-<?php include(SECCIONES . 'valida-acceso.php')?>
+<?php include SECCIONES.'valida-acceso.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,12 +30,23 @@
         <?php include SECCIONES.'topnav.php'?>
         <!-- End of Topbar -->
 
+         <!-------------------------- Begin Page Content ------------------------------>
+         <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <h1 class="h3 mb-4 text-gray-800">Inventario</h1>
+          
+          </div>
+          <!--------------------------- /.container-fluid -------------------------------->
+
         <!-- Begin Page Content -->
         <?php include(SECCIONES . 'tabla.php')?>
         <!-- /.container-fluid -->
 
       </div>
       <!-- End of Main Content -->
+         
+      
 
       <!-- Footer -->
       <?php include SECCIONES.'footer.php'?>
@@ -62,8 +73,8 @@
   <script src="<?php echo VENDOR?>datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="<?php echo JS?>demo/datatables-demo.js"></script>
-
+  <script src="<?php echo JS?>data-table.js"></script>
+  <script src="<?php echo JS?>inventario-controller.js"></script>
 </body>
 
 </html>
