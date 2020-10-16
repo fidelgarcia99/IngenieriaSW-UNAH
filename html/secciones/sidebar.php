@@ -38,8 +38,8 @@
 <!-- Nav Item - Tables -->
 <li class="nav-item">
   <a class="nav-link" href="?view=tables">
-    <i class="fas fa-fw fa-table"></i>
-    <span>Tables</span></a>
+    <i class="fas fa-users"></i>
+    <span>Empleados</span></a>
 </li>
 
 <!-- Divider -->
