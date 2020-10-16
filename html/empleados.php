@@ -4,6 +4,9 @@
 
 <head>
   <?php include(SECCIONES . 'head-general.php')?>
+
+  <!-- Custom styles for this page -->
+  <link href="<?php echo VENDOR?>datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -37,7 +40,7 @@
         <!-- Begin Page Content -->
         <?php include(SECCIONES . 'tabla.php')?>
         <!-- /.container-fluid -->
-          
+
       </div>
       <!-- End of Main Content -->
 
@@ -62,11 +65,11 @@
   <!-- Scripts-->
   <?php include(SECCIONES . 'scripts-generales.php')?>
   <!------------>
-    
+
       <!-- Page level plugins -->
   <script src="<?php echo VENDOR?>datatables/jquery.dataTables.min.js"></script>
   <script src="<?php echo VENDOR?>datatables/dataTables.bootstrap4.min.js"></script>
-    
+
   <!-- Page level custom scripts -->
   <script src="<?php echo JS?>data-table.js"></script>
   <script src="<?php echo JS?>empleados-controller.js"></script>
