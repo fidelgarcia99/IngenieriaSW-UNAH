@@ -1,1 +1,1 @@
-rellenaTabla(null,"inventario","get");
+rellenaTabla(null,"inventario");

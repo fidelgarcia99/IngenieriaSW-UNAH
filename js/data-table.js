@@ -2,7 +2,7 @@ var readCookie = function(name) {
     return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + name.replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
 }
 
-var rellenaTabla = async function(id,api, method){
+var rellenaTabla = async function(id,api){
     let params;
     if(id==null){
         params={token:readCookie('token')};
@@ -12,7 +12,7 @@ var rellenaTabla = async function(id,api, method){
 
     await axios({
             url:`http://localhost/IngenieriaSW-UNAH/php/api/${api}.php`,
-            method:method,
+            method:'get',
             responseType:'json',
             params:params
         }).then(res=>{    
