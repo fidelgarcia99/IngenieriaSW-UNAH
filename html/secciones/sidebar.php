@@ -42,6 +42,13 @@
     <span>Empleados</span></a>
 </li>
 
+<!-- Nav Item - Clientes -->
+<li class="nav-item">
+  <a class="nav-link" href="?view=clientes">
+    <i class="fas fa-address-card"></i>
+    <span>Clientes</span></a>
+</li>
+
 <!-- Divider -->
 <hr class="sidebar-divider d-none d-md-block">
 
