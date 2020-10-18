@@ -16,16 +16,6 @@ var rellenaTabla = async function(id,api){
             responseType:'json',
             params:params
         }).then(res=>{
-            //Se agrega las opciones del select de filtro
-            let opciones = '<option value="">-----</option>';
-            for(let i in res.data[0]){
-                opciones+=`
-                    <option value="${i}">${i}</opction>
-                `;
-            }
-            document.getElementById('select_Filtro').innerHTML = opciones;
-
-
             //Se agrega el nombre de las columnas
             let nombreCol = '';
             for(let i in res.data[0]){

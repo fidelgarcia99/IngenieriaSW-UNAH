@@ -7,6 +7,8 @@
 
   <!-- Custom styles for this page -->
   <link href="<?php echo VENDOR?>datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="<?php echo CSS?>usuarios.css" rel="stylesheet">
+
 </head>
 
 <body id="page-top">
@@ -58,6 +60,9 @@
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
+
+  <!-- Registro Modal -->
+  <?php include(SECCIONES . 'nuevo-usuario-modal.php')?>
 
   <!-- Logout Modal-->
   <?php include(SECCIONES . 'logout-modal.php')?>
