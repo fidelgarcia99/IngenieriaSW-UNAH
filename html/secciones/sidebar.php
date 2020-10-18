@@ -48,6 +48,13 @@
     <i class="fas fa-address-card"></i>
     <span>Clientes</span></a>
 </li>
+<!-- Nav Item - Usuarios -->
+<li class="nav-item">
+  <a class="nav-link" href="?view=usuarios">
+    <i class="fas fa-user-edit"></i>
+    <span>Usuarios</span></a>
+</li>
+
 
 <!-- Divider -->
 <hr class="sidebar-divider d-none d-md-block">
