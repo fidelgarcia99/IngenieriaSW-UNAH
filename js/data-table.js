@@ -11,43 +11,43 @@ var rellenaTabla = async function(id,api){
     }
 
     await axios({
-            url:`http://localhost/IngenieriaSW-UNAH/php/api/${api}.php`,
+            url:`http://${window.location.hostname}/IngenieriaSW-UNAH/php/api/${api}.php`,
             method:'get',
             responseType:'json',
             params:params
-        }).then(res=>{    
-            //Se agrega las opciones del select de filtro     
-            let opciones = '<option value="">-----</option>';   
+        }).then(res=>{
+            //Se agrega las opciones del select de filtro
+            let opciones = '<option value="">-----</option>';
             for(let i in res.data[0]){
                 opciones+=`
                     <option value="${i}">${i}</opction>
                 `;
-            }            
+            }
             document.getElementById('select_Filtro').innerHTML = opciones;
-      
-            
-            //Se agrega el nombre de las columnas     
-            let nombreCol = '';   
+
+
+            //Se agrega el nombre de las columnas
+            let nombreCol = '';
             for(let i in res.data[0]){
                 nombreCol+=`
                     <td>${i}</td>
                 `;
-            }            
+            }
             document.getElementById('thead').innerHTML+=`
             <tr>${nombreCol}</tr>
             `;
 
-            //Se gregan las filas de datos            
+            //Se gregan las filas de datos
             res.data.forEach(element => {
                 let fila='';
                 for(let i in element){
                     fila+=`
                         <td>${element[i]}</td>
                     `;
-                }    
+                }
                 document.getElementById('tbody').innerHTML+=`
                 <tr>${fila}</tr>
-                `;            
+                `;
             });
 
         }).catch(err=>{
