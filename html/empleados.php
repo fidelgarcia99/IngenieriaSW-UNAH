@@ -41,7 +41,7 @@
         <?php include(SECCIONES . 'nuevo-empleado-modal.php') ?>
 
         <!-- Begin Page Content -->
-        <?php include(SECCIONES . 'tablainventario.php') ?>
+        <?php include(SECCIONES . 'tabla.php') ?>
         <!-- /.container-fluid -->
 
       </div>
