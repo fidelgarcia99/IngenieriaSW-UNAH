@@ -1,1 +1,1 @@
-rellenaTabla(null,"inventario");
+obtenerRegistros(null,"inventario");

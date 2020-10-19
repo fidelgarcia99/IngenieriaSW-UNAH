@@ -76,7 +76,7 @@
   <script src="<?php echo VENDOR?>datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="<?php echo JS?>data-table.js"></script>
+  <script src="<?php echo JS?>axios-calls.js"></script>
   <script src="<?php echo JS?>usuarios-controller.js"></script>
 </body>
 

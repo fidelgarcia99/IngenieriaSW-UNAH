@@ -35,7 +35,7 @@
 
           <!-- Page Heading -->
           <h1 class="h3 mb-4 text-gray-800">Inventario</h1>
-          
+
           </div>
           <!--------------------------- /.container-fluid -------------------------------->
 
@@ -45,8 +45,8 @@
 
       </div>
       <!-- End of Main Content -->
-         
-      
+
+
 
       <!-- Footer -->
       <?php include SECCIONES.'footer.php'?>
@@ -73,7 +73,7 @@
   <script src="<?php echo VENDOR?>datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="<?php echo JS?>data-table.js"></script>
+  <script src="<?php echo JS?>axios-calls.js"></script>
   <script src="<?php echo JS?>inventario-controller.js"></script>
 </body>
 

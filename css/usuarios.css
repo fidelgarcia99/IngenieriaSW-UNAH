@@ -1,9 +1,25 @@
+#modal-success-icon{
+  color:green;
+  font-size:5rem;
+}
+#modal-success-message{
+  text-align: center; 
+}
+
+#modal-success .modal-dialog{
+  max-width: 20%;
+  padding-top: 10%;
+}
+#modal-success .modal-content{
+  max-width: 100%;
+}
+
 .modal-dialog{
   max-width: 50%;
   padding-top: 5%;
 }
 .modal-footer{
-  
+
   align-content: #FFFFFF!important;
 }
 .card-signin {

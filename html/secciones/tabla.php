@@ -8,7 +8,7 @@
     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
       <div class="row">
         <div class="col-3 mb-3">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevoUsuarioModal"><i class="fas fa-user-plus"></i></button>
+          <?php if($_GET['view']=="usuarios") echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevoUsuarioModal"><i class="fas fa-user-plus"></i></button>' ?>
         </div>
       </div>
     </div>

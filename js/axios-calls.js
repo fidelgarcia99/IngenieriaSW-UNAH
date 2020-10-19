@@ -2,7 +2,7 @@ var readCookie = function(name) {
     return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + name.replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
 }
 
-var rellenaTabla = async function(id,api){
+var obtenerRegistros = async function(id,api){
     let params;
     if(id==null){
         params={token:readCookie('token')};
@@ -26,7 +26,6 @@ var rellenaTabla = async function(id,api){
             document.getElementById('thead').innerHTML+=`
             <tr>${nombreCol}</tr>
             `;
-
             //Se gregan las filas de datos
             res.data.forEach(element => {
                 let fila='';
@@ -41,8 +40,23 @@ var rellenaTabla = async function(id,api){
             });
 
         }).catch(err=>{
-            console.log(err);
+            console.error(err);
         });
 
         $('#dataTable').DataTable();
+}
+
+var nuevoRegistro = async function(data,api){
+  let respuesta=null;
+    await axios({
+            url:`http://${window.location.hostname}/IngenieriaSW-UNAH/php/api/${api}.php`,
+            method:'post',
+            responseType:'json',
+            data:data
+        }).then(res=>{
+            respuesta=res.data;
+        }).catch(err=>{
+            console.error(err);
+        });
+        return respuesta;
 }

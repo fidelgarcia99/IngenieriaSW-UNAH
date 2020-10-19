@@ -1,5 +1,5 @@
-<?php 
-function verificaToken($token){
+<?php
+function verificaToken(){
     if(!isset($_SESSION['token'])){
         echo '{"mensaje":"Acceso no autorizado. No session iniciada"}';
         exit;
@@ -13,11 +13,11 @@ function verificaToken($token){
         exit;
     }
     try {
-        JWTokens::validaToken($token);
+        JWTokens::validaToken($_COOKIE['token']);
     } catch (Exception $e) {
         echo '{"mensaje":"Acceso no autorizado. Token invalido"}';
         exit;
-    }    
+    }
 }
 
 ?>

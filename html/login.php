@@ -1,4 +1,4 @@
-<?php 
+<?php
       session_start();
       if(isset($_SESSION['token'])){
         if(isset($_COOKIE['token'])){
@@ -32,7 +32,7 @@
           <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
             <div class="row">
-              
+
              <!--  <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>-->
              <img src="<?php echo IMG?>logoicon.jpg" alt="" class="col-lg-6 d-none d-lg-block bg-login-image">
               <div class="col-lg-6">
@@ -58,10 +58,10 @@
                     <div id="errorMessage" class="alert alert-danger" style="display:none">
                     Credenciales Incorrectas
                     </div>
-                    <hr>    
+                    <hr>
                     <button onclick="validaLogin();" class="btn btn-primary btn-user btn-block" type="button">Iniciar Sesion</button>
                     <hr>
-                   
+
                 </div>
               </div>
             </div>
