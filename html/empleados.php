@@ -1,12 +1,13 @@
-<?php include(SECCIONES . 'valida-acceso.php')?>
+<?php include(SECCIONES . 'valida-acceso.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <?php include(SECCIONES . 'head-general.php')?>
+  <?php include(SECCIONES . 'head-general.php') ?>
 
   <!-- Custom styles for this page -->
-  <link href="<?php echo VENDOR?>datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="<?php echo VENDOR ?>datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="<?php echo CSS ?>empleadosmodal.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -15,7 +16,7 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <?php include(SECCIONES . 'sidebar.php')?>
+    <?php include(SECCIONES . 'sidebar.php') ?>
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -25,7 +26,7 @@
       <div id="content">
 
         <!-- Topbar -->
-    <?php include(SECCIONES . 'topnav.php')?>
+        <?php include(SECCIONES . 'topnav.php') ?>
         <!-- End of Topbar -->
 
         <!-------------------------- Begin Page Content ------------------------------>
@@ -36,16 +37,18 @@
 
         </div>
         <!--------------------------- /.container-fluid -------------------------------->
+        <!-- Registro Modal -->
+        <?php include(SECCIONES . 'nuevo-empleado-modal.php') ?>
 
         <!-- Begin Page Content -->
-        <?php include(SECCIONES . 'tabla.php')?>
+        <?php include(SECCIONES . 'tablainventario.php') ?>
         <!-- /.container-fluid -->
 
       </div>
       <!-- End of Main Content -->
 
       <!-- Footer -->
-      <?php include(SECCIONES . 'footer.php')?>
+      <?php include(SECCIONES . 'footer.php') ?>
       <!-- End of Footer -->
 
     </div>
@@ -60,19 +63,21 @@
   </a>
 
   <!-- Logout Modal-->
-  <?php include(SECCIONES . 'logout-modal.php')?>
+  <?php include(SECCIONES . 'logout-modal.php') ?>
 
   <!-- Scripts-->
-  <?php include(SECCIONES . 'scripts-generales.php')?>
+  <?php include(SECCIONES . 'scripts-generales.php') ?>
   <!------------>
 
-      <!-- Page level plugins -->
-  <script src="<?php echo VENDOR?>datatables/jquery.dataTables.min.js"></script>
-  <script src="<?php echo VENDOR?>datatables/dataTables.bootstrap4.min.js"></script>
+  <!-- Page level plugins -->
+  <script src="<?php echo VENDOR ?>datatables/jquery.dataTables.min.js"></script>
+  <script src="<?php echo VENDOR ?>datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="<?php echo JS?>data-table.js"></script>
-  <script src="<?php echo JS?>empleados-controller.js"></script>
+
+  <script src="<?php echo JS ?>data-table.js"></script>
+  <script src="<?php echo JS ?>empleados-controller.js"></script>
+
 </body>
 
 </html>
