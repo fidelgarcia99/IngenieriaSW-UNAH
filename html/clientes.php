@@ -7,6 +7,7 @@
 
   <!-- Custom styles for this page -->
   <link href="<?php echo VENDOR?>datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="<?php echo CSS ?>empleadosmodal.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -36,6 +37,9 @@
 
         </div>
         <!--------------------------- /.container-fluid -------------------------------->
+
+         <!-- Registro Modal -->
+         <?php include(SECCIONES . 'nuevo-cliente-modal.php') ?>
 
         <!-- Begin Page Content -->
         <?php include(SECCIONES . 'tabla.php')?>
