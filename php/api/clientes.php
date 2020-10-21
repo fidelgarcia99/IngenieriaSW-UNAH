@@ -23,7 +23,16 @@
             if(isset($_GET['id'])){
 
             }else{
-                $resultado = $conexion->ejecutarInstruccion('SELECT *  FROM cliente');
+                $resultado = $conexion->ejecutarInstruccion('SELECT
+                p.num_identidad as Id,
+                CONCAT(p.pnombre," ",p.snombre," ",p.papellido," ",p.sapellido) as "Nombre Completo",
+                c.idCliente as RTN
+            FROM
+                persona AS p
+                    INNER JOIN
+                cliente  AS c
+                 ON p.idPersona = c.Persona_idPersona
+            ');
 
                 $res = array(); //creamos un array
 
