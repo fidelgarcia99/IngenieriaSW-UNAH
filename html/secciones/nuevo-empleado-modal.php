@@ -31,10 +31,10 @@
 
 
                                                   <div class="form-label-group">
-                                                       <input type="text" pattern="[0-9]+" maxlength="13" minlength="13" id="inputNumid" class="form-control" placeholder="Número Id" required>
+                                                       <input type="number" pattern="[0-9]+"  id="inputNumid" class="form-control" placeholder="Número Id" required>
                                                   </div>
                                                   <div class="form-label-group">
-                                                       <input type="number" id="inputNumtel" class="form-control" placeholder="Número Telefonico" required>
+                                                       <input type="number" pattern="[0-9]+"  id="inputNumtel" class="form-control" placeholder="Número Telefonico" required>
                                                   </div>
 
                                                   <div class="form-label-group">
