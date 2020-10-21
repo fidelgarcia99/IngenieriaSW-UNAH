@@ -5,7 +5,7 @@
     require_once("../clases/class_conexion.php");
     require_once("../clases/class_jwt.php");
     require_once("../verificaToken.php");
-    $conexion = new Conexion();    
+    $conexion = new Conexion();
 
     session_start();
 
@@ -17,19 +17,38 @@
         break;
 
 
-        case 'GET':     //Obtener producto/s            
+        case 'GET':     //Obtener producto/s
             verificaToken($_GET['token']);
 
             if(isset($_GET['id'])){
 
             }else{
-                $resultado = $conexion->ejecutarInstruccion('SELECT *  FROM empleado');
+                $resultado = $conexion->ejecutarInstruccion('SELECT
+                per.num_identidad as Id,
+                CONCAT(per.pnombre," ",per.snombre," ",per.papellido," ",per.sapellido) as Nombre,
+                tel.num_telefono as Telefono,
+                per.direccion as Direccion,
+                car.nombre_cargo as Funcion,
+                car.sueldo_base as Sueldo,
+                cxe.fecha_nombramiento as Contratado
+            FROM
+                empleado AS emp
+                INNER JOIN
+                persona as per ON emp.Persona_idPersona = per.IdPersona
+                INNER JOIN
+                telefono as tel ON tel.Persona_idPersona = per.IdPersona
+                INNER JOIN
+                cargo_x_empleado as cxe on cxe.Empleado_idEmpleado = emp.idEmpleado
+                INNER JOIN
+                cargo as car on car.idCargo = cxe.Cargo_idCargo
+
+            ');
 
                 $res = array(); //creamos un array
-            
+
                 while($row = mysqli_fetch_assoc($resultado))
                 {
-                    $res[] = $row;                    
+                    $res[] = $row;
                 }
                 echo json_encode($res);
             }
