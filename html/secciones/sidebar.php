@@ -55,6 +55,12 @@
     <span>Usuarios</span></a>
 </li>
 
+<!-- Nav Item - Tables -->
+<li class="nav-item">
+  <a class="nav-link" href="?view=proveedores">
+    <i class="fas fa-users"></i>
+    <span>Proveedores</span></a>
+</li>
 
 <!-- Divider -->
 <hr class="sidebar-divider d-none d-md-block">

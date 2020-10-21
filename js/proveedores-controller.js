@@ -1,0 +1,1 @@
+obtenerRegistros(null,"proveedores");
