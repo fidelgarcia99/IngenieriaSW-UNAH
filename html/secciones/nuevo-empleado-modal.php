@@ -15,7 +15,7 @@
                                              <form class="form-signin">
                                                   <div class="form-label-group">
                                                        <div class="input-group">
-                                                            <input type="text" id="inputPnombre" class="form-control" placeholder="Primer Nombre" required autofocus>
+                                                            <input type="text" id="inputPnombre"  class="form-control" placeholder="Primer Nombre" required autofocus>
                                                             <br>
                                                             <input type="text" id="inputSnombre" class="form-control" placeholder="Segundo Nombre">
                                                        </div>

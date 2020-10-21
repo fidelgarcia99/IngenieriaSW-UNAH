@@ -32,7 +32,7 @@
 
                                                   <div class="form-label-group">
 
-                                                       <input type="tel" id="numTelCliente" class="form-control" placeholder="Número Telefonico" >
+                                                       <input type="number" id="numTelCliente" class="form-control" placeholder="Número Telefonico" >
                                                   </div>
 
                                                   <div class="form-label-group">
