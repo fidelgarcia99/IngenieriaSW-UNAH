@@ -1,4 +1,4 @@
-<div class="modal fade" id="nuevoEmpleadoModal" tabindex="-1" role="dialog" aria-labelledby="nuevoUsuarioModalLabel" aria-hidden="true">
+<div class="modal fade" id="nuevoClienteModal" tabindex="-1" role="dialog" aria-labelledby="nuevoUsuarioModalLabel" aria-hidden="true">
      <div class="modal-dialog" role="document">
           <div class="modal-content">
 
@@ -11,49 +11,46 @@
                                              <!-- Background image for card set in CSS! -->
                                         </div>
                                         <div class="card-body">
-                                             <h5 class="card-title text-center">Nuevo Empleado</h5>
+                                             <h5 class="card-title text-center">Nuevo Cliente</h5>
                                              <form class="form-signin">
                                                   <div class="form-label-group">
                                                        <div class="input-group">
-                                                            <input type="text" id="inputPnombre"  class="form-control" placeholder="Primer Nombre" required autofocus>
+                                                            <input type="text" id="pNombreCliente" class="form-control" placeholder="Primer Nombre" required autofocus>
                                                             <br>
-                                                            <input type="text" id="inputSnombre" class="form-control" placeholder="Segundo Nombre">
+                                                            <input type="text" id="sNombreCliente" class="form-control" placeholder="Segundo Nombre">
                                                        </div>
 
                                                        <br>
                                                        <div class="input-group">
-                                                            <input type="text" id="inputPapellido" class="form-control" placeholder="Primer Apellido" required autofocus>
+                                                            <input type="text" id="pApellidoCliente" class="form-control" placeholder="Primer Apellido" required autofocus>
                                                             <br>
-                                                            <input type="text" id="inputSapellido" class="form-control" placeholder="Segundo Apellido">
+                                                            <input type="text" id="sApellidoCliente" class="form-control" placeholder="Segundo Apellido">
                                                        </div>
 
                                                   </div>
 
 
                                                   <div class="form-label-group">
-                                                       <input type="number" pattern="[0-9]+"  id="inputNumid" class="form-control" placeholder="Número Id" required>
-                                                  </div>
-                                                  <div class="form-label-group">
-                                                       <input type="number" pattern="[0-9]+"  id="inputNumtel" class="form-control" placeholder="Número Telefonico" required>
+
+                                                       <input type="number"  id="numTelCliente" class="form-control" placeholder="Número Telefonico" >
                                                   </div>
 
                                                   <div class="form-label-group">
-                                                       <input type="text" id="inputDireccion" class="form-control" placeholder="Dirección" required>
+                                                       <input type="email" id="inputFecha" class="form-control" placeholder="Email" >
                                                   </div>
 
-                                                  <h6>Cargo</h6>
                                                   <div class="form-label-group">
-                                                       <select class="form-control" id="selectIdEmpleado" >
-                                                            <option disabled>Seleccion un cargo</option>
-                                                            
+                                                       <input type="text" id="nom_ciudad" class="form-control" placeholder="Ciudad" >
+                                                  </div>
 
-                                                       </select>
+                                                  <div class="form-label-group">
+                                                       <input type="text" id="direccion" class="form-control" placeholder="Dirección" >
                                                   </div>
 
 
-                                                  <h6>Fecha de contratación</h6>
+                                                  <h6>Fecha de registro</h6>
                                                   <div class="form-label-group">
-                                                       <input type="date" id="inputFecha" class="form-control" placeholder="Fecha" required>
+                                                       <input type="date" id="fechaRegistro" class="form-control" placeholder="Fecha" required>
                                                   </div>
 
                                              </form>

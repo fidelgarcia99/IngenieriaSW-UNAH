@@ -3,9 +3,9 @@
 <!-- Sidebar - Brand -->
 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="?view=index">
   <div class="sidebar-brand-icon rotate-n-15">
-    <i class="fas fa-laugh-wink"></i>
+  <i class="fas fa-car"></i>
   </div>
-  <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+  <div class="sidebar-brand-text mx-3">El Boulevard</div>
 </a>
 
 <!-- Divider -->
@@ -55,6 +55,12 @@
     <span>Usuarios</span></a>
 </li>
 
+<!-- Nav Item - Tables -->
+<li class="nav-item">
+  <a class="nav-link" href="?view=proveedores">
+    <i class="fas fa-users"></i>
+    <span>Proveedores</span></a>
+</li>
 
 <!-- Divider -->
 <hr class="sidebar-divider d-none d-md-block">

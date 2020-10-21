@@ -7,7 +7,8 @@
 
   <!-- Custom styles for this page -->
   <link href="<?php echo VENDOR?>datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-  <link href="<?php echo CSS ?>empleadosmodal.css" rel="stylesheet">
+  <link href="<?php echo CSS?>usuarios.css" rel="stylesheet">
+
 </head>
 
 <body id="page-top">
@@ -33,13 +34,10 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Clientes</h1>
+          <h1 class="h3 mb-4 text-gray-800">Proveedores</h1>
 
         </div>
         <!--------------------------- /.container-fluid -------------------------------->
-
-         <!-- Registro Modal -->
-         <?php include(SECCIONES . 'nuevo-cliente-modal.php') ?>
 
         <!-- Begin Page Content -->
         <?php include(SECCIONES . 'tabla.php')?>
@@ -63,6 +61,9 @@
     <i class="fas fa-angle-up"></i>
   </a>
 
+  <!-- Registro Modal -->
+  <?php include(SECCIONES . 'nuevo-proveedor-modal.php')?>
+
   <!-- Logout Modal-->
   <?php include(SECCIONES . 'logout-modal.php')?>
 
@@ -76,7 +77,7 @@
 
   <!-- Page level custom scripts -->
   <script src="<?php echo JS?>axios-calls.js"></script>
-  <script src="<?php echo JS?>clientes-controller.js"></script>
+  <script src="<?php echo JS?>proveedores-controller.js"></script>
 </body>
 
 </html>
