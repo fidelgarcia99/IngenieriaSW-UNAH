@@ -24,7 +24,7 @@
                      <hr>
 
                      <div class="form-label-group">
-                       <input type="password" id="inputTelefono" class="form-control" placeholder="Telefono" required>
+                       <input type="number" id="inputTelefono" class="form-control" placeholder="Telefono" required>
                      </div>
 
                      <div class="form-label-group">
