@@ -32,6 +32,10 @@
                }else{
                  if(mysqli_errno($conexion->getLink()) == 1062)
                  echo '{"res":"fail","mensaje":"Nombre de usuario en uso."}';
+                 else{
+                    $res = array("res"=>"fail","mensaje"=>mysqli_error($conexion->getLink()));
+                    echo json_encode($res);
+                 }                 
                }
 
             }else{
