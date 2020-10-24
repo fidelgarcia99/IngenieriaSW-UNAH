@@ -32,6 +32,10 @@ class Empleados{
 
 
 	public function registraEmpleado($conexion){
+		return $conexion->ejecutarInstruccion("
+          INSERT INTO usuario ( idEmpleado, nombre_usuario, password)
+		VALUES ('$this->pNombre' ,'$this->sNombre', '$this->pApellido','$this->sApellido' ,'$this->num_identidad', 
+		'$this->direccion','$this->num_telefono', '$this->cargo')");
 	}
 
 
@@ -53,7 +57,7 @@ class Empleados{
 				}
 			}
 			
-			 $conexion->liberarResultado($cargo);
+			$conexion->liberarResultado($cargo);
 	}
 
 

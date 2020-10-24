@@ -1,6 +1,6 @@
 <?php include(SECCIONES . 'valida-acceso.php') ;
 include("php/clases/class_conexion.php");
-//se incluye la clase personas parapoder llamar sus funciones desde el index
+//se incluye la clase empleados parapoder llamar sus funciones desde el index
 include_once("php/clases/class_empleado.php");
 //objeto Conexion 
 $conexion = new Conexion();?>

@@ -16,10 +16,11 @@ class Usuario{
 	}
 
 	public function registraUsuario($conexion){
-    return $conexion->ejecutarInstruccion("
-    INSERT INTO usuario ( idEmpleado, nombre_usuario, password)
-    VALUES ('$this->idEmpleado' ,'$this->username', '$this->passwd')");
+          return $conexion->ejecutarInstruccion("
+          INSERT INTO usuario ( idEmpleado, nombre_usuario, password)
+          VALUES ('$this->idEmpleado' ,'$this->username', '$this->passwd')");
 	}
 
 }
+
 ?>
