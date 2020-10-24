@@ -8,6 +8,7 @@ class Empleados{
 	private $direccion;
 	private $num_telefono;
 	private $cargo;
+	private $fechainicio_contrato;
 
 	public function __construct(
 		$pNombre = null,
@@ -17,7 +18,8 @@ class Empleados{
 		$num_identidad = null,
 		$direccion = null,
 		$num_telefono = null,
-		$cargo = null
+		$cargo = null,
+		$fechainicio_contrato= null
 	){
 		$this->pNombre = $pNombre;
 		$this->sNombre = $sNombre;
@@ -27,6 +29,7 @@ class Empleados{
 		$this->direccion = $direccion;
 		$this->num_telefono = $num_telefono;
 		$this->cargo = $cargo;
+		$this->fechainicio_contrato = $fechainicio_contrato;
 	}
 
 
@@ -35,7 +38,7 @@ class Empleados{
 		return $conexion->ejecutarInstruccion("
           INSERT INTO usuario ( idEmpleado, nombre_usuario, password)
 		VALUES ('$this->pNombre' ,'$this->sNombre', '$this->pApellido','$this->sApellido' ,'$this->num_identidad', 
-		'$this->direccion','$this->num_telefono', '$this->cargo')");
+		'$this->direccion','$this->num_telefono', '$this->cargo',  '$this->fechainicio_contrato')");
 	}
 
 
