@@ -7,7 +7,7 @@
     define('DB_SERVER','us-cdbr-east-02.cleardb.com');
     define('DB_PASSWORD','d5d097f7');
     define('DB_NAME','heroku_a16e5753c5ce081');
-    define('DB_PORT','3036');
+    define('DB_PORT','3306');
 
    // mysql://b70fe44c3564d1:d5d097f7@us-cdbr-east-02.cleardb.com/heroku_a16e5753c5ce081?reconnect=true
 //Rutas para utilizar en las paginas
@@ -24,6 +24,5 @@
 //Generacion de tokens con JWT
     define('SECRETKEY','IS-IIIPAC-2020');
     define('TIEMPOTOKEN',3600);
-    define('ENCRYPT',['HS256']);
-    //$encrypt = ['HS256'];    
+    define('ENCRYPT',['HS256']);  
 ?>
