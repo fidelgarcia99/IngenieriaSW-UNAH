@@ -44,8 +44,8 @@
                                                   <h6>Cargo</h6>
                                                   <div class="form-label-group">
                                                        <select class="form-control" id="selectIdEmpleado" >
-                                                            <option disabled>Seleccion un cargo</option>
                                                             
+                                                            <?php Empleados::llenarCargos($conexion); ?>
 
                                                        </select>
                                                   </div>
