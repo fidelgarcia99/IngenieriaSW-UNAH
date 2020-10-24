@@ -2,11 +2,6 @@
 
 	class Conexion{
 
-		private $usuario="root";
-		private $contrasena="";
-		private $host="localhost";
-		private $baseDatos="modelosistema";
-		private $puerto="3306";
 		private $link;
 
 		public function __construct(){
@@ -14,10 +9,10 @@
 		}
 
 		public function establecerConexion(){
-			$this->link = mysqli_connect($this->host, $this->usuario, $this->contrasena, $this->baseDatos, $this->puerto);
+			$this->link = mysqli_connect(DB_SERVER, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT);
 
 			if (!$this->link){
-				echo "No se pudo conectar con mysql";
+				echo '{"res":"fail","mensaje":"No se puede conectar a la base de datos."}';
 				exit;
 			}
 		}
