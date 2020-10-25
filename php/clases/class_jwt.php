@@ -1,8 +1,5 @@
 <?php
-    require_once '../config.php';
-    require_once '../../vendor/autoload.php';
-    use Firebase\JWT\JWT;
-
+use Firebase\JWT\JWT;
 class JWTokens
 {
     private static $aud = null;
@@ -41,11 +38,11 @@ class JWTokens
 
     public static function GetData($token)
     {
-        return JWT::decode(
+        return json_decode(json_encode(JWT::decode(
             $token,
             SECRETKEY,
             ENCRYPT
-        )->data;
+        )->data),true);
     }
 
     private static function Aud()

@@ -1,6 +1,6 @@
 <?php
     header("Content-Type: application/json");
-
+    require_once('../../vendor/autoload.php');
     require_once('../config.php');
     require_once("../clases/class_conexion.php");
     require_once("../clases/class_jwt.php");
@@ -35,7 +35,7 @@
                  else{
                     $res = array("res"=>"fail","mensaje"=>mysqli_error($conexion->getLink()));
                     echo json_encode($res);
-                 }                 
+                 }
                }
 
             }else{
@@ -50,7 +50,12 @@
             if(isset($_GET['id'])){
 
             }else{
-                $resultado = $conexion->ejecutarInstruccion('SELECT *  FROM usuario');
+                $resultado = $conexion->ejecutarInstruccion('
+                  SELECT CONCAT(p.pnombre," ",p.papellido) as Empleado, u.nombre_usuario as "Nombre de Usuario", tu.tipo as "Tipo de Cuenta"
+                  FROM usuario as u
+                  inner join empleado as e on e.idEmpleado = u.Empleado_idEmpleado
+                  inner join persona as p on p.idPersona = e.Persona_idPersona
+                  inner join tipousuario as tu on tu.idtipousuario = u.idtipousuario');
 
                 $res = array(); //creamos un array
 
