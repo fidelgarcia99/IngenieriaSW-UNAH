@@ -1,6 +1,6 @@
 <?php
     header("Content-Type: application/json");
-
+    require_once('../../vendor/autoload.php');
     require_once('../config.php');
     require_once("../clases/class_conexion.php");
     require_once("../clases/class_jwt.php");
@@ -35,7 +35,7 @@
                  else{
                     $res = array("res"=>"fail","mensaje"=>mysqli_error($conexion->getLink()));
                     echo json_encode($res);
-                 }                 
+                 }
                }
 
             }else{
