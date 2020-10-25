@@ -38,9 +38,13 @@
                                                   <div class="form-label-group">
                                                        <input type="email" id="inputFecha" class="form-control" placeholder="Email" >
                                                   </div>
-
+<h6>Ciudad</h6>
                                                   <div class="form-label-group">
-                                                       <input type="text" id="nom_ciudad" class="form-control" placeholder="Ciudad" >
+                                                       <select class="form-control" id="nom_ciudad" >
+                                                            
+                                                            <?php Clientes::llenarCiudad($conexion); ?>
+
+                                                       </select>
                                                   </div>
 
                                                   <div class="form-label-group">
