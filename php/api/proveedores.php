@@ -33,10 +33,10 @@
                 t.num_telefono as Contacto
             FROM
                 proveedor AS p
-                    INNER JOIN
+                    LEFT JOIN
                 persona  AS pe
                  ON p.Persona_idPersona = pe.idPersona
-                    INNER JOIN
+                    LEFT JOIN
                 telefono AS t
                  ON pe.idPersona = t.Persona_idPersona
             ');
