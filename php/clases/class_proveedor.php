@@ -17,10 +17,25 @@ class Proveedor{
 		$this->correo = $correo;
 	}
 
-	public function registraProveedor($conexion){
+	public function registroProveedor($conexion){
     return $conexion->ejecutarInstruccion("
-    INSERT INTO proveedor ( nombre_proveedor, direccion_proveedor, telefono_proveedor, correo_proveedor)
-    VALUES ('$this->nombre' ,'$this->direccion', '$this->telefono', '$this->correo')");
+    										INSERT INTO proveedor( 
+    										idProveedor,
+    										nombre_proveedor, 
+    										direccion_proveedor, 
+    										telefono_proveedor, 
+    										correo_proveedor, 
+    										Persona_idPersona
+    										)
+    										VALUES (
+    										NULL, 
+    										'$this->nombre',
+    										'$this->direccion', 
+    										'$this->telefono', 
+    										'$this->correo', 
+    										NULL
+    										)
+    									");
 	}
 
 }

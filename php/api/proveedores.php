@@ -5,7 +5,7 @@
     require_once("../clases/class_conexion.php");
     require_once("../clases/class_jwt.php");
     require_once("../verificaToken.php");
-    require_once("../clases/class_usuario.php");
+    require_once("../clases/class_proveedor.php");
     $conexion = new Conexion();
 
     session_start();
@@ -14,7 +14,36 @@
     switch($_SERVER['REQUEST_METHOD'])
     {
         case 'POST':
-            echo '{"res":"post"}';
+
+            verificaToken();
+
+            if(isset($_POST['nombreP']) && $_POST['nombreP']!='' &&
+               isset($_POST['direccionP']) && $_POST['direccionP']!='' &&
+               isset($_POST['telefonoP']) && $_POST['telefonoP']!='' &&
+               isset($_POST['correoP']) && $_POST['correoP']!=''){
+
+               $proveedor = new Proveedor(
+                             $_POST['nombreP'] ,
+                             $_POST['direccionP'],
+                             $_POST['telefonoP'],
+                             $_POST['correoP']
+                           );
+
+               if($proveedor->registroProveedor($conexion)){
+                 echo '{"res":"OK","mensaje":"Proveedor Agregado."}';
+               }else{
+                 if(mysqli_errno($conexion->getLink()) == 1062)
+                 echo '{"res":"fail","mensaje":"El proveedor ya existe."}';
+                 else{
+                    $res = array("res"=>"fail","mensaje"=>mysqli_error($conexion->getLink()));
+                    echo json_encode($res);
+                 }
+               }
+
+            }else{
+              echo '{"res":"fail","mensaje":"Debe ingresar todos los campos."}';
+            }
+
         break;
 
         case 'GET':
@@ -33,12 +62,20 @@
                 t.num_telefono as Contacto
             FROM
                 proveedor AS p
+<<<<<<< Updated upstream
                     LEFT JOIN
                 persona  AS pe
                  ON p.Persona_idPersona = pe.idPersona
                     LEFT JOIN
+=======
+                     LEFT JOIN
+                persona AS pe
+                  ON p.Persona_idPersona = pe.idPersona
+                     LEFT JOIN
+>>>>>>> Stashed changes
                 telefono AS t
-                 ON pe.idPersona = t.Persona_idPersona
+                  ON pe.idPersona = t.Persona_idPersona
+                ORDER BY Id
             ');
 
                 $res = array(); //creamos un array

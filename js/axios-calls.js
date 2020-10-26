@@ -59,9 +59,15 @@ var renderTabla = function(param,id,api){
     data.forEach(element => {
         let fila='';
         for(let i in element){
-            fila+=`
-                <td>${element[i]}</td>
-            `;
+            if(element[i]==null){
+                fila+=`
+                    <td>---</td>
+                `;
+            }else{
+                fila+=`
+                    <td>${element[i]}</td>
+                `;
+            }
         }
         document.getElementById('tbody').innerHTML+=`
         <tr>${fila}</tr>
