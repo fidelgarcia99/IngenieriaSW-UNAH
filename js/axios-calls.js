@@ -40,10 +40,11 @@ var nuevoRegistro = async function(data,api){
 }
 
 var renderTabla = function(param,id,api){
-  document.getElementById('tbody').innerHTML='';
-  document.getElementById('thead').innerHTML='';
+
   var dataa = obtenerRegistros(param,id,api);
   dataa.then((data)=>{
+    document.getElementById('tbody').innerHTML='';
+    document.getElementById('thead').innerHTML='';
     //Se agrega el nombre de las columnas
     let nombreCol = '';
     for(let i in data[0]){

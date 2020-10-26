@@ -35,9 +35,9 @@
                 empleado AS emp
                 INNER JOIN
                 persona as per ON emp.Persona_idPersona = per.IdPersona
-                INNER JOIN
+                left JOIN
                 telefono as tel ON tel.Persona_idPersona = per.IdPersona
-                INNER JOIN
+                inner JOIN
                 cargo_x_empleado as cxe on cxe.Empleado_idEmpleado = emp.idEmpleado
                 INNER JOIN
                 cargo as car on car.idCargo = cxe.Cargo_idCargo

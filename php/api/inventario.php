@@ -18,7 +18,7 @@
 
 
         case 'GET':     //Obtener producto/s
-            verificaToken($_GET['token']);
+            verificaToken();
 
             if(isset($_GET['id'])){
 
