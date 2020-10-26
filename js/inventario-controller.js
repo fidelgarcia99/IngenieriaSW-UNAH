@@ -1,1 +1,1 @@
-obtenerRegistros(null,"inventario");
+renderTabla(null,null,"inventario");

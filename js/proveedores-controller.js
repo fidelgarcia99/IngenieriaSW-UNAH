@@ -1,1 +1,1 @@
-obtenerRegistros(null,"proveedores");
+renderTabla(null,null,"proveedores");

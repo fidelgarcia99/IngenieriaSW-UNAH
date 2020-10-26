@@ -1,1 +1,1 @@
-obtenerRegistros(null,'empleados');
+renderTabla(null,null,'empleados');

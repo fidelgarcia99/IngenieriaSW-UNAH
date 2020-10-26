@@ -1,1 +1,1 @@
-obtenerRegistros(null,'clientes');
+renderTabla(null,null,'clientes');
