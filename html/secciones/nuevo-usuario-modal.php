@@ -19,11 +19,12 @@
 
                      <div class="form-label-group">
                        <select class="form-control" id="selectIdEmpleado">
-                          <option value="1">Empelado 1</option>
-                          <option value="2">Empelado 2</option>
-                          <option value="3">Empelado 3</option>
-                          <option value="4">Empelado 4</option>
-                          <option value="5">Empelado 5</option>
+
+                       </select>
+                     </div>
+                     <div class="form-label-group">
+                       <select class="form-control" id="selectTipoUsuario">
+
                        </select>
                      </div>
 

@@ -1,5 +1,30 @@
 var mostrarUsuarios = function(){
-  obtenerRegistros(null,"usuarios");
+  renderTabla(null,null,"usuarios");
+}
+
+var mostrarTiposUsuarios = function(){
+  var dataa = obtenerRegistros('tipo',null,"usuarios");
+ dataa.then((data)=>{
+   var opciones = "";
+   data.forEach((item, i) => {
+     opciones+=`
+     <option value="${i+1}">${item['tipo']}</option>
+     `;
+   });
+ document.getElementById('selectTipoUsuario').innerHTML=opciones;
+ });
+}
+var mostrarEmpleados = function(){
+  var dataa = obtenerRegistros(null,null,"empleados");
+ dataa.then((data)=>{
+   var opciones = "";
+   data.forEach((item, i) => {
+     opciones+=`
+     <option value="${i+1}">${item['Nombre']}</option>
+     `;
+   });
+ document.getElementById('selectIdEmpleado').innerHTML=opciones;
+ });
 }
 
 var registraUsuario = async function(){
@@ -7,6 +32,7 @@ var registraUsuario = async function(){
 
     let username = document.getElementById('inputUserame').value;
     let empleado = document.getElementById('selectIdEmpleado').value;
+    let tipo = document.getElementById('selectTipoUsuario').value;
     let passwd = document.getElementById('inputPassword').value;
     let cpasswd = document.getElementById('inputConfirmPassword').value;
 
@@ -14,6 +40,7 @@ var registraUsuario = async function(){
         let usuario = {
           username : username,
           idEmpleado : empleado,
+          tipo: tipo,
           passwd : passwd
         }
 
@@ -28,6 +55,7 @@ var registraUsuario = async function(){
             document.getElementById('inputUserame').value='';
             document.getElementById('inputPassword').value='';
             document.getElementById('inputConfirmPassword').value='';
+            mostrarUsuarios();
           }else{
             document.getElementById('errorMessage').innerHTML=respuesta.mensaje;
             document.getElementById('errorMessage').style='display:block';
@@ -107,3 +135,5 @@ var comparaContraseñas = function(){
   }
 }
 mostrarUsuarios();
+mostrarTiposUsuarios();
+mostrarEmpleados();

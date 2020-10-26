@@ -20,12 +20,15 @@
 
             if(isset($_POST['username']) && $_POST['username']!='' &&
                isset($_POST['idEmpleado']) && $_POST['idEmpleado']!='' &&
+               isset($_POST['tipo']) && $_POST['tipo']!='' &&
                isset($_POST['passwd']) && $_POST['passwd']!=''){
 
                $usuario = new Usuario(
                              $_POST['username'] ,
                              sha1($_POST['passwd']),
-                             $_POST['idEmpleado']);
+                             $_POST['idEmpleado'],
+                             $_POST['tipo']
+                           );
 
                if($usuario->registraUsuario($conexion)){
                  echo '{"res":"OK","mensaje":"Usuario creado."}';
@@ -45,9 +48,21 @@
         break;
 
         case 'GET':     //Obtener usuario/s
-            verificaToken($_GET['token']);
+            verificaToken();
+            $resultado=null;
+            if(isset($_GET['param'])){
 
-            if(isset($_GET['id'])){
+              switch ($_GET['param']) {
+                case 'id':
+                  // code...
+                  break;
+                case 'tipo':
+                $resultado = $conexion->ejecutarInstruccion('
+                  SELECT tipo
+                  FROM tipousuario
+                  ');
+                break;
+              }
 
             }else{
                 $resultado = $conexion->ejecutarInstruccion('
@@ -56,14 +71,16 @@
                   inner join empleado as e on e.idEmpleado = u.Empleado_idEmpleado
                   inner join persona as p on p.idPersona = e.Persona_idPersona
                   inner join tipousuario as tu on tu.idtipousuario = u.idtipousuario');
+            }
 
-                $res = array(); //creamos un array
+            if($resultado!=null and $resultado){
+              $res = array(); //creamos un array
 
-                while($row = mysqli_fetch_assoc($resultado))
-                {
-                    $res[] = $row;
-                }
-                echo json_encode($res);
+              while($row = mysqli_fetch_assoc($resultado))
+              {
+                  $res[] = $row;
+              }
+              echo json_encode($res);
             }
         break;
 

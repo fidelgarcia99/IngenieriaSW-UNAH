@@ -2,13 +2,13 @@ var readCookie = function(name) {
     return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + name.replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
 }
 
-var obtenerRegistros = async function(id,api){
+var obtenerRegistros = async function(param,id,api){
     let params;
     let resultado;
-    if(id==null){
+    if(param==null){
         params={token:readCookie('token')};
     }else{
-        params={token:readCookie('token'),id:id}
+        params={token:readCookie('token'),param:param, id:id}
     }
 
     await axios({
@@ -17,7 +17,7 @@ var obtenerRegistros = async function(id,api){
             responseType:'json',
             params:params
         }).then(res=>{
-          resultado= res.data;
+          resultado = res.data;
         }).catch(err=>{
             console.error(err);
         });
@@ -39,30 +39,33 @@ var nuevoRegistro = async function(data,api){
         return respuesta;
 }
 
-var renderTabla = async function(id,api){
-  var data = await obtenerRegistros(id,api);
-  alert(data);
-  //Se agrega el nombre de las columnas
-  let nombreCol = '';
-  for(let i in data[0]){
-      nombreCol+=`
-          <td>${i}</td>
-      `;
-  }
-  document.getElementById('thead').innerHTML+=`
-  <tr>${nombreCol}</tr>
-  `;
-  //Se gregan las filas de datos
-  data.forEach(element => {
-      let fila='';
-      for(let i in element){
-          fila+=`
-              <td>${element[i]}</td>
-          `;
-      }
-      document.getElementById('tbody').innerHTML+=`
-      <tr>${fila}</tr>
-      `;
+var renderTabla = function(param,id,api){
+  document.getElementById('tbody').innerHTML='';
+  document.getElementById('thead').innerHTML='';
+  var dataa = obtenerRegistros(param,id,api);
+  dataa.then((data)=>{
+    //Se agrega el nombre de las columnas
+    let nombreCol = '';
+    for(let i in data[0]){
+        nombreCol+=`
+            <td>${i}</td>
+        `;
+    }
+    document.getElementById('thead').innerHTML+=`
+    <tr>${nombreCol}</tr>
+    `;
+    //Se gregan las filas de datos
+    data.forEach(element => {
+        let fila='';
+        for(let i in element){
+            fila+=`
+                <td>${element[i]}</td>
+            `;
+        }
+        document.getElementById('tbody').innerHTML+=`
+        <tr>${fila}</tr>
+        `;
+    });
+    $('#dataTable').DataTable();
   });
-  $('#dataTable').DataTable();
 }
