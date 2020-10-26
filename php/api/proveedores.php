@@ -62,17 +62,10 @@
                 t.num_telefono as Contacto
             FROM
                 proveedor AS p
-<<<<<<< Updated upstream
                     LEFT JOIN
                 persona  AS pe
                  ON p.Persona_idPersona = pe.idPersona
-                    LEFT JOIN
-=======
                      LEFT JOIN
-                persona AS pe
-                  ON p.Persona_idPersona = pe.idPersona
-                     LEFT JOIN
->>>>>>> Stashed changes
                 telefono AS t
                   ON pe.idPersona = t.Persona_idPersona
                 ORDER BY Id
