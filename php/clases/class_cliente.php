@@ -7,7 +7,7 @@ class Clientes{
 	private $nom_ciudad;
 	private $direccion;
 	private $num_telefono;
-	private $email;
+	private $dir_correo;
 	private $fechaRegistro;
 
 	public function __construct(
@@ -18,7 +18,7 @@ class Clientes{
 		$nom_ciudad = null,
 		$direccion = null,
 		$num_telefono = null,
-		$email = null,
+		$dir_correo = null,
 		$fechaRegistro= null
 	){
 		$this->pNombre = $pNombre;
@@ -28,17 +28,17 @@ class Clientes{
 		$this->nom_ciudad = $nom_ciudad;
 		$this->direccion = $direccion;
 		$this->num_telefono = $num_telefono;
-		$this->email = $email;
+		$this->dir_correo = $dir_correo;
 		$this->fechaRegistro = $fechaRegistro;
 	}
 
 
 
-	public function registraEmpleado($conexion){
+	public function registraCliente($conexion){
 		return $conexion->ejecutarInstruccion("
           INSERT INTO  ( )
 		VALUES ('$this->pNombre' ,'$this->sNombre', '$this->pApellido','$this->sApellido' ,'$this->nom_ciudad', 
-		'$this->direccion','$this->num_telefono', '$this->email',  '$this->fechaRegistro')");
+		'$this->direccion','$this->num_telefono', '$this->dir_correo',  '$this->fechaRegistro')");
 	}
 
 
