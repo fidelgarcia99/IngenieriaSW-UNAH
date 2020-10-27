@@ -24,14 +24,15 @@
 
             }else{
                 $resultado = $conexion->ejecutarInstruccion('SELECT
-                p.num_identidad as Id,
+                p.num_identidad as "Id/RTN",
                 CONCAT(p.pnombre," ",p.snombre," ",p.papellido," ",p.sapellido) as "Nombre Completo",
-                c.idCliente as RTN
+                tel.num_telefono as Telefono,
+                co.dir_correo as Email
             FROM
                 persona AS p
-                    INNER JOIN
-                cliente  AS c
-                 ON p.idPersona = c.Persona_idPersona
+                INNER JOIN cliente  AS c ON p.idPersona = c.Persona_idPersona
+                LEFT JOIN correo as co ON co.Persona_idPersona = p.idPersona
+                LEFT JOIN telefono as tel on tel.idTelefono = p.idPersona
             ');
 
                 $res = array(); //creamos un array
