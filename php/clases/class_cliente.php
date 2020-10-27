@@ -34,7 +34,7 @@ class Clientes{
 
 
 
-	public function registraEmpleado($conexion){
+	public function registraCliente($conexion){
 		return $conexion->ejecutarInstruccion("
           INSERT INTO  ( )
 		VALUES ('$this->pNombre' ,'$this->sNombre', '$this->pApellido','$this->sApellido' ,'$this->nom_ciudad', 
