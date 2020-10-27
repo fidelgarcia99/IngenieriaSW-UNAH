@@ -1,5 +1,5 @@
 <?php
-class Clientes{
+class Cliente{
 	private $pNombre;
 	private $sNombre;
 	private $pApellido;
@@ -9,6 +9,8 @@ class Clientes{
 	private $num_telefono;
 	private $email;
 	private $fechaRegistro;
+	private $id;
+	private $nom_departamento;
 
 	public function __construct(
 		$pNombre = null,
@@ -19,7 +21,9 @@ class Clientes{
 		$direccion = null,
 		$num_telefono = null,
 		$email = null,
-		$fechaRegistro= null
+		$fechaRegistro= null,
+		$id= null,
+		$nom_departamento=null
 	){
 		$this->pNombre = $pNombre;
 		$this->sNombre = $sNombre;
@@ -30,15 +34,18 @@ class Clientes{
 		$this->num_telefono = $num_telefono;
 		$this->email = $email;
 		$this->fechaRegistro = $fechaRegistro;
+		$this->id = $id;
+		$this->nom_departamento = $nom_departamento;
 	}
 
 
 
-	public function registraEmpleado($conexion){
+	public function registraCliente($conexion){
 		return $conexion->ejecutarInstruccion("
-          INSERT INTO  ( )
-		VALUES ('$this->pNombre' ,'$this->sNombre', '$this->pApellido','$this->sApellido' ,'$this->nom_ciudad', 
-		'$this->direccion','$this->num_telefono', '$this->email',  '$this->fechaRegistro')");
+		call SPnuevo_cliente(
+			'$this->pNombre', '$this->sNombre', '$this->pApellido', '$this->sApellido',
+			 $this->nom_ciudad, '$this->direccion', '$this->num_telefono', '$this->email',
+			 '$this->fechaRegistro', '$this->id', $this->nom_departamento);");
 	}
 
 
@@ -53,13 +60,13 @@ class Clientes{
                          ?>
 					<option selected value="<?php echo $fila_ciudad["idCiudad"];?>">
 						<?php echo $fila_ciudad["nom_ciudad"];?>
-						
+
 					</option>
 
 					<?php
 				}
 			}
-			
+
 			$conexion->liberarResultado($ciudad);
 	}
 
