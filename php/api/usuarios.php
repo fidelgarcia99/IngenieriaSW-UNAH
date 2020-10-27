@@ -10,13 +10,13 @@
 
     session_start();
 
+    verificaToken();
+
     //Servicios web
     switch($_SERVER['REQUEST_METHOD'])
     {
         case 'POST':    //Crear usuario
             $_POST = json_decode(file_get_contents('php://input'),true);
-
-            verificaToken();
 
             if(isset($_POST['username']) && $_POST['username']!='' &&
                isset($_POST['idEmpleado']) && $_POST['idEmpleado']!='' &&
@@ -47,8 +47,7 @@
 
         break;
 
-        case 'GET':     //Obtener usuario/s
-            verificaToken();
+        case 'GET':     //Obtener usuario/s            
             $resultado=null;
             if(isset($_GET['param'])){
 

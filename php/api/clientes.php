@@ -9,6 +9,8 @@
 
     session_start();
 
+    verificaToken();
+    
     //Servicios web
     switch($_SERVER['REQUEST_METHOD'])
     {
@@ -18,8 +20,6 @@
 
 
         case 'GET':     //Obtener cliente/s
-            verificaToken($_GET['token']);
-
             if(isset($_GET['id'])){
 
             }else{

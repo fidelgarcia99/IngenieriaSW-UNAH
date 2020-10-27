@@ -10,13 +10,12 @@
 
     session_start();
 
+    verificaToken();
+
     //Servicios web
     switch($_SERVER['REQUEST_METHOD'])
     {
         case 'POST':
-
-            verificaToken();
-
             if(isset($_POST['nombreP']) && $_POST['nombreP']!='' &&
                isset($_POST['direccionP']) && $_POST['direccionP']!='' &&
                isset($_POST['telefonoP']) && $_POST['telefonoP']!='' &&
@@ -46,9 +45,7 @@
 
         break;
 
-        case 'GET':
-            verificaToken($_GET['token']);
-
+        case 'GET':            
             if(isset($_GET['id'])){
 
             }else{
