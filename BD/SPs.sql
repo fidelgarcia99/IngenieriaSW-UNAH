@@ -61,7 +61,7 @@ CREATE PROCEDURE SPnuevo_proveedor(
     IN telefono_proveedor VARCHAR(45),
     IN correo_proveedor VARCHAR(45),
     IN idPersona INT,
-    IN pcAccion VARCHAR(1000),
+    OUT pcAccion VARCHAR(1000),
 	OUT pcMensaje VARCHAR(1000),
 	OUT pbOcurreError BOOLEAN
     )
