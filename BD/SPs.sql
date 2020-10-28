@@ -6,13 +6,14 @@ CREATE PROCEDURE SPnuevo_usuario
 		IN idTipousuario INT,
     	IN nombre_usuario VARCHAR(50),
     	IN password_usuario VARCHAR(50),
-    	IN pcAccion VARCHAR(1000),
+    	OUT pcAccion VARCHAR(1000),
 		OUT pcMensaje VARCHAR(1000),
 		OUT pbOcurreError BOOLEAN
     )
     SP:BEGIN
         DECLARE vcMsjTemp VARCHAR(1000);
 		DECLARE idUsuario_insert INT;
+		SET pbOcurreError = 0;
 		SET autocommit = 0;
 		
 		START TRANSACTION;
