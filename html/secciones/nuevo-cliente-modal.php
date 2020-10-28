@@ -41,8 +41,8 @@
 <h6>Ciudad</h6>
                                                   <div class="form-label-group">
                                                        <select class="form-control" id="nom_ciudad" >
-                                                            
-                                                            <?php Clientes::llenarCiudad($conexion); ?>
+
+                                                            <?php Cliente::llenarCiudad($conexion); ?>
 
                                                        </select>
                                                   </div>

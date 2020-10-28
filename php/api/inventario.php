@@ -9,6 +9,8 @@
 
     session_start();
 
+    verificaToken();
+
     //Servicios web
     switch($_SERVER['REQUEST_METHOD'])
     {
@@ -18,27 +20,10 @@
 
 
         case 'GET':     //Obtener producto/s
-            verificaToken();
-
             if(isset($_GET['id'])){
 
             }else{
-                $resultado = $conexion->ejecutarInstruccion('SELECT
-                p.idProducto as Id,
-                p.nombre_producto as Nombre,
-                p.precioCosto as Costo,
-                p.precioVenta as Precio,
-                p.cantidad as Cantidad,
-                prov.nombre_proveedor as Proveedor
-            FROM
-                producto AS p
-                    INNER JOIN
-                producto_x_proveedor  AS pxp
-                 ON p.idProducto = pxp.Producto_idProducto
-                    INNER JOIN
-                proveedor AS prov
-                 ON pxp.Proveedor_idProveedor = prov.idProveedor
-            ');
+                $resultado = $conexion->ejecutarInstruccion('call Inventario();');
 
                 $res = array(); //creamos un array
 

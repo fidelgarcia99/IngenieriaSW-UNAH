@@ -10,13 +10,13 @@
 
     session_start();
 
+    verificaToken();
+
     //Servicios web
     switch($_SERVER['REQUEST_METHOD'])
     {
         case 'POST':    //Crear usuario
             $_POST = json_decode(file_get_contents('php://input'),true);
-
-            verificaToken();
 
             if(isset($_POST['username']) && $_POST['username']!='' &&
                isset($_POST['idEmpleado']) && $_POST['idEmpleado']!='' &&
@@ -48,7 +48,6 @@
         break;
 
         case 'GET':     //Obtener usuario/s
-            verificaToken();
             $resultado=null;
             if(isset($_GET['param'])){
 
@@ -65,12 +64,7 @@
               }
 
             }else{
-                $resultado = $conexion->ejecutarInstruccion('
-                  SELECT CONCAT(p.pnombre," ",p.papellido) as Empleado, u.nombre_usuario as "Nombre de Usuario", tu.tipo as "Tipo de Cuenta"
-                  FROM usuario as u
-                  inner join empleado as e on e.idEmpleado = u.Empleado_idEmpleado
-                  inner join persona as p on p.idPersona = e.Persona_idPersona
-                  inner join tipousuario as tu on tu.idtipousuario = u.idtipousuario');
+                $resultado = $conexion->ejecutarInstruccion('call Usuarios();');
             }
 
             if($resultado!=null and $resultado){

@@ -9,6 +9,8 @@
 
     session_start();
 
+    verificaToken();
+
     //Servicios web
     switch($_SERVER['REQUEST_METHOD'])
     {
@@ -18,34 +20,11 @@
 
 
         case 'GET':     //Obtener producto/s
-            verificaToken($_GET['token']);
 
             if(isset($_GET['id'])){
 
             }else{
-                $resultado = $conexion->ejecutarInstruccion('SELECT
-                per.num_identidad as Id,
-                CONCAT(per.pnombre," ",per.snombre," ",per.papellido," ",per.sapellido) as Nombre,
-                tel.num_telefono as Telefono,
-                c.dir_correo as Email,
-                per.direccion as Direccion,
-                car.nombre_cargo as Funcion,
-                car.sueldo_base as Sueldo,
-                cxe.fecha_nombramiento as Contratado
-            FROM
-                empleado AS emp
-                INNER JOIN
-                persona as per ON emp.Persona_idPersona = per.IdPersona
-                left JOIN
-                telefono as tel ON tel.Persona_idPersona = per.IdPersona
-                left join
-                correo as c ON c.Persona_idPersona = per.idPersona
-                inner JOIN
-                cargo_x_empleado as cxe on cxe.Empleado_idEmpleado = emp.idEmpleado
-                INNER JOIN
-                cargo as car on car.idCargo = cxe.Cargo_idCargo
-
-            ');
+                $resultado = $conexion->ejecutarInstruccion('call Empleados();');
 
                 $res = array(); //creamos un array
 
