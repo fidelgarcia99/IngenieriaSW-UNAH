@@ -1,33 +1,36 @@
-renderTabla(null,null,"proveedores");
-
-function guardarProveedor(){
-	var datos = "nombreP="+$("#nombreP").val()+
-				"&direccionP="+$("#direccionP").val()+
-				"&telefonoP="+$("#telefonoP").val()+
-				"&correoP="+$("#correoP").val();
-	$.ajax({
-		url: "php/api/proveedores.php",
-		data: datos,
-		method: "POST",
-		dataType: "json",
-		success:function(respuesta){
-				$("#nombreP").val(" ");
-				$("#direccionP").val(" ");
-				$("#telefonoP").val(" ");
-				$("#correoP").val(" ");
-
-				$('#modal-success-message').html(respuesta.mensaje);
-				$('#nuevoProveedorModal').modal('hide');
-          		$('#modal-success-prov').modal('show');
-
-          		renderTabla(null,null,"proveedores");
-          		
-           		setTimeout(function() {
-					$('#modal-success-prov').modal('hide');
-				},2000);
-			},
-		error:function(){
-			alert("error");
-		}
-	});
+var mostrarProveedores = function(){
+  renderTabla(null,null,'proveedores');
 }
+
+var registrarProveedor = async function(){
+  let nombreP = document.getElementById('nombreP').value;
+  let direccionP = document.getElementById('direccionP').value;
+  let correoP = document.getElementById('correoP').value;
+  let telefonoP = document.getElementById('telefonoP').value;
+
+      let proveedor = {
+        nombreP: nombreP,
+        direccionP: direccionP,
+        correoP: correoP,
+        telefonoP: telefonoP
+      }
+      let respuesta = await nuevoRegistro(proveedor, "proveedores");
+
+      if(respuesta!=null){
+        if(respuesta.res=='OK'){
+          document.getElementById('modal-success-message').innerHTML = respuesta.mensaje;
+          $('#nuevoProveedorModal').modal('hide');
+          $('#modal-success').modal('show');
+          setTimeout(()=>$('#modal-success').modal('hide'), 2000);
+          document.getElementById('nombreP').value='';
+          document.getElementById('direccionP').value='';
+          document.getElementById('correoP').value='';
+          document.getElementById('telefonoP').value='';
+          mostrarProveedores();
+        }else{
+          document.getElementById('errorMessage').innerHTML=respuesta.mensaje;
+          document.getElementById('errorMessage').style='display:block';
+        }
+      }
+}
+mostrarProveedores();

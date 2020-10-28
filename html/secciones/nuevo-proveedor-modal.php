@@ -30,6 +30,9 @@
                      <div class="form-label-group">
                        <input type="text" id="correoP" class="form-control" placeholder="Correo" required>
                      </div>
+                     <div id="errorMessage" class="alert alert-danger" style="display:none">
+                       Hubo un problema
+                     </div>
                    </form>
                  </div>
                </div>
@@ -39,33 +42,9 @@
       </div>
       <div class="modal-footer py-0">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" onclick="guardarProveedor()">Guardar</button>
+        <button type="button" class="btn btn-primary" onclick="registrarProveedor()">Guardar</button>
       </div>
     </div>
   </div>
 </div>
-
-<div class="modal fade" id="modal-success-prov" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="container-fluid">
-          <div class="row mx-0 px-0">
-            <div class="col-3">
-            </div>
-            <div class="col-9 mx-0 px-0">
-              <i class="fas fa-check-circle mx-auto" id="modal-success-icon"></i>
-            </div>
-          </div>
-          <div class="row mx-0 px-0">
-            <div class="col-12 mx-0 px-0">
-              <div id="modal-success-message" class="alert alert-success">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
-    </div>
-  </div>
-</div>
+<?php include(SECCIONES . 'success-modal.php')?>

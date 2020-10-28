@@ -16,6 +16,8 @@
     switch($_SERVER['REQUEST_METHOD'])
     {
         case 'POST':
+            $_POST = json_decode(file_get_contents('php://input'),true);
+            
             if(isset($_POST['nombreP']) && $_POST['nombreP']!='' &&
                isset($_POST['direccionP']) && $_POST['direccionP']!='' &&
                isset($_POST['telefonoP']) && $_POST['telefonoP']!='' &&
