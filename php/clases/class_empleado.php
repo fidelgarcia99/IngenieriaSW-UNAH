@@ -8,6 +8,8 @@ class Empleados{
 	private $direccion;
 	private $num_telefono;
 	private $cargo;
+	private $ciudad;
+	private $email;
 	private $fechainicio_contrato;
 
 	public function __construct(
@@ -18,6 +20,8 @@ class Empleados{
 		$num_identidad = null,
 		$direccion = null,
 		$num_telefono = null,
+		$ciudad = null,
+		$email = null,
 		$cargo = null,
 		$fechainicio_contrato= null
 	){
@@ -28,6 +32,8 @@ class Empleados{
 		$this->num_identidad = $num_identidad;
 		$this->direccion = $direccion;
 		$this->num_telefono = $num_telefono;
+		$this->ciudad = $ciudad;
+		$this->email = $email;
 		$this->cargo = $cargo;
 		$this->fechainicio_contrato = $fechainicio_contrato;
 	}
@@ -36,9 +42,8 @@ class Empleados{
 
 	public function registraEmpleado($conexion){
 		return $conexion->ejecutarInstruccion("
-          INSERT INTO  ( )
-		VALUES ('$this->pNombre' ,'$this->sNombre', '$this->pApellido','$this->sApellido' ,'$this->num_identidad', 
-		'$this->direccion','$this->num_telefono', '$this->cargo',  '$this->fechainicio_contrato')");
+          CALL SPnuevo_empleado('$this->pNombre' ,'$this->sNombre', '$this->pApellido','$this->sApellido' , $this->ciudad, 
+		'$this->direccion','$this->num_telefono', '$this->email',  '$this->fechainicio_contrato', '$this->identidad', $this->cargo)");
 	}
 
 
