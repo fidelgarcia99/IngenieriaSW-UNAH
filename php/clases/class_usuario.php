@@ -18,20 +18,8 @@ class Usuario{
 	}
 
 	public function registraUsuario($conexion){
-          return $conexion->ejecutarInstruccion("
-					INSERT INTO .usuario
-					(
-					Empleado_idEmpleado,
-					idtipousuario,
-					nombre_usuario,
-					password)
-					VALUES
-					(
-					$this->idEmpleado,
-					$this->tipo,
-					'$this->username',
-					'$this->passwd');
-					");
+		  return $conexion->ejecutarInstruccion("CALL SPnuevo_usuario($this->idEmpleado , $this->tipo, 
+		  '$this->username', '$this->passwd', '0', '0', '0');");
 	}
 
 }
