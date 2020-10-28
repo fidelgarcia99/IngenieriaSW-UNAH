@@ -64,5 +64,27 @@ class Empleados{
 	}
 
 
+	public function llenarCiudad($conexion){
+		$ciudad = $conexion->ejecutarInstruccion("
+		SELECT idCiudad, nom_ciudad from ciudad
+			");
+
+			$c = 0;
+			while ($fila_ciudad = $conexion->obtenerFila($ciudad)) {
+				if ($c==0) {
+                         ?>
+					<option selected value="<?php echo $fila_ciudad["idCiudad"];?>">
+						<?php echo $fila_ciudad["nom_ciudad"];?>
+						
+					</option>
+
+					<?php
+				}
+			}
+			
+			$conexion->liberarResultado($ciudad);
+	}
+
+
 }
 ?>

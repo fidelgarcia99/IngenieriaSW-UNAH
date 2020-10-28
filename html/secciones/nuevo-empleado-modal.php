@@ -37,6 +37,15 @@
                                                        <input type="number" pattern="[0-9]+"  id="inputNumtel" class="form-control" placeholder="Número Telefonico" required>
                                                   </div>
 
+                                                  <h6>Ciudad</h6>
+                                                  <div class="form-label-group">
+                                                       <select class="form-control" id="nom_ciudad" >
+                                                            
+                                                            <?php Empleados::llenarCiudad($conexion); ?>
+
+                                                       </select>
+                                                  </div>
+
                                                   <div class="form-label-group">
                                                        <input type="text" id="inputDireccion" class="form-control" placeholder="Dirección" required>
                                                   </div>
