@@ -1,5 +1,5 @@
 <?php
-class Empleados{
+class Empleado{
 	private $pNombre;
 	private $sNombre;
 	private $pApellido;
@@ -42,8 +42,8 @@ class Empleados{
 
 	public function registraEmpleado($conexion){
 		return $conexion->ejecutarInstruccion("
-          CALL SPnuevo_empleado('$this->pNombre' ,'$this->sNombre', '$this->pApellido','$this->sApellido' , $this->ciudad, 
-		'$this->direccion','$this->num_telefono', '$this->email',  '$this->fechainicio_contrato', '$this->identidad', $this->cargo)");
+          CALL SPnuevo_empleado('$this->pNombre' ,'$this->sNombre', '$this->pApellido','$this->sApellido' , $this->ciudad,
+		'$this->direccion','$this->num_telefono', '$this->email',  '$this->fechainicio_contrato', '$this->num_identidad', $this->cargo)");
 	}
 
 
@@ -58,13 +58,13 @@ class Empleados{
 					?>
 					<option selected value="<?php echo $fila_cargo["idCargo"];?>">
 						<?php echo $fila_cargo["nombre_cargo"];?>
-						
+
 					</option>
 
 					<?php
 				}
 			}
-			
+
 			$conexion->liberarResultado($cargo);
 	}
 
@@ -80,13 +80,13 @@ class Empleados{
                          ?>
 					<option selected value="<?php echo $fila_ciudad["idCiudad"];?>">
 						<?php echo $fila_ciudad["nom_ciudad"];?>
-						
+
 					</option>
 
 					<?php
 				}
 			}
-			
+
 			$conexion->liberarResultado($ciudad);
 	}
 

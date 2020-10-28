@@ -40,8 +40,8 @@
                                                   <h6>Ciudad</h6>
                                                   <div class="form-label-group">
                                                        <select class="form-control" id="nom_ciudad" >
-                                                            
-                                                            <?php Empleados::llenarCiudad($conexion); ?>
+
+                                                            <?php Empleado::llenarCiudad($conexion); ?>
 
                                                        </select>
                                                   </div>
@@ -53,8 +53,8 @@
                                                   <h6>Cargo</h6>
                                                   <div class="form-label-group">
                                                        <select class="form-control" id="selectIdEmpleado" >
-                                                            
-                                                            <?php Empleados::llenarCargos($conexion); ?>
+
+                                                            <?php Empleado::llenarCargos($conexion); ?>
 
                                                        </select>
                                                   </div>

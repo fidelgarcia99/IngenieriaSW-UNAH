@@ -58,7 +58,6 @@
         }
         break;
 
-
         case 'GET':     //Obtener cliente/s
             if(isset($_GET['id'])){
 
