@@ -19,7 +19,7 @@ class Proveedor{
 
 	public function registroProveedor($conexion){
 	return $conexion->ejecutarInstruccion("CALL SPnuevo_proveedor('$this->nombre','$this->direccion',
-	'$this->telefono','$this->correo', NULL);");
+	'$this->telefono','$this->correo', NULL, '0', '0', '0');");
 	}
 
 }
