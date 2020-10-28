@@ -19,7 +19,7 @@ class Usuario{
 
 	public function registraUsuario($conexion){
 		  return $conexion->ejecutarInstruccion("CALL SPnuevo_usuario($this->idEmpleado , $this->tipo, 
-		  '$this->username', '$this->passwd', '0', '0', '0');");
+		  '$this->username', '$this->passwd');");
 	}
 
 }
