@@ -18,24 +18,8 @@ class Proveedor{
 	}
 
 	public function registroProveedor($conexion){
-    return $conexion->ejecutarInstruccion("
-    										INSERT INTO proveedor( 
-    										idProveedor,
-    										nombre_proveedor, 
-    										direccion_proveedor, 
-    										telefono_proveedor, 
-    										correo_proveedor, 
-    										Persona_idPersona
-    										)
-    										VALUES (
-    										NULL, 
-    										'$this->nombre',
-    										'$this->direccion', 
-    										'$this->telefono', 
-    										'$this->correo', 
-    										NULL
-    										)
-    									");
+	return $conexion->ejecutarInstruccion("CALL SPnuevo_proveedor('$this->nombre','$this->direccion',
+	'$this->telefono','$this->correo', NULL);");
 	}
 
 }
