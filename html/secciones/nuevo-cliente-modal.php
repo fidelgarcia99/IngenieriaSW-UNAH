@@ -36,7 +36,7 @@
                                                   </div>
 
                                                   <div class="form-label-group">
-                                                       <input type="email" id="inputFecha" class="form-control" placeholder="Email" >
+                                                       <input type="email" id="inputEmail" class="form-control" placeholder="Email" >
                                                   </div>
 <h6>Ciudad</h6>
                                                   <div class="form-label-group">
@@ -52,11 +52,13 @@
                                                   </div>
 
 
-                                                  <h6>Fecha de registro</h6>
+                                                  <h6>Id/RTN</h6>
                                                   <div class="form-label-group">
-                                                       <input type="date" id="fechaRegistro" class="form-control" placeholder="Fecha" required>
+                                                       <input type="text" id="inputId" class="form-control" placeholder="Id/RTN" required>
                                                   </div>
-
+                                                  <div id="errorMessage" class="alert alert-danger" style="display:none">
+                                                    Hubo un problema
+                                                  </div>
                                              </form>
                                         </div>
                                    </div>
@@ -66,8 +68,9 @@
                </div>
                <div class="modal-footer py-0">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Registrar</button>
+                    <button type="button" class="btn btn-primary" onclick="registrarCliente();">Registrar</button>
                </div>
           </div>
      </div>
 </div>
+<?php include(SECCIONES.'success-modal.php')?>

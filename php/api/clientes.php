@@ -19,14 +19,13 @@
         $_POST = json_decode(file_get_contents('php://input'),true);
 
         if(isset($_POST['ciudad']) && $_POST['ciudad']!='' &&
-           isset($_POST['departamento']) && $_POST['departamento']!='' &&
            isset($_POST['pnombre']) && $_POST['pnombre']!='' &&
            isset($_POST['snombre']) && isset($_POST['sapellido']) &&
            isset($_POST['papellido']) && $_POST['papellido']!='' &&
            isset($_POST['id']) && $_POST['id']!='' &&
            isset($_POST['direccion']) && $_POST['direccion']!='' &&
            isset($_POST['telefono']) && $_POST['telefono']!='' &&
-           isset($_POST['email']) && $_POST['email']!=''){
+           isset($_POST['email'])){
 
            $cliente = new Cliente(
                          $_POST['pnombre'] ,
@@ -38,8 +37,7 @@
                          $_POST['telefono'] ,
                          $_POST['email'] ,
                          date('Y-m-d'),
-                         $_POST['id'] ,
-                         $_POST['departamento']
+                         $_POST['id']
                        );
 
            if($cliente->registraCliente($conexion)){
@@ -62,7 +60,7 @@
             if(isset($_GET['id'])){
 
             }else{
-                $resultado = $conexion->ejecutarInstruccion('call Clientes()');
+                $resultado = $conexion->ejecutarInstruccion('call Clientes();');
 
                 $res = array(); //creamos un array
 

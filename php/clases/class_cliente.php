@@ -22,8 +22,7 @@ class Cliente{
 		$num_telefono = null,
 		$email = null,
 		$fechaRegistro= null,
-		$id= null,
-		$nom_departamento=null
+		$id= null
 	){
 		$this->pNombre = $pNombre;
 		$this->sNombre = $sNombre;
@@ -32,20 +31,17 @@ class Cliente{
 		$this->nom_ciudad = $nom_ciudad;
 		$this->direccion = $direccion;
 		$this->num_telefono = $num_telefono;
-		$this->dir_correo = $dir_correo;
+		$this->email = $email;
 		$this->fechaRegistro = $fechaRegistro;
 		$this->id = $id;
-		$this->nom_departamento = $nom_departamento;
 	}
 
 
 
 	public function registraCliente($conexion){
 		return $conexion->ejecutarInstruccion("
-		call SPnuevo_cliente(
-			'$this->pNombre', '$this->sNombre', '$this->pApellido', '$this->sApellido',
-			 $this->nom_ciudad, '$this->direccion', '$this->num_telefono', '$this->email',
-			 '$this->fechaRegistro', '$this->id', $this->nom_departamento);");
+			call SPnuevo_cliente('$this->pNombre', '$this->sNombre', '$this->pApellido', '$this->sApellido',
+			 $this->nom_ciudad, '$this->direccion', '$this->num_telefono', '$this->email', '$this->fechaRegistro', '$this->id');");
 	}
 
 
