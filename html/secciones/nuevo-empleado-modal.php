@@ -52,7 +52,7 @@
 
                                                   <h6>Cargo</h6>
                                                   <div class="form-label-group">
-                                                       <select class="form-control" id="selectIdEmpleado" >
+                                                       <select class="form-control" id="selectCargo" >
 
                                                             <?php Empleado::llenarCargos($conexion); ?>
 
@@ -60,11 +60,13 @@
                                                   </div>
 
 
-                                                  <h6>Fecha de contratación</h6>
+                                                  <h6>Correo Electronico</h6>
                                                   <div class="form-label-group">
-                                                       <input type="date" id="inputFecha" class="form-control" placeholder="Fecha" required>
+                                                       <input type="text" id="inputEmail" class="form-control" placeholder="Email" required>
                                                   </div>
-
+                                                  <div id="errorMessage" class="alert alert-danger" style="display:none">
+                                                    Hubo un problema
+                                                  </div>
                                              </form>
                                         </div>
                                    </div>
@@ -74,8 +76,9 @@
                </div>
                <div class="modal-footer py-0">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Registrar</button>
+                    <button type="button" class="btn btn-primary" onclick="registraEmpleado();">Registrar</button>
                </div>
           </div>
      </div>
 </div>
+<?php include(SECCIONES. 'success-modal.php');?>
