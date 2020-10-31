@@ -44,6 +44,9 @@ class Cliente{
 			 $this->nom_ciudad, '$this->direccion', '$this->num_telefono', '$this->email', '$this->fechaRegistro', '$this->id');");
 	}
 
+	public static function eliminarCliente($conexion, $id_registro){
+		return $conexion->ejecutarInstruccion("call SPelimina_cliente($id_registro)");
+	}
 
 	public function llenarCiudad($conexion){
 		$ciudad = $conexion->ejecutarInstruccion("

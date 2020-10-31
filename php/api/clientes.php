@@ -12,12 +12,11 @@
 
     verificaToken();
 
-    //Servicios web
-    switch($_SERVER['REQUEST_METHOD'])
-    {
-        case 'POST':    //Crear cliente
-        $_POST = json_decode(file_get_contents('php://input'),true);
+    $_POST = json_decode(file_get_contents('php://input'),true);
 
+    //Servicios web
+    switch($_SERVER['REQUEST_METHOD']){
+        case 'POST':    //Crear cliente
         if(isset($_POST['ciudad']) && $_POST['ciudad']!='' &&
            isset($_POST['pnombre']) && $_POST['pnombre']!='' &&
            isset($_POST['snombre']) && isset($_POST['sapellido']) &&
@@ -72,12 +71,20 @@
             }
         break;
 
-
         case 'PUT':     //Actualizar cliente
             echo '{"res":"put"}';
         break;
+
         case 'DELETE':  //Eliminar cliente
-            echo '{"res":"delete"}';
+        if (isset($_POST['id']) && $_POST['id']!='') {
+          if (Cliente::eliminarCliente($conexion,$_POST['id'])) {
+              echo '{"res":"OK","mensaje":"Cliente Eliminado"}';
+          }else{
+            $res = array("res"=>"fail","mensaje"=>mysqli_error);
+          }
+        }else{
+          echo '{"res":"fail","mensaje":"Debe especificar un id"}';
+        }
         break;
     }
 ?>
