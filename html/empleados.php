@@ -2,7 +2,7 @@
 include("php/clases/class_conexion.php");
 //se incluye la clase empleados parapoder llamar sus funciones desde el index
 include_once("php/clases/class_empleado.php");
-//objeto Conexion 
+//objeto Conexion
 $conexion = new Conexion();?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,6 +13,7 @@ $conexion = new Conexion();?>
   <!-- Custom styles for this page -->
   <link href="<?php echo VENDOR ?>datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
   <link href="<?php echo CSS ?>empleadosmodal.css" rel="stylesheet">
+  <link href="<?php echo CSS ?>modales.style.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
