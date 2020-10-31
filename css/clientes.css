@@ -19,6 +19,17 @@ input[type=number]::-webkit-outer-spin-button {
 #modal-success .modal-content{
   max-width: 100%;
 }
+#modal-confirm-msj{
+  text-align: center;
+}
+
+#modal-confirm .modal-dialog{
+  max-width: 20%;
+  padding-top: 10%;
+}
+#modal-confirm .modal-content{
+  max-width: 100%;
+}
 
 .modal-dialog{
   max-width: 50%;
