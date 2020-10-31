@@ -1,3 +1,6 @@
+var confirm = false;
+var selectId = null;
+
 var mostrarClientes = function(){
   renderTabla(null,null,'clientes');
 }
@@ -47,4 +50,27 @@ var registrarCliente = async function(){
         }
       }
 }
+
+var eliminarRegistro = async function(id){
+  if (confirm) {
+    let data = {id:id}
+    let respuesta = await eliminarRegistroId(data,"clientes")
+    if(respuesta!=null){
+      if(respuesta.res=='OK'){
+        document.getElementById('modal-success-message').innerHTML = respuesta.mensaje;
+        $('#modal-confirm').modal('hide');
+        $('#modal-success').modal('show');
+        setTimeout(()=>$('#modal-success').modal('hide'), 2000);
+      }
+      selectId=null;
+      confirm=false;
+      mostrarClientes();
+    }
+  }else{
+      document.getElementById('modal-confirm-msj').innerHTML=`Esta a punto de eliminar el registro con Id:${id}.`;
+      $('#modal-confirm').modal('show');
+      selectId = id;
+  }
+}
+
 mostrarClientes();

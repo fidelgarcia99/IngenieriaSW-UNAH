@@ -24,21 +24,6 @@ var obtenerRegistros = async function(param,id,api){
         return resultado;
 }
 
-var nuevoRegistro = async function(data,api){
-  let respuesta=null;
-    await axios({
-            url:`http://${window.location.hostname}/IngenieriaSW-UNAH/php/api/${api}.php`,
-            method:'post',
-            responseType:'json',
-            data:data
-        }).then(res=>{
-            respuesta=res.data;
-        }).catch(err=>{
-            console.error(err);
-        });
-        return respuesta;
-}
-
 var renderTabla = function(param,id,api){
 
   var dataa = obtenerRegistros(param,id,api);
@@ -69,7 +54,7 @@ var renderTabla = function(param,id,api){
                     <td>${element[i]}</td>
                 `;
             }
-        }        
+        }
         fila+=`<td>
         <div class="container-fluid px-0" style="max-widh:450%;">
           <div class="row">
@@ -88,4 +73,34 @@ var renderTabla = function(param,id,api){
     });
     $('#dataTable').DataTable();
   });
+}
+
+var nuevoRegistro = async function(data,api){
+  let respuesta=null;
+    await axios({
+            url:`http://${window.location.hostname}/IngenieriaSW-UNAH/php/api/${api}.php`,
+            method:'post',
+            responseType:'json',
+            data:data
+        }).then(res=>{
+            respuesta=res.data;
+        }).catch(err=>{
+            console.error(err);
+        });
+        return respuesta;
+}
+
+var eliminarRegistroId = async function(data,api){
+    let respuesta=null;
+      await axios({
+              url:`http://${window.location.hostname}/IngenieriaSW-UNAH/php/api/${api}.php`,
+              method:'delete',
+              responseType:'json',
+              data:data
+          }).then(res=>{
+              respuesta=res.data;
+          }).catch(err=>{
+              console.error(err);
+          });
+          return respuesta;
 }
