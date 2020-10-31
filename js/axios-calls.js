@@ -52,6 +52,7 @@ var renderTabla = function(param,id,api){
             <td>${i}</td>
         `;
     }
+    nombreCol+=`<td>Opciones</td>`;
     document.getElementById('thead').innerHTML+=`
     <tr>${nombreCol}</tr>
     `;
@@ -68,7 +69,19 @@ var renderTabla = function(param,id,api){
                     <td>${element[i]}</td>
                 `;
             }
-        }
+        }        
+        fila+=`<td>
+        <div class="container-fluid px-0" style="max-widh:450%;">
+          <div class="row">
+            <div class="col pr-0 mr-0">
+              <button class="btn text-info" onclick="editarRegistro(${element['Id']});"><i class="fa fa-edit"></i></button>
+            </div>
+            <div class="col pl-0 ml-0">
+              <button class="btn text-danger" onclick="eliminarRegistro(${element['Id']});"><i class="fa fa-trash"></i></button>
+            </div>
+          </div>
+        </div>
+        </td>`;
         document.getElementById('tbody').innerHTML+=`
         <tr>${fila}</tr>
         `;
