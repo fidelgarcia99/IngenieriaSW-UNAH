@@ -12,12 +12,12 @@
 
     verificaToken();
 
+    $_POST = json_decode(file_get_contents('php://input'),true);
+
     //Servicios web
     switch($_SERVER['REQUEST_METHOD'])
     {
         case 'POST':    //Crear usuario
-            $_POST = json_decode(file_get_contents('php://input'),true);
-
             if(isset($_POST['username']) && $_POST['username']!='' &&
                isset($_POST['idEmpleado']) && $_POST['idEmpleado']!='' &&
                isset($_POST['tipo']) && $_POST['tipo']!='' &&
@@ -44,7 +44,6 @@
             }else{
               echo '{"res":"fail","mensaje":"Debe ingresar todos los campos."}';
             }
-
         break;
 
         case 'GET':     //Obtener usuario/s
@@ -79,7 +78,35 @@
         break;
 
         case 'PUT':     //Actualizar usuario
-            echo '{"res":"put"}';
+        if(isset($_POST['username']) && $_POST['username']!='' &&
+           isset($_POST['idEmpleado']) && $_POST['idEmpleado']!='' &&
+           isset($_POST['tipo']) && $_POST['tipo']!='' &&
+           isset($_POST['passwd'])){
+
+            $contra=null;
+           if ($_POST['passwd']!='') {
+             sha1($_POST['passwd']);
+           }
+
+           $usuario = new Usuario(
+                         $_POST['username'] ,
+                         $contra,
+                         $_POST['idEmpleado'],
+                         $_POST['tipo']
+                       );
+
+           if($usuario->actualizarUsuario($conexion)){
+             echo '{"res":"OK","mensaje":"Usuario Actualizado."}';
+           }else{          
+                $res = array("res"=>"fail","mensaje"=>mysqli_error($conexion->getLink()));
+                echo json_encode($res);
+             }
+           }
+
+        }else{
+          echo '{"res":"fail","mensaje":"Debe ingresar todos los campos."}';
+        }
+
         break;
 
         case 'DELETE':  //Eliminar usuario
