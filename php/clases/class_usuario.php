@@ -18,8 +18,13 @@ class Usuario{
 	}
 
 	public function registraUsuario($conexion){
-		  return $conexion->ejecutarInstruccion("CALL SPnuevo_usuario($this->idEmpleado , $this->tipo, 
+		  return $conexion->ejecutarInstruccion("CALL SPnuevo_usuario($this->idEmpleado , $this->tipo,
 		  '$this->username', '$this->passwd');");
+	}
+
+	public function actualizarUsuario($conexion){
+			return $conexion->ejecutarInstruccion("CALL SPactualiza_usuario($this->idEmpleado , $this->tipo, 
+			'$this->username', '$this->passwd');");
 	}
 
 }
