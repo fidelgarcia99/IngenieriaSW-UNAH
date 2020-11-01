@@ -1,11 +1,33 @@
+var modo = true;
+
 var mostrarUsuarios = function(){
   renderTabla(null,null,"usuarios");
+}
+
+var editarRegistro = function(id){
+  let usuario = obtenerRegistros('id', id, 'usuarios');
+  usuario.then(user=>{
+    if(user!=null){
+      data = user[0];
+      document.getElementById('inputUserame').value = data.username;
+      document.getElementById('selectIdEmpleado').value = data.empleado;
+      document.getElementById('selectTipoUsuario').value = data.tipo;
+      document.getElementById('inputPassword').value='';
+      document.getElementById('inputConfirmPassword').value='';
+      modo = false;
+      $('#nuevoUsuarioModal').modal('show');
+    }else{
+      console.error('El servidor no ha devuelto un resultado');
+    }
+  }).catch(error=>{
+    console.error(error);
+  });
 }
 
 var mostrarTiposUsuarios = function(){
   var dataa = obtenerRegistros('tipo',null,"usuarios");
  dataa.then((data)=>{
-   var opciones = "";
+   var opciones = "<option value='-1' selected disable>--- Seleccione un Tipo de Usuario ---</option>";
    data.forEach((item, i) => {
      opciones+=`
      <option value="${i+1}">${item['tipo']}</option>
@@ -14,10 +36,11 @@ var mostrarTiposUsuarios = function(){
  document.getElementById('selectTipoUsuario').innerHTML=opciones;
  });
 }
+
 var mostrarEmpleados = function(){
   var dataa = obtenerRegistros(null,null,"empleados");
  dataa.then((data)=>{
-   var opciones = "";
+   var opciones = "<option value='-1' selected disable>--- Seleccione un Empleado ---</option>";
    data.forEach((item, i) => {
      opciones+=`
      <option value="${i+1}">${item['Nombre']}</option>
@@ -29,7 +52,6 @@ var mostrarEmpleados = function(){
 
 var registraUsuario = async function(){
   if(isCamposLlenos()){
-
     let username = document.getElementById('inputUserame').value;
     let empleado = document.getElementById('selectIdEmpleado').value;
     let tipo = document.getElementById('selectTipoUsuario').value;
@@ -43,9 +65,12 @@ var registraUsuario = async function(){
           tipo: tipo,
           passwd : passwd
         }
-
-        let respuesta = await nuevoRegistro(usuario, "usuarios");
-
+        let respuesta=null;
+        if (modo) {
+          respuesta = await nuevoRegistro(usuario, "usuarios");
+        }else{
+          respuesta = await actualizaRegistro(usuario, "usuarios");
+        }
         if(respuesta!=null){
           if(respuesta.res=='OK'){
             document.getElementById('modal-success-message').innerHTML = respuesta.mensaje;
@@ -77,7 +102,7 @@ var teclea = function(input){
 }
 
 var isCampoVacio = function(input){
-    if(input.value=='')
+    if(input.value=='' || input.value==-1)
     input.classList='form-control is-invalid';
     else
     input.classList='form-control';
@@ -86,7 +111,10 @@ var isCampoVacio = function(input){
     let passwd = document.getElementById('inputPassword');
     let cpasswd = document.getElementById('inputConfirmPassword');
     let errMes = document.getElementById('errorMessage');
-    if(username.value!='' && passwd.value!='' && cpasswd.value!=''){
+    let empleado = document.getElementById('selectIdEmpleado');
+    let tipo = document.getElementById('selectTipoUsuario');
+
+    if(username.value!='' && passwd.value!='' && cpasswd.value!='' && empleado.value!=-1 && tipo.value!=-1){
         errMes.style='display:none';
     }
 
@@ -97,8 +125,11 @@ var isCamposLlenos = function(){
   let passwd = document.getElementById('inputPassword');
   let cpasswd = document.getElementById('inputConfirmPassword');
   let errMes = document.getElementById('errorMessage');
+  let empleado = document.getElementById('selectIdEmpleado');
+  let tipo = document.getElementById('selectTipoUsuario');
 
-    if(username.value=='' || passwd.value=='' || cpasswd.value=='' ){
+  if (modo) {
+    if(username.value=='' || passwd.value=='' || cpasswd.value=='' || empleado.value==-1 || tipo.value==-1){
         errMes.innerHTML = 'Ingrese todos los campos.';
         errMes.style='display:block';
         return false;
@@ -106,6 +137,16 @@ var isCamposLlenos = function(){
         errMes.style='display:none';
         return true;
     }
+  }else{
+    if(username.value=='' || empleado.value==-1 || tipo.value==-1){
+        errMes.innerHTML = 'Ingrese todos los campos.';
+        errMes.style='display:block';
+        return false;
+    }else{
+        errMes.style='display:none';
+        return true;
+    }
+  }
 }
 
 var isCamposLlenos2 = function(){
@@ -113,8 +154,10 @@ var isCamposLlenos2 = function(){
   let passwd = document.getElementById('inputPassword');
   let cpasswd = document.getElementById('inputConfirmPassword');
   let errMes = document.getElementById('errorMessage');
+  let empleado = document.getElementById('selectIdEmpleado');
+  let tipo = document.getElementById('selectTipoUsuario');
 
-    if(username.value!='' && passwd.value!='' && cpasswd.value!='' ){
+    if(username.value!='' && passwd.value!='' && cpasswd.value!='' && empleado.value!=-1 && tipo.value!=-1 ){
         errMes.style='display:none';
     }
 }
@@ -133,6 +176,21 @@ var comparaContraseñas = function(){
     cpasswd.classList='form-control is-invalid';
     err.style='display:block';
   }
+}
+
+var limpiarModal = function(){
+  document.getElementById('inputUserame').value='';
+  document.getElementById('selectIdEmpleado').value=-1;
+  document.getElementById('selectTipoUsuario').value=-1;
+  document.getElementById('inputPassword').value='';
+  document.getElementById('inputConfirmPassword').value='';
+  document.getElementById('errorMessage').style="display:none";
+  document.getElementById('inputUserame').classList='form-control';
+  document.getElementById('selectIdEmpleado').classList='form-control';
+  document.getElementById('selectTipoUsuario').classList='form-control';
+  document.getElementById('inputPassword').classList='form-control';
+  document.getElementById('inputConfirmPassword').classList='form-control';
+  modo=true;
 }
 mostrarUsuarios();
 mostrarTiposUsuarios();
