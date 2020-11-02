@@ -16,6 +16,7 @@
 
     //Servicios web
     switch($_SERVER['REQUEST_METHOD']){
+
         case 'POST':    //Crear cliente
         if(isset($_POST['ciudad']) && $_POST['ciudad']!='' &&
            isset($_POST['pnombre']) && $_POST['pnombre']!='' &&
@@ -55,20 +56,18 @@
         break;
 
         case 'GET':     //Obtener cliente/s
-            if(isset($_GET['id']) && $_POST['id']!=null){
-              $id = $_POST['id'];
-                $resultado = $conexion->ejecutarInstruccion("call Cliente($id);");
+            if(isset($_GET['id']) && $_GET['id']!=null){
+              $id = $_GET['id'];
+              $resultado = $conexion->ejecutarInstruccion("call Cliente($id);");
             }else{
                 $resultado = $conexion->ejecutarInstruccion('call Clientes();');
-
-                $res = array(); //creamos un array
-
-                while($row = mysqli_fetch_assoc($resultado))
-                {
-                    $res[] = $row;
-                }
-                echo json_encode($res);
             }
+            $res = array(); //creamos un array
+            while($row = mysqli_fetch_assoc($resultado))
+            {
+                $res[] = $row;
+            }
+            echo json_encode($res);
         break;
 
         case 'PUT':     //Actualizar cliente
@@ -94,7 +93,6 @@
                 $res = array("res"=>"fail","mensaje"=>mysqli_error($conexion->getLink()));
                 echo json_encode($res);
              }
-           }
 
         }else{
           echo '{"res":"fail","mensaje":"Debe ingresar todos los campos."}';
