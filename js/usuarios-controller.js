@@ -77,10 +77,8 @@ var registraUsuario = async function(){
             $('#nuevoUsuarioModal').modal('hide');
             $('#modal-success').modal('show');
             setTimeout(()=>$('#modal-success').modal('hide'), 2000);
-            document.getElementById('inputUserame').value='';
-            document.getElementById('inputPassword').value='';
-            document.getElementById('inputConfirmPassword').value='';
             mostrarUsuarios();
+            limpiarModal();
           }else{
             document.getElementById('errorMessage').innerHTML=respuesta.mensaje;
             document.getElementById('errorMessage').style='display:block';
