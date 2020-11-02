@@ -39,7 +39,7 @@
                          $_POST['id']
                        );
 
-           if($cliente->registraCliente($conexion)){
+           if($cliente->registrarCliente($conexion)){
              echo '{"res":"OK","mensaje":"Cliente creado."}';
            }else{
              if(mysqli_errno($conexion->getLink()) == 1062)
@@ -56,8 +56,9 @@
         break;
 
         case 'GET':     //Obtener cliente/s
-            if(isset($_GET['id'])){
-
+            if(isset($_GET['id']) && $_POST['id']!=null){
+              $id = $_POST['id'];
+                $resultado = $conexion->ejecutarInstruccion("call Cliente($id);");
             }else{
                 $resultado = $conexion->ejecutarInstruccion('call Clientes();');
 

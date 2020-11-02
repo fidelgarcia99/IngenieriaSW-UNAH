@@ -38,10 +38,16 @@ class Cliente{
 
 
 
-	public function registraCliente($conexion){
+	public function registrarCliente($conexion){
 		return $conexion->ejecutarInstruccion("
 			call SPnuevo_cliente('$this->pNombre', '$this->sNombre', '$this->pApellido', '$this->sApellido',
 			 $this->nom_ciudad, '$this->direccion', '$this->num_telefono', '$this->email', '$this->fechaRegistro', '$this->id');");
+	}
+
+	public function actualizarCliente($conexion){
+		return $conexion->ejecutarInstruccion("
+			call SPactualiza_cliente('$this->pNombre', '$this->sNombre', '$this->pApellido', '$this->sApellido',
+			 $this->nom_ciudad, '$this->direccion', '$this->num_telefono', '$this->email', '$this->id');");
 	}
 
 	public static function eliminarCliente($conexion, $id_registro){
