@@ -1,5 +1,6 @@
 var confirm = false;
 var selectId = null;
+var modo = true;
 
 var mostrarClientes = function(){
   renderTabla(null,null,'clientes');
@@ -27,7 +28,12 @@ var registrarCliente = async function(){
         ciudad : ciudad,
         email : email
       }
-      let respuesta = await nuevoRegistro(cliente, "clientes");
+      let respuesta=null;
+      if (modo) {
+        respuesta = await nuevoRegistro(cliente, "clientes");
+      }else{
+        respuesta = await actualizaRegistro(cliente, "clientes");
+      }
 
       if(respuesta!=null){
         if(respuesta.res=='OK'){
@@ -35,20 +41,37 @@ var registrarCliente = async function(){
           $('#nuevoClienteModal').modal('hide');
           $('#modal-success').modal('show');
           setTimeout(()=>$('#modal-success').modal('hide'), 2000);
-          pnombre.value='';
-          snombre.value='';
-          papellido.value='';
-          sapellido.value='';
-          id.value='';
-          direccion.value='';
-          telefono.value='';
-          email.value='';
           mostrarClientes();
+          limpiarModal();
         }else{
           document.getElementById('errorMessage').innerHTML=respuesta.mensaje;
           document.getElementById('errorMessage').style='display:block';
         }
       }
+}
+
+var editarRegistro = function(id){
+      let cliente = obtenerRegistros('id', id, 'clientes');
+      cliente.then(data=>{
+        if(data!=null){
+          data = data[0];
+          document.getElementById('pNombreCliente').value=data.pnombre;
+          document.getElementById('sNombreCliente').value=data.snombre;
+          document.getElementById('pApellidoCliente').value=data.papellido;
+          document.getElementById('sApellidoCliente').value=data.sapellido;
+          document.getElementById('inputId').value=data.id;
+          document.getElementById('direccion').value=data.direccion;
+          document.getElementById('numTelCliente').value=data.telefono;
+          document.getElementById('nom_ciudad').value=data.ciudad;
+          document.getElementById('inputEmail').value=data.email;
+          modo = false;
+          $('#nuevoClienteModal').modal('show');
+        }else{
+          console.error('El servidor no ha devuelto un resultado');
+        }
+      }).catch(error=>{
+        console.error(error);
+      });
 }
 
 var eliminarRegistro = async function(id){
@@ -71,6 +94,20 @@ var eliminarRegistro = async function(id){
       $('#modal-confirm').modal('show');
       selectId = id;
   }
+}
+
+var limpiarModal = function(){
+  document.getElementById('pNombreCliente').value='';
+  document.getElementById('sNombreCliente').value='';
+  document.getElementById('pApellidoCliente').value='';
+  document.getElementById('sApellidoCliente').value='';
+  document.getElementById('inputId').value='';
+  document.getElementById('direccion').value='';
+  document.getElementById('numTelCliente').value='';
+  document.getElementById('nom_ciudad').value=-1;
+  document.getElementById('inputEmail').value='';
+  document.getElementById('errorMessage').style="display:none";
+  modo=true;
 }
 
 mostrarClientes();

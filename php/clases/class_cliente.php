@@ -60,10 +60,11 @@ class Cliente{
 			");
 
 			$c = 0;
+			echo '<option value="-1" selected disable>--- Selecciones una ciudad ---</option>';
 			while ($fila_ciudad = $conexion->obtenerFila($ciudad)) {
 				if ($c==0) {
                          ?>
-					<option selected value="<?php echo $fila_ciudad["idCiudad"];?>">
+					<option value="<?php echo $fila_ciudad["idCiudad"];?>">
 						<?php echo $fila_ciudad["nom_ciudad"];?>
 
 					</option>
