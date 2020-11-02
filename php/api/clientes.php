@@ -22,9 +22,8 @@
            isset($_POST['snombre']) && isset($_POST['sapellido']) &&
            isset($_POST['papellido']) && $_POST['papellido']!='' &&
            isset($_POST['id']) && $_POST['id']!='' &&
-           isset($_POST['direccion']) && $_POST['direccion']!='' &&
-           isset($_POST['telefono']) && $_POST['telefono']!='' &&
-           isset($_POST['email'])){
+           isset($_POST['direccion']) &&
+           isset($_POST['telefono']) && isset($_POST['email'])){
 
            $cliente = new Cliente(
                          $_POST['pnombre'] ,
@@ -73,7 +72,33 @@
         break;
 
         case 'PUT':     //Actualizar cliente
-            echo '{"res":"put"}';
+        if(isset($_POST['ciudad']) && $_POST['ciudad']!='' &&
+           isset($_POST['pnombre']) && $_POST['pnombre']!='' &&
+           isset($_POST['snombre']) && isset($_POST['sapellido']) &&
+           isset($_POST['papellido']) && $_POST['papellido']!='' &&
+           isset($_POST['id']) && $_POST['id']!='' &&
+           isset($_POST['direccion']) &&
+           isset($_POST['telefono']) && isset($_POST['email'])){
+
+           $cliente = new Cliente(
+                         $_POST['pnombre'] ,$_POST['snombre'] ,
+                         $_POST['papellido'] ,$_POST['sapellido'] ,
+                         $_POST['ciudad'] ,$_POST['direccion'] ,
+                         $_POST['telefono'] ,$_POST['email'] ,
+                         $_POST['id']
+                       );
+
+           if($cliente->actualizarCliente($conexion)){
+             echo '{"res":"OK","mensaje":"Cliente actualizado."}';
+           }else{
+                $res = array("res"=>"fail","mensaje"=>mysqli_error($conexion->getLink()));
+                echo json_encode($res);
+             }
+           }
+
+        }else{
+          echo '{"res":"fail","mensaje":"Debe ingresar todos los campos."}';
+        }
         break;
 
         case 'DELETE':  //Eliminar cliente
