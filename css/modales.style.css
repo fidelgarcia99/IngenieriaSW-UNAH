@@ -24,3 +24,6 @@
 #modal-confirm .modal-content{
   max-width: 100%;
 }
+.modal-footer{
+  justify-content: space-between ;
+}

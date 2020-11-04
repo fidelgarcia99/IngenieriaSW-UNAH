@@ -16,15 +16,15 @@
 
     //Servicios web
     switch($_SERVER['REQUEST_METHOD']){
+
         case 'POST':    //Crear cliente
         if(isset($_POST['ciudad']) && $_POST['ciudad']!='' &&
            isset($_POST['pnombre']) && $_POST['pnombre']!='' &&
            isset($_POST['snombre']) && isset($_POST['sapellido']) &&
            isset($_POST['papellido']) && $_POST['papellido']!='' &&
            isset($_POST['id']) && $_POST['id']!='' &&
-           isset($_POST['direccion']) && $_POST['direccion']!='' &&
-           isset($_POST['telefono']) && $_POST['telefono']!='' &&
-           isset($_POST['email'])){
+           isset($_POST['direccion']) &&
+           isset($_POST['telefono']) && isset($_POST['email'])){
 
            $cliente = new Cliente(
                          $_POST['pnombre'] ,
@@ -39,7 +39,7 @@
                          $_POST['id']
                        );
 
-           if($cliente->registraCliente($conexion)){
+           if($cliente->registrarCliente($conexion)){
              echo '{"res":"OK","mensaje":"Cliente creado."}';
            }else{
              if(mysqli_errno($conexion->getLink()) == 1062)
@@ -56,23 +56,47 @@
         break;
 
         case 'GET':     //Obtener cliente/s
-            if(isset($_GET['id'])){
-
+            if(isset($_GET['id']) && $_GET['id']!=null){
+              $id = $_GET['id'];
+              $resultado = $conexion->ejecutarInstruccion("call Cliente($id);");
             }else{
                 $resultado = $conexion->ejecutarInstruccion('call Clientes();');
-
-                $res = array(); //creamos un array
-
-                while($row = mysqli_fetch_assoc($resultado))
-                {
-                    $res[] = $row;
-                }
-                echo json_encode($res);
             }
+            $res = array(); //creamos un array
+            while($row = mysqli_fetch_assoc($resultado))
+            {
+                $res[] = $row;
+            }
+            echo json_encode($res);
         break;
 
         case 'PUT':     //Actualizar cliente
-            echo '{"res":"put"}';
+        if(isset($_POST['ciudad']) && $_POST['ciudad']!='' &&
+           isset($_POST['pnombre']) && $_POST['pnombre']!='' &&
+           isset($_POST['snombre']) && isset($_POST['sapellido']) &&
+           isset($_POST['papellido']) && $_POST['papellido']!='' &&
+           isset($_POST['id']) && $_POST['id']!='' &&
+           isset($_POST['direccion']) && isset($_POST['idCliente']) && $_POST['idCliente']!='' &&
+           isset($_POST['telefono']) && isset($_POST['email'])){
+
+           $cliente = new Cliente(
+                         $_POST['pnombre'] ,$_POST['snombre'] ,
+                         $_POST['papellido'] ,$_POST['sapellido'] ,
+                         $_POST['ciudad'] ,$_POST['direccion'] ,
+                         $_POST['telefono'] ,$_POST['email'] ,
+                         null,$_POST['id']
+                       );
+
+           if($cliente->actualizarCliente($conexion,$_POST['idCliente'])){
+             echo '{"res":"OK","mensaje":"Cliente actualizado."}';
+           }else{
+                $res = array("res"=>"fail","mensaje"=>mysqli_error($conexion->getLink()));
+                echo json_encode($res);
+             }
+
+        }else{
+          echo '{"res":"fail","mensaje":"Debe ingresar todos los campos."}';
+        }
         break;
 
         case 'DELETE':  //Eliminar cliente
