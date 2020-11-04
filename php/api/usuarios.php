@@ -84,19 +84,18 @@
            isset($_POST['tipo']) && $_POST['tipo']!='' &&
            isset($_POST['passwd'])){
 
-            $contra=null;
            if ($_POST['passwd']!='') {
-             sha1($_POST['passwd']);
+             $_POST['passwd'] = sha1($_POST['passwd']);
            }
 
            $usuario = new Usuario(
                          $_POST['username'] ,
-                         $contra,
+                         $_POST['passwd'],
                          $_POST['idEmpleado'],
                          $_POST['tipo']
                        );
 
-           if($usuario->actualizarUsuario($conexion)){
+           if($usuario->actualizarUsuario($conexion,$_POST['id'])){
              echo '{"res":"OK","mensaje":"Usuario Actualizado."}';
            }else{
                 $res = array("res"=>"fail","mensaje"=>mysqli_error($conexion->getLink()));

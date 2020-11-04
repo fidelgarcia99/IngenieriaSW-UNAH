@@ -22,8 +22,8 @@ class Usuario{
 		  '$this->username', '$this->passwd');");
 	}
 
-	public function actualizarUsuario($conexion){
-			return $conexion->ejecutarInstruccion("CALL SPactualiza_usuario($this->idEmpleado , $this->tipo, 
+	public function actualizarUsuario($conexion,$id){
+			return $conexion->ejecutarInstruccion("CALL SPactualiza_usuario($id , $this->idEmpleado , $this->tipo,
 			'$this->username', '$this->passwd');");
 	}
 
