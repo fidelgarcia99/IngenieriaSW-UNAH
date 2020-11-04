@@ -108,3 +108,18 @@ var eliminarRegistroId = async function(data,api){
           });
           return respuesta;
 }
+
+var actualizaRegistro = async function(data,api){
+  let respuesta=null;
+    await axios({
+            url:`http://${window.location.hostname}/IngenieriaSW-UNAH/php/api/${api}.php`,
+            method:'put',
+            responseType:'json',
+            data:data
+        }).then(res=>{
+            respuesta=res.data;
+        }).catch(err=>{
+            console.error(err);
+        });
+        return respuesta;
+}
