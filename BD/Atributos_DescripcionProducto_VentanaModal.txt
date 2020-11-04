@@ -1,0 +1,31 @@
+Valores que irian dentro del JSON de "descp_gral":
+Nombre Producto:
+Atributos Especificos del Producto: Aceite: Marca:
+                                            Tipo de Motor:
+                                            Viscosidad:
+                                            Fabricacion:
+                                            Temperatura Invierno:
+                                            Temperatura General:
+                                            Fecha Elaboracion:
+                                            Fecha Vencimiento:
+                                    Lubricante: Marca:
+                                                Tipo:
+                                                Fecha Elaboracion:
+                                                Fecha Vencimiento:
+                                    Llantas: Marca:
+                                             Tipo:
+                                             Ancho:
+                                             Altura:
+                                             Rin:
+                                    Neumatico: Marca:
+                                               Tipo:
+                                               Valvula:
+                                               Rin:
+                                               Posicion (Moto):
+                                    Comestibles: Nombre:
+                                                 Marca:
+                                                 Fecha Elaboracion:
+                                                 Fecha Vencimiento:
+                                    Accesorios: Nombre:
+                                                Marca:
+
