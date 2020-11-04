@@ -44,9 +44,9 @@ class Cliente{
 			 $this->nom_ciudad, '$this->direccion', '$this->num_telefono', '$this->email', '$this->fechaRegistro', '$this->id');");
 	}
 
-	public function actualizarCliente($conexion){
+	public function actualizarCliente($conexion,$id){
 		return $conexion->ejecutarInstruccion("
-			call SPactualiza_cliente('$this->pNombre', '$this->sNombre', '$this->pApellido', '$this->sApellido',
+			call SPactualiza_cliente($id,'$this->pNombre', '$this->sNombre', '$this->pApellido', '$this->sApellido',
 			 $this->nom_ciudad, '$this->direccion', '$this->num_telefono', '$this->email', '$this->id');");
 	}
 

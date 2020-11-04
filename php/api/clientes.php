@@ -76,7 +76,7 @@
            isset($_POST['snombre']) && isset($_POST['sapellido']) &&
            isset($_POST['papellido']) && $_POST['papellido']!='' &&
            isset($_POST['id']) && $_POST['id']!='' &&
-           isset($_POST['direccion']) &&
+           isset($_POST['direccion']) && isset($_POST['idCliente']) && $_POST['idCliente']!='' &&
            isset($_POST['telefono']) && isset($_POST['email'])){
 
            $cliente = new Cliente(
@@ -84,10 +84,10 @@
                          $_POST['papellido'] ,$_POST['sapellido'] ,
                          $_POST['ciudad'] ,$_POST['direccion'] ,
                          $_POST['telefono'] ,$_POST['email'] ,
-                         $_POST['id']
+                         null,$_POST['id']
                        );
 
-           if($cliente->actualizarCliente($conexion)){
+           if($cliente->actualizarCliente($conexion,$_POST['idCliente'])){
              echo '{"res":"OK","mensaje":"Cliente actualizado."}';
            }else{
                 $res = array("res"=>"fail","mensaje"=>mysqli_error($conexion->getLink()));

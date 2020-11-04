@@ -1,6 +1,7 @@
 var confirm = false;
 var selectId = null;
 var modo = true;
+var temp =null;
 
 var mostrarClientes = function(){
   renderTabla(null,null,'clientes');
@@ -18,6 +19,7 @@ var registrarCliente = async function(){
   let email = document.getElementById('inputEmail').value;
 
       let cliente = {
+        idCliente:temp,
         pnombre : pnombre,
         snombre : snombre,
         papellido : papellido,
@@ -64,7 +66,9 @@ var editarRegistro = function(id){
           document.getElementById('numTelCliente').value=data.telefono;
           document.getElementById('nom_ciudad').value=data.ciudad;
           document.getElementById('inputEmail').value=data.email;
+          document.getElementById('modal-titulo').innerHTML="Editar Cliente";
           modo = false;
+          temp=id;
           $('#nuevoClienteModal').modal('show');
         }else{
           console.error('El servidor no ha devuelto un resultado');
@@ -107,7 +111,9 @@ var limpiarModal = function(){
   document.getElementById('nom_ciudad').value=-1;
   document.getElementById('inputEmail').value='';
   document.getElementById('errorMessage').style="display:none";
+  document.getElementById('modal-titulo').innerHTML="Nuevo Cliente";
   modo=true;
+  temp=null;
 }
 
 mostrarClientes();
