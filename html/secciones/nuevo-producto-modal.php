@@ -12,49 +12,43 @@
                                         </div>
                                         <div class="card-body">
                                              <h5 class="card-title text-center">Nuevo Producto</h5>
-                                             <form class="form-signin">
-                                                  <div class="form-label-group">
-                                                       <div class="input-group">
-                                                            <input type="text" id="inputnombre_producto" class="form-control" placeholder="Nombre Producto" required autofocus>
-                                                       </div>
-                                                       <br>
-                                                       <div class="form-label-group">
-                                                            <input type="number" pattern="[0-9]+" id="inputcod_barra" class="form-control" placeholder="Codigo de Barra" required>
-                                                       </div>
-                                                       <div class="input-group">
-                                                            <input type="number" pattern="[0-9]+" id="inputprecioCosto" class="form-control" placeholder="Precio Costo" required>
-                                                            <br>
-                                                            <input type="number" pattern="[0-9]+" id="inputprecioVenta" class="form-control" placeholder="PrecioVenta" required>
-                                                       </div>
+                                             <div class="row">
+                                                  <div class="col">
+                                                       <button type="button" style="margin-left: 10px" id="ptm" class="btn btn-primary btn-block" data-toggle="modal" data-target="#nuevoAceiteModal"> Aceites <br> <i class="fas fa-oil-can"></i></button>
+                                                  </div>
 
-                                                       <br>
-                                                       <h6>Proveedor</h6>
-                                                       <div class="form-label-group">
-                                                            <select class="form-control" id="nom_ciudad">
+                                                  <div class="col">
+                                                       <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#nuevoAceiteModal"> Llantas <br> <i class="fas fa-truck-monster"></i></button>
+                                                  </div>
+                                             </div>
 
-                                                                 <?php producto::llenarProveedor($conexion); ?>
+                                             <br>
 
-                                                            </select>
-                                                       </div>
+                                             <div class="row">
+                                                  <div class="col">
+                                                       <button type="button" style="margin-left: 10px" class="btn btn-primary btn-block" data-toggle="modal" data-target="#nuevoAceiteModal"> Lubricante <br> <i class="fas fa-tint"></i></i></button>
+                                                  </div>
+
+                                                  <div class="col">
+                                                       <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#nuevoAceiteModal"> Neumáticos <br> <i class="fas fa-car-side"></i> </button>
+                                                  </div>
+                                             </div>
+
+                                             <br>
+
+                                             <div class="row">
+                                                  <div class="col">
+                                                       <button type="button" style="margin-left: 10px" class="btn btn-primary btn-block" data-toggle="modal" data-target="#nuevoAceiteModal"> Comestibles <br> <i class="fas fa-cookie"></i></i></button>
+                                                  </div>
+
+                                                  <div class="col">
+                                                       <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#nuevoAceiteModal"> Accesorios <br> <i class="fas fa-vr-cardboard"></i></button>
+                                                  </div>
+                                             </div>
+
+                                             
 
 
-
-                                                       <div class="input-group">
-                                                            <input type="number" pattern="[0-9]+" id="inputcantidad" class="form-control" placeholder="Cantidad" required>
-                                                            <br>
-                                                            <input type="number" pattern="[0-9]+" id="inputmodelo" class="form-control" placeholder="Modelo" required>
-                                                       </div>
-
-
-                                                       <br>
-                                                       <h6>Fecha de Vencimiento</h6>
-                                                       <div class="form-label-group">
-                                                            <input type="date" id="inputEmail" class="form-control" required>
-                                                       </div>
-                                                       <div id="errorMessage" class="alert alert-danger" style="display:none">
-                                                            Hubo un problema
-                                                       </div>
-                                             </form>
                                         </div>
                                    </div>
                               </div>

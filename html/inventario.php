@@ -56,6 +56,7 @@ $conexion = new Conexion();?>
       <!-- End of Main Content -->
  
       <?php include(SECCIONES . 'nuevo-producto-modal.php') ?>
+      <?php include(SECCIONES . 'nuevo-aceite-modal.php') ?>
 
       <!-- Footer -->
       <?php include SECCIONES.'footer.php'?>
