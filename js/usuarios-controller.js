@@ -15,6 +15,7 @@ var editarRegistro = function(id){
       document.getElementById('selectTipoUsuario').value = data.tipo;
       document.getElementById('inputPassword').value='';
       document.getElementById('inputConfirmPassword').value='';
+      document.getElementById('modal-titulo').innerHTML = "Editar Usuario";
       modo = false
       temp=id;
       $('#nuevoUsuarioModal').modal('show');
@@ -73,7 +74,7 @@ var registraUsuario = async function(){
           respuesta = await nuevoRegistro(usuario, "usuarios");
         }else{
           respuesta = await actualizaRegistro(usuario, "usuarios");
-        }        
+        }
         if(respuesta!=null){
           if(respuesta.res=='OK'){
             document.getElementById('modal-success-message').innerHTML = respuesta.mensaje;
@@ -191,6 +192,7 @@ var limpiarModal = function(){
   document.getElementById('selectTipoUsuario').classList='form-control';
   document.getElementById('inputPassword').classList='form-control';
   document.getElementById('inputConfirmPassword').classList='form-control';
+  document.getElementById('modal-titulo').innerHTML = "Nuevo Usuario";
   modo=true;
 }
 mostrarUsuarios();

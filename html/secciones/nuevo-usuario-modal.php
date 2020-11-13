@@ -11,7 +11,7 @@
                     <!-- Background image for card set in CSS! -->
                  </div>
                  <div class="card-body">
-                   <h5 class="card-title text-center">Nuevo Usuario</h5>
+                   <h5 class="card-title text-center" id="modal-titulo">Nuevo Usuario</h5>
                    <form class="form-signin">
                      <div class="form-label-group">
                        <input type="text" id="inputUserame" class="form-control" placeholder="Username" onfocusin="teclea(this);" onfocusout="isCampoVacio(this);" onkeyup="isCamposLlenos2();" required autofocus>
