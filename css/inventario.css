@@ -1,0 +1,81 @@
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#modal-success-icon{
+  color:green;
+  font-size:5rem;
+}
+#modal-success-message{
+  text-align: center;
+}
+
+#modal-success .modal-dialog{
+  max-width: 20%;
+  padding-top: 10%;
+}
+#modal-success .modal-content{
+  max-width: 100%;
+}
+#div-detalles .form-label-group{
+  max-width: 33%;
+}
+
+.modal-dialog{
+  max-width: 50%;
+  padding-top: 5%;
+}
+.modal-footer{
+
+  align-content: #FFFFFF!important;
+}
+.card-signin {
+  border: 1px;
+
+  overflow: hidden;
+}
+
+.card-signin .card-title {
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+.card-signin .card-img-left {
+  width: 45%;
+  /* Link to your background image using in the property below! */
+  background: scroll center url('https://source.unsplash.com/WEQbe2jBg40/414x512');
+  background-size: cover;
+}
+
+.card-signin .card-body {
+  padding: 2rem;
+}
+
+.form-signin {
+  width: 100%;
+}
+
+.form-signin .btn {
+  font-size: 80%;
+  border-radius: 5rem;
+  letter-spacing: .1rem;
+  font-weight: bold;
+  padding: 1rem;
+  transition: all 0.2s;
+}
+
+.form-label-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.form-label-group input {
+  border-radius: 0.5rem;
+}
+.form-label-group select {
+  height: auto;
+  border-radius: 0.5rem;
+}
