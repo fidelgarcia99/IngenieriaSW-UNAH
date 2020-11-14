@@ -33,14 +33,141 @@ const cambioCategoria = function(){
       `;
     break;
     case 'Aceites':
+    document.getElementById('div-detalles').innerHTML=`
+    <div class="form-label-group tercio">
+    Altura
+         <input type="number" pattern="[0-9]+" id="input-alto" class="form-control" placeholder="Altura" required>
+    </div>
+    <div class="form-label-group tercio">
+    Ancho
+         <input type="number" pattern="[0-9]+" id="input-ancho" class="form-control" placeholder="Ancho" required>
+    </div>
+    <div class="form-label-group tercio">
+    Diametro
+         <input type="number" pattern="[0-9]+" id="input-diametro" class="form-control" placeholder="Rin"required>
+    </div>
+    <div class="form-label-group">
+    Tipo Vehiculo
+      <div class="input-group">
+            <select class="form-control" id="select-vehiculo">
+              <option selected value="1">Carro</option>
+              <option value="2">Moto</option>
+            </select>
+      </div>
+    </div>
+    <div class="form-label-group">
+    Observaciones
+         <input type="text" id="input-observacion" class="form-control" placeholder="Observaciones" required>
+    </div>
+    `;
     break;
     case 'Lubricantes':
+    document.getElementById('div-detalles').innerHTML=`
+    <div class="form-label-group tercio">
+    Altura
+         <input type="number" pattern="[0-9]+" id="input-alto" class="form-control" placeholder="Altura" required>
+    </div>
+    <div class="form-label-group tercio">
+    Ancho
+         <input type="number" pattern="[0-9]+" id="input-ancho" class="form-control" placeholder="Ancho" required>
+    </div>
+    <div class="form-label-group tercio">
+    Diametro
+         <input type="number" pattern="[0-9]+" id="input-diametro" class="form-control" placeholder="Rin"required>
+    </div>
+    <div class="form-label-group">
+    Tipo Vehiculo
+      <div class="input-group">
+            <select class="form-control" id="select-vehiculo">
+              <option selected value="1">Carro</option>
+              <option value="2">Moto</option>
+            </select>
+      </div>
+    </div>
+    <div class="form-label-group">
+    Observaciones
+         <input type="text" id="input-observacion" class="form-control" placeholder="Observaciones" required>
+    </div>
+    `;
     break;
     case 'Consumible':
+    document.getElementById('div-detalles').innerHTML=`
+    <div class="form-label-group tercio">
+    Altura
+         <input type="number" pattern="[0-9]+" id="input-alto" class="form-control" placeholder="Altura" required>
+    </div>
+    <div class="form-label-group tercio">
+    Ancho
+         <input type="number" pattern="[0-9]+" id="input-ancho" class="form-control" placeholder="Ancho" required>
+    </div>
+    <div class="form-label-group tercio">
+    Diametro
+         <input type="number" pattern="[0-9]+" id="input-diametro" class="form-control" placeholder="Rin"required>
+    </div>
+    <div class="form-label-group">
+    Tipo Vehiculo
+      <div class="input-group">
+            <select class="form-control" id="select-vehiculo">
+              <option selected value="1">Carro</option>
+              <option value="2">Moto</option>
+            </select>
+      </div>
+    </div>
+    <div class="form-label-group">
+    Observaciones
+         <input type="text" id="input-observacion" class="form-control" placeholder="Observaciones" required>
+    </div>
+    `;
     break;
     case 'Neumaticos':
+    document.getElementById('div-detalles').innerHTML=`
+    <div class="form-label-group">
+    Diametro
+         <input type="number" pattern="[0-9]+" id="input-diametro" class="form-control" placeholder="Rin"required>
+    </div>
+    <div class="form-label-group">
+    Tipo Vehiculo
+      <div class="input-group">
+            <select class="form-control" id="select-vehiculo">
+              <option selected value="1">Carro</option>
+              <option value="2">Moto</option>
+            </select>
+      </div>
+    </div>
+    <div class="form-label-group">
+    Observaciones
+         <input type="text" id="input-observacion" class="form-control" placeholder="Observaciones" required>
+    </div>
+    `;
     break;
     case 'Accesorios':
+    document.getElementById('div-detalles').innerHTML=`
+    <div class="form-label-group tercio">
+    Altura
+         <input type="number" pattern="[0-9]+" id="input-alto" class="form-control" placeholder="Altura" required>
+    </div>
+    <div class="form-label-group tercio">
+    Ancho
+         <input type="number" pattern="[0-9]+" id="input-ancho" class="form-control" placeholder="Ancho" required>
+    </div>
+    <div class="form-label-group tercio">
+    Diametro
+         <input type="number" pattern="[0-9]+" id="input-diametro" class="form-control" placeholder="Rin"required>
+    </div>
+    <div class="form-label-group">
+    Tipo Vehiculo
+      <div class="input-group">
+            <select class="form-control" id="select-vehiculo">
+              <option selected value="1">Carro</option>
+              <option value="2">Moto</option>
+            </select>
+      </div>
+    </div>
+    <div class="form-label-group">
+    Observaciones
+         <input type="text" id="input-observacion" class="form-control" placeholder="Observaciones" required>
+    </div>
+    `;
     break;
   }
 }
