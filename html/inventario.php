@@ -32,13 +32,6 @@
         <!-- End of Topbar -->
 
          <!-------------------------- Begin Page Content ------------------------------>
-         <div class="container-fluid">
-
-          <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Inventario</h1>
-
-          </div>
-          <!--------------------------- /.container-fluid -------------------------------->
 
         <!-- Begin Page Content -->
         <?php include(SECCIONES . 'tabla.php')?>

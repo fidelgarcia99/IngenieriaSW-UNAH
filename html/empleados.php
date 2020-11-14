@@ -36,13 +36,7 @@ $conexion = new Conexion();?>
         <!-- End of Topbar -->
 
         <!-------------------------- Begin Page Content ------------------------------>
-        <div class="container-fluid">
 
-          <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Empleados</h1>
-
-        </div>
-        <!--------------------------- /.container-fluid -------------------------------->
         <!-- Registro Modal -->
         <?php include(SECCIONES . 'nuevo-empleado-modal.php') ?>
 

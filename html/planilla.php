@@ -4,7 +4,7 @@
   include_once("php/clases/class_conexion.php");
   //se incluye la clase personas parapoder llamar sus funciones desde el index
   include_once("php/clases/class_planilla.php");
-  //objeto Conexion 
+  //objeto Conexion
   $conexion = new Conexion();
 ?>
 <!DOCTYPE html>
@@ -37,13 +37,6 @@
         <!-- End of Topbar -->
 
         <!-------------------------- Begin Page Content ------------------------------>
-        <div class="container-fluid">
-
-          <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Planilla De Empleados</h1>
-        <hr>
-        </div>
-        <!--------------------------- /.container-fluid -------------------------------->
 
         <!-- Begin Page Content -->
         <?php include(SECCIONES . 'tablaplanilla.php')?>
@@ -51,7 +44,7 @@
 
       </div>
       <!-- End of Main Content -->
-      
+
       <!-- Footer -->
       <?php include(SECCIONES . 'footer.php')?>
       <!-- End of Footer -->
