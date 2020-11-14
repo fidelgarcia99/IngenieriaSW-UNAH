@@ -5,23 +5,29 @@ const cambioCategoria = function(){
   switch (opcion) {
     case 'Llantas':
       document.getElementById('div-detalles').innerHTML=`
-      <div class="form-label-group">
+      <div class="form-label-group tercio">
+      Altura
            <input type="number" pattern="[0-9]+" id="input-alto" class="form-control" placeholder="Altura" required>
       </div>
-      <div class="form-label-group">
+      <div class="form-label-group tercio">
+      Ancho
            <input type="number" pattern="[0-9]+" id="input-ancho" class="form-control" placeholder="Ancho" required>
       </div>
-      <div class="form-label-group">
+      <div class="form-label-group tercio">
+      Diametro
            <input type="number" pattern="[0-9]+" id="input-diametro" class="form-control" placeholder="Rin"required>
       </div>
-      <div class="input-group mb-3">
-            <select class="form-control" id="select-vehiculo">
-              <option selected value="1">Carro</option>
-              <option value="2">Moto</option>
-            </select>
+      <div class="form-label-group">
+      Tipo Vehiculo
+        <div class="input-group">
+              <select class="form-control" id="select-vehiculo">
+                <option selected value="1">Carro</option>
+                <option value="2">Moto</option>
+              </select>
+        </div>
       </div>
-      <br>
-      <div class="input-group">
+      <div class="form-label-group">
+      Observaciones
            <input type="text" id="input-observacion" class="form-control" placeholder="Observaciones" required>
       </div>
       `;

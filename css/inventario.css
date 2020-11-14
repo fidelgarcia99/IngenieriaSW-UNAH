@@ -19,10 +19,19 @@ input[type=number]::-webkit-outer-spin-button {
 #modal-success .modal-content{
   max-width: 100%;
 }
-#div-detalles .form-label-group{
+#div-detalles .tercio{
   max-width: 33%;
 }
-
+#div-detalles{
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+}
+#div-detalles .form-label-group{
+  width: inherit;
+}
 .modal-dialog{
   max-width: 50%;
   padding-top: 5%;
