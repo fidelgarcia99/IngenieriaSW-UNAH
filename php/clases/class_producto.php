@@ -49,8 +49,7 @@ class Producto{
 
 	public function actualizarProducto($conexion,$id){
 		return $conexion->ejecutarInstruccion("
-			call SPactualiza_producto($id,'$this->pNombre', '$this->sNombre', '$this->pApellido', '$this->sApellido',
-			 $this->nom_ciudad, '$this->direccion', '$this->num_telefono', '$this->email', '$this->id');");
+			call SPactualiza_producto();");
 	}
 
 	public static function eliminarProducto($conexion, $id_registro){
