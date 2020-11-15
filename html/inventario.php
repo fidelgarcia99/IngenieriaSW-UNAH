@@ -1,4 +1,10 @@
-<?php include SECCIONES.'valida-acceso.php' ?>
+<?php include(SECCIONES . 'valida-acceso.php') ;
+include("php/clases/class_conexion.php");
+//se incluye la clase producto parapoder llamar sus funciones desde el index
+include_once("php/clases/class_producto.php");
+//objeto Conexion
+$conexion = new Conexion();?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +14,8 @@
 
   <!-- Custom styles for this page -->
   <link href="<?php echo VENDOR?>datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-  <link href="<?php echo CSS ?>modales.style.css" rel="stylesheet">
+  <link href="<?php echo CSS ?>modales.css" rel="stylesheet">
+  <link href="<?php echo CSS ?>inventario.css" rel="stylesheet">
 
 </head>
 
@@ -33,6 +40,8 @@
 
          <!-------------------------- Begin Page Content ------------------------------>
 
+
+
         <!-- Begin Page Content -->
         <?php include(SECCIONES . 'tabla.php')?>
         <!-- /.container-fluid -->
@@ -40,7 +49,8 @@
       </div>
       <!-- End of Main Content -->
 
-
+      <?php include(SECCIONES . 'nuevo-producto-modal.php') ?>
+      <?php include(SECCIONES . 'nuevo-aceite-modal.php') ?>
 
       <!-- Footer -->
       <?php include SECCIONES.'footer.php'?>
