@@ -207,7 +207,22 @@ const marcas = function(){
   });
 }
 
+const proveedores = function(){
+  document.getElementById('select-proveedores').innerHTML="<option value='-1'>--- Seleccione un Proveedor ---</option>"
+  var data = obtenerRegistros("proveedores",null,"inventario");
+  data.then(result=>{
+    result.forEach((item, i) => {
+      document.getElementById('select-proveedores').innerHTML+=`
+      <option value="${i+1}">${item['Nombre']}</option>
+      `;
+    });
+  }).catch(err=>{
+    console.error(err);
+  });
+}
+
 categorias();
 contenedores();
 marcas();
+proveedores();
 renderTabla(null,null,"inventario");

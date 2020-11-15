@@ -34,6 +34,12 @@
                                                        <select class="form-control" id="select-marcas"></select>
                                                   </div>
                                                 </div>
+                                                <div class="form-label-group">
+                                                  Proveedor
+                                                  <div class="input-group">
+                                                       <select class="form-control" id="select-proveedores"></select>
+                                                  </div>
+                                                </div>
                                                 <div id="div-detalles">
                                                 </div>
                                                 <div id="errorMessage" class="alert alert-danger" style="display:none">
@@ -49,7 +55,7 @@
                </div>
                <div class="modal-footer py-0">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" onclick="registraEmpleado();">Registrar</button>
+                    <button type="button" class="btn btn-primary" onclick="registraEmpleado();">Guardar</button>
                </div>
           </div>
      </div>

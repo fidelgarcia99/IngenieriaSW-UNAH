@@ -31,9 +31,12 @@
                 case 'marcas':
                 $resultado = $conexion->ejecutarInstruccion('call Marcas();');
                   break;
-                  case 'categorias':
-                  $resultado = $conexion->ejecutarInstruccion('call Categorias();');
-                    break;
+                case 'categorias':
+                $resultado = $conexion->ejecutarInstruccion('call Categorias();');
+                  break;
+                case 'proveedores':
+                $resultado = $conexion->ejecutarInstruccion('call Proveedores();');
+                  break;
               }
             }else{
                 $resultado = $conexion->ejecutarInstruccion('call Inventario();');

@@ -14,7 +14,7 @@ $conexion = new Conexion();?>
 
   <!-- Custom styles for this page -->
   <link href="<?php echo VENDOR?>datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-  <link href="<?php echo CSS ?>modales.css" rel="stylesheet">
+  <link href="<?php echo CSS ?>modales.style.css" rel="stylesheet">
   <link href="<?php echo CSS ?>inventario.css" rel="stylesheet">
 
 </head>
