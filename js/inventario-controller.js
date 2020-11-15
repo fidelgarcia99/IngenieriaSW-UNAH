@@ -21,8 +21,8 @@ const cambioCategoria = function(){
       Tipo Vehiculo
         <div class="input-group">
               <select class="form-control" id="select-vehiculo">
-                <option selected value="1">Carro</option>
-                <option value="2">Moto</option>
+                <option selected value="carro">Carro</option>
+                <option value="moto">Moto</option>
               </select>
         </div>
       </div>
@@ -38,9 +38,9 @@ const cambioCategoria = function(){
     Tipo de Aceite
       <div class="input-group">
             <select class="form-control" id="select-tipo-aceite">
-              <option selected value="1">Sintetico</option>
-              <option value="2">Semi-sintetico</option>
-              <option value="3">Mineral</option>
+              <option selected value="sintetico">Sintetico</option>
+              <option value="semi-sintetico">Semi-sintetico</option>
+              <option value="mineral">Mineral</option>
             </select>
       </div>
     </div>
@@ -80,8 +80,8 @@ const cambioCategoria = function(){
     Tipo Vehiculo
       <div class="input-group">
             <select class="form-control" id="select-vehiculo">
-              <option selected value="0">Carro</option>
-              <option value="1">Moto 4T</option>
+              <option selected value="4">Carro</option>
+              <option value="4">Moto 4T</option>
               <option value="2">Moto 2T</option>
             </select>
       </div>
@@ -94,12 +94,34 @@ const cambioCategoria = function(){
     break;
     case 'Lubricantes':
     document.getElementById('div-detalles').innerHTML=`
-
+    <div class="form-label-group">
+    Nombre
+         <input type="text" id="input-nombre-lubricante" class="form-control" placeholder="Nombre del lubricante" required>
+    </div>
+    <div class="form-label-group">
+    Grado de Viscosidad
+         <input type="text" id="input-grado-viscosidad" class="form-control" placeholder="Grado de viscosidad" required>
+    </div>
+    <div class="form-label-group">
+    Observaciones
+         <input type="text" id="input-observacion" class="form-control" placeholder="Observaciones" required>
+    </div>
     `;
     break;
-    case 'Consumible':
+    case 'Consumibles':
     document.getElementById('div-detalles').innerHTML=`
-
+    <div class="form-label-group">
+    Nombre
+         <input type="text" id="input-nombre-lubricante" class="form-control" placeholder="Nombre del Producto" required>
+    </div>
+    <div class="form-label-group">
+    Fecha de vencimiento
+         <input type="date" id="input-fecha-vencimiento" class="form-control" placeholder="Fecha de vencimiento" required>
+    </div>
+    <div class="form-label-group">
+    Observaciones
+         <input type="text" id="input-observacion" class="form-control" placeholder="Observaciones" required>
+    </div>
     `;
     break;
     case 'Neumaticos':
@@ -109,11 +131,20 @@ const cambioCategoria = function(){
          <input type="number" pattern="[0-9]+" id="input-diametro" class="form-control" placeholder="Rin"required>
     </div>
     <div class="form-label-group">
+    Tipo Valvula
+      <div class="input-group">
+            <select class="form-control" id="select-vehiculo">
+              <option selected value="corta">Corta</option>
+              <option value="larga">Larga</option>
+            </select>
+      </div>
+    </div>
+    <div class="form-label-group">
     Tipo Vehiculo
       <div class="input-group">
             <select class="form-control" id="select-vehiculo">
-              <option selected value="1">Carro</option>
-              <option value="2">Moto</option>
+              <option selected value="carro">Carro</option>
+              <option value="moto">Moto</option>
             </select>
       </div>
     </div>
@@ -125,7 +156,10 @@ const cambioCategoria = function(){
     break;
     case 'Accesorios':
     document.getElementById('div-detalles').innerHTML=`
-    
+    <div class="form-label-group">
+    Descripcion
+         <input type="text" id="input-grado-descripcion" class="form-control" placeholder="Descripcion" required>
+    </div>
     `;
     break;
   }
