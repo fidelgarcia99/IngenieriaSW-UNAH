@@ -1,68 +1,60 @@
 <?php
-class producto{
-	private $nombre_producto;
-	private $fechaVencimiento;
-	private $precioCosto;
-	private $precioVenta;
+class Producto{
+	private $descripcion;
+	private $barcode;
+	private $costo;
+	private $venta;
+	private $descuento;
 	private $cantidad;
-	private $cod_barra;
-	private $nombre_proveedor;
-	private $marca_producto;
+	private $contenedor;
+	private $categoria;
+	private $proveedor;
+	private $marca;
 
 	public function __construct(
-		$nombre_producto = null,
-		$fechaVencimiento = null,
-		$precioCosto = null,
-		$precioVenta = null,
+		$descripcion = null,
+		$barcode = null,
+		$costo = null,
+		$venta = null,
+		$descuento = null,
 		$cantidad = null,
-		$cod_barra = null,
-		$nombre_proveedor = null,
-		$marca_producto = null
+		$contenedor = null,
+		$categoria = null,
+		$proveedor = null,
+		$marca = null
 	){
-		$this->nombre_producto = $nombre_producto;
-		$this->fechaVencimiento = $fechaVencimiento;
-		$this->precioCosto = $precioCosto;
-		$this->precioVenta = $precioVenta;
+		$this->descripcion = $descripcion;
+		$this->barcode = $barcode;
+		$this->costo = $costo;
+		$this->venta = $venta;
+		$this->descuento = $descuento;
 		$this->cantidad = $cantidad;
-		$this->cod_barra = $cod_barra;
-		$this->nombre_proveedor = $nombre_proveedor;
-		$this->marca_producto = $marca_producto;
+		$this->contenedor = $contenedor;
+		$this->categoria = $categoria;
+		$this->proveedor = $proveedor;
+		$this->marca = $marca;
 	}
 
-	public function __toString(){
-		$var = "producto{"
-		."nombre_producto: ".$this->nombre_producto." , "
-		."fechaVencimiento: ".$this->fechaVencimiento." , "
-		."precioCosto: ".$this->precioCosto." , "
-		."precioVenta: ".$this->precioVenta." , "
-		."cantidad: ".$this->cantidad." , "
-		."cod_barra: ".$this->cod_barra." , "
-		."nombre_proveedor: ".$this->nombre_proveedor." , "
-		."marca_producto: ".$this->marca_producto;
-		return $var."}";
+	public function registrarProducto($conexion){
+		return $conexion->ejecutarInstruccion("
+			call SPnuevo_producto(
+			'$this->descripcion',
+			'$this->barcode',
+			$this->contenedor,
+			$this->categoria,
+			$this->marca,
+			$this->proveedor
+			);");
 	}
 
-	public function llenarProveedor($conexion){
-          $proveedor = $conexion->ejecutarInstruccion("
-		select idProveedor,nombre_proveedor from proveedor
-			");
-
-			$c = 0;
-			while ($fila_proveedor = $conexion->obtenerFila($proveedor)) {
-				if ($c==0) {
-					?>
-					<option selected value="<?php echo $fila_proveedor["idProveedor"];?>">
-						<?php echo $fila_proveedor["nombre_proveedor"];?>
-
-					</option>
-
-					<?php
-				}
-			}
-
-			$conexion->liberarResultado($proveedor);
+	public function actualizarProducto($conexion,$id){
+		return $conexion->ejecutarInstruccion("
+			call SPactualiza_producto($id,'$this->pNombre', '$this->sNombre', '$this->pApellido', '$this->sApellido',
+			 $this->nom_ciudad, '$this->direccion', '$this->num_telefono', '$this->email', '$this->id');");
 	}
-	public function llenarMarca(/*Parametros*/){
+
+	public static function eliminarProducto($conexion, $id_registro){
+		return $conexion->ejecutarInstruccion("call SPelimina_producto($id_registro)");
 	}
 
 }

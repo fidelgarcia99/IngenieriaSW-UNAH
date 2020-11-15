@@ -1,5 +1,3 @@
-renderTabla(null,null,"inventario");
-
 const cambioCategoria = function(){
   var opcion = document.getElementById('select-categorias').options[document.getElementById('select-categorias').selectedIndex].text;
   switch (opcion) {
