@@ -37,7 +37,7 @@ var renderTabla = function(param,id,api){
             <td>${i}</td>
         `;
     }
-    if (api=="clientes" || api=='usuarios') {
+    if (api=="clientes" || api=='usuarios' || api=='inventario') {
       nombreCol+=`<td>Opciones</td>`;
     }
     document.getElementById('thead').innerHTML+=`
@@ -57,7 +57,7 @@ var renderTabla = function(param,id,api){
                 `;
             }
         }
-        if(api=="clientes" || api=='usuarios'){
+        if(api=="clientes" || api=='usuarios' || api=='inventario'){
           fila+=`<td>
           <div class="container-fluid px-0" style="max-widh:450%;">
             <div class="row">

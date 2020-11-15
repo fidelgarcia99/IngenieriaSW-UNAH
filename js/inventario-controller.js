@@ -218,9 +218,8 @@ const proveedores = function(){
     console.error(err);
   });
 }
-
+renderTabla(null,null,"inventario");
 categorias();
 contenedores();
 marcas();
 proveedores();
-renderTabla(null,null,"inventario");

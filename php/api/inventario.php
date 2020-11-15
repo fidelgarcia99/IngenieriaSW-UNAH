@@ -82,7 +82,15 @@
         break;
 
         case 'DELETE':  //Eliminar producto
-            echo '{"res":"delete"}';
+        if (isset($_POST['id']) && $_POST['id']!='') {
+          if (Producto::eliminarProducto($conexion,$_POST['id'])) {
+              echo '{"res":"OK","mensaje":"Producto Eliminado"}';
+          }else{
+            $res = array("res"=>"fail","mensaje"=>mysqli_error);
+          }
+        }else{
+          echo '{"res":"fail","mensaje":"Debe especificar un id"}';
+        }
         break;
     }
 ?>
