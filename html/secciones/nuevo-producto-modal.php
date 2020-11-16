@@ -24,21 +24,33 @@
                                                 </div>
                                                 <div class="form-label-group">
                                                   Ubicacion
-                                                  <div class="input-group">
-                                                       <select class="form-control" id="select-contenedor"></select>
-                                                  </div>
+                                                  <div class="form-label-group">
+                                                            <select class="form-control" id="nom_ciudad">
+
+                                                                 <?php producto::llenarSucursal($conexion); ?>
+
+                                                            </select>
+                                                       </div>
                                                 </div>
                                                 <div class="form-label-group">
                                                   Marca
-                                                  <div class="input-group">
-                                                       <select class="form-control" id="select-marcas"></select>
-                                                  </div>
+                                                  <div class="form-label-group">
+                                                            <select class="form-control" id="nom_ciudad">
+
+                                                                 <?php producto::llenarMarcas($conexion); ?>
+
+                                                            </select>
+                                                       </div>
                                                 </div>
                                                 <div class="form-label-group">
                                                   Proveedor
-                                                  <div class="input-group">
-                                                       <select class="form-control" id="select-proveedores"></select>
-                                                  </div>
+                                                       <div class="form-label-group">
+                                                            <select class="form-control" id="nom_ciudad">
+
+                                                                 <?php producto::llenarProveedor($conexion); ?>
+
+                                                            </select>
+                                                       </div>
                                                 </div>
                                                 <div id="div-detalles">
                                                 </div>
