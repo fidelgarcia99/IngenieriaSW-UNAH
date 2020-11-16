@@ -1,7 +1,3 @@
-<?php
-  require_once(VENDOR . 'autoload.php');
-  require_once(CLASES . "class_jwt.php");
-?>
 <nav class="navbar navbar-expand navbar-light bg-white topbar static-top" style="height:3.375rem;">
 
 <!-- Sidebar Toggle (Topbar) -->

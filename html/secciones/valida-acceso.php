@@ -1,4 +1,4 @@
-<?php 
+<?php
     session_start();
     if(!isset($_SESSION['token'])){
         header('Location: ?view=login');
@@ -7,6 +7,7 @@
         header('Location: ?view=login');
     }
     if($_COOKIE['token'] != $_SESSION['token']){
-        header('Location: ?view=401');
+        header('Location: ?view=login');
     }
+    require_once(CLASES . "class_jwt.php");
 ?>

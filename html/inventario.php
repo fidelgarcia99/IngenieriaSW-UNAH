@@ -1,10 +1,14 @@
-<?php include(SECCIONES . 'valida-acceso.php') ;
-include("php/clases/class_conexion.php");
-//se incluye la clase producto parapoder llamar sus funciones desde el index
-include_once("php/clases/class_producto.php");
-//objeto Conexion
-$conexion = new Conexion();?>
-
+<?php
+  include SECCIONES.'valida-acceso.php';
+  if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+    header('Location: ?view=401');
+  }
+  include("php/clases/class_conexion.php");
+  //se incluye la clase producto parapoder llamar sus funciones desde el index
+  include_once("php/clases/class_producto.php");
+  //objeto Conexion
+  $conexion = new Conexion();
+?>
 <!DOCTYPE html>
 <html lang="en">
 

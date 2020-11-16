@@ -1,4 +1,8 @@
 <?php include(SECCIONES . 'valida-acceso.php') ;
+if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+  header('Location: ?view=401');
+}
+
 include("php/clases/class_conexion.php");
 //se incluye la clase empleados parapoder llamar sus funciones desde el index
 include_once("php/clases/class_empleado.php");
