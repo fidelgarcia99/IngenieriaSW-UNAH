@@ -14,10 +14,10 @@
 
 <head>
 
-<?php include SECCIONES.'head-general.php'?>
+  <?php include SECCIONES . 'head-general.php' ?>
 
   <!-- Custom styles for this page -->
-  <link href="<?php echo VENDOR?>datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="<?php echo VENDOR ?>datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
   <link href="<?php echo CSS ?>modales.style.css" rel="stylesheet">
   <link href="<?php echo CSS ?>inventario.css" rel="stylesheet">
 
@@ -29,7 +29,7 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <?php include SECCIONES.'sidebar.php'?>
+    <?php include SECCIONES . 'sidebar.php' ?>
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -39,15 +39,15 @@
       <div id="content">
 
         <!-- Topbar -->
-        <?php include SECCIONES.'topnav.php'?>
+        <?php include SECCIONES . 'topnav.php' ?>
         <!-- End of Topbar -->
 
-         <!-------------------------- Begin Page Content ------------------------------>
+        <!-------------------------- Begin Page Content ------------------------------>
 
 
 
         <!-- Begin Page Content -->
-        <?php include(SECCIONES . 'tabla.php')?>
+        <?php include(SECCIONES . 'tabla.php') ?>
         <!-- /.container-fluid -->
 
       </div>
@@ -56,7 +56,7 @@
       <?php include(SECCIONES . 'nuevo-producto-modal.php') ?>
 
       <!-- Footer -->
-      <?php include SECCIONES.'footer.php'?>
+      <?php include SECCIONES . 'footer.php' ?>
       <!-- End of Footer -->
 
     </div>
@@ -71,17 +71,17 @@
   </a>
 
   <!-- Logout Modal-->
-  <?php include SECCIONES.'logout-modal.php'?>
+  <?php include SECCIONES . 'logout-modal.php' ?>
 
-  <?php include SECCIONES.'scripts-generales.php'?>
+  <?php include SECCIONES . 'scripts-generales.php' ?>
 
   <!-- Page level plugins -->
-  <script src="<?php echo VENDOR?>datatables/jquery.dataTables.min.js"></script>
-  <script src="<?php echo VENDOR?>datatables/dataTables.bootstrap4.min.js"></script>
+  <script src="<?php echo VENDOR ?>datatables/jquery.dataTables.min.js"></script>
+  <script src="<?php echo VENDOR ?>datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="<?php echo JS?>axios-calls.js"></script>
-  <script src="<?php echo JS?>inventario-controller.js"></script>
+  <script src="<?php echo JS ?>axios-calls.js"></script>
+  <script src="<?php echo JS ?>inventario-controller.js"></script>
 </body>
 
 </html>

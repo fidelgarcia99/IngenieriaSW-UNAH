@@ -56,5 +56,69 @@ class Producto{
 		return $conexion->ejecutarInstruccion("call SPelimina_producto($id_registro)");
 	}
 
+	public function llenarProveedor($conexion){
+          $proveedor = $conexion->ejecutarInstruccion("
+		select idProveedor,nombre_proveedor from proveedor
+			");
+
+			$c = 0;
+			while ($fila_proveedor = $conexion->obtenerFila($proveedor)) {
+				if ($c==0) {
+					?>
+					<option selected value="<?php echo $fila_proveedor["idProveedor"];?>">
+						<?php echo $fila_proveedor["nombre_proveedor"];?>
+
+					</option>
+
+					<?php
+				}
+			}
+
+			$conexion->liberarResultado($proveedor);
+	}
+
+
+	public function llenarMarcas($conexion){
+          $Marcas = $conexion->ejecutarInstruccion("
+		select idMarca,nombre_marca from marca
+			");
+
+			$c = 0;
+			while ($fila_Marcas = $conexion->obtenerFila($Marcas)) {
+				if ($c==0) {
+					?>
+					<option selected value="<?php echo $fila_Marcas["idMarca"];?>">
+						<?php echo $fila_Marcas["nombre_marca"];?>
+
+					</option>
+
+					<?php
+				}
+			}
+
+			$conexion->liberarResultado($Marcas);
+	}
+
+	public function llenarSucursal($conexion){
+          $Sucursal = $conexion->ejecutarInstruccion("
+		select idSucursal,nombre_sucursal from Sucursal
+			");
+
+			$c = 0;
+			while ($fila_Sucursal = $conexion->obtenerFila($Sucursal)) {
+				if ($c==0) {
+					?>
+					<option selected value="<?php echo $fila_Sucursal["idSucursal"];?>">
+						<?php echo $fila_Sucursal["nombre_sucursal"];?>
+
+					</option>
+
+					<?php
+				}
+			}
+
+			$conexion->liberarResultado($Sucursal);
+	}
+
 }
 ?>
