@@ -1,4 +1,8 @@
-<?php include SECCIONES.'valida-acceso.php' ?>
+<?php include SECCIONES.'valida-acceso.php';
+if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+  header('Location: ?view=401');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 

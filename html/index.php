@@ -1,4 +1,9 @@
-<?php include SECCIONES.'valida-acceso.php' ?>
+<?php
+ include SECCIONES.'valida-acceso.php';
+if (JWTokens::GetData($_COOKIE['token'])['tipo']=="cajero") {
+  header('Location: ?view=facturacion');
+}
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 

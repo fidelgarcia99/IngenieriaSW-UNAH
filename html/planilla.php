@@ -1,10 +1,14 @@
 <?php
   include SECCIONES.'valida-acceso.php';
+  if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+    header('Location: ?view=401');
+  }
+
   //incluimos la clase conexion para poder crear el objeto Conexion que enviaremos como parametro
   include_once("php/clases/class_conexion.php");
   //se incluye la clase personas parapoder llamar sus funciones desde el index
   include_once("php/clases/class_planilla.php");
-  //objeto Conexion 
+  //objeto Conexion
   $conexion = new Conexion();
 ?>
 <!DOCTYPE html>
@@ -51,7 +55,7 @@
 
       </div>
       <!-- End of Main Content -->
-      
+
       <!-- Footer -->
       <?php include(SECCIONES . 'footer.php')?>
       <!-- End of Footer -->

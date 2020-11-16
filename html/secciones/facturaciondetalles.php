@@ -55,11 +55,7 @@
 
                                    <h6>Empleado</h6>
                                    <div class="col-md-6">
-                                        <select class="form-control" id="selectCargo">
-
-                                             <?php Empleado::llenarEmpleados($conexion); ?>
-
-                                        </select>
+                                        <input type="text" value="<?php echo JWTokens::GetData($_COOKIE['token'])['nombre']?>" readonly class="form-control">
                                    </div>
                               </div>
 
