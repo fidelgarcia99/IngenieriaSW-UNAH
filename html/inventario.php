@@ -57,12 +57,17 @@ $conexion = new Conexion();?>
       <!-- End of Main Content -->
 
       <?php include(SECCIONES . 'nuevo-producto-modal.php') ?>
-      <?php include(SECCIONES . 'nuevo-aceite-modal.php') ?>
+      <?php include(SECCIONES . 'nuevo-aceite-modal.php') ?> 
+     
+
+   
+     
+     
 
       <!-- Footer -->
       <?php include SECCIONES.'footer.php'?>
       <!-- End of Footer -->
-
+  
     </div>
     <!-- End of Content Wrapper -->
 
@@ -84,7 +89,11 @@ $conexion = new Conexion();?>
   <script src="<?php echo VENDOR?>datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
+
   <script src="<?php echo JS?>axios-calls.js"></script>
+   <script src="<?php echo JS?>modal.js"></script>
+  
+
   <script src="<?php echo JS?>inventario-controller.js"></script>
 </body>
 
