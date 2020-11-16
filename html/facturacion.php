@@ -25,6 +25,13 @@ $conexion = new Conexion();?>
   <!-- Page Wrapper -->
   <div id="wrapper">
 
+    <!-- Sidebar -->
+    <?php
+    if (JWTokens::GetData($_COOKIE['token'])['tipo']=="admin") {
+      include(SECCIONES . 'sidebar.php');
+    }
+    ?>
+    <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
