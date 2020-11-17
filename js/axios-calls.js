@@ -28,54 +28,56 @@ var renderTabla = function(param,id,api){
 
   var dataa = obtenerRegistros(param,id,api);
   dataa.then((data)=>{
-    document.getElementById('tbody').innerHTML='';
-    document.getElementById('thead').innerHTML='';
-    //Se agrega el nombre de las columnas
-    let nombreCol = '';
-    for(let i in data[0]){
-        nombreCol+=`
-            <td>${i}</td>
-        `;
-    }
-    if (api=="clientes" || api=='usuarios' || api=='inventario') {
-      nombreCol+=`<td>Opciones</td>`;
-    }
-    document.getElementById('thead').innerHTML+=`
-    <tr>${nombreCol}</tr>
-    `;
-    //Se gregan las filas de datos
-    data.forEach(element => {
-        let fila='';
-        for(let i in element){
-            if(element[i]==null){
-                fila+=`
-                    <td>---</td>
-                `;
-            }else{
-                fila+=`
-                    <td>${element[i]}</td>
-                `;
-            }
-        }
-        if(api=="clientes" || api=='usuarios' || api=='inventario'){
-          fila+=`<td>
-          <div class="container-fluid px-0" style="max-widh:450%;">
-            <div class="row">
-              <div class="col pr-0 mr-0">
-                <button class="btn text-info" onclick="editarRegistro(${element['Id']});"><i class="fa fa-edit"></i></button>
-              </div>
-              <div class="col pl-0 ml-0">
-                <button class="btn text-danger" onclick="eliminarRegistro(${element['Id']});"><i class="fa fa-trash"></i></button>
+    if (data!=null) {
+      document.getElementById('tbody').innerHTML='';
+      document.getElementById('thead').innerHTML='';
+      //Se agrega el nombre de las columnas
+      let nombreCol = '';
+      for(let i in data[0]){
+          nombreCol+=`
+              <td>${i}</td>
+          `;
+      }
+      if (api=="clientes" || api=='usuarios' || api=='inventario') {
+        nombreCol+=`<td>Opciones</td>`;
+      }
+      document.getElementById('thead').innerHTML+=`
+      <tr>${nombreCol}</tr>
+      `;
+      //Se gregan las filas de datos
+      data.forEach(element => {
+          let fila='';
+          for(let i in element){
+              if(element[i]==null){
+                  fila+=`
+                      <td>---</td>
+                  `;
+              }else{
+                  fila+=`
+                      <td>${element[i]}</td>
+                  `;
+              }
+          }
+          if(api=="clientes" || api=='usuarios' || api=='inventario'){
+            fila+=`<td>
+            <div class="container-fluid px-0" style="max-widh:450%;">
+              <div class="row">
+                <div class="col pr-0 mr-0">
+                  <button class="btn text-info" onclick="editarRegistro(${element['Id']});"><i class="fa fa-edit"></i></button>
+                </div>
+                <div class="col pl-0 ml-0">
+                  <button class="btn text-danger" onclick="eliminarRegistro(${element['Id']});"><i class="fa fa-trash"></i></button>
+                </div>
               </div>
             </div>
-          </div>
-          </td>`;
-        }
-        document.getElementById('tbody').innerHTML+=`
-        <tr>${fila}</tr>
-        `;
-    });
-    $('#dataTable').DataTable();
+            </td>`;
+          }
+          document.getElementById('tbody').innerHTML+=`
+          <tr>${fila}</tr>
+          `;
+      });
+      $('#dataTable').DataTable();
+    }
   });
 }
 

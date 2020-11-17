@@ -52,23 +52,8 @@
         $resultado=null;
             if(isset($_GET['id'])){
               $resultado = $conexion->ejecutarInstruccion('call Producto();');
-            }else if(isset($_GET['param'])){
-              switch ($_GET['param']) {
-                case 'contenedores':
-                  $resultado = $conexion->ejecutarInstruccion('call Contenedores();');
-                  break;
-                case 'marcas':
-                $resultado = $conexion->ejecutarInstruccion('call Marcas();');
-                  break;
-                case 'categorias':
-                $resultado = $conexion->ejecutarInstruccion('call Categorias();');
-                  break;
-                case 'proveedores':
-                $resultado = $conexion->ejecutarInstruccion('call Proveedores();');
-                  break;
-              }
-            }else{
-                $resultado = $conexion->ejecutarInstruccion('call Inventario();');
+            }else {
+              $resultado = $conexion->ejecutarInstruccion('call Inventario();');
             }
             $res = array(); //creamos un array
             while($row = mysqli_fetch_assoc($resultado))            {

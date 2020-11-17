@@ -56,7 +56,7 @@ class Producto{
 		return $conexion->ejecutarInstruccion("call SPelimina_producto($id_registro)");
 	}
 
-	public function llenarProveedor($conexion){
+	public static function llenarProveedor($conexion){
           $proveedor = $conexion->ejecutarInstruccion("
 		select idProveedor,nombre_proveedor from proveedor
 			");
@@ -73,12 +73,10 @@ class Producto{
 					<?php
 				}
 			}
-
 			$conexion->liberarResultado($proveedor);
 	}
 
-
-	public function llenarMarcas($conexion){
+	public static function llenarMarcas($conexion){
           $Marcas = $conexion->ejecutarInstruccion("
 		select idMarca,nombre_marca from marca
 			");
@@ -99,17 +97,21 @@ class Producto{
 			$conexion->liberarResultado($Marcas);
 	}
 
-	public function llenarSucursal($conexion){
-          $Sucursal = $conexion->ejecutarInstruccion("
-		select idSucursal,nombre_sucursal from Sucursal
-			");
-
+	public static function llenarUbicacion($conexion){
+          $ubicacion = $conexion->ejecutarInstruccion('
+					SELECT
+					c.idContenedor as Id,
+					CONCAT(c.descripcion_cont," ",tc.descripcion_tipocont) as Ubicacion
+					FROM contenedor c
+					INNER JOIN tipocontenedor tc
+					ON c.TipoContenedor_idTipoContenedor = tc.idTipoContenedor;
+					');
 			$c = 0;
-			while ($fila_Sucursal = $conexion->obtenerFila($Sucursal)) {
+			while ($fila_ubicacion = $conexion->obtenerFila($ubicacion)) {
 				if ($c==0) {
 					?>
-					<option selected value="<?php echo $fila_Sucursal["idSucursal"];?>">
-						<?php echo $fila_Sucursal["nombre_sucursal"];?>
+					<option selected value="<?php echo $fila_ubicacion["Id"];?>">
+						<?php echo $fila_ubicacion["Ubicacion"];?>
 
 					</option>
 
@@ -117,7 +119,25 @@ class Producto{
 				}
 			}
 
-			$conexion->liberarResultado($Sucursal);
+			$conexion->liberarResultado($ubicacion);
+	}
+
+	public static function llenarCategoria($conexion){
+					$result = $conexion->ejecutarInstruccion("select * from tipoproducto;");
+
+			while ($fila_categoria = $conexion->obtenerFila($result)) {
+				if ($c==0) {
+					?>
+					<option selected value="<?php echo $fila_categoria["idTipo_Producto"];?>">
+						<?php echo $fila_categoria["descp_tipo"];?>
+
+					</option>
+
+					<?php
+				}
+			}
+
+			$conexion->liberarResultado($result);
 	}
 
 }
