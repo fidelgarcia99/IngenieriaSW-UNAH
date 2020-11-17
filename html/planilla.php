@@ -1,14 +1,12 @@
 <?php
   include SECCIONES.'valida-acceso.php';
-  if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
-    header('Location: ?view=401');
-  }
-
   //incluimos la clase conexion para poder crear el objeto Conexion que enviaremos como parametro
   include_once("php/clases/class_conexion.php");
   //se incluye la clase personas parapoder llamar sus funciones desde el index
   include_once("php/clases/class_planilla.php");
-  //objeto Conexion
+  include_once("php/clases/class_deducciones.php");
+  include_once("php/clases/class_bonos.php");
+  //objeto Conexion 
   $conexion = new Conexion();
 ?>
 <!DOCTYPE html>
@@ -41,14 +39,24 @@
         <!-- End of Topbar -->
 
         <!-------------------------- Begin Page Content ------------------------------>
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <h1 class="h3 mb-4 text-gray-800">Planilla De Empleados</h1>
+        <hr>
+        </div>
+        <!--------------------------- /.container-fluid -------------------------------->
 
         <!-- Begin Page Content -->
         <?php include(SECCIONES . 'tablaplanilla.php')?>
+        <?php include(SECCIONES . 'nueva-planilla-modal.php')?>
+        <?php include(SECCIONES . 'nueva-deduccion-modal.php')?>
+        <?php include(SECCIONES . 'nuevo-bono-modal.php')?>
         <!-- /.container-fluid -->
 
       </div>
       <!-- End of Main Content -->
-
+      
       <!-- Footer -->
       <?php include(SECCIONES . 'footer.php')?>
       <!-- End of Footer -->
@@ -77,6 +85,8 @@
 <!-- Page level custom scripts -->
 <script src="<?php echo JS?>demo/datatables-demo.js"></script>
 <script src="js/planilla-controller.js"></script>
+<script src="js/deducciones-controller.js"></script>
+<script src="js/bonos-controller.js"></script>
 
 </body>
 

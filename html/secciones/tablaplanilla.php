@@ -3,20 +3,35 @@
   <br>
   <div class="row justify-content-center">
     <div class="col-3">
-       <select class="form-control" id="fechas-planilla">
-          <option selected="">seleccionar fecha</option>
-          <?php Personas::llenarFechas($conexion); ?>
-       </select>
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Menu
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a id="addPlanilla" class="dropdown-item" href="#" data-toggle="modal" data-target="#nuevaPlanillaModal">Nueva Planilla</a>
+          <a id="addDeduccion" class="dropdown-item" href="#" data-toggle="modal" data-target="#nuevaDeduccionModal">Agregar Deduccion</a>
+          <a id="addBono" class="dropdown-item" href="#" data-toggle="modal" data-target="#nuevoBonoModal">Agregar Bono</a>
+        </div>
+      </div>
     </div>
-    <div class="col-2">
+    <div class="col-3">
+        <select class="form-control" id="fechas-planilla">
+          <option>seleccionar fecha</option>
+          <!-- <?php //Planilla::llenarFechas($conexion); ?> -->
+        </select>
+    </div>
+    <div class="col-3">
       <button type="button" class="btn btn-primary" onclick="planilla()">Mostrar</button>
     </div>
-  </div>
+    <div class="col-2">
+      <button type="button" id="pagarPlanilla" class="btn btn-success" onclick="actualizarEstado('P')">Pagar Planila</button>
+    </div>
+  </div><br>
 
             <div class="card-body">
               <div class="table-responsive">
               
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="dataTablePlanilla" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Nombre</th>
@@ -26,15 +41,13 @@
                       <th>Deducciones</th>
                       <th>Bonos</th>
                       <th>Sueldo</th>
-                      
+                      <th>Estado</th>
                     </tr>
                   </thead>
                   
-                  <tbody class="tplanilla">
-                   <?php
-                      Personas::empleados($conexion, 1);
-                   ?>
-                    
+                  <tbody id="tplanilla">
+                   <!-- contenido de la tabla planilla -->
+                   
                   </tbody>
                 </table>
               </div>
@@ -53,10 +66,11 @@
       <div class="modal-body">
         <table class="table table-striped">
           <thead>
-             <tr>
-          <th>fecha</th>
-            <th>Monto</th>
-          </tr>
+            <tr>
+              <th>Descripcion</th>
+              <th>Fecha</th>
+              <th>Monto</th>
+            </tr>
           </thead>
          <tbody class="tdeducciones">
            
