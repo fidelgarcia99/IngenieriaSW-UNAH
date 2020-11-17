@@ -62,7 +62,7 @@
                </div>
                <div class="modal-footer py-0">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" onclick="registraEmpleado();">Guardar</button>
+                    <button type="button" class="btn btn-primary" onclick="registraProducto();">Guardar</button>
                </div>
           </div>
      </div>

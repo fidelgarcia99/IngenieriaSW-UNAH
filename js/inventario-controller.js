@@ -2,39 +2,79 @@ const cambioCategoria = function(){
   var opcion = document.getElementById('select-categorias').options[document.getElementById('select-categorias').selectedIndex].text;
   switch (opcion) {
     case 'Llantas':
+    let alturas ='';
+    let anchos ='';
+    let radios='';
+    for (var i = 125; i <= 335; i+=10) {
+      anchos+=`<option value="${i}">${i}</option>`;
+    }
+    for (var i = 25; i <= 80; i+=5) {
+      alturas+=`<option value="${i}">${i}</option>`;
+    }
+    for (var i = 10; i <= 21; i++) {
+      radios+=`<option value="${i}">${i}</option>`;
+    }
       document.getElementById('div-detalles').innerHTML=`
-      <div class="form-label-group tercio">
-      Altura
-           <input type="number" pattern="[0-9]+" id="input-alto" class="form-control" placeholder="Altura" required>
-      </div>
-      <div class="form-label-group tercio">
+      <div class="form-label-group cuarto">
       Ancho
-           <input type="number" pattern="[0-9]+" id="input-ancho" class="form-control" placeholder="Ancho" required>
+      <div class="input-group espaciado">
+            <select class="form-control" id="select-ancho">
+              ${anchos}
+            </select>
       </div>
-      <div class="form-label-group tercio">
+      </div>
+      <div class="form-label-group cuarto">
+      Altura
+      <div class="input-group espaciado">
+            <select class="form-control" id="select-alto">
+              ${alturas}
+            </select>
+      </div>
+      </div>
+      <div class="form-label-group cuarto">
+      Tipo
+      <div class="input-group espaciado">
+            <select class="form-control" id="select-tipo">
+              <option value="R">R</option>
+              <option value="ZR">ZR</option>
+              <option value="RF">RF</option>
+              <option value="D">D</option>
+            </select>
+      </div>
+      </div>
+      <div class="form-label-group cuarto">
       Diametro
-           <input type="number" pattern="[0-9]+" id="input-diametro" class="form-control" placeholder="Rin"required>
+      <div class="input-group espaciado">
+            <select class="form-control" id="select-diametro">
+              ${radios}
+            </select>
       </div>
-      <div class="form-label-group">
+      </div>
+      <div class="form-label-group medio">
       Tipo Vehiculo
-        <div class="input-group">
+        <div class="input-group espaciado">
               <select class="form-control" id="select-vehiculo">
                 <option selected value="carro">Carro</option>
                 <option value="moto">Moto</option>
               </select>
         </div>
       </div>
-      <div class="form-label-group">
-      Observaciones
-           <input type="text" id="input-observacion" class="form-control" placeholder="Observaciones" required>
+      <div class="form-label-group medio">
+      Estado
+      <div class="input-group espaciado">
+            <select class="form-control" id="select-estado">
+              <option value="nueva">Nueva</option>
+              <option value="usada">Usada</option>
+            </select>
+      </div>
       </div>
       `;
     break;
     case 'Aceites':
     document.getElementById('div-detalles').innerHTML=`
-    <div class="form-label-group">
+    <div class="form-label-group medio">
     Tipo de Aceite
-      <div class="input-group">
+      <div class="input-group espaciado">
             <select class="form-control" id="select-tipo-aceite">
               <option selected value="sintetico">Sintetico</option>
               <option value="semi-sintetico">Semi-sintetico</option>
@@ -42,10 +82,20 @@ const cambioCategoria = function(){
             </select>
       </div>
     </div>
-    <div class="form-label-group">
+    <div class="form-label-group medio">
+    Tipo Vehiculo
+      <div class="input-group espaciado">
+            <select class="form-control" id="select-tiempos-vehiculo">
+              <option selected value="4">Carro</option>
+              <option value="4">Moto 4T</option>
+              <option value="2">Moto 2T</option>
+            </select>
+      </div>
+    </div>
+    <div class="form-label-group tercio">
     Viscosidad SAE
       <div class="input-group">
-            <select class="form-control" id="select-tipo-aceite">
+            <select class="form-control" id="select-sae-low">
               <option selected value="25W">25W</option>
               <option selected value="20W">20W</option>
               <option selected value="15W">15W</option>
@@ -53,7 +103,7 @@ const cambioCategoria = function(){
               <option selected value="5W">5W</option>
               <option selected value="0W">0W</option>
             </select>
-            <select class="form-control" id="select-tipo-aceite">
+            <select class="form-control" id="select-sae-high">
               <option selected value="50">50</option>
               <option selected value="40">40</option>
               <option selected value="30">30</option>
@@ -61,10 +111,10 @@ const cambioCategoria = function(){
             </select>
       </div>
     </div>
-    <div class="form-label-group">
+    <div class="form-label-group tercio mx-auto">
     Servicio API
       <div class="input-group">
-            <select class="form-control" id="select-tipo-aceite">
+            <select class="form-control" id="select-api-service">
               <option selected value="SN">Motor a Gasolina (SN)</option>
               <option selected value="SM">Motor a Gasolina (SM)</option>
               <option selected value="SL">Motor a Gasolina (SL)</option>
@@ -74,81 +124,101 @@ const cambioCategoria = function(){
             </select>
       </div>
     </div>
-    <div class="form-label-group">
-    Tipo Vehiculo
-      <div class="input-group">
-            <select class="form-control" id="select-vehiculo">
-              <option selected value="4">Carro</option>
-              <option value="4">Moto 4T</option>
-              <option value="2">Moto 2T</option>
-            </select>
-      </div>
+
+    <div class="form-label-group cuarto">
+    Volumen
+    <div class="input-group">
+          <input type="number" id="input-volumen" class="form-control tercio" value="1">
+          <select class="form-control dosterios" id="select-volumen">
+            <option selected value="G">Galones</option>
+            <option selected value="L">Litros</option>
+          </select>
     </div>
-    <div class="form-label-group">
-    Observaciones
-         <input type="text" id="input-observacion" class="form-control" placeholder="Observaciones" required>
     </div>
     `;
     break;
     case 'Lubricantes':
     document.getElementById('div-detalles').innerHTML=`
-    <div class="form-label-group">
-    Nombre
-         <input type="text" id="input-nombre-lubricante" class="form-control" placeholder="Nombre del lubricante" required>
+    <div class="form-label-group tercio">
+    Tipo Lubricante
+    <div class="input-group espaciado">
+          <select class="form-control" id="select-tipo-lubricante">
+            <option selected value="Liquido Hidraulico">Liquido Hidraulico</option>
+            <option value="Liquido de Frenos">Liquido de Frenos</option>
+            <option value="Liquido para Transmicion">Liquido para Transmicion</option>
+            <option value="Grasa">Grasa</option>
+          </select>
     </div>
-    <div class="form-label-group">
+    </div>
+    <div class="form-label-group tercio">
     Grado de Viscosidad
-         <input type="text" id="input-grado-viscosidad" class="form-control" placeholder="Grado de viscosidad" required>
+         <input type="text" id="input-grado-viscosidad" class="form-control espaciado" placeholder="Grado de viscosidad" required>
     </div>
-    <div class="form-label-group">
-    Observaciones
-         <input type="text" id="input-observacion" class="form-control" placeholder="Observaciones" required>
+    <div class="form-label-group tercio">
+    Volumen/Cantidad
+    <div class="input-group">
+          <input type="number" id="input-volumen" class="form-control tercio" value="1">
+          <select class="form-control dosterios" id="select-volumen">
+            <option selected value="G">Galones</option>
+            <option selected value="L">Litros</option>
+            <option selected value="gr">Gramos</option>
+          </select>
+    </div>
     </div>
     `;
     break;
     case 'Consumibles':
     document.getElementById('div-detalles').innerHTML=`
-    <div class="form-label-group">
+    <div class="form-label-group medio ">
     Nombre
-         <input type="text" id="input-nombre-lubricante" class="form-control" placeholder="Nombre del Producto" required>
+         <input type="text" id="input-nombre-consumible" class="form-control espaciado" placeholder="Nombre del Producto" required>
     </div>
-    <div class="form-label-group">
+    <div class="form-label-group medio">
     Fecha de vencimiento
-         <input type="date" id="input-fecha-vencimiento" class="form-control" placeholder="Fecha de vencimiento" required>
-    </div>
-    <div class="form-label-group">
-    Observaciones
-         <input type="text" id="input-observacion" class="form-control" placeholder="Observaciones" required>
+         <input type="date" id="input-fecha-vencimiento" class="form-control espaciado" placeholder="Fecha de vencimiento" required>
     </div>
     `;
     break;
     case 'Neumaticos':
+    let diametros='';
+    for (var i = 10; i <= 21; i++) {
+      diametros+=`<option value="${i}">${i}</option>`;
+    }
     document.getElementById('div-detalles').innerHTML=`
-    <div class="form-label-group">
+    <div class="form-label-group cuarto">
     Diametro
-         <input type="number" pattern="[0-9]+" id="input-diametro" class="form-control" placeholder="Rin"required>
+    <div class="input-group espaciado">
+          <select class="form-control" id="select-diametro">
+            ${diametros}
+          </select>
     </div>
-    <div class="form-label-group">
+    </div>
+    <div class="form-label-group cuarto">
     Tipo Valvula
-      <div class="input-group">
-            <select class="form-control" id="select-vehiculo">
+      <div class="input-group espaciado">
+            <select class="form-control" id="select-valvula">
               <option selected value="corta">Corta</option>
               <option value="larga">Larga</option>
             </select>
       </div>
     </div>
-    <div class="form-label-group">
+    <div class="form-label-group cuarto">
     Tipo Vehiculo
-      <div class="input-group">
+      <div class="input-group espaciado">
             <select class="form-control" id="select-vehiculo">
               <option selected value="carro">Carro</option>
               <option value="moto">Moto</option>
             </select>
       </div>
     </div>
-    <div class="form-label-group">
-    Observaciones
-         <input type="text" id="input-observacion" class="form-control" placeholder="Observaciones" required>
+    <div class="form-label-group cuarto">
+    Observacion (Moto)
+    <div class="input-group espaciado">
+          <select class="form-control" id="select-observacion">
+            <option selected value="trasero">Trasero</option>
+            <option value="delantero">Delantero</option>
+          </select>
+    </div>
     </div>
     `;
     break;
@@ -156,11 +226,77 @@ const cambioCategoria = function(){
     document.getElementById('div-detalles').innerHTML=`
     <div class="form-label-group">
     Descripcion
-         <input type="text" id="input-grado-descripcion" class="form-control" placeholder="Descripcion" required>
+         <input type="text" id="input-descripcion" class="form-control" placeholder="Descripcion" required>
     </div>
     `;
     break;
   }
 }
 
+const registraProducto = function(){
+  var opcion = document.getElementById('select-categorias').options[document.getElementById('select-categorias').selectedIndex].text;
+  var detalles = null;
+  switch (opcion) {
+    case 'Llantas':
+      detalles={
+        altura:document.getElementById('select-alto').value,
+        ancho:document.getElementById('select-ancho').value,
+        tipo:document.getElementById('select-tipo').value,
+        diametro:document.getElementById('select-diametro').value,
+        vehiculo:document.getElementById('select-vehiculo').value,
+        observacion:document.getElementById('select-estado').value
+      };
+    break;
+    case 'Aceites':
+      detalles={
+      base:document.getElementById('select-tipo-aceite').value,
+      saelow:document.getElementById('select-sae-low').value,
+      saehigh:document.getElementById('select-sae-high').value,
+      apiservice:document.getElementById('select-api-service').value,
+      tiempos:document.getElementById('select-tiempos-vehiculo').value,
+      volumen:document.getElementById('input-volumen').value,
+      unidad:document.getElementById('input-volumen').value
+    };
+    break;
+    case 'Lubricantes':
+    detalles={
+      tipo:document.getElementById('select-tipo-lubricante').value,
+      viscosidad:document.getElementById('input-grado-viscosidad').value,
+      volumen:document.getElementById('input-volumen').value,
+      unidad:document.getElementById('select-volumen').value,
+    };
+    break;
+    case 'Consumibles':
+    detalles={
+      nombre:document.getElementById('input-nombre-consumible').value,
+      caducidad:document.getElementById('input-fecha-vencimiento').value,
+      observaciones:document.getElementById('input-observacion').value,
+    };
+    break;
+    case 'Neumaticos':
+    detalles={
+      diametro:document.getElementById('select-diametro').value,
+      valvula:document.getElementById('select-valvula').value,
+      vehiculo:document.getElementById('select-vehiculo').value,
+      observacion:document.getElementById('select-observacion').value,
+    };
+    break;
+    case 'Accesorios':
+    detalles=document.getElementById('input-descripcion').value;
+    break;
+  }
+  var data={
+    descripcion:detalles,
+    barcode:document.getElementById('input-barcode').value,
+    marca:document.getElementById('select-marcas').value,
+    proveedor:document.getElementById('select-proveedores').value,
+    contenedor:document.getElementById('select-contenedor').value,
+    categoria:document.getElementById('select-categorias').value
+  }
+  console.log(data);
+
+  console.log(nuevoRegistro(data,'inventario'));
+}
+
 renderTabla(null,null,"inventario");
+cambioCategoria();

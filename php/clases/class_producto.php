@@ -65,7 +65,7 @@ class Producto{
 			while ($fila_proveedor = $conexion->obtenerFila($proveedor)) {
 				if ($c==0) {
 					?>
-					<option selected value="<?php echo $fila_proveedor["idProveedor"];?>">
+					<option value="<?php echo $fila_proveedor["idProveedor"];?>">
 						<?php echo $fila_proveedor["nombre_proveedor"];?>
 
 					</option>
@@ -85,7 +85,7 @@ class Producto{
 			while ($fila_Marcas = $conexion->obtenerFila($Marcas)) {
 				if ($c==0) {
 					?>
-					<option selected value="<?php echo $fila_Marcas["idMarca"];?>">
+					<option value="<?php echo $fila_Marcas["idMarca"];?>">
 						<?php echo $fila_Marcas["nombre_marca"];?>
 
 					</option>
@@ -110,7 +110,7 @@ class Producto{
 			while ($fila_ubicacion = $conexion->obtenerFila($ubicacion)) {
 				if ($c==0) {
 					?>
-					<option selected value="<?php echo $fila_ubicacion["Id"];?>">
+					<option value="<?php echo $fila_ubicacion["Id"];?>">
 						<?php echo $fila_ubicacion["Ubicacion"];?>
 
 					</option>
@@ -128,7 +128,7 @@ class Producto{
 			while ($fila_categoria = $conexion->obtenerFila($result)) {
 				if ($c==0) {
 					?>
-					<option selected value="<?php echo $fila_categoria["idTipo_Producto"];?>">
+					<option value="<?php echo $fila_categoria["idTipo_Producto"];?>">
 						<?php echo $fila_categoria["descp_tipo"];?>
 
 					</option>
