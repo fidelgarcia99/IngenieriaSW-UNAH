@@ -33,14 +33,18 @@
                               </div>
 
                               <div class="row">
+                                   
 
                                    <div class="col-md-6">
                                         <input type="text" id="nombreCliente" class="form-control" placeholder="Cliente" required autofocus>
-
+                                   </div>
+                                   
+                                   <div >  
+                                       <button type="button" class="btn btn-primary"  data-target=""><i class="fas fa-search"></i></button>
                                    </div>
 
                                    <br>
-                                   <div class="col-md-6">
+                                   <div class="col-md-4">
                                         <input type="text" id="RTNCliente" class="form-control" placeholder="RTN" autofocus>
                                    </div>
                               </div>
