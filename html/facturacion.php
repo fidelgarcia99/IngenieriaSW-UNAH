@@ -9,7 +9,7 @@ if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="cajero" || JWTokens::GetDat
 
 include("php/clases/class_conexion.php");
 //se incluye la clase empleados parapoder llamar sus funciones desde el index
-include_once("php/clases/class_empleado.php");
+include_once("php/clases/class_cliente.php");
 //objeto Conexion
 $conexion = new Conexion();?>
 
@@ -18,6 +18,10 @@ $conexion = new Conexion();?>
 
 <head>
   <?php include(SECCIONES . 'head-general.php')?>
+   <!-- Custom styles for this page -->
+   <link href="<?php echo VENDOR ?>datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="<?php echo CSS ?>empleadosmodal.css" rel="stylesheet">
+  <link href="<?php echo CSS ?>modales.style.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -46,6 +50,7 @@ $conexion = new Conexion();?>
         <!-------------------------- Begin Page Content ------------------------------>
 
       </div>
+      <?php include(SECCIONES . 'modal-cliente-rtn.php') ?>
       <!-- End of Main Content -->
       <?php include(SECCIONES . 'facturaciondetalles.php')?>
       <!-- Footer -->
@@ -69,6 +74,8 @@ $conexion = new Conexion();?>
   <!-- Scripts-->
   <?php include(SECCIONES . 'scripts-generales.php')?>
   <!------------>
+  
+
 </body>
 
 </html>

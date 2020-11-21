@@ -37,6 +37,9 @@ class Cliente{
 	}
 
 
+	
+
+
 
 	public function registrarCliente($conexion){
 		return $conexion->ejecutarInstruccion("
@@ -53,6 +56,8 @@ class Cliente{
 	public static function eliminarCliente($conexion, $id_registro){
 		return $conexion->ejecutarInstruccion("call SPelimina_cliente($id_registro)");
 	}
+
+
 
 	public function llenarCiudad($conexion){
 		$ciudad = $conexion->ejecutarInstruccion("
@@ -76,6 +81,42 @@ class Cliente{
 			$conexion->liberarResultado($ciudad);
 	}
 
+	public static function llenarCliente($conexion){
+          $cliente = $conexion->ejecutarInstruccion('
+		select  p.pnombre, p.snombre,p.papellido,p.sapellido, p.num_identidad, c.idCliente
+		from persona p
+	    inner join cliente c  on p.idPersona=c.Persona_idPersona
+					');
+					
+			$c = 0;
+			   
+
+			
+			while ($fila_cliente = $conexion->obtenerFila($cliente)) {
+				if ($c==0) {
+					?>
+					<option value="<?php echo $fila_cliente["idCliente"];?>">
+						<?php echo $fila_cliente['pnombre'];?>
+						<?php echo $fila_cliente["snombre"];?>
+						<?php echo $fila_cliente["papellido"];?>
+						<?php echo $fila_cliente["sapellido"];?>
+						-
+						<?php echo $fila_cliente["num_identidad"];?>
+					</option>
+
+				
+					<?php
+				}
+			};
+
+			
+			$conexion->liberarResultado($cliente);
+			
+	}
+
+	
+
+	
 
 }
 ?>
