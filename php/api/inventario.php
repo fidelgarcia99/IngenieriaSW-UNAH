@@ -18,7 +18,7 @@
     {
         case 'POST':    //Crear producto
         if(isset($_POST['descripcion']) && $_POST['descripcion']!='' &&
-           isset($_POST['barcode']) && isset($_POST['marca']) && isset($_POST['proveedor']) &&
+           isset($_POST['barcode']) && isset($_POST['marca']) &&
            isset($_POST['contenedor']) && $_POST['contenedor']!='' &&
            isset($_POST['categoria']) && $_POST['categoria']!=''){
 
@@ -27,8 +27,7 @@
                          $_POST['barcode'] ,
                          0 , 0 , 0 , 0 ,
                          $_POST['contenedor'] ,
-                         $_POST['categoria'] ,
-                         $_POST['proveedor'] ,
+                         $_POST['categoria'] ,                      
                          $_POST['marca']
                        );
 

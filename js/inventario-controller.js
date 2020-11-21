@@ -1,3 +1,95 @@
+var selectId=null;
+confirm=false;
+
+const formatDescrip = function(desc,tipo){
+  desc = JSON.parse(desc);
+  let resp='';
+
+  switch (tipo) {
+    case 'Llantas':
+    resp = `${desc['altura']}/${desc['ancho']}/${desc['tipo']}${desc['diametro']} para ${desc['vehiculo']} ${desc['observacion']}`;
+    break;
+    case 'Aceites':
+    resp=`${desc['base']} SAE ${desc['saelow']}${desc['saehigh']} API ${desc['apiservice']}-${desc['tiempos']} ${desc['volumen']}${desc['unidad']}`;
+    break;
+    case 'Lubricantes':
+    resp=`${desc['tipo']} ${desc['viscosidad']} ${desc['volumen']}${desc['unidad']}`;
+    break;
+    case 'Consumibles':
+    resp=`${desc['nombre']} Vence: ${desc['caducidad']}`;
+    break;
+    case 'Neumaticos':
+    let t ='';
+    resp=`R${desc['diametro']} valvula ${desc['valvula']} para ${desc['vehiculo']} ${desc['observacion']}`;
+    break;
+    case 'Accesorios':
+    resp="Accesorios";
+    resp=`${desc['general']}`;
+    break;
+  }
+  return resp;
+}
+
+const mostrarInventario = function(){
+  var dataa = obtenerRegistros(null,null,"inventario");
+  dataa.then((data)=>{
+    if (data!=null) {
+      document.getElementById('tbody').innerHTML='';
+      document.getElementById('thead').innerHTML='';
+      //Se agrega el nombre de las columnas
+      let nombreCol = '';
+      for(let i in data[0]){
+          nombreCol+=`
+              <td>${i}</td>
+          `;
+      }
+
+      nombreCol+=`<td></td>`;
+
+      document.getElementById('thead').innerHTML+=`
+      <tr>${nombreCol}</tr>
+      `;
+
+      //Se gregan las filas de datos
+      data.forEach(element => {
+          let fila='';
+          for(let i in element){
+              if(element[i]==null){
+                  fila+=`
+                      <td>---</td>
+                  `;
+              }else{
+                  if(i=="Descripcion"){
+                    element[i]=formatDescrip(element[i],element['Tipo']);
+                  }
+                  fila+=`
+                      <td>${element[i]}</td>
+                  `;
+              }
+          }
+
+            fila+=`<td>
+            <div class="container-fluid px-0" style="max-widh:450%;">
+              <div class="row">
+                <div class="col pr-0 mr-0">
+                  <button class="btn text-info p-1" onclick="editarRegistro(${element['Id']});"><i class="fa fa-edit"></i></button>
+                </div>
+                <div class="col pl-0 ml-0">
+                  <button class="btn text-danger p-1" onclick="eliminarRegistro(${element['Id']});"><i class="fa fa-trash"></i></button>
+                </div>
+              </div>
+            </div>
+            </td>`;
+
+          document.getElementById('tbody').innerHTML+=`
+          <tr onclick="formatearDescrip();">${fila}</tr>
+          `;
+      });
+      $('#dataTable').DataTable();
+    }
+  });
+}
+
 const cambioCategoria = function(){
   var opcion = document.getElementById('select-categorias').options[document.getElementById('select-categorias').selectedIndex].text;
   switch (opcion) {
@@ -76,9 +168,9 @@ const cambioCategoria = function(){
     Tipo de Aceite
       <div class="input-group espaciado">
             <select class="form-control" id="select-tipo-aceite">
-              <option selected value="sintetico">Sintetico</option>
-              <option value="semi-sintetico">Semi-sintetico</option>
-              <option value="mineral">Mineral</option>
+              <option selected value="Sintetico">Sintetico</option>
+              <option value="Semi-sintetico">Semi-sintetico</option>
+              <option value="Mineral">Mineral</option>
             </select>
       </div>
     </div>
@@ -215,8 +307,8 @@ const cambioCategoria = function(){
     Observacion (Moto)
     <div class="input-group espaciado">
           <select class="form-control" id="select-observacion">
-            <option selected value="trasero">Trasero</option>
-            <option value="delantero">Delantero</option>
+            <option selected value="trasero">Trasera</option>
+            <option value="delantero">Delantera</option>
           </select>
     </div>
     </div>
@@ -233,70 +325,115 @@ const cambioCategoria = function(){
   }
 }
 
-const registraProducto = function(){
+const registraProducto = async function(){
   var opcion = document.getElementById('select-categorias').options[document.getElementById('select-categorias').selectedIndex].text;
-  var detalles = null;
-  switch (opcion) {
-    case 'Llantas':
-      detalles={
-        altura:document.getElementById('select-alto').value,
-        ancho:document.getElementById('select-ancho').value,
-        tipo:document.getElementById('select-tipo').value,
-        diametro:document.getElementById('select-diametro').value,
-        vehiculo:document.getElementById('select-vehiculo').value,
-        observacion:document.getElementById('select-estado').value
-      };
-    break;
-    case 'Aceites':
-      detalles={
-      base:document.getElementById('select-tipo-aceite').value,
-      saelow:document.getElementById('select-sae-low').value,
-      saehigh:document.getElementById('select-sae-high').value,
-      apiservice:document.getElementById('select-api-service').value,
-      tiempos:document.getElementById('select-tiempos-vehiculo').value,
-      volumen:document.getElementById('input-volumen').value,
-      unidad:document.getElementById('input-volumen').value
-    };
-    break;
-    case 'Lubricantes':
-    detalles={
-      tipo:document.getElementById('select-tipo-lubricante').value,
-      viscosidad:document.getElementById('input-grado-viscosidad').value,
-      volumen:document.getElementById('input-volumen').value,
-      unidad:document.getElementById('select-volumen').value,
-    };
-    break;
-    case 'Consumibles':
-    detalles={
-      nombre:document.getElementById('input-nombre-consumible').value,
-      caducidad:document.getElementById('input-fecha-vencimiento').value,
-      observaciones:document.getElementById('input-observacion').value,
-    };
-    break;
-    case 'Neumaticos':
-    detalles={
-      diametro:document.getElementById('select-diametro').value,
-      valvula:document.getElementById('select-valvula').value,
-      vehiculo:document.getElementById('select-vehiculo').value,
-      observacion:document.getElementById('select-observacion').value,
-    };
-    break;
-    case 'Accesorios':
-    detalles=document.getElementById('input-descripcion').value;
-    break;
-  }
-  var data={
-    descripcion:detalles,
-    barcode:document.getElementById('input-barcode').value,
-    marca:document.getElementById('select-marcas').value,
-    proveedor:document.getElementById('select-proveedores').value,
-    contenedor:document.getElementById('select-contenedor').value,
-    categoria:document.getElementById('select-categorias').value
-  }
-  console.log(data);
 
-  console.log(nuevoRegistro(data,'inventario'));
+    var detalles = null;
+    switch (opcion) {
+      case 'Llantas':
+        detalles={
+          altura:document.getElementById('select-alto').value,
+          ancho:document.getElementById('select-ancho').value,
+          tipo:document.getElementById('select-tipo').value,
+          diametro:document.getElementById('select-diametro').value,
+          vehiculo:document.getElementById('select-vehiculo').value,
+          observacion:document.getElementById('select-estado').value
+        };
+      break;
+      case 'Aceites':
+        detalles={
+        base:document.getElementById('select-tipo-aceite').value,
+        saelow:document.getElementById('select-sae-low').value,
+        saehigh:document.getElementById('select-sae-high').value,
+        apiservice:document.getElementById('select-api-service').value,
+        tiempos:document.getElementById('select-tiempos-vehiculo').value,
+        volumen:document.getElementById('input-volumen').value,
+        unidad:document.getElementById('select-volumen').value
+      };
+      break;
+      case 'Lubricantes':
+      detalles={
+        tipo:document.getElementById('select-tipo-lubricante').value,
+        viscosidad:document.getElementById('input-grado-viscosidad').value,
+        volumen:document.getElementById('input-volumen').value,
+        unidad:document.getElementById('select-volumen').value,
+      };
+      break;
+      case 'Consumibles':
+      detalles={
+        nombre:document.getElementById('input-nombre-consumible').value,
+        caducidad:document.getElementById('input-fecha-vencimiento').value,
+      };
+      break;
+      case 'Neumaticos':
+      detalles={
+        diametro:document.getElementById('select-diametro').value,
+        valvula:document.getElementById('select-valvula').value,
+        vehiculo:document.getElementById('select-vehiculo').value,
+        observacion:document.getElementById('select-observacion').value,
+      };
+      break;
+      case 'Accesorios':
+      detalles={general:document.getElementById('input-descripcion').value};
+      break;
+    }
+    if (detalles!="") {
+      detalles=JSON.stringify(detalles)
+    }
+    var producto={
+      descripcion:detalles,
+      barcode:document.getElementById('input-barcode').value,
+      marca:document.getElementById('select-marcas').value,
+      contenedor:document.getElementById('select-contenedor').value,
+      categoria:document.getElementById('select-categorias').value
+    }
+
+    let respuesta=null;
+    //if (modo) {
+      respuesta = await nuevoRegistro(producto, "inventario");
+    //}else{
+    //  respuesta = await actualizaRegistro(cliente, "clientes");
+    //}
+    if(respuesta!=null){
+      if(respuesta.res=='OK'){
+        document.getElementById('modal-success-message').innerHTML = respuesta.mensaje;
+        $('#nuevoProductoModal').modal('hide');
+        $('#modal-success').modal('show');
+        setTimeout(()=>$('#modal-success').modal('hide'), 2000);
+        mostrarInventario();
+        if(document.getElementById('select-categorias').options[document.getElementById('select-categorias').selectedIndex].text=="Accesorios"){
+          document.getElementsByClassName('input-descripcion').value='';
+        }
+      }else{
+        document.getElementById('errorMessage').innerHTML=respuesta.mensaje;
+        document.getElementById('errorMessage').style='display:block';
+      }
+    }else{
+      console.console.error('El servidor no ha devuelto respuesta');
+    }
 }
 
-renderTabla(null,null,"inventario");
+const eliminarRegistro = async function(id){
+  if (confirm) {
+    let data = {id:id}
+    let respuesta = await eliminarRegistroId(data,"inventario")
+    if(respuesta!=null){
+      if(respuesta.res=='OK'){
+        document.getElementById('modal-success-message').innerHTML = respuesta.mensaje;
+        $('#modal-confirm').modal('hide');
+        $('#modal-success').modal('show');
+        setTimeout(()=>$('#modal-success').modal('hide'), 2000);
+      }
+      selectId=null;
+      confirm=false;
+      mostrarInventario();
+    }
+  }else{
+      document.getElementById('modal-confirm-msj').innerHTML=`Esta a punto de eliminar el registro con Id:${id}.`;
+      $('#modal-confirm').modal('show');
+      selectId = id;
+  }
+}
+
+mostrarInventario();
 cambioCategoria();

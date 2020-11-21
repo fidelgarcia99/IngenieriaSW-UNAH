@@ -8,7 +8,6 @@ class Producto{
 	private $cantidad;
 	private $contenedor;
 	private $categoria;
-	private $proveedor;
 	private $marca;
 
 	public function __construct(
@@ -20,7 +19,6 @@ class Producto{
 		$cantidad = null,
 		$contenedor = null,
 		$categoria = null,
-		$proveedor = null,
 		$marca = null
 	){
 		$this->descripcion = $descripcion;
@@ -31,19 +29,17 @@ class Producto{
 		$this->cantidad = $cantidad;
 		$this->contenedor = $contenedor;
 		$this->categoria = $categoria;
-		$this->proveedor = $proveedor;
 		$this->marca = $marca;
 	}
 
-	public function registrarProducto($conexion){
+	public function registrarProducto($conexion){		
 		return $conexion->ejecutarInstruccion("
 			call SPnuevo_producto(
 			'$this->descripcion',
 			'$this->barcode',
 			$this->contenedor,
 			$this->categoria,
-			$this->marca,
-			$this->proveedor
+			$this->marca
 			);");
 	}
 
