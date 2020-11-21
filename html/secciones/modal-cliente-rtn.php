@@ -55,7 +55,7 @@
                </div>
                <div class="modal-footer py-0">
                     <button type="button" class="btn btn-secondary" onclick="limpiarModal();" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" onclick="">Aceptar</button>
+                    <button type="button" class="btn btn-primary" onclick="registrarCliente();">Aceptar</button>
                </div>
           </div>
      </div>
