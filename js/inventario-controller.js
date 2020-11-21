@@ -1,8 +1,93 @@
 var selectId=null;
 confirm=false;
 
+const formatDescrip = function(desc,tipo){
+  desc = JSON.parse(desc);
+  let resp='';
+
+  switch (tipo) {
+    case 'Llantas':
+    resp = `${desc['altura']}/${desc['ancho']}/${desc['tipo']}${desc['diametro']} para ${desc['vehiculo']} ${desc['observacion']}`;
+    break;
+    case 'Aceites':
+    resp=`${desc['base']} SAE ${desc['saelow']}${desc['saehigh']} API ${desc['apiservice']}-${desc['tiempos']} ${desc['volumen']}${desc['unidad']}`;
+    break;
+    case 'Lubricantes':
+    resp=`${desc['tipo']} ${desc['viscosidad']} ${desc['volumen']}${desc['unidad']}`;
+    break;
+    case 'Consumibles':
+    resp=`${desc['nombre']} Vence: ${desc['caducidad']}`;
+    break;
+    case 'Neumaticos':
+    let t ='';
+    resp=`R${desc['diametro']} valvula ${desc['valvula']} para ${desc['vehiculo']} ${desc['observacion']}`;
+    break;
+    case 'Accesorios':
+    resp="Accesorios";
+    resp=`${desc['general']}`;
+    break;
+  }
+  return resp;
+}
+
 const mostrarInventario = function(){
-  renderTabla(null,null,"inventario");
+  var dataa = obtenerRegistros(null,null,"inventario");
+  dataa.then((data)=>{
+    if (data!=null) {
+      document.getElementById('tbody').innerHTML='';
+      document.getElementById('thead').innerHTML='';
+      //Se agrega el nombre de las columnas
+      let nombreCol = '';
+      for(let i in data[0]){
+          nombreCol+=`
+              <td>${i}</td>
+          `;
+      }
+
+      nombreCol+=`<td></td>`;
+
+      document.getElementById('thead').innerHTML+=`
+      <tr>${nombreCol}</tr>
+      `;
+
+      //Se gregan las filas de datos
+      data.forEach(element => {
+          let fila='';
+          for(let i in element){
+              if(element[i]==null){
+                  fila+=`
+                      <td>---</td>
+                  `;
+              }else{
+                  if(i=="Descripcion"){
+                    element[i]=formatDescrip(element[i],element['Tipo']);
+                  }
+                  fila+=`
+                      <td>${element[i]}</td>
+                  `;
+              }
+          }
+
+            fila+=`<td>
+            <div class="container-fluid px-0" style="max-widh:450%;">
+              <div class="row">
+                <div class="col pr-0 mr-0">
+                  <button class="btn text-info p-1" onclick="editarRegistro(${element['Id']});"><i class="fa fa-edit"></i></button>
+                </div>
+                <div class="col pl-0 ml-0">
+                  <button class="btn text-danger p-1" onclick="eliminarRegistro(${element['Id']});"><i class="fa fa-trash"></i></button>
+                </div>
+              </div>
+            </div>
+            </td>`;
+
+          document.getElementById('tbody').innerHTML+=`
+          <tr onclick="formatearDescrip();">${fila}</tr>
+          `;
+      });
+      $('#dataTable').DataTable();
+    }
+  });
 }
 
 const cambioCategoria = function(){
@@ -83,9 +168,9 @@ const cambioCategoria = function(){
     Tipo de Aceite
       <div class="input-group espaciado">
             <select class="form-control" id="select-tipo-aceite">
-              <option selected value="sintetico">Sintetico</option>
-              <option value="semi-sintetico">Semi-sintetico</option>
-              <option value="mineral">Mineral</option>
+              <option selected value="Sintetico">Sintetico</option>
+              <option value="Semi-sintetico">Semi-sintetico</option>
+              <option value="Mineral">Mineral</option>
             </select>
       </div>
     </div>
@@ -222,8 +307,8 @@ const cambioCategoria = function(){
     Observacion (Moto)
     <div class="input-group espaciado">
           <select class="form-control" id="select-observacion">
-            <option selected value="trasero">Trasero</option>
-            <option value="delantero">Delantero</option>
+            <option selected value="trasero">Trasera</option>
+            <option value="delantero">Delantera</option>
           </select>
     </div>
     </div>
@@ -263,7 +348,7 @@ const registraProducto = async function(){
         apiservice:document.getElementById('select-api-service').value,
         tiempos:document.getElementById('select-tiempos-vehiculo').value,
         volumen:document.getElementById('input-volumen').value,
-        unidad:document.getElementById('input-volumen').value
+        unidad:document.getElementById('select-volumen').value
       };
       break;
       case 'Lubricantes':
@@ -278,7 +363,6 @@ const registraProducto = async function(){
       detalles={
         nombre:document.getElementById('input-nombre-consumible').value,
         caducidad:document.getElementById('input-fecha-vencimiento').value,
-        observaciones:document.getElementById('input-observacion').value,
       };
       break;
       case 'Neumaticos':
@@ -290,7 +374,7 @@ const registraProducto = async function(){
       };
       break;
       case 'Accesorios':
-      detalles=document.getElementById('input-descripcion').value;
+      detalles={general:document.getElementById('input-descripcion').value};
       break;
     }
     if (detalles!="") {
