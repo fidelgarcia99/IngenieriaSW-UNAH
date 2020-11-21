@@ -38,15 +38,7 @@
                                                          <?php producto::llenarMarcas($conexion); ?>
                                                        </select>
                                                   </div>
-                                                </div>
-                                                <div class="form-label-group">
-                                                  Proveedor
-                                                  <div class="input-group">
-                                                    <select class="form-control" id="select-proveedores">
-                                                      <?php producto::llenarProveedor($conexion);?>
-                                                    </select>
-                                                  </div>
-                                                </div>
+                                                </div>          
                                                 <div id="div-detalles">
                                                 </div>
                                                 <div id="errorMessage" class="alert alert-danger" style="display:none">
