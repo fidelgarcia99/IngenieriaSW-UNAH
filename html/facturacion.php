@@ -75,6 +75,9 @@ $conexion = new Conexion();?>
   <?php include(SECCIONES . 'scripts-generales.php')?>
   <!------------>
   
+  <!-- Page level custom scripts -->
+  
+  <script src="<?php echo JS?>clientes-controller.js"></script>
 
 </body>
 

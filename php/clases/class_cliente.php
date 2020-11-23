@@ -95,13 +95,12 @@ class Cliente{
 			while ($fila_cliente = $conexion->obtenerFila($cliente)) {
 				if ($c==0) {
 					?>
-					<option value="<?php echo $fila_cliente["idCliente"];?>">
+					<option value="<?php echo $fila_cliente["num_identidad"];?>">
 						<?php echo $fila_cliente['pnombre'];?>
 						<?php echo $fila_cliente["snombre"];?>
 						<?php echo $fila_cliente["papellido"];?>
 						<?php echo $fila_cliente["sapellido"];?>
-						-
-						<?php echo $fila_cliente["num_identidad"];?>
+						
 					</option>
 
 				

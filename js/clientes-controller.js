@@ -1,3 +1,7 @@
+function cambioRtn()
+{
+    document.getElementById('inputId').value=document.getElementById('nom_cliente').value;
+}
 
 
 var confirm = false;
