@@ -9,15 +9,12 @@
                     <!-- Inicio Filtro y Busqueda -->
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 
-
-
-                         <div class="form-label-group">
+                         <div class="container-fluid">
 
                               <div class="row">
-                                   <div style='text-align:left' class="col-md-6">
+                                   <div class="col-8">
                                         <h4 for="tel2" class="col-md-12 ">Autoservicio "El Boulevard"</h4>
                                         <p for="tel2" class="col-md-12">
-                                             Razon social del cliente <br>
                                              R.T.N.:0101010101010 <br>
                                              Boulevard Chorotega, Contiguo a Expresso Americano, 77199 Ciudad Choluteca,Honduras <br>
                                              TEL.:(504)3307-8867 <br>
@@ -25,51 +22,54 @@
                                         </p>
                                    </div>
 
-                                   <div style='text-align:right' class="col-md-6">
+                                   <div class="col-4">
 
-                                        <H5 for="tel2" class="col-md-12"> Factura No. XXXXXXXX<br></H5>
-
-
-
+                                        <div class="input-group mb-2">
+                                          <div class="input-group-prepend">
+                                            <div class="input-group-text">Factura No.</div>
+                                          </div>
+                                          <input type="text" class="form-control input-sm" id="nFactura" value="00000" readonly>
+                                        </div>
+                                        <!--<div class="input-group mb-2">
+                                          <div class="input-group-prepend">
+                                            <div class="input-group-text">Fecha</div>
+                                          </div>
+                                          <input type="text" class="form-control input-sm" id="fecha" value="<?php echo date("d/m/Y"); ?>" readonly>
+                                        </div> -->
+                                        <div class="input-group mb-2">
+                                          <div class="input-group-prepend">
+                                            <div class="input-group-text">Cajero</div>
+                                          </div>
+                                          <input type="text" value="<?php echo JWTokens::GetData($_COOKIE['token'])['nombre']?>" readonly class="form-control">
+                                        </div>
                                    </div>
+
                               </div>
 
-                              <div class="row">
-
-
+                              <div class="row mb-2">
                                    <div class="col-md-5">
-                                        <input type="text" id="nombreCliente" class="form-control" placeholder="Cliente" required value="Consumidor Final">
+                                     <div class="input-group">
+                                       <div class="input-group-prepend">
+                                         <div class="input-group-text">Cliente</div>
+                                       </div>
+                                       <input type="text" id="nombreCliente" class="form-control" required value="Consumidor Final">
+                                     </div>
                                    </div>
-
-
-                                   <div class="col-md-4">
-                                        <input type="number" id="RTNCliente" class="form-control" placeholder="RTN" required>
+                                   <div class="col-md-5">
+                                     <div class="input-group">
+                                       <div class="input-group-prepend">
+                                         <div class="input-group-text">RTN</div>
+                                       </div>
+                                       <input type="number" id="RTNCliente" class="form-control" required>
+                                     </div>
                                    </div>
-                                   <br>
-
-                                   <div >
-                                       <button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#nuevoClienteRtnModal"><i class="fas fa-search"></i></button>
+                                   <div class="col-2 mx-0 px-0">
+                                       <button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#nuevoClienteRtnModal" onclick="cargarClientes();"><i class="fas fa-search"></i></button>
+                                       <button type="button" class="btn btn-primary"><i class="fas fa-save" onclick="guardarCliente();"></i></button>
                                    </div>
-                                   <br>
-
-                                   <div class="col-md-2" >
-                                     <button type="button" class="btn btn-primary"><i class="fas fa-save"></i></button>
-                                 </div>
-
                               </div>
-                              <br>
-
-                              <div class="row">
-
-                                   <label for="tel2" class="col-md-1 control-label">Fecha</label>
-                                   <div class="col-md-3">
-                                        <input type="text" class="form-control input-sm" id="fecha" value="<?php echo date("d/m/Y"); ?>" readonly>
-                                   </div>
-
-                                   <h6>Empleado</h6>
-                                   <div class="col-md-6">
-                                        <input type="text" value="<?php echo JWTokens::GetData($_COOKIE['token'])['nombre']?>" readonly class="form-control">
-                                   </div>
+                              <div id="errorMessage" class="row alert alert-danger mb-2" style="display:none">
+                                Hubo un problema
                               </div>
 
                          </div>

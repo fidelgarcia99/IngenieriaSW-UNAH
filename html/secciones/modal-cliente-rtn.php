@@ -13,19 +13,13 @@
                                                   <h6>Cliente-RTN</h6>
                                                   <div class="form-label-group mb-2">
                                                        <select class="form-control" name="nom_cliente" id="nom_cliente" onchange='cambioRtn();'>
-
-                                                            <?php Cliente::llenarCliente($conexion); ?>
-
                                                        </select>
                                                   </div>
 
                                                    <h6>Id/RTN</h6>
                                                   <div class="form-label-group">
                                                        <input type="text" id="inputId" class="form-control" placeholder="Id/RTN" readonly>
-                                                  </div>
-                                                  <div id="errorMessage" class="alert alert-danger" style="display:none">
-                                                    Hubo un problema
-                                                  </div>
+                                                  </div>                                                  
                                              </form>
                                         </div>
                                    </div>
