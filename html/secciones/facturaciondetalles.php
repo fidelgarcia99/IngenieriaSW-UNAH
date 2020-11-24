@@ -1,6 +1,6 @@
 
 
-<div class="container-fluid">
+<div class="container-fluid m-0 p-0">
      <!-- DataTales Example -->
      <div class="card shadow mb-4">
 
