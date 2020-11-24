@@ -1,9 +1,3 @@
-function cambioRtn()
-{
-    document.getElementById('inputId').value=document.getElementById('nom_cliente').value;
-}
-
-
 var confirm = false;
 var selectId = null;
 var modo = true;
@@ -121,7 +115,5 @@ var limpiarModal = function(){
   modo=true;
   temp=null;
 }
-
-
 
 mostrarClientes();

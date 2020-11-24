@@ -35,25 +35,25 @@
                               </div>
 
                               <div class="row">
-                                   
+
 
                                    <div class="col-md-5">
-                                        <input type="text" id="nombreCliente" class="form-control" placeholder="Cliente" required autofocus>
+                                        <input type="text" id="nombreCliente" class="form-control" placeholder="Cliente" required value="Consumidor Final">
                                    </div>
-                                   
-     
+
+
                                    <div class="col-md-4">
-                                        <input type="text" id="RTNCliente" class="form-control" placeholder="RTN" autofocus>
+                                        <input type="number" id="RTNCliente" class="form-control" placeholder="RTN" required>
                                    </div>
                                    <br>
 
-                                   <div >  
+                                   <div >
                                        <button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#nuevoClienteRtnModal"><i class="fas fa-search"></i></button>
                                    </div>
                                    <br>
-                       
-                                   <div class="col-md-2" >  
-                                     <button type="button" class="btn btn-primary" >Guardar Cliente</button>
+
+                                   <div class="col-md-2" >
+                                     <button type="button" class="btn btn-primary"><i class="fas fa-save"></i></button>
                                  </div>
 
                               </div>

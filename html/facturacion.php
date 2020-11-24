@@ -20,7 +20,7 @@ $conexion = new Conexion();?>
   <?php include(SECCIONES . 'head-general.php')?>
    <!-- Custom styles for this page -->
    <link href="<?php echo VENDOR ?>datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-  <link href="<?php echo CSS ?>empleadosmodal.css" rel="stylesheet">
+  <link href="<?php echo CSS ?>modales.style.css" rel="stylesheet">
   <link href="<?php echo CSS ?>modales.style.css" rel="stylesheet">
 </head>
 
@@ -74,10 +74,10 @@ $conexion = new Conexion();?>
   <!-- Scripts-->
   <?php include(SECCIONES . 'scripts-generales.php')?>
   <!------------>
-  
+
   <!-- Page level custom scripts -->
-  
-  <script src="<?php echo JS?>clientes-controller.js"></script>
+
+  <script src="<?php echo JS?>facturacion-controller.js"></script>
 
 </body>
 
