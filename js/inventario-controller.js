@@ -82,7 +82,7 @@ const mostrarInventario = function(){
             </td>`;
 
           document.getElementById('tbody').innerHTML+=`
-          <tr onclick="formatearDescrip();">${fila}</tr>
+          <tr">${fila}</tr>
           `;
       });
       $('#dataTable').DataTable();
