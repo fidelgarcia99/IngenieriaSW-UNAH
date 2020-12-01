@@ -28,7 +28,7 @@ var renderTabla = function(param,id,api){
 
   var dataa = obtenerRegistros(param,id,api);
   dataa.then((data)=>{
-    if (data!=null) {
+    if (data!=null && data.length>0) {
       document.getElementById('tbody').innerHTML='';
       document.getElementById('thead').innerHTML='';
       //Se agrega el nombre de las columnas
