@@ -27,6 +27,11 @@ class Usuario{
 			'$this->username', '$this->passwd');");
 	}
 
+	public static function eliminarUsuario($conexion, $id_registro){
+		return $conexion->ejecutarInstruccion("call SPelimina_usuario($id_registro)");
+	}
+
+
 }
 
 ?>

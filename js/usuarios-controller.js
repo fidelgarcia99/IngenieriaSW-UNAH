@@ -59,6 +59,8 @@ var eliminarRegistro = async function(){
         $('#modal-confirm').modal('hide');
         $('#modal-success').modal('show');
         setTimeout(()=>$('#modal-success').modal('hide'), 2000);
+      }else{
+        console.error('El Servidor no ha devuelto nada.');
       }
       confirm=false;
       mostrarUsuarios();

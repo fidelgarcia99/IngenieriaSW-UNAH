@@ -108,7 +108,15 @@
         break;
 
         case 'DELETE':  //Eliminar usuario
-            echo '{"res":"delete"}';
+        if (isset($_POST['id']) && $_POST['id']!='') {
+          if (Usuario::eliminarUsuario($conexion,$_POST['id'])) {
+              echo '{"res":"OK","mensaje":"Usuario Eliminado"}';
+          }else{
+            $res = array("res"=>"fail","mensaje"=>mysqli_error);
+          }
+        }else{
+          echo '{"res":"fail","mensaje":"Debe especificar un id"}';
+        }
         break;
     }
 ?>
