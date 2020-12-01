@@ -35,6 +35,17 @@
 
   if ((JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
     echo '
+    <!-- Nav Item - Tables -->
+    <li class="nav-item">
+      <a class="nav-link" href="?view=compras">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Compras</span></a>
+    </li>
+    ';
+  }
+
+  if ((JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+    echo '
     <!-- Nav Item - Planilla -->
     <li class="nav-item">
       <a class="nav-link" href="?view=planilla">
