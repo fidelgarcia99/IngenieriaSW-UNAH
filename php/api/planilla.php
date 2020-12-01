@@ -1,31 +1,34 @@
 <?php
-include_once("../config.php");
-  //incluimos la clase conexion para poder crear el objeto Conexion que enviaremos como parametro
-  include_once("../clases/class_conexion.php");
-  //se incluye la clase personas parapoder llamar sus funciones desde el index
-  include_once("../clases/class_planilla.php");
-  //objeto Conexion 
-  $conexion = new Conexion();
+	include_once("../config.php");
+  	include_once("../clases/class_conexion.php");
+  	include_once("../clases/class_planilla.php");
+  	$conexion = new Conexion();
 
-switch ($_GET["accion"]) {
-		case '1':
-			$idEmpleado = $_POST["idEmpleado"];
-			$idPlanilla = $_POST["idPlanilla"];
+switch ($_SERVER['REQUEST_METHOD']) {
+		case 'POST'://guardar Planilla
+			$efectiva = $_POST["efectiva"];
+			$inicio = $_POST["inicio"];
+			$fin = $_POST["fin"];
 			
-			echo Personas::deducciones($conexion, $idEmpleado, $idPlanilla);
+			echo Planilla::guardarPlanilla($conexion, $efectiva, $inicio, $fin);
 
 		break;
-		case '2':
-			$idEmpleado = $_POST["idEmpleado"];
-			$idPlanilla = $_POST["idPlanilla"];
+		case 'GET'://obtener empleados
+			$idPlanilla = $_GET['codigo'];
 			
-			echo Personas::bonos($conexion, $idEmpleado, $idPlanilla);
+			echo Planilla::empleados($conexion, $idPlanilla);
 
 		break;
-		case '3':
-			$idPlanilla = $_POST["codigo"];
+		case 'PUT'://actualizar estado
+			$_PUT = json_decode(file_get_contents('php://input'), true);
+			$estado = $_PUT['estado'];
 			
-			echo Personas::empleados($conexion, $idPlanilla);
+			echo Planilla::actualizarEstado($conexion, $estado);
+
+		break;
+		case 'SEL'://select fechas planilla
+			
+			echo Planilla::llenarFechas($conexion);
 
 		break;
 	}

@@ -4,6 +4,8 @@
   include_once("php/clases/class_conexion.php");
   //se incluye la clase personas parapoder llamar sus funciones desde el index
   include_once("php/clases/class_planilla.php");
+  include_once("php/clases/class_deducciones.php");
+  include_once("php/clases/class_bonos.php");
   //objeto Conexion 
   $conexion = new Conexion();
 ?>
@@ -47,6 +49,9 @@
 
         <!-- Begin Page Content -->
         <?php include(SECCIONES . 'tablaplanilla.php')?>
+        <?php include(SECCIONES . 'nueva-planilla-modal.php')?>
+        <?php include(SECCIONES . 'nueva-deduccion-modal.php')?>
+        <?php include(SECCIONES . 'nuevo-bono-modal.php')?>
         <!-- /.container-fluid -->
 
       </div>
@@ -80,6 +85,8 @@
 <!-- Page level custom scripts -->
 <script src="<?php echo JS?>demo/datatables-demo.js"></script>
 <script src="js/planilla-controller.js"></script>
+<script src="js/deducciones-controller.js"></script>
+<script src="js/bonos-controller.js"></script>
 
 </body>
 

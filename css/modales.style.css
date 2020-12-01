@@ -1,0 +1,29 @@
+#modal-success-icon{
+  color:green;
+  font-size:5rem;
+}
+#modal-success-message{
+  text-align: center;
+}
+
+#modal-success .modal-dialog{
+  max-width: 20%;
+  padding-top: 10%;
+}
+#modal-success .modal-content{
+  max-width: 100%;
+}
+#modal-confirm-msj{
+  text-align: center;
+}
+
+#modal-confirm .modal-dialog{
+  max-width: 20%;
+  padding-top: 10%;
+}
+#modal-confirm .modal-content{
+  max-width: 100%;
+}
+.modal-footer{
+  justify-content: space-between ;
+}

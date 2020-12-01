@@ -1,22 +1,26 @@
-<?php include(SECCIONES . 'valida-acceso.php');
-if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+<?php
+include(SECCIONES . 'valida-acceso.php') ;
+
+//El empleado es cajero o admin?
+if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="cajero" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
   header('Location: ?view=401');
 }
+//
 
 include("php/clases/class_conexion.php");
 //se incluye la clase empleados parapoder llamar sus funciones desde el index
 include_once("php/clases/class_cliente.php");
 //objeto Conexion
 $conexion = new Conexion();?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <?php include(SECCIONES . 'head-general.php')?>
-
-  <!-- Custom styles for this page -->
-  <link href="<?php echo VENDOR?>datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-  <link href="<?php echo CSS ?>clientes.css" rel="stylesheet">
+   <!-- Custom styles for this page -->
+   <link href="<?php echo VENDOR ?>datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="<?php echo CSS ?>modales.style.css" rel="stylesheet">
   <link href="<?php echo CSS ?>modales.style.css" rel="stylesheet">
 </head>
 
@@ -26,7 +30,11 @@ $conexion = new Conexion();?>
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <?php include(SECCIONES . 'sidebar.php')?>
+    <?php
+    if (JWTokens::GetData($_COOKIE['token'])['tipo']=="admin") {
+      include(SECCIONES . 'sidebar.php');
+    }
+    ?>
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -41,16 +49,10 @@ $conexion = new Conexion();?>
 
         <!-------------------------- Begin Page Content ------------------------------>
 
-         <!-- Registro Modal -->
-         <?php include(SECCIONES . 'nuevo-cliente-modal.php') ?>
-
-        <!-- Begin Page Content -->
-        <?php include(SECCIONES . 'tabla.php')?>
-        <!-- /.container-fluid -->
-
       </div>
+      <?php include(SECCIONES . 'modal-cliente-rtn.php') ?>
       <!-- End of Main Content -->
-
+      <?php include(SECCIONES . 'facturaciondetalles.php')?>
       <!-- Footer -->
       <?php include(SECCIONES . 'footer.php')?>
       <!-- End of Footer -->
@@ -73,13 +75,10 @@ $conexion = new Conexion();?>
   <?php include(SECCIONES . 'scripts-generales.php')?>
   <!------------>
 
-      <!-- Page level plugins -->
-  <script src="<?php echo VENDOR?>datatables/jquery.dataTables.min.js"></script>
-  <script src="<?php echo VENDOR?>datatables/dataTables.bootstrap4.min.js"></script>
-
   <!-- Page level custom scripts -->
   <script src="<?php echo JS?>axios-calls.js"></script>
-  <script src="<?php echo JS?>clientes-controller.js"></script>
+  <script src="<?php echo JS?>facturacion-controller.js"></script>
+
 </body>
 
 </html>

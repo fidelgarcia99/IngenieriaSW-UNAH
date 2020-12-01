@@ -1,8 +1,12 @@
 <?php include(SECCIONES . 'valida-acceso.php') ;
+if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+  header('Location: ?view=401');
+}
+
 include("php/clases/class_conexion.php");
 //se incluye la clase empleados parapoder llamar sus funciones desde el index
 include_once("php/clases/class_empleado.php");
-//objeto Conexion 
+//objeto Conexion
 $conexion = new Conexion();?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,6 +17,7 @@ $conexion = new Conexion();?>
   <!-- Custom styles for this page -->
   <link href="<?php echo VENDOR ?>datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
   <link href="<?php echo CSS ?>empleadosmodal.css" rel="stylesheet">
+  <link href="<?php echo CSS ?>modales.style.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -35,13 +40,7 @@ $conexion = new Conexion();?>
         <!-- End of Topbar -->
 
         <!-------------------------- Begin Page Content ------------------------------>
-        <div class="container-fluid">
 
-          <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Empleados</h1>
-
-        </div>
-        <!--------------------------- /.container-fluid -------------------------------->
         <!-- Registro Modal -->
         <?php include(SECCIONES . 'nuevo-empleado-modal.php') ?>
 

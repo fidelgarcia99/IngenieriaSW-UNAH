@@ -1,4 +1,8 @@
-<?php include(SECCIONES . 'valida-acceso.php')?>
+<?php include(SECCIONES . 'valida-acceso.php');
+if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+  header('Location: ?view=401');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,6 +12,7 @@
   <!-- Custom styles for this page -->
   <link href="<?php echo VENDOR?>datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
   <link href="<?php echo CSS?>proveedores.css" rel="stylesheet">
+  <link href="<?php echo CSS ?>modales.style.css" rel="stylesheet">
 
 </head>
 
@@ -31,13 +36,6 @@
         <!-- End of Topbar -->
 
         <!-------------------------- Begin Page Content ------------------------------>
-        <div class="container-fluid">
-
-          <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Proveedores</h1>
-
-        </div>
-        <!--------------------------- /.container-fluid -------------------------------->
 
         <!-- Begin Page Content -->
         <?php include(SECCIONES . 'tabla.php')?>

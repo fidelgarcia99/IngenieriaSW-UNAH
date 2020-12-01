@@ -4,11 +4,57 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
 }
 
+#modal-success-icon{
+  color:green;
+  font-size:5rem;
+}
+#modal-success-message{
+  text-align: center;
+}
+
+#modal-success .modal-dialog{
+  max-width: 20%;
+  padding-top: 10%;
+}
+#modal-success .modal-content{
+  max-width: 100%;
+}
+#div-detalles .cuarto{
+  max-width: 25%;
+}
+ .medio{
+  max-width: 50%;
+}
+#div-detalles .tercio{
+  max-width: 33%;
+}
+#div-detalles .dostercios{
+  max-width: 66%;
+}
+#div-detalles .trescuartos{
+  max-width: 75%;
+}
+#div-detalles .espaciado{
+  max-width: 95%;
+}
+#div-detalles{
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+}
+#div-detalles .form-label-group{
+  width: inherit;
+}
 .modal-dialog{
   max-width: 50%;
   padding-top: 5%;
 }
+.modal-footer{
 
+  align-content: #FFFFFF!important;
+}
 .card-signin {
   border: 1px;
 

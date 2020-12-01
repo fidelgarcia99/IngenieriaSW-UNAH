@@ -11,19 +11,19 @@
                     <!-- Background image for card set in CSS! -->
                  </div>
                  <div class="card-body">
-                   <h5 class="card-title text-center">Nuevo Usuario</h5>
+                   <h5 class="card-title text-center" id="modal-titulo">Nuevo Usuario</h5>
                    <form class="form-signin">
                      <div class="form-label-group">
                        <input type="text" id="inputUserame" class="form-control" placeholder="Username" onfocusin="teclea(this);" onfocusout="isCampoVacio(this);" onkeyup="isCamposLlenos2();" required autofocus>
                      </div>
 
                      <div class="form-label-group">
-                       <select class="form-control" id="selectIdEmpleado">
+                       <select class="form-control" onchange="isCampoVacio(this);" id="selectIdEmpleado">
 
                        </select>
                      </div>
                      <div class="form-label-group">
-                       <select class="form-control" id="selectTipoUsuario">
+                       <select class="form-control" onchange="isCampoVacio(this);" id="selectTipoUsuario">
 
                        </select>
                      </div>
@@ -51,8 +51,8 @@
          </div>
       </div>
       <div class="modal-footer py-0">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" onclick="registraUsuario();" id="btnRegistra">Registrar</button>
+        <button type="button" class="btn btn-secondary" onclick="limpiarModal();" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" onclick="registraUsuario();" id="btnRegistra">Guardar</button>
       </div>
     </div>
   </div>

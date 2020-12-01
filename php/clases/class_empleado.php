@@ -91,5 +91,29 @@ class Empleado{
 	}
 
 
+
+	public function llenarEmpleados($conexion){
+		$empleado = $conexion->ejecutarInstruccion("
+		SELECT persona.pnombre, persona.papellido,e.idEmpleado FROM `persona` 
+		     inner join empleado as e on persona.idPersona =e.Persona_idPersona
+			");
+
+			$c = 0;
+			while ($fila_empleado = $conexion->obtenerFila($empleado)) {
+				if ($c==0) {
+                         ?>
+					<option selected value="<?php echo $fila_empleado["idEmpleado"];?>">
+						<?php echo $fila_empleado['pnombre']." ".$fila_empleado["papellido"];?>
+
+					</option>
+
+					<?php
+				}
+			}
+
+			$conexion->liberarResultado($empleado);
+	}
+
+
 }
 ?>
