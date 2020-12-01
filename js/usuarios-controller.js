@@ -1,11 +1,34 @@
 var modo = true
-var temp=null;
+var id=null;
+var confirm=false;
+
+function selectRow(idRow,row){
+  if(id==null){
+    id=idRow;
+    document.getElementById('btnEdit').disabled=false;
+    document.getElementById('btnDelete').disabled=false;
+  }else if(id==idRow){
+    id=null;
+    document.getElementById('btnEdit').disabled=true;
+    document.getElementById('btnDelete').disabled=true;
+  }
+}
+
+function mouseOverRow(row){
+  if(id==null)
+  row.style="background-color:cornsilk;cursor:pointer";
+}
+
+function mouseOutRow(row){
+  if(id==null)
+  row.style="background-color:white;";
+}
 
 var mostrarUsuarios = function(){
   renderTabla(null,null,"usuarios");
 }
 
-var editarRegistro = function(id){
+var editarRegistro = function(){
   let usuario = obtenerRegistros('id', id, 'usuarios');
   usuario.then(user=>{
     if(user!=null){
@@ -17,7 +40,6 @@ var editarRegistro = function(id){
       document.getElementById('inputConfirmPassword').value='';
       document.getElementById('modal-titulo').innerHTML = "Editar Usuario";
       modo = false
-      temp=id;
       $('#nuevoUsuarioModal').modal('show');
     }else{
       console.error('El servidor no ha devuelto un resultado');
@@ -25,6 +47,26 @@ var editarRegistro = function(id){
   }).catch(error=>{
     console.error(error);
   });
+}
+
+var eliminarRegistro = async function(){
+  if (confirm) {
+    let data = {id:id}
+    let respuesta = await eliminarRegistroId(data,"usuarios")
+    if(respuesta!=null){
+      if(respuesta.res=='OK'){
+        document.getElementById('modal-success-message').innerHTML = respuesta.mensaje;
+        $('#modal-confirm').modal('hide');
+        $('#modal-success').modal('show');
+        setTimeout(()=>$('#modal-success').modal('hide'), 2000);
+      }
+      confirm=false;
+      mostrarUsuarios();
+    }
+  }else{
+      document.getElementById('modal-confirm-msj').innerHTML=`Esta a punto de eliminar el registro con Id:${id}.`;
+      $('#modal-confirm').modal('show');
+  }
 }
 
 var mostrarTiposUsuarios = function(){
@@ -63,7 +105,7 @@ var registraUsuario = async function(){
 
     if(passwd == cpasswd){
         let usuario = {
-          id:temp,
+          id:id,
           username : username,
           idEmpleado : empleado,
           tipo: tipo,
@@ -195,6 +237,7 @@ var limpiarModal = function(){
   document.getElementById('modal-titulo').innerHTML = "Nuevo Usuario";
   modo=true;
 }
+
 mostrarUsuarios();
 mostrarTiposUsuarios();
 mostrarEmpleados();

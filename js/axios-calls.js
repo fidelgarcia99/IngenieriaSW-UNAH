@@ -38,7 +38,7 @@ var renderTabla = function(param,id,api){
               <td>${i}</td>
           `;
       }
-      if (api=="clientes" || api=='usuarios' || api=='inventario') {
+      if (api=="clientes" || api=='inventario') {
         nombreCol+=`<td>Edicion</td>`;
       }
       document.getElementById('thead').innerHTML+=`
@@ -58,7 +58,7 @@ var renderTabla = function(param,id,api){
                   `;
               }
           }
-          if(api=="clientes" || api=='usuarios' || api=='inventario'){
+          if(api=="clientes" || api=='inventario'){
             fila+=`<td>
             <div class="container-fluid px-0" style="max-widh:450%;">
               <div class="row">
@@ -73,7 +73,7 @@ var renderTabla = function(param,id,api){
             </td>`;
           }
           document.getElementById('tbody').innerHTML+=`
-          <tr>${fila}</tr>
+          <tr onmouseover="mouseOverRow(this)" onmouseout="mouseOutRow(this)" onclick="selectRow(${element['Id']},this)">${fila}</tr>
           `;
       });
       $('#dataTable').DataTable();
