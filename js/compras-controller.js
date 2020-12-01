@@ -1,0 +1,1 @@
+renderTabla(null,null,"compras");
