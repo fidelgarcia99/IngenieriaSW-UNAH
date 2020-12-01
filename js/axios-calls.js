@@ -39,7 +39,7 @@ var renderTabla = function(param,id,api){
           `;
       }
       if (api=="clientes" || api=='usuarios' || api=='inventario') {
-        nombreCol+=`<td></td>`;
+        nombreCol+=`<td>Edicion</td>`;
       }
       document.getElementById('thead').innerHTML+=`
       <tr>${nombreCol}</tr>
@@ -62,18 +62,18 @@ var renderTabla = function(param,id,api){
             fila+=`<td>
             <div class="container-fluid px-0" style="max-widh:450%;">
               <div class="row">
-                <div class="col pr-0 mr-0">
-                  <button class="btn text-info p-1" onclick="editarRegistro(${element['Id']});"><i class="fa fa-edit"></i></button>
+                <div class="col pr-1 mr-1">
+                  <button class="btn text-info mx-1" onclick="editarRegistro(${element['Id']});"><i class="fa fa-edit"></i></button>
                 </div>
-                <div class="col pl-0 ml-0">
-                  <button class="btn text-danger p-1" onclick="eliminarRegistro(${element['Id']});"><i class="fa fa-trash"></i></button>
+                <div class="col pl-1 ml-1">
+                  <button class="btn text-danger mx-1" onclick="eliminarRegistro(${element['Id']});"><i class="fa fa-trash"></i></button>
                 </div>
               </div>
             </div>
             </td>`;
           }
           document.getElementById('tbody').innerHTML+=`
-          <tr onclick="formatearDescrip();">${fila}</tr>
+          <tr>${fila}</tr>
           `;
       });
       $('#dataTable').DataTable();
