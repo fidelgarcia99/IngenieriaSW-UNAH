@@ -1,5 +1,27 @@
 var selectId=null;
-confirm=false;
+var confirm=false;
+
+function selectRow(idRow,row){
+  if(selectId==null){
+    selectId=idRow;
+    //document.getElementById('btnEdit').disabled=false;
+    document.getElementById('btnDelete').disabled=false;
+  }else if(selectId==idRow){
+    selectId=null;
+    //document.getElementById('btnEdit').disabled=true;
+    document.getElementById('btnDelete').disabled=true;
+  }
+}
+
+function mouseOverRow(row){
+  if(selectId==null)
+  row.style="background-color:cornsilk;cursor:pointer";
+}
+
+function mouseOutRow(row){
+  if(selectId==null)
+  row.style="background-color:white;";
+}
 
 const mostrarInventario = function(){
 let tabla=document.getElementById('dataTable');
@@ -336,7 +358,7 @@ const registraProducto = async function(){
     }
 }
 
-const eliminarRegistro = async function(id){
+const eliminarRegistro = async function(){
   if (confirm) {
     let data = {id:selectId}
     let respuesta = await eliminarRegistroId(data,"inventario")
@@ -352,9 +374,8 @@ const eliminarRegistro = async function(id){
       mostrarInventario();
     }
   }else{
-      document.getElementById('modal-confirm-msj').innerHTML=`Esta a punto de eliminar el registro con Id:${id}.`;
+      document.getElementById('modal-confirm-msj').innerHTML=`Esta a punto de eliminar el registro con Id:${selectId}.`;
       $('#modal-confirm').modal('show');
-      selectId = id;
   }
 }
 
