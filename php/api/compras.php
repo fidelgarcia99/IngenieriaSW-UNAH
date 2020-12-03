@@ -21,9 +21,12 @@
         break;
 
         case 'GET':     //Obtener cliente/s
-
+          if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $resultado = $conexion->ejecutarInstruccion("call DetalleProducto($id)");
+          }else{
             $resultado = $conexion->ejecutarInstruccion("call Compras();");
-
+          }
             $res = array(); //creamos un array
             while($row = mysqli_fetch_assoc($resultado))
             {

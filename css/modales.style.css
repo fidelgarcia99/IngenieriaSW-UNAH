@@ -5,7 +5,9 @@
 #modal-success-message{
   text-align: center;
 }
-
+.modal-dialog{
+  max-width: 50%;
+}
 #modal-success .modal-dialog{
   max-width: 20%;
   padding-top: 10%;
