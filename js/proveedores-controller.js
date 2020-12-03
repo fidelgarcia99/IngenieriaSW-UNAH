@@ -1,3 +1,11 @@
+function mouseOverRow(row){
+  row.style="background-color:cornsilk;cursor:pointer";
+}
+
+function mouseOutRow(row){
+  row.style="background-color:white;";
+}
+
 var mostrarProveedores = function(){
   tabla=document.getElementById('dataTable');
   renderTabla(null,null,'proveedores',tabla);
