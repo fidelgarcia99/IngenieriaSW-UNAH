@@ -75,7 +75,7 @@ if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::Ge
 
   <!-- Page level custom scripts -->
   <script src="<?php echo JS?>axios-calls.js"></script>
-  <script src="<?php echo JS?>proveedores-controller.js"></script>
+  <script src="<?php echo JS?>proveedor-controller.js"></script>
 </body>
 
 </html>
