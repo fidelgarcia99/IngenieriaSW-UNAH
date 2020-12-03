@@ -37,7 +37,7 @@ function renderTabla(param,id,api,tabla){
               }
           }
 
-          if (api=="usuarios" || api=="compras") {
+          if (api=="usuarios" || api=="compras" || api=="clientes") {
           var modulos=`onmouseover="mouseOverRow(this)" onmouseout="mouseOutRow(this)" onclick="selectRow(${element['Id']},this)"`;
           }
           tbody.innerHTML+=`

@@ -64,6 +64,7 @@ var eliminarRegistro = async function(){
         console.error('El Servidor no ha devuelto nada.');
       }
       confirm=false;
+      id=null;
       mostrarUsuarios();
     }
   }else{
@@ -239,6 +240,7 @@ var limpiarModal = function(){
   document.getElementById('inputConfirmPassword').classList='form-control';
   document.getElementById('modal-titulo').innerHTML = "Nuevo Usuario";
   modo=true;
+  id=null;
 }
 
 mostrarUsuarios();

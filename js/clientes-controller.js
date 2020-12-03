@@ -1,12 +1,34 @@
 var confirm = false;
 var selectId = null;
 var modo = true;
-var temp =null;
 
 var mostrarClientes = function(){
   tabla=document.getElementById('dataTable');
   renderTabla(null,null,'clientes',tabla);
 }
+
+function selectRow(idRow,row){
+  if(selectId==null){
+    selectId=idRow;
+    document.getElementById('btnEdit').disabled=false;
+    document.getElementById('btnDelete').disabled=false;
+  }else if(selectId==idRow){
+    selectId=null;
+    document.getElementById('btnEdit').disabled=true;
+    document.getElementById('btnDelete').disabled=true;
+  }
+}
+
+function mouseOverRow(row){
+  if(selectId==null)
+  row.style="background-color:cornsilk;cursor:pointer";
+}
+
+function mouseOutRow(row){
+  if(selectId==null)
+  row.style="background-color:white;";
+}
+
 
 var registrarCliente = async function(){
   let pnombre = document.getElementById('pNombreCliente').value;
@@ -20,7 +42,7 @@ var registrarCliente = async function(){
   let email = document.getElementById('inputEmail').value;
 
       let cliente = {
-        idCliente:temp,
+        idCliente:selectId,
         pnombre : pnombre,
         snombre : snombre,
         papellido : papellido,
@@ -31,6 +53,7 @@ var registrarCliente = async function(){
         ciudad : ciudad,
         email : email
       }
+
       let respuesta=null;
       if (modo) {
         respuesta = await nuevoRegistro(cliente, "clientes");
@@ -46,6 +69,7 @@ var registrarCliente = async function(){
           setTimeout(()=>$('#modal-success').modal('hide'), 2000);
           mostrarClientes();
           limpiarModal();
+          selectId=null;
         }else{
           document.getElementById('errorMessage').innerHTML=respuesta.mensaje;
           document.getElementById('errorMessage').style='display:block';
@@ -53,8 +77,8 @@ var registrarCliente = async function(){
       }
 }
 
-var editarRegistro = function(id){
-      let cliente = obtenerRegistros('id', id, 'clientes');
+var editarRegistro = function(){
+      let cliente = obtenerRegistros('id', selectId, 'clientes');
       cliente.then(data=>{
         if(data!=null){
           data = data[0];
@@ -69,7 +93,6 @@ var editarRegistro = function(id){
           document.getElementById('inputEmail').value=data.email;
           document.getElementById('modal-titulo').innerHTML="Editar Cliente";
           modo = false;
-          temp=id;
           $('#nuevoClienteModal').modal('show');
         }else{
           console.error('El servidor no ha devuelto un resultado');
@@ -79,9 +102,9 @@ var editarRegistro = function(id){
       });
 }
 
-var eliminarRegistro = async function(id){
+var eliminarRegistro = async function(){
   if (confirm) {
-    let data = {id:id}
+    let data = {id:selectId}
     let respuesta = await eliminarRegistroId(data,"clientes")
     if(respuesta!=null){
       if(respuesta.res=='OK'){
@@ -90,14 +113,13 @@ var eliminarRegistro = async function(id){
         $('#modal-success').modal('show');
         setTimeout(()=>$('#modal-success').modal('hide'), 2000);
       }
-      selectId=null;
       confirm=false;
+      selectId=null;
       mostrarClientes();
     }
   }else{
-      document.getElementById('modal-confirm-msj').innerHTML=`Esta a punto de eliminar el registro con Id:${id}.`;
+      document.getElementById('modal-confirm-msj').innerHTML=`Esta a punto de eliminar el registro con Id:${selectId}.`;
       $('#modal-confirm').modal('show');
-      selectId = id;
   }
 }
 
@@ -114,7 +136,6 @@ var limpiarModal = function(){
   document.getElementById('errorMessage').style="display:none";
   document.getElementById('modal-titulo').innerHTML="Nuevo Cliente";
   modo=true;
-  temp=null;
 }
 
 mostrarClientes();
