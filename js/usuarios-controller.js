@@ -25,7 +25,8 @@ function mouseOutRow(row){
 }
 
 var mostrarUsuarios = function(){
-  renderTabla(null,null,"usuarios");
+  tabla=document.getElementById('dataTable');
+  renderTabla(null,null,"usuarios",tabla);
 }
 
 var editarRegistro = function(){
@@ -52,7 +53,7 @@ var editarRegistro = function(){
 var eliminarRegistro = async function(){
   if (confirm) {
     let data = {id:id}
-    let respuesta = await eliminarRegistroId(data,"usuarios")
+    let respuesta = await eliminarRegistroId(data,"usuarios");
     if(respuesta!=null){
       if(respuesta.res=='OK'){
         document.getElementById('modal-success-message').innerHTML = respuesta.mensaje;

@@ -1,93 +1,9 @@
 var selectId=null;
 confirm=false;
 
-const formatDescrip = function(desc,tipo){
-  desc = JSON.parse(desc);
-  let resp='';
-
-  switch (tipo) {
-    case 'Llantas':
-    resp = `${desc['altura']}/${desc['ancho']}/${desc['tipo']}${desc['diametro']} para ${desc['vehiculo']} ${desc['observacion']}`;
-    break;
-    case 'Aceites':
-    resp=`${desc['base']} SAE ${desc['saelow']}${desc['saehigh']} API ${desc['apiservice']}-${desc['tiempos']} ${desc['volumen']}${desc['unidad']}`;
-    break;
-    case 'Lubricantes':
-    resp=`${desc['tipo']} ${desc['viscosidad']} ${desc['volumen']}${desc['unidad']}`;
-    break;
-    case 'Consumibles':
-    resp=`${desc['nombre']} Vence: ${desc['caducidad']}`;
-    break;
-    case 'Neumaticos':
-    let t ='';
-    resp=`R${desc['diametro']} valvula ${desc['valvula']} para ${desc['vehiculo']} ${desc['observacion']}`;
-    break;
-    case 'Accesorios':
-    resp="Accesorios";
-    resp=`${desc['general']}`;
-    break;
-  }
-  return resp;
-}
-
 const mostrarInventario = function(){
-  var dataa = obtenerRegistros(null,null,"inventario");
-  dataa.then((data)=>{
-    if (data!=null) {
-      document.getElementById('tbody').innerHTML='';
-      document.getElementById('thead').innerHTML='';
-      //Se agrega el nombre de las columnas
-      let nombreCol = '';
-      for(let i in data[0]){
-          nombreCol+=`
-              <td>${i}</td>
-          `;
-      }
-
-      nombreCol+=`<td></td>`;
-
-      document.getElementById('thead').innerHTML+=`
-      <tr>${nombreCol}</tr>
-      `;
-
-      //Se gregan las filas de datos
-      data.forEach(element => {
-          let fila='';
-          for(let i in element){
-              if(element[i]==null){
-                  fila+=`
-                      <td>---</td>
-                  `;
-              }else{
-                  if(i=="Descripcion"){
-                    element[i]=formatDescrip(element[i],element['Tipo']);
-                  }
-                  fila+=`
-                      <td>${element[i]}</td>
-                  `;
-              }
-          }
-
-            fila+=`<td>
-            <div class="container-fluid px-0" style="max-widh:450%;">
-              <div class="row">
-                <div class="col pr-0 mr-0">
-                  <button class="btn text-info p-1" onclick="editarRegistro(${element['Id']});"><i class="fa fa-edit"></i></button>
-                </div>
-                <div class="col pl-0 ml-0">
-                  <button class="btn text-danger p-1" onclick="eliminarRegistro(${element['Id']});"><i class="fa fa-trash"></i></button>
-                </div>
-              </div>
-            </div>
-            </td>`;
-
-          document.getElementById('tbody').innerHTML+=`
-          <tr">${fila}</tr>
-          `;
-      });
-      $('#dataTable').DataTable();
-    }
-  });
+let tabla=document.getElementById('dataTable');
+renderTabla(null,null,"inventario",tabla);
 }
 
 const cambioCategoria = function(){
@@ -332,6 +248,7 @@ const registraProducto = async function(){
     switch (opcion) {
       case 'Llantas':
         detalles={
+          categoria:opcion,
           altura:document.getElementById('select-alto').value,
           ancho:document.getElementById('select-ancho').value,
           tipo:document.getElementById('select-tipo').value,
@@ -342,6 +259,7 @@ const registraProducto = async function(){
       break;
       case 'Aceites':
         detalles={
+          categoria:opcion,
         base:document.getElementById('select-tipo-aceite').value,
         saelow:document.getElementById('select-sae-low').value,
         saehigh:document.getElementById('select-sae-high').value,
@@ -353,6 +271,7 @@ const registraProducto = async function(){
       break;
       case 'Lubricantes':
       detalles={
+        categoria:opcion,
         tipo:document.getElementById('select-tipo-lubricante').value,
         viscosidad:document.getElementById('input-grado-viscosidad').value,
         volumen:document.getElementById('input-volumen').value,
@@ -361,12 +280,14 @@ const registraProducto = async function(){
       break;
       case 'Consumibles':
       detalles={
+        categoria:opcion,
         nombre:document.getElementById('input-nombre-consumible').value,
         caducidad:document.getElementById('input-fecha-vencimiento').value,
       };
       break;
       case 'Neumaticos':
       detalles={
+        categoria:opcion,
         diametro:document.getElementById('select-diametro').value,
         valvula:document.getElementById('select-valvula').value,
         vehiculo:document.getElementById('select-vehiculo').value,
@@ -374,7 +295,9 @@ const registraProducto = async function(){
       };
       break;
       case 'Accesorios':
-      detalles={general:document.getElementById('input-descripcion').value};
+      detalles={
+        categoria:opcion,
+        general:document.getElementById('input-descripcion').value};
       break;
     }
     if (detalles!="") {
@@ -415,7 +338,7 @@ const registraProducto = async function(){
 
 const eliminarRegistro = async function(id){
   if (confirm) {
-    let data = {id:id}
+    let data = {id:selectId}
     let respuesta = await eliminarRegistroId(data,"inventario")
     if(respuesta!=null){
       if(respuesta.res=='OK'){

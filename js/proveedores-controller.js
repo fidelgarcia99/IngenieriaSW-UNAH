@@ -1,5 +1,6 @@
 var mostrarProveedores = function(){
-  renderTabla(null,null,'proveedores');
+  tabla=document.getElementById('dataTable');
+  renderTabla(null,null,'proveedores',tabla);
 }
 
 var registrarProveedor = async function(){

@@ -4,7 +4,8 @@ var modo = true;
 var temp =null;
 
 var mostrarClientes = function(){
-  renderTabla(null,null,'clientes');
+  tabla=document.getElementById('dataTable');
+  renderTabla(null,null,'clientes',tabla);
 }
 
 var registrarCliente = async function(){

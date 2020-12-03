@@ -1,5 +1,6 @@
 var mostrarEmpleados = function(){
-  renderTabla(null,null,'empleados');
+  tabla=document.getElementById('dataTable');
+  renderTabla(null,null,'empleados',tabla);
 }
 
 var registraEmpleado = async function(){
