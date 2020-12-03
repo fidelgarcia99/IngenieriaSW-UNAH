@@ -37,6 +37,8 @@ if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::Ge
         <?php include(SECCIONES . 'tabla.php')?>
         <!-- /.container-fluid -->
 
+        <?php include(SECCIONES . 'detalle-compra-modal.php')?>
+
       </div>
       <!-- End of Main Content -->
 
@@ -67,6 +69,7 @@ if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::Ge
   <script src="<?php echo VENDOR?>datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
+  <script src="<?php echo JS ?>product-format.js"></script>
   <script src="<?php echo JS?>axios-calls.js"></script>
   <script src="<?php echo JS?>compras-controller.js"></script>
 </body>

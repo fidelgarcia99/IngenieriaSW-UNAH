@@ -24,62 +24,6 @@ var obtenerRegistros = async function(param,id,api){
         return resultado;
 }
 
-var renderTabla = function(param,id,api){
-
-  var dataa = obtenerRegistros(param,id,api);
-  dataa.then((data)=>{
-    if (data!=null && data.length>0) {
-      document.getElementById('tbody').innerHTML='';
-      document.getElementById('thead').innerHTML='';
-      //Se agrega el nombre de las columnas
-      let nombreCol = '';
-      for(let i in data[0]){
-          nombreCol+=`
-              <td>${i}</td>
-          `;
-      }
-      if (api=="clientes" || api=='inventario') {
-        nombreCol+=`<td>Edicion</td>`;
-      }
-      document.getElementById('thead').innerHTML+=`
-      <tr>${nombreCol}</tr>
-      `;
-      //Se gregan las filas de datos
-      data.forEach(element => {
-          let fila='';
-          for(let i in element){
-              if(element[i]==null){
-                  fila+=`
-                      <td>---</td>
-                  `;
-              }else{
-                  fila+=`
-                      <td>${element[i]}</td>
-                  `;
-              }
-          }
-          if(api=="clientes" || api=='inventario'){
-            fila+=`<td>
-            <div class="container-fluid px-0" style="max-widh:450%;">
-              <div class="row">
-                <div class="col pr-1 mr-1">
-                  <button class="btn text-info mx-1" onclick="editarRegistro(${element['Id']});"><i class="fa fa-edit"></i></button>
-                </div>
-                <div class="col pl-1 ml-1">
-                  <button class="btn text-danger mx-1" onclick="eliminarRegistro(${element['Id']});"><i class="fa fa-trash"></i></button>
-                </div>
-              </div>
-            </div>
-            </td>`;
-          }
-          document.getElementById('tbody').innerHTML+=`
-          <tr onmouseover="mouseOverRow(this)" onmouseout="mouseOutRow(this)" onclick="selectRow(${element['Id']},this)">${fila}</tr>
-          `;
-      });
-      $('#dataTable').DataTable();
-    }
-  });
-}
 
 var nuevoRegistro = async function(data,api){
   let respuesta=null;

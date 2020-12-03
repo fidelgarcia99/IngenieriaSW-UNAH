@@ -80,6 +80,7 @@
   <script src="<?php echo VENDOR ?>datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
+  <script src="<?php echo JS ?>product-format.js"></script>
   <script src="<?php echo JS ?>axios-calls.js"></script>
   <script src="<?php echo JS ?>inventario-controller.js"></script>
 </body>
