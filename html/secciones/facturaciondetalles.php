@@ -72,7 +72,7 @@
                     <!-- Fin Filtro y Busqueda -->
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                          <thead id="thead">
-                              <th>Cantidad</th>
+                              <th style="width:100px;">Cantidad</th>
                               <th>Descripcion</th>
                               <th>Precio</th>
                               <th>Descuento</th>

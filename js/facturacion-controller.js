@@ -1,3 +1,5 @@
+var carrito = Array();
+
 function scan(event){
   if (event.keyCode >47 && event.keyCode<58) {
     document.getElementById('input-codigo').value+=event.key;
@@ -22,8 +24,28 @@ function siscan(){
   document.getElementById('page-top').addEventListener("keypress",scan);
 }
 
-function buscaProducto(){
-alert('hola');
+function buscaProducto(barcode){
+  let producto = obtenerRegistros("barcode",barcode,"inventario");
+  producto.then(data=>{
+    //Se gregan las filas de datos
+    data.forEach(element => {
+        let fila='<td><input type="number" class="form-control" min="1" value="1" style="width:80px;"></td>';
+        for(let i in element){
+          if(i=="Descripcion"){
+            element[i]=formatDescrip(element[i],element['Tipo']);
+          }
+          fila+=`
+              <td>${element[i]}</td>
+          `;
+        }
+        fila+=`<td>${element['Precio']}</td>`;
+        tbody.innerHTML+=`
+        <tr onmouseover="mouseOverRow(this)" onmouseout="mouseOutRow(this)">${fila}</tr>
+        `;
+    });
+  }).catch(err=>{
+    console.error(err);
+  });
 }
 
 function cargarClientes(){
@@ -77,5 +99,13 @@ function cambioRtn(){
 function escogeCliente(){
   document.getElementById('nombreCliente').value = document.getElementById('nom_cliente').options[document.getElementById('nom_cliente').selectedIndex].text;
   document.getElementById('RTNCliente').value = document.getElementById('inputId').value;
+}
+
+function mouseOverRow(row){
+  row.style="background-color:cornsilk;cursor:pointer";
+}
+
+function mouseOutRow(row){
+  row.style="background-color:white;";
 }
 siscan();
