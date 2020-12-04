@@ -60,10 +60,10 @@
                                        <div class="input-group-prepend">
                                          <div class="input-group-text">Codigo</div>
                                        </div>
-                                       <input type="number" id="input-codigo" class="form-control" required>
+                                       <input type="number" id="input-codigo" class="form-control" onkeypress="enter(event)" onfocusin="noscan()" onfocusout="siscan()" required>
                                      </div>
                                    </div>
-                                   
+
                               </div>
                          </div>
 
@@ -74,8 +74,8 @@
                          <thead id="thead">
                               <th>Cantidad</th>
                               <th>Descripcion</th>
-                              <th>Precio Unitario</th>
-                              <th>Descuento o Rebajas Otorgados</th>
+                              <th>Precio</th>
+                              <th>Descuento</th>
                               <th>Total</th>
                          </thead>
                          <tbody id="tbody">

@@ -1,4 +1,30 @@
-var clientes=null;
+function scan(event){
+  if (event.keyCode >47 && event.keyCode<58) {
+    document.getElementById('input-codigo').value+=event.key;
+  }else{
+    enter(event);
+  }
+}
+
+function enter(event){
+  if(event.keyCode == 13){
+    let code = document.getElementById('input-codigo');
+    buscaProducto(code.value);
+    code.value='';
+  }
+}
+
+function noscan(){
+  document.getElementById('page-top').removeEventListener("keypress",scan);
+}
+
+function siscan(){
+  document.getElementById('page-top').addEventListener("keypress",scan);
+}
+
+function buscaProducto(){
+alert('hola');
+}
 
 function cargarClientes(){
   document.getElementById('nom_cliente').innerHTML='';
@@ -52,3 +78,4 @@ function escogeCliente(){
   document.getElementById('nombreCliente').value = document.getElementById('nom_cliente').options[document.getElementById('nom_cliente').selectedIndex].text;
   document.getElementById('RTNCliente').value = document.getElementById('inputId').value;
 }
+siscan();
