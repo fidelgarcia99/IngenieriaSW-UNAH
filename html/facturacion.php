@@ -49,10 +49,12 @@ $conexion = new Conexion();?>
 
         <!-------------------------- Begin Page Content ------------------------------>
 
+        <?php include(SECCIONES . 'facturaciondetalles.php')?>
+
       </div>
       <?php include(SECCIONES . 'modal-cliente-rtn.php') ?>
       <!-- End of Main Content -->
-      <?php include(SECCIONES . 'facturaciondetalles.php')?>
+
       <!-- Footer -->
       <?php include(SECCIONES . 'footer.php')?>
       <!-- End of Footer -->

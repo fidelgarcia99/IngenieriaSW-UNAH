@@ -1,8 +1,8 @@
 
 
-<div class="container-fluid m-0 p-0">
+<div class="container-fluid m-0 p-0 h-100">
      <!-- DataTales Example -->
-     <div class="card shadow mb-4">
+     <div class="card shadow h-100">
 
           <div class="card-body">
                <div class="table-responsive">
@@ -12,30 +12,15 @@
                          <div class="container-fluid">
 
                               <div class="row">
-                                   <div class="col-8">
-                                        <h4 for="tel2" class="col-md-12 ">Autoservicio "El Boulevard"</h4>
-                                        <p for="tel2" class="col-md-12">
-                                             R.T.N.:0101010101010 <br>
-                                             Boulevard Chorotega, Contiguo a Expresso Americano, 77199 Ciudad Choluteca,Honduras <br>
-                                             TEL.:(504)3307-8867 <br>
-                                             Email: s.benitez@yahoo.com <br>
-                                        </p>
-                                   </div>
-
-                                   <div class="col-4">
-
+                                   <div class="col-5">
                                         <div class="input-group mb-2">
                                           <div class="input-group-prepend">
                                             <div class="input-group-text">Factura No.</div>
                                           </div>
                                           <input type="text" class="form-control input-sm" id="nFactura" value="00000" readonly>
                                         </div>
-                                        <!--<div class="input-group mb-2">
-                                          <div class="input-group-prepend">
-                                            <div class="input-group-text">Fecha</div>
-                                          </div>
-                                          <input type="text" class="form-control input-sm" id="fecha" value="<?php echo date("d/m/Y"); ?>" readonly>
-                                        </div> -->
+                                   </div>
+                                   <div class="col-5">
                                         <div class="input-group mb-2">
                                           <div class="input-group-prepend">
                                             <div class="input-group-text">Cajero</div>
@@ -46,7 +31,7 @@
 
                               </div>
 
-                              <div class="row mb-2">
+                              <div class="row mb-5">
                                    <div class="col-md-5">
                                      <div class="input-group">
                                        <div class="input-group-prepend">
@@ -68,12 +53,19 @@
                                        <button type="button" class="btn btn-primary"><i class="fas fa-save" onclick="guardarCliente();"></i></button>
                                    </div>
                               </div>
-                              <div id="errorMessage" class="row alert alert-danger mb-2" style="display:none">
-                                Hubo un problema
+
+                              <div class="row">
+                                   <div class="col-md-10">
+                                     <div class="input-group">
+                                       <div class="input-group-prepend">
+                                         <div class="input-group-text">Codigo</div>
+                                       </div>
+                                       <input type="number" id="input-codigo" class="form-control" required>
+                                     </div>
+                                   </div>
+                                   
                               </div>
-
                          </div>
-
 
                     </div>
                     <br>
@@ -87,105 +79,47 @@
                               <th>Total</th>
                          </thead>
                          <tbody id="tbody">
-                              <tr>
-                                   <td></td>
-                                   <td></td>
-                                   <td></td>
-                                   <td></td>
-                                   <td></td>
-                              </tr>
-
-                              <tr>
-                                   <td></td>
-                                   <td></td>
-                                   <td></td>
-                                   <td></td>
-                                   <td></td>
-                              </tr>
-
-
-
                          </tbody>
                     </table>
-
-                    <div style='text-align:RIGHT'>
-                         <p class="col-md-10">
-                              Total
-                         </p>
-
-                         <DIV style='text-align:LEFT'> <B>"La factura es beneficio de todos ¡EXIJALA!"</B> </DIV>
-                         <hr>
-
-                         <div class="row">
-
-                              <div class="col-md-6" style='text-align:left'>
-
-
-                                   <TABLE class="table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <TR>
-                                             <TH>No. correlativo de orden de compra exenta</TH>
-                                             <TD>Item 1</TD>
-
-                                        </TR>
-                                        <TR>
-                                             <TH>No. correlativo de constancia de registro exonerado</TH>
-                                             <TD>Item 2</TD>
-
-                                        </TR>
-                                        <TR>
-                                             <TH>No. identificativo del registro de la SAG</TH>
-                                             <TD>Item 3</TD>
-
-                                        </TR>
-                                   </TABLE>
-                              </div>
-
-                              <br>
-                              <div class="col-md-6" style='text-align:left'>
-                                   <TABLE class="table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <TR>
-                                             <TH>Importe Exonerado L.</TH>
-                                             <TD>Item 1</TD>
-
-                                        </TR>
-                                        <TR>
-                                             <TH>Importe Exento L.</TH>
-                                             <TD>Item 2</TD>
-
-                                        </TR>
-                                        <TR>
-                                             <TH>Importe Gravado 15%</TH>
-                                             <TD>Item 3</TD>
-
-                                        </TR>
-
-                                        <TR>
-                                             <TH>Importe Gravado 18%</TH>
-                                             <TD>Item 4</TD>
-
-                                        </TR>
-                                        <TR>
-                                             <TH>I.S.V 15%</TH>
-                                             <TD>Item 5</TD>
-
-                                        </TR>
-
-                                        <TR>
-                                             <TH>I.S.V 18%</TH>
-                                             <TD>Item 6</TD>
-
-                                        </TR>
-
-                                        <TR>
-                                             <TH>TOTAL A PAGAR L.</TH>
-                                             <TD>Item 7</TD>
-
-                                        </TR>
-                                   </TABLE>
-
-                              </div>
+               </div>
+               <div class="row">
+                    <div class="col-4">
+                         <div class="input-group mb-2">
+                           <div class="input-group-prepend">
+                             <div class="input-group-text">SubTotal</div>
+                           </div>
+                           <input type="number" class="form-control input-sm" id="nFactura" value="00.00" readonly>
                          </div>
-                         <br>
+                    </div>
+               </div>
+               <div class="row">
+                    <div class="col-4">
+                         <div class="input-group mb-2">
+                           <div class="input-group-prepend">
+                             <div class="input-group-text">Descuento</div>
+                           </div>
+                           <input type="number" class="form-control input-sm" id="nFactura" value="00000" readonly>
+                         </div>
+                    </div>
+               </div>
+               <div class="row">
+                    <div class="col-4">
+                         <div class="input-group mb-2">
+                           <div class="input-group-prepend">
+                             <div class="input-group-text">IVS</div>
+                           </div>
+                           <input type="numbre" class="form-control input-sm" id="nFactura" value="00000" readonly>
+                         </div>
+                    </div>
+               </div>
+               <div class="row">
+                    <div class="col-4">
+                         <div class="input-group mb-2">
+                           <div class="input-group-prepend">
+                             <div class="input-group-text">Total</div>
+                           </div>
+                           <input type="number" class="form-control input-sm" id="nFactura" value="00000" readonly>
+                         </div>
                     </div>
                </div>
           </div>
