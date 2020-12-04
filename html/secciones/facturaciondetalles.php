@@ -66,12 +66,14 @@
                                    <div class="col-2 mx-0 px-0">
                                        <button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#nuevoClienteRtnModal" onclick="cargarClientes();"><i class="fas fa-search"></i></button>
                                        <button type="button" class="btn btn-primary"><i class="fas fa-save" onclick="guardarCliente();"></i></button>
+
+                                       <button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#nuevoConsulta" ><i class="fas fa-search-dollar"></i></button>
                                    </div>
                               </div>
                               <div id="errorMessage" class="row alert alert-danger mb-2" style="display:none">
                                 Hubo un problema
                               </div>
-
+                              
                          </div>
 
 

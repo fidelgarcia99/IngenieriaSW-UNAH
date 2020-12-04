@@ -1,6 +1,8 @@
 <?php
 include(SECCIONES . 'valida-acceso.php') ;
 
+
+
 //El empleado es cajero o admin?
 if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="cajero" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
   header('Location: ?view=401');
@@ -9,7 +11,7 @@ if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="cajero" || JWTokens::GetDat
 
 include("php/clases/class_conexion.php");
 //se incluye la clase empleados parapoder llamar sus funciones desde el index
-include_once("php/clases/class_cliente.php");
+
 //objeto Conexion
 $conexion = new Conexion();?>
 
@@ -52,6 +54,8 @@ $conexion = new Conexion();?>
       </div>
       <?php include(SECCIONES . 'modal-cliente-rtn.php') ?>
       <!-- End of Main Content -->
+      <?php include(SECCIONES . 'modal-consulta-precio.php') ?>
+
       <?php include(SECCIONES . 'facturaciondetalles.php')?>
       <!-- Footer -->
       <?php include(SECCIONES . 'footer.php')?>
