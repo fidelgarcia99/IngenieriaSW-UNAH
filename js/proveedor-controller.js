@@ -64,7 +64,7 @@ var registrarProveedor = async function(){
 var eliminarRegistro = async function(){
   if (confirm) {
     let data = {id:id}
-    let respuesta = await eliminarRegistroId(data,"proveedores")
+    let respuesta = await eliminarRegistroId(data,"proveedores");
     if(respuesta!=null){
       if(respuesta.res=='OK'){
         document.getElementById('modal-success-message').innerHTML = respuesta.mensaje;
@@ -84,4 +84,3 @@ var eliminarRegistro = async function(){
 }
 
 mostrarProveedores();
-

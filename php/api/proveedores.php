@@ -12,12 +12,12 @@
 
     verificaToken();
 
+    $_POST = json_decode(file_get_contents('php://input'),true);
+
     //Servicios web
     switch($_SERVER['REQUEST_METHOD'])
     {
-        case 'POST':
-            $_POST = json_decode(file_get_contents('php://input'),true);
-            
+        case 'POST':          
             if(isset($_POST['nombreP']) && $_POST['nombreP']!='' &&
                isset($_POST['direccionP']) && $_POST['direccionP']!='' &&
                isset($_POST['telefonoP']) && $_POST['telefonoP']!='' &&
@@ -68,7 +68,15 @@
         break;
 
         case 'DELETE':  //Eliminar usuario
-            echo '{"res":"delete"}';
+        if (isset($_POST['id']) && $_POST['id']!='') {
+          if (Proveedor::eliminarProveedor($conexion,$_POST['id'])) {
+              echo '{"res":"OK","mensaje":"Proveedor Eliminado"}';
+          }else{
+            $res = array("res"=>"fail","mensaje"=>mysqli_error);
+          }
+        }else{
+          echo '{"res":"fail","mensaje":"Debe especificar un id"}';
+        }
         break;
     }
 ?>
