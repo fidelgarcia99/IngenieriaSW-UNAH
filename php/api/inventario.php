@@ -27,7 +27,7 @@
                          $_POST['barcode'] ,
                          0 , 0 , 0 , 0 ,
                          $_POST['contenedor'] ,
-                         $_POST['categoria'] ,                      
+                         $_POST['categoria'] ,
                          $_POST['marca']
                        );
 
@@ -50,8 +50,12 @@
         case 'GET':     //Obtener producto/s
         $resultado=null;
             if(isset($_GET['id'])){
-              $resultado = $conexion->ejecutarInstruccion('call Producto();');
-            }else {
+              $id=$_GET['id'];
+              $resultado = $conexion->ejecutarInstruccion("call Producto($id);");
+            }else if(isset($_GET['param'])){
+              $barcode=$_GET['param'];
+              $resultado = $conexion->ejecutarInstruccion("call Producto($barcode);");
+            }else{
               $resultado = $conexion->ejecutarInstruccion('call Inventario();');
             }
             $res = array(); //creamos un array
