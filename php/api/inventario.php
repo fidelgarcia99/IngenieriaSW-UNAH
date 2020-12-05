@@ -54,7 +54,7 @@
               $resultado = $conexion->ejecutarInstruccion("call Producto($id);");
             }else if(isset($_GET['param'])){
               $barcode=$_GET['param'];
-              $resultado = $conexion->ejecutarInstruccion("call Producto($barcode);");
+              $resultado = $conexion->ejecutarInstruccion("call Producto('$barcode');");
             }else{
               $resultado = $conexion->ejecutarInstruccion('call Inventario();');
             }
