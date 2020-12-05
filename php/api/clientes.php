@@ -56,8 +56,8 @@
         break;
 
         case 'GET':     //Obtener cliente/s
-            if(isset($_GET['id']) && $_GET['id']!=null){
-              $id = $_GET['id'];
+            if(isset($_GET['param']) && isset($_GET['value'])){
+              $id = $_GET['value'];
               $resultado = $conexion->ejecutarInstruccion("call Cliente($id);");
             }else{
                 $resultado = $conexion->ejecutarInstruccion('call Clientes();');

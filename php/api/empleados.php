@@ -57,30 +57,22 @@
         }
         break;
 
+        case 'GET':     //Obtener producto/s            
+              $resultado = $conexion->ejecutarInstruccion('call Empleados();');
+
+              $res = array(); //creamos un array
+              while($row = mysqli_fetch_assoc($resultado))
+              {
+                  $res[] = $row;
+              }
+              echo json_encode($res);
+
         break;
-
-
-        case 'GET':     //Obtener producto/s
-
-            if(isset($_GET['id'])){
-
-            }else{
-                $resultado = $conexion->ejecutarInstruccion('call Empleados();');
-
-                $res = array(); //creamos un array
-
-                while($row = mysqli_fetch_assoc($resultado))
-                {
-                    $res[] = $row;
-                }
-                echo json_encode($res);
-            }
-        break;
-
 
         case 'PUT':     //Actualizar producto
             echo '{"res":"put"}';
         break;
+
         case 'DELETE':  //Eliminar producto
             echo '{"res":"delete"}';
         break;

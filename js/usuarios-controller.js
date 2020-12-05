@@ -74,7 +74,7 @@ var eliminarRegistro = async function(){
 }
 
 var mostrarTiposUsuarios = function(){
-  var dataa = obtenerRegistros('tipo',null,"usuarios");
+  var dataa = obtenerRegistros("retorno","tipo","usuarios");
  dataa.then((data)=>{
    var opciones = "<option value='-1' selected disable>--- Seleccione un Tipo de Usuario ---</option>";
    data.forEach((item, i) => {

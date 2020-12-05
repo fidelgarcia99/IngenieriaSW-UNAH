@@ -2,21 +2,16 @@ var readCookie = function(name) {
     return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + name.replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
 }
 
-var obtenerRegistros = async function(param,id,api){
-    let params;
+var obtenerRegistros = async function(param,value,api){
     let resultado;
-    if(param==null){
-        params={token:readCookie('token')};
-    }else{
-        params={token:readCookie('token'),param:param, id:id}
-    }
+    let params={param:param, value:value}
 
     await axios({
             url:`http://${window.location.hostname}/IngenieriaSW-UNAH/php/api/${api}.php`,
             method:'get',
             responseType:'json',
             params:params
-        }).then(res=>{
+        }).then(res=>{          
           resultado = res.data;
         }).catch(err=>{
             console.error(err);

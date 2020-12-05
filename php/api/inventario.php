@@ -49,17 +49,16 @@
 
         case 'GET':     //Obtener producto/s
         $resultado=null;
-            if(isset($_GET['id'])){
-              $id=$_GET['id'];
-              $resultado = $conexion->ejecutarInstruccion("call Producto($id);");
-            }else if(isset($_GET['param'])){
-              $barcode=$_GET['param'];
-              $resultado = $conexion->ejecutarInstruccion("call Producto('$barcode');");
+            if(isset($_GET['param'])){
+              if ($_GET['param']=="barcode") {                
+                $barcode=$_GET['value'];
+                $resultado = $conexion->ejecutarInstruccion('call Producto("'.$barcode.'");');
+              }
             }else{
               $resultado = $conexion->ejecutarInstruccion('call Inventario();');
             }
             $res = array(); //creamos un array
-            while($row = mysqli_fetch_assoc($resultado))            {
+            while($row = mysqli_fetch_assoc($resultado)){
                 $res[] = $row;
             }
             echo json_encode($res);
