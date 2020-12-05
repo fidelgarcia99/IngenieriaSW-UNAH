@@ -11,7 +11,7 @@
                                              <!-- Background image for card set in CSS! -->
                                         </div>
                                         <div class="card-body">
-                                             <h5 class="card-title text-center">Nuevo Empleado</h5>
+                                             <h5 class="card-title text-center" id="modal-titulo">Nuevo Empleado</h5>
                                              <form class="form-signin">
                                                   <div class="form-label-group">
                                                        <div class="input-group">

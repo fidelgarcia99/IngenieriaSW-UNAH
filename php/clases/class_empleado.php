@@ -42,8 +42,13 @@ class Empleado{
 
 	public function registraEmpleado($conexion){
 		return $conexion->ejecutarInstruccion("
-          CALL SPnuevo_empleado('$this->pNombre' ,'$this->sNombre', '$this->pApellido','$this->sApellido' , $this->ciudad,
-		'$this->direccion','$this->num_telefono', '$this->email',  '$this->fechainicio_contrato', '$this->num_identidad', $this->cargo)");
+          CALL SPnuevo_empleado('$this->pNombre' ,'$this->sNombre', '$this->pApellido','$this->sApellido' , '$this->ciudad',
+		'$this->direccion','$this->num_telefono', '$this->email',  '$this->fechainicio_contrato', '$this->num_identidad', '$this->cargo')");
+	}
+
+	public function actualizarEmpleado($conexion, $id){
+		return $conexion->ejecutarInstruccion("
+          CALL SPactualiza_empleado('$id', '$this->pNombre' ,'$this->sNombre', '$this->pApellido','$this->sApellido' ,'$this->ciudad','$this->direccion','$this->num_telefono', '$this->email',  '$this->fechainicio_contrato', '$this->num_identidad','$this->cargo')");
 	}
 
 
@@ -57,6 +62,15 @@ class Empleado{
 				if ($c==0) {
 					?>
 					<option selected value="<?php echo $fila_cargo["idCargo"];?>">
+						<?php echo $fila_cargo["nombre_cargo"];?>
+
+					</option>
+
+					<?php
+					$c=1;
+				}else{
+					?>
+					<option value="<?php echo $fila_cargo["idCargo"];?>">
 						<?php echo $fila_cargo["nombre_cargo"];?>
 
 					</option>
@@ -77,8 +91,18 @@ class Empleado{
 			$c = 0;
 			while ($fila_ciudad = $conexion->obtenerFila($ciudad)) {
 				if ($c==0) {
-                         ?>
+                        ?>
 					<option selected value="<?php echo $fila_ciudad["idCiudad"];?>">
+						<?php echo $fila_ciudad["nom_ciudad"];?>
+
+					</option>
+
+					<?php
+					$c=1;
+				}
+				else{
+					?>
+					<option value="<?php echo $fila_ciudad["idCiudad"];?>">
 						<?php echo $fila_ciudad["nom_ciudad"];?>
 
 					</option>
@@ -103,6 +127,15 @@ class Empleado{
 				if ($c==0) {
                          ?>
 					<option selected value="<?php echo $fila_empleado["idEmpleado"];?>">
+						<?php echo $fila_empleado['pnombre']." ".$fila_empleado["papellido"];?>
+
+					</option>
+
+					<?php
+					$c=1;
+				}else{
+					?>
+					<option value="<?php echo $fila_empleado["idEmpleado"];?>">
 						<?php echo $fila_empleado['pnombre']." ".$fila_empleado["papellido"];?>
 
 					</option>

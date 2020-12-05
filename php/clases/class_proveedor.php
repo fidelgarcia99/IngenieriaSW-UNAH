@@ -22,6 +22,11 @@ class Proveedor{
 	'$this->telefono','$this->correo', NULL);");
 	}
 
+	public function actualizarProveedor($conexion, $id){
+		return $conexion->ejecutarInstruccion("CALL SPactualiza_proveedor('$id','$this->nombre','$this->direccion',
+		'$this->telefono','$this->correo', NULL);");
+		}
+
 	public static function eliminarProveedor($conexion, $id_registro){
 		return $conexion->ejecutarInstruccion("call SPelimina_proveedor($id_registro)");
 	}

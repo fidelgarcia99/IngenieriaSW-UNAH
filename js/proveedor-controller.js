@@ -36,12 +36,19 @@ var registrarProveedor = async function(){
   let telefonoP = document.getElementById('telefonoP').value;
 
       let proveedor = {
+        id:id,
         nombreP: nombreP,
         direccionP: direccionP,
         correoP: correoP,
         telefonoP: telefonoP
       }
-      let respuesta = await nuevoRegistro(proveedor, "proveedores");
+      let respuesta=null;
+      if (modo) {
+        respuesta = await nuevoRegistro(proveedor, "proveedores");
+      }else{
+        respuesta = await actualizaRegistro(proveedor, "proveedores");
+        selectRow(id);
+      }
 
       if(respuesta!=null){
         if(respuesta.res=='OK'){
@@ -60,6 +67,28 @@ var registrarProveedor = async function(){
         }
       }
 };
+
+var editarRegistro = function(){
+  let proveedor = obtenerRegistros('id', id, 'proveedores');
+  proveedor.then(data=>{
+    console.log(data);
+    if(data){
+      data = data[0];
+      document.getElementById('nombreP').value = data.Nombre;
+      document.getElementById('direccionP').value = data.Direccion;
+      document.getElementById('correoP').value = data.Email;
+      document.getElementById('telefonoP').value = data.Telefono;
+
+      document.getElementById('modal-titulo').innerHTML = "Editar Proveedor";
+      modo = false
+      $('#nuevoProveedorModal').modal('show');
+    }else{
+      console.error('El servidor no ha devuelto un resultado');
+    }
+  }).catch(error=>{
+    console.error(error);
+  });
+}
 
 
 var eliminarRegistro = async function(){
