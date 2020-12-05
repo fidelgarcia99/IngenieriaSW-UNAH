@@ -240,7 +240,6 @@ var limpiarModal = function(){
   document.getElementById('inputConfirmPassword').classList='form-control';
   document.getElementById('modal-titulo').innerHTML = "Nuevo Usuario";
   modo=true;
-  id=null;
 }
 
 mostrarUsuarios();
