@@ -51,6 +51,10 @@ class Empleado{
           CALL SPactualiza_empleado('$id', '$this->pNombre' ,'$this->sNombre', '$this->pApellido','$this->sApellido' ,'$this->ciudad','$this->direccion','$this->num_telefono', '$this->email',  '$this->fechainicio_contrato', '$this->num_identidad','$this->cargo')");
 	}
 
+	public function despedirEmpleado($conexion, $id){
+		return $conexion->ejecutarInstruccion("CALL SPdespedir_empleado('$id')");
+	}
+
 
 	public function llenarCargos($conexion){
 		$cargo = $conexion->ejecutarInstruccion("

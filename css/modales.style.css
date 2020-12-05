@@ -15,7 +15,8 @@
 #modal-success .modal-content{
   max-width: 100%;
 }
-#modal-confirm-msj{
+#modal-confirm-msj
+#modal-confirm-despedir-msj {
   text-align: center;
 }
 
@@ -24,6 +25,14 @@
   padding-top: 10%;
 }
 #modal-confirm .modal-content{
+  max-width: 100%;
+}
+
+#modal-confirm-despedir .modal-dialog{
+  max-width: 20%;
+  padding-top: 10%;
+}
+#modal-confirm-despedir .modal-content{
   max-width: 100%;
 }
 .modal-footer{

@@ -7,10 +7,12 @@ function selectRow(idRow,row){
     id=idRow;
     document.getElementById('btnEdit').disabled=false;
     document.getElementById('btnDelete').disabled=false;
+    document.getElementById('btnDown').disabled=false;
   }else if(id==idRow){
     id=null;
     document.getElementById('btnEdit').disabled=true;
     document.getElementById('btnDelete').disabled=true;
+    document.getElementById('btnDown').disabled=false;
   }
 }
 
@@ -128,6 +130,27 @@ var editarRegistro = function(){
   }).catch(error=>{
     console.error(error);
   });
+}
+
+var despedirEmpleado = async function(){
+  if (confirm) {
+    let data = {id:id}
+    let respuesta = await eliminarRegistroId(data,"empleados");
+    if(respuesta!=null){
+      if(respuesta.res=='OK'){
+        document.getElementById('modal-success-message').innerHTML = respuesta.mensaje;
+        $('#modal-confirm-despedir').modal('hide');
+        $('#modal-success').modal('show');
+        setTimeout(()=>$('#modal-success').modal('hide'), 2000);
+      }else{
+        console.error('El Servidor no ha devuelto nada.');
+      }
+      confirm=false;
+    }
+  }else{
+      document.getElementById('modal-confirm-despedir-msj').innerHTML=`Esta a punto de eliminar el registro con Id:${id}.`;
+      $('#modal-confirm-despedir').modal('show');
+  }
 }
 
 mostrarEmpleados();

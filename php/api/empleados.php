@@ -135,7 +135,20 @@
         break;
 
         case 'DELETE':  //Eliminar producto
-            echo '{"res":"delete"}';
+          $_POST = json_decode(file_get_contents('php://input'),true);
+
+          $empleado = new Empleado();
+
+         if($empleado->despedirEmpleado($conexion, $_POST['id'])){
+          echo '{"res":"OK","mensaje":"Empleado Despedido."}';
+        }else{
+          if(mysqli_errno($conexion->getLink()) == 1062)
+          echo '{"res":"fail","mensaje":"Ha ocurrido un problema."}';
+          else{
+             $res = array("res"=>"fail","mensaje"=>mysqli_error($conexion->getLink()));
+             echo json_encode($res);
+          }
+        }
         break;
     }
 ?>
