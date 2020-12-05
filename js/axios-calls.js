@@ -11,8 +11,12 @@ var obtenerRegistros = async function(param,value,api){
             method:'get',
             responseType:'json',
             params:params
-        }).then(res=>{          
-          resultado = res.data;
+        }).then(res=>{
+          if (res.data.res=="fail" && res.data.mensaje =="401: Acceso no autorizado") {
+            location.href="?view=401";
+          }else{
+            resultado = res.data;
+          }
         }).catch(err=>{
             console.error(err);
         });

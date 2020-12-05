@@ -12,6 +12,11 @@
 
     verificaToken();
 
+    if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+      echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
+      exit;
+    }
+
     //Servicios web
     switch($_SERVER['REQUEST_METHOD'])
     {
@@ -57,7 +62,7 @@
         }
         break;
 
-        case 'GET':     //Obtener producto/s            
+        case 'GET':     //Obtener producto/s
               $resultado = $conexion->ejecutarInstruccion('call Empleados();');
 
               $res = array(); //creamos un array

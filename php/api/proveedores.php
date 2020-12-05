@@ -12,12 +12,17 @@
 
     verificaToken();
 
+    if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+      echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
+      exit;
+    }
+
     $_POST = json_decode(file_get_contents('php://input'),true);
 
     //Servicios web
     switch($_SERVER['REQUEST_METHOD'])
     {
-        case 'POST':          
+        case 'POST':
             if(isset($_POST['nombreP']) && $_POST['nombreP']!='' &&
                isset($_POST['direccionP']) && $_POST['direccionP']!='' &&
                isset($_POST['telefonoP']) && $_POST['telefonoP']!='' &&

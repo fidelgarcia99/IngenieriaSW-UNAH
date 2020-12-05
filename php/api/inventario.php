@@ -12,6 +12,11 @@
 
     verificaToken();
 
+    if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+      echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
+      exit;
+    }
+
     $_POST = json_decode(file_get_contents('php://input'),true);
     //Servicios web
     switch($_SERVER['REQUEST_METHOD'])
@@ -50,7 +55,7 @@
         case 'GET':     //Obtener producto/s
         $resultado=null;
             if(isset($_GET['param'])){
-              if ($_GET['param']=="barcode") {                
+              if ($_GET['param']=="barcode") {
                 $barcode=$_GET['value'];
                 $resultado = $conexion->ejecutarInstruccion('call Producto("'.$barcode.'");');
               }
