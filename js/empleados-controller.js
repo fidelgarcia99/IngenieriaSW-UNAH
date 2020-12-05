@@ -12,7 +12,7 @@ function selectRow(idRow,row){
     id=null;
     document.getElementById('btnEdit').disabled=true;
     document.getElementById('btnDelete').disabled=true;
-    document.getElementById('btnDown').disabled=false;
+    document.getElementById('btnDown').disabled=true;
   }
 }
 
@@ -141,6 +141,7 @@ var despedirEmpleado = async function(){
         document.getElementById('modal-success-message').innerHTML = respuesta.mensaje;
         $('#modal-confirm-despedir').modal('hide');
         $('#modal-success').modal('show');
+        selectRow(id);
         setTimeout(()=>$('#modal-success').modal('hide'), 2000);
       }else{
         console.error('El Servidor no ha devuelto nada.');
