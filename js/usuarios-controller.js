@@ -63,8 +63,7 @@ var eliminarRegistro = async function(){
       }else{
         console.error('El Servidor no ha devuelto nada.');
       }
-      confirm=false;
-      id=null;
+      limpiarModal();
       mostrarUsuarios();
     }
   }else{
@@ -239,7 +238,11 @@ var limpiarModal = function(){
   document.getElementById('inputPassword').classList='form-control';
   document.getElementById('inputConfirmPassword').classList='form-control';
   document.getElementById('modal-titulo').innerHTML = "Nuevo Usuario";
+  document.getElementById('btnEdit').disabled=true;
+  document.getElementById('btnDelete').disabled=true;
+  id=null;
   modo=true;
+  confirm=false;
 }
 
 mostrarUsuarios();

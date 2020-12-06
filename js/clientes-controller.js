@@ -67,9 +67,8 @@ var registrarCliente = async function(){
           $('#nuevoClienteModal').modal('hide');
           $('#modal-success').modal('show');
           setTimeout(()=>$('#modal-success').modal('hide'), 2000);
-          mostrarClientes();
           limpiarModal();
-          selectId=null;
+          mostrarClientes();
         }else{
           document.getElementById('errorMessage').innerHTML=respuesta.mensaje;
           document.getElementById('errorMessage').style='display:block';
@@ -113,8 +112,7 @@ var eliminarRegistro = async function(){
         $('#modal-success').modal('show');
         setTimeout(()=>$('#modal-success').modal('hide'), 2000);
       }
-      confirm=false;
-      selectId=null;
+      limpiarModal();
       mostrarClientes();
     }
   }else{
@@ -135,7 +133,11 @@ var limpiarModal = function(){
   document.getElementById('inputEmail').value='';
   document.getElementById('errorMessage').style="display:none";
   document.getElementById('modal-titulo').innerHTML="Nuevo Cliente";
+  document.getElementById('btnEdit').disabled=true;
+  document.getElementById('btnDelete').disabled=true;
   modo=true;
+  confirm=false;
+  selectId=null;
 }
 
 mostrarClientes();

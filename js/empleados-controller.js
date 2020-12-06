@@ -61,7 +61,6 @@ var registraEmpleado = async function(){
           respuesta = await nuevoRegistro(empleado, "empleados");
         }else{
           respuesta = await actualizaRegistro(empleado, "empleados");
-          selectRow(id);
         }
 
       if(respuesta!=null){
@@ -70,14 +69,7 @@ var registraEmpleado = async function(){
           $('#nuevoEmpleadoModal').modal('hide');
           $('#modal-success').modal('show');
           setTimeout(()=>$('#modal-success').modal('hide'), 2000);
-          document.getElementById('inputPnombre').value = '';
-          document.getElementById('inputSnombre').value = '';
-          document.getElementById('inputPapellido').value = '';
-          document.getElementById('inputSapellido').value = '';
-          document.getElementById('inputDireccion').value = '';
-          document.getElementById('inputNumtel').value = '';
-          document.getElementById('inputNumid').value = '';
-          document.getElementById('inputEmail').value = '';
+          limpiarModal();
           mostrarEmpleados();
         }else{
           document.getElementById('errorMessage').innerHTML=respuesta.mensaje;
@@ -108,7 +100,7 @@ var editarRegistro = function(){
              // seleccionamos el valor que coincide
              selectCiudades.selectedIndex=i;
            }
-         } 
+         }
       document.getElementById('inputEmail').value = data.Email;
       //buscamos la opccion del select que coincide con la funcion
       let selectCargos = document.getElementById('selectCargo');
@@ -120,7 +112,7 @@ var editarRegistro = function(){
             // seleccionamos el valor que coincide
             selectCargos.selectedIndex=i;
           }
-        } 
+        }
       document.getElementById('modal-titulo').innerHTML = "Editar Empleado";
       modo = false
       $('#nuevoEmpleadoModal').modal('show');
@@ -141,7 +133,7 @@ var despedirEmpleado = async function(){
         document.getElementById('modal-success-message').innerHTML = respuesta.mensaje;
         $('#modal-confirm-despedir').modal('hide');
         $('#modal-success').modal('show');
-        selectRow(id);
+        limpiarModal();
         setTimeout(()=>$('#modal-success').modal('hide'), 2000);
       }else{
         console.error('El Servidor no ha devuelto nada.');
@@ -149,9 +141,25 @@ var despedirEmpleado = async function(){
       confirm=false;
     }
   }else{
-      document.getElementById('modal-confirm-despedir-msj').innerHTML=`Esta a punto de eliminar el registro con Id:${id}.`;
+      document.getElementById('modal-confirm-despedir-msj').innerHTML=`Esta a punto de dar de baja al empleado con Id:${id}.`;
       $('#modal-confirm-despedir').modal('show');
   }
 }
 
+
+function limpiarModal(){
+  document.getElementById('inputPnombre').value = '';
+  document.getElementById('inputSnombre').value = '';
+  document.getElementById('inputPapellido').value = '';
+  document.getElementById('inputSapellido').value = '';
+  document.getElementById('inputDireccion').value = '';
+  document.getElementById('inputNumtel').value = '';
+  document.getElementById('inputNumid').value = '';
+  document.getElementById('inputEmail').value = '';
+  document.getElementById('btnEdit').disabled=true;
+  document.getElementById('btnDelete').disabled=true;
+  id=null;
+  modo=true;
+  confirm=false;
+}
 mostrarEmpleados();

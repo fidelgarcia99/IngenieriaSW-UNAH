@@ -47,7 +47,6 @@ var registrarProveedor = async function(){
         respuesta = await nuevoRegistro(proveedor, "proveedores");
       }else{
         respuesta = await actualizaRegistro(proveedor, "proveedores");
-        selectRow(id);
       }
 
       if(respuesta!=null){
@@ -56,10 +55,7 @@ var registrarProveedor = async function(){
           $('#nuevoProveedorModal').modal('hide');
           $('#modal-success').modal('show');
           setTimeout(()=>$('#modal-success').modal('hide'), 2000);
-          document.getElementById('nombreP').value='';
-          document.getElementById('direccionP').value='';
-          document.getElementById('correoP').value='';
-          document.getElementById('telefonoP').value='';
+          limpiarModal();
           mostrarProveedores();
         }else{
           document.getElementById('errorMessage').innerHTML=respuesta.mensaje;
@@ -105,6 +101,7 @@ var eliminarRegistro = async function(){
         console.error('El Servidor no ha devuelto nada.');
       }
       confirm=false;
+      id=null;
      mostrarProveedores();
     }
   }else{
@@ -113,4 +110,13 @@ var eliminarRegistro = async function(){
   }
 }
 
+function limpiarModal(){
+  document.getElementById('nombreP').value='';
+  document.getElementById('direccionP').value='';
+  document.getElementById('correoP').value='';
+  document.getElementById('telefonoP').value='';
+  document.getElementById('btnEdit').disabled=true;
+  document.getElementById('btnDelete').disabled=true;
+  id=null;
+}
 mostrarProveedores();
