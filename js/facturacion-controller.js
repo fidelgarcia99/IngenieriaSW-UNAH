@@ -32,7 +32,21 @@ function buscaProducto(barcode){
       element['Precio'] = parseFloat(element['Precio']);
       element['Descuento'] = parseFloat(element['Descuento']);
       element['Descripcion']=formatDescrip(element['Descripcion'],element['Tipo']);
-      carrito.push(element);
+
+      if (carrito.length>0) {
+        let alreadyExist = false;
+        carrito.forEach((item, i) => {
+          if(item['Barcode']==element['Barcode']){
+            item['Cantidad']++;
+            alreadyExist = true;
+          }
+        });
+        if (!alreadyExist) {
+          carrito.push(element);
+        }
+      }else{
+        carrito.push(element);
+      }
     });
     renderTabla();
   }).catch(err=>{
