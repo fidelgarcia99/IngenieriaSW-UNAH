@@ -12,18 +12,15 @@
                                              <form class="form-signin" method="POST" action="" onSubmit="return validarForm(this)">
                                                   <h6>Producto</h6>
                                                   <div class="row mb-2">
-                                                  <div class="col-md-10">
-                                                  
-                                                       <input type="search" class="form-control" id="busqueda" name="palabra" placeholder="Ingrese nombre del producto">
+                                                  <div class="col-md-12">
+                                                  <select class="form-control" id="select-productos" onchange="cambioPrecio();">
+                                                         <?php Producto::llenarProductos($conexion); ?>
+                                                      </select>
                                                       
                                                   </div>
 
                                                   <br>
 
-                                                  <div class="col-2 mx-0 px-0">
-                                                       <button type="submit" value="Buscar" name="buscar" class="btn btn-primary" ><i class="fas fa-search"></i></button>
-                                                      
-                                                  </div>
                                                   
                                                   </div>
                                                   <br>

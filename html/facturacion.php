@@ -8,7 +8,7 @@ if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="cajero" || JWTokens::GetDat
   header('Location: ?view=401');
 }
 //
-
+include("php/clases/class_producto.php");
 include("php/clases/class_conexion.php");
 //se incluye la clase empleados parapoder llamar sus funciones desde el index
 

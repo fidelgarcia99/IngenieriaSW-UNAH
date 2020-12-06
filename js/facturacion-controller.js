@@ -63,3 +63,8 @@ function escogeCliente() {
   ).value;
 }
 
+
+function cambioPrecio()
+        {
+            document.getElementById('inputPrecioVenta').value=document.getElementById('select-productos').value;
+        }
