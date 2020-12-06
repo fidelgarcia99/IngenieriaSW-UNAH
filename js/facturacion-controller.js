@@ -125,7 +125,7 @@ function mouseOutRow(row){
 }
 
 function addRow(element){
-  let fila=`<td><input type="number" class="form-control" min="1" value="${element['Cantidad']}" onchange="cambiarCantidad(${element['Barcode']},this)" style="width:80px;"></td>`;
+  let fila=`<td><input type="number" class="form-control" min="1" value="${element['Cantidad']}" onchange="cambiarCantidad('${element['Barcode']}',this)" style="width:80px;"></td>`;
   let boton=`<button class="btn btn-danger" onclick="eliminaProducto(${element['Barcode']})" style="width:50px;"><i class="fas fa-trash"></i></button>`;
     fila+=`
         <td>${element['Barcode']}</td>
@@ -149,6 +149,8 @@ tbody.innerHTML='';
 
 function cambiarCantidad(barcode, input){
   carrito.forEach((item, i) => {
+console.log(item['Barcode']);
+console.log(barcode);
     if(item['Barcode']==barcode){
       item['Cantidad'] = parseInt(input.value);
     }
