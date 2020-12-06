@@ -27,25 +27,26 @@ function siscan(){
 function buscaProducto(barcode){
   let producto = obtenerRegistros("barcode",barcode,"inventario");
   producto.then(data=>{
-    //Se gregan las filas de datos
     data.forEach(element => {
-        let fila='<td><input type="number" class="form-control" min="1" value="1" style="width:80px;"></td>';
-        for(let i in element){
-          if(i=="Descripcion"){
-            element[i]=formatDescrip(element[i],element['Tipo']);
-          }
-          fila+=`
-              <td>${element[i]}</td>
-          `;
-        }
-        fila+=`<td>${element['Precio']}</td>`;
-        tbody.innerHTML+=`
-        <tr onmouseover="mouseOverRow(this)" onmouseout="mouseOutRow(this)">${fila}</tr>
-        `;
+      element['Cantidad']=1;
+      element['Precio'] = parseFloat(element['Precio']);
+      element['Descuento'] = parseFloat(element['Descuento']);
+      element['Descripcion']=formatDescrip(element['Descripcion'],element['Tipo']);
+      carrito.push(element);
     });
+    renderTabla();
   }).catch(err=>{
     console.error(err);
   });
+}
+
+function eliminaProducto(barcode){
+  carrito.forEach((item, i) => {
+    if(item['Barcode']==barcode){
+      carrito.splice(i,1);
+    }
+  });
+  renderTabla();
 }
 
 function cargarClientes(){
@@ -108,4 +109,37 @@ function mouseOverRow(row){
 function mouseOutRow(row){
   row.style="background-color:white;";
 }
+
+function addRow(element){
+  let fila=`<td><input type="number" class="form-control" min="1" value="${element['Cantidad']}" onchange="cambiarCantidad(${element['Barcode']},this)" style="width:80px;"></td>`;
+  let boton=`<button class="btn btn-danger" onclick="eliminaProducto(${element['Barcode']})" style="width:50px;"><i class="fas fa-trash"></i></button>`;
+    fila+=`
+        <td>${element['Barcode']}</td>
+        <td>${element['Descripcion']}</td>
+        <td>${element['Precio']}</td>
+        <td>${element['Descuento']}</td>
+        <td>${element['Precio'] * element['Cantidad']}</td>
+        <td>${boton}</td>
+    `;
+  tbody.innerHTML+=`
+  <tr onmouseover="mouseOverRow(this)" onmouseout="mouseOutRow(this)">${fila}</tr>
+  `;
+}
+
+function renderTabla(){
+tbody.innerHTML='';
+  carrito.forEach((item, i) => {
+    addRow(item);
+  });
+}
+
+function cambiarCantidad(barcode, input){
+  carrito.forEach((item, i) => {
+    if(item['Barcode']==barcode){
+      item['Cantidad'] = parseInt(input.value);
+    }
+  });
+  renderTabla();
+}
+
 siscan();

@@ -73,10 +73,12 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                          <thead id="thead">
                               <th style="width:100px;">Cantidad</th>
+                              <th>Barcode</th>
                               <th>Descripcion</th>
                               <th>Precio</th>
                               <th>Descuento</th>
                               <th>Total</th>
+                              <th style="width:100px;">Quitar</th>
                          </thead>
                          <tbody id="tbody">
                          </tbody>
