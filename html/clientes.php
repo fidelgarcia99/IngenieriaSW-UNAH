@@ -6,8 +6,8 @@ if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::Ge
 include("php/clases/class_conexion.php");
 //se incluye la clase empleados parapoder llamar sus funciones desde el index
 include_once("php/clases/class_cliente.php");
-//objeto Conexion
-$conexion = new Conexion();?>
+//objeto Conexi;on
+$conexion = new Conexion()?>
 <!DOCTYPE html>
 <html lang="en">
 

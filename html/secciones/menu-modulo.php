@@ -29,7 +29,7 @@
     echo '<button type="button" class="btn btn-danger mx-1" onclick="eliminarRegistro()" disabled id="btnDelete"><i class="fas fa-user-minus"></i></button>';
     break;
     case 'compras':
-    echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevoProductoModal"><i class="fas fa-user-plus"></i></button>';
+    echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nueva-compra-modal"><i class="fas fa-user-plus"></i></button>';
 
     break;
   }

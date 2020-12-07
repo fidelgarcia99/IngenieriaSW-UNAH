@@ -1,7 +1,11 @@
 <?php include(SECCIONES . 'valida-acceso.php');
 if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
   header('Location: ?view=401');
+ 
 }
+include("php/clases/class_conexion.php");
+include_once("php/clases/class_producto.php");
+$conexion = new Conexion()
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,6 +42,9 @@ if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::Ge
         <!-- /.container-fluid -->
 
         <?php include(SECCIONES . 'detalle-compra-modal.php')?>
+        
+        <?php include(SECCIONES . 'nueva-compra-modal.php')?>
+
 
       </div>
       <!-- End of Main Content -->

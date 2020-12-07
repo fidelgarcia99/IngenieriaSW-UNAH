@@ -8,7 +8,7 @@
                               <div class="col">
                                    <div class="card card-signin flex-row">
                                         <div class="card-body">
-                                             <h5 class="card-title text-center" id="modal-titulo"></h5>
+                                             <h5 class="card-title text-center" id="modal-titulo">Registrar Compra</h5>
                                              <table class="table table-bordered" id="detalle-compra-tabla" width="100%" cellspacing="0">
                                              <thead id="thead">
 
@@ -24,7 +24,7 @@
                     </div>
                </div>
                <div class="modal-footer py-0">
-                    <button type="button" class="btn btn-secondary" onclick="" data-dismiss="modal">Cerrar</button>                    
+                    <button type="button" class="btn btn-secondary" onclick="" data-dismiss="modal">Cerrar</button>                
                </div>
           </div>
      </div>
