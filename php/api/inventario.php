@@ -62,7 +62,31 @@
         break;
 
         case 'PUT':     //Actualizar producto
-            echo '{"res":"put"}';
+          if(isset($_POST['categoria']) && $_POST['categoria']!='' &&
+          isset($_POST['barcode']) && $_POST['barcode']!='' &&
+          isset($_POST['contenedor']) && $_POST['contenedor']!='' &&
+          isset($_POST['marca']) && $_POST['marca']!='' ){
+
+        
+
+          $producto = new producto(
+                        $_POST['categoria'] ,
+                        $_POST['barcode'],
+                        $_POST['contenedor'],
+                        $_POST['marca']
+                      );
+
+          if($usuario->actualizarUsuario($conexion,$_POST['selectId'])){
+            echo '{"res":"OK","mensaje":"Usuario Actualizado."}';
+          }else{
+               $res = array("res"=>"fail","mensaje"=>mysqli_error($conexion->getLink()));
+               echo json_encode($res);
+            }
+
+       }else{
+         echo '{"res":"fail","mensaje":"Debe ingresar todos los campos."}';
+       }
+          //  echo '{"res":"put"}';
         break;
 
         case 'DELETE':  //Eliminar producto

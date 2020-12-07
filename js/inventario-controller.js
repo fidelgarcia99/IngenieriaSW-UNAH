@@ -1,5 +1,6 @@
 var selectId=null;
 var confirm=false;
+var modo = true;
 
 function selectRow(idRow,row){
   if(selectId==null){
@@ -334,11 +335,11 @@ const registraProducto = async function(){
     }
 
     let respuesta=null;
-    //if (modo) {
+    if (modo) {
       respuesta = await nuevoRegistro(producto, "inventario");
-    //}else{
-    //  respuesta = await actualizaRegistro(cliente, "clientes");
-    //}
+    }else{
+     respuesta = await actualizaRegistro(producto, "inventario");
+    }
     if(respuesta!=null){
       if(respuesta.res=='OK'){
         document.getElementById('modal-success-message').innerHTML = respuesta.mensaje;
@@ -377,6 +378,26 @@ const eliminarRegistro = async function(){
       document.getElementById('modal-confirm-msj').innerHTML=`Esta a punto de eliminar el registro con Id:${selectId}.`;
       $('#modal-confirm').modal('show');
   }
+}
+
+var editarRegistro = function(){
+  let producto = obtenerRegistros('id', selectId, 'inventario');
+  producto.then(data=>{
+    if(data!=null){
+      data = data[0];
+      document.getElementById('select-categorias').value = data.categoria;
+      document.getElementById('input-barcode').value = data.barcode;
+      document.getElementById('select-contenedor').value = data.contenedor;
+      document.getElementById('select-marcas').value=data.marca;
+      document.getElementById('modal-titulo').innerHTML = "Editar Producto";
+      modo = false
+      $('#nuevoProductoModal').modal('show');
+    }else{
+      console.error('El servidor no ha devuelto un resultado');
+    }
+  }).catch(error=>{
+    console.error(error);
+  });
 }
 
 mostrarInventario();
