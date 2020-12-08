@@ -26,9 +26,11 @@
         break;
 
         case 'GET':     //Obtener cliente/s
-          if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-            $resultado = $conexion->ejecutarInstruccion("call DetalleProducto($id)");
+          if (isset($_GET['param']) && $_GET['param']!='') {
+            if ($_GET['param']=='id') {
+              $id = $_GET['value'];
+              $resultado = $conexion->ejecutarInstruccion("call DetalleProducto($id)");
+            }
           }else{
             $resultado = $conexion->ejecutarInstruccion("call Compras();");
           }
