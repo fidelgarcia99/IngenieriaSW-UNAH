@@ -11,6 +11,27 @@
 
                          <div class="container-fluid">
 
+
+                              <div class="row">
+
+                                <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
+                                  <div class="collapse navbar-collapse" id="navbarNav">
+                                    <ul class="navbar-nav">
+                                      <li class="nav-item mx-1 active">
+                                        <button type="button" class="btn btn-secondary">Nueva Factura F1</button>
+                                      </li>
+                                      <li class="nav-item mx-1">
+                                        <button type="button" class="btn btn-secondary">Consultar Precio F2</button>
+                                      </li>
+                                      <li class="nav-item mx-1">
+                                        <button type="button" class="btn btn-secondary">Adelanto Empleados F3</button>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </nav>
+
+                              </div>
+
                               <div class="row">
                                    <div class="col-5">
                                         <div class="input-group mb-2">
