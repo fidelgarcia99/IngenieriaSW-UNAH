@@ -10,7 +10,7 @@
 						nombre_cargo,
 						fecha_nombramiento,
 						idEmpleado,
-						sueldo_emp,
+						TRUNCATE(sueldo_emp,2) as sueldo_emp,
 						sueldo_total,
 						fechainicio,
 						fechafin,
