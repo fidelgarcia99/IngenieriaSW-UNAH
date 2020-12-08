@@ -18,13 +18,13 @@
                                   <div class="collapse navbar-collapse" id="navbarNav">
                                     <ul class="navbar-nav">
                                       <li class="nav-item mx-1 active">
-                                        <button type="button" class="btn btn-secondary">Nueva Factura F1</button>
+                                        <button type="button" class="btn btn-secondary">Nueva Factura Ctrl+1</button>
                                       </li>
                                       <li class="nav-item mx-1">
-                                        <button type="button" class="btn btn-secondary">Consultar Precio F2</button>
+                                        <button type="button" class="btn btn-secondary">Consultar Precio Ctrl+2</button>
                                       </li>
                                       <li class="nav-item mx-1">
-                                        <button type="button" class="btn btn-secondary">Adelanto Empleados F3</button>
+                                        <button type="button" class="btn btn-secondary">Adelanto Empleados Ctrl+3</button>
                                       </li>
                                     </ul>
                                   </div>
@@ -58,7 +58,7 @@
                                        <div class="input-group-prepend">
                                          <div class="input-group-text">Cliente</div>
                                        </div>
-                                       <input type="text" id="nombreCliente" class="form-control" required value="Consumidor Final">
+                                       <input type="text" id="nombreCliente" class="form-control" required value="Consumidor Final" onfocusin="onfocusInNombre(this)" onfocusout="onfocusOutNombre(this)">
                                      </div>
                                    </div>
                                    <div class="col-md-5">

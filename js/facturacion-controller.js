@@ -1,6 +1,11 @@
 var carrito = Array();
 
 function scan(event){
+
+  if (window.event.keyCode==112) {
+    window.event.preventDefault();
+    alert('hola');
+  }
   if (event.keyCode >47 && event.keyCode<58) {
     document.getElementById('input-codigo').value+=event.key;
   }else{
@@ -158,4 +163,26 @@ console.log(barcode);
   renderTabla();
 }
 
+function onfocusInNombre(object){
+  noscan();
+  if (object.value=="Consumidor Final") {
+    object.value="";
+  }
+}
+
+function onfocusOutNombre(object){
+  siscan();
+  if (object.value=='') {
+    object.value="Consumidor Final";
+  }
+}
+
+function adelantoEmpleado(){
+  data = {};
+  nuevoRegistro(data,"facturacion");
+}
+
 siscan();
+shortcut.add("Ctrl+1", adelantoEmpleado);
+shortcut.add("Ctrl+2", adelantoEmpleado);
+shortcut.add("Ctrl+3", adelantoEmpleado);
