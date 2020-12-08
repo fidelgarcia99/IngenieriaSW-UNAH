@@ -32,7 +32,7 @@ class Producto{
 		$this->marca = $marca;
 	}
 
-	public function registrarProducto($conexion){		
+	public function registrarProducto($conexion){
 		return $conexion->ejecutarInstruccion("
 			call SPnuevo_producto(
 			'$this->descripcion',
@@ -45,7 +45,14 @@ class Producto{
 
 	public function actualizarProducto($conexion,$id){
 		return $conexion->ejecutarInstruccion("
-			call SPactualiza_producto();");
+			call SPactualiza_producto(
+				$id,
+				'$this->descripcion',
+				'$this->barcode',
+				$this->contenedor,
+				$this->categoria,
+				$this->marca
+			);");
 	}
 
 	public static function eliminarProducto($conexion, $id_registro){
