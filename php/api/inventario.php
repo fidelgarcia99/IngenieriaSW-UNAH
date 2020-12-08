@@ -57,7 +57,11 @@
             if(isset($_GET['param'])){
               if ($_GET['param']=="barcode") {
                 $barcode=$_GET['value'];
-                $resultado = $conexion->ejecutarInstruccion('call Producto("'.$barcode.'");');
+                $resultado = $conexion->ejecutarInstruccion('call ProductoBarcode("'.$barcode.'");');
+              }
+              if ($_GET['param']=="id") {
+                $id=$_GET['value'];
+                $resultado = $conexion->ejecutarInstruccion('call ProductoId("'.$id.'");');
               }
             }else{
               $resultado = $conexion->ejecutarInstruccion('call Inventario();');
@@ -70,7 +74,30 @@
         break;
 
         case 'PUT':     //Actualizar producto
-            echo '{"res":"put"}';
+        if(isset($_POST['descripcion']) && $_POST['descripcion']!='' &&
+           isset($_POST['barcode']) && isset($_POST['marca']) &&
+           isset($_POST['contenedor']) && $_POST['contenedor']!='' &&
+           isset($_POST['categoria']) && $_POST['categoria']!='' &&
+            isset($_POST['id']) && $_POST['id']!=''){
+
+           $producto = new Producto(
+                         $_POST['descripcion'] ,
+                         $_POST['barcode'] ,
+                         0 , 0 , 0 , 0 ,
+                         $_POST['contenedor'] ,
+                         $_POST['categoria'] ,
+                         $_POST['marca']
+                       );
+
+           if($producto->actualizarProducto($conexion,$_POST['id'])){
+             echo '{"res":"OK","mensaje":"Producto Actualizado."}';
+           }else{
+                $res = array("res"=>"fail","mensaje"=>mysqli_error($conexion->getLink()));
+                echo json_encode($res);
+             }
+        }else{
+          echo '{"res":"fail","mensaje":"Debe ingresar todos los campos."}';
+        }
         break;
 
         case 'DELETE':  //Eliminar producto
