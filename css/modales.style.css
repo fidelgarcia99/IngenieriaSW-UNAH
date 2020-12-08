@@ -16,7 +16,8 @@
   max-width: 100%;
 }
 #modal-confirm-msj
-#modal-confirm-despedir-msj {
+#modal-confirm-despedir-msj
+#modal-confirm-pagar-planilla-msj {
   text-align: center;
 }
 
@@ -35,6 +36,15 @@
 #modal-confirm-despedir .modal-content{
   max-width: 100%;
 }
+
+#modal-confirm-pagar-planilla .modal-dialog{
+  max-width: 20%;
+  padding-top: 10%;
+}
+#modal-confirm-pagar-planilla .modal-content{
+  max-width: 100%;
+}
+
 .modal-footer{
   justify-content: space-between ;
 }

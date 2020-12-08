@@ -98,6 +98,8 @@
 			INSERT INTO empleado_x_deduccion(Empleado_idEmpleado, Empleado_Persona_idPersona, Deduccion_idDeduccion, fecha_emp_deduc, estado_emp_deduc, Planilla_idPlanilla) 
 			VALUES ('$idEmpleado','$idPersona','$idDeduccion','$fecha','$estado','$idPlanilla')
 			");
+
+			$conexion->ejecutarInstruccion("CALL SPsueldo_total($idEmpleado, $idPlanilla)");
         }
 		
 		public static function selectEmpleados($conexion){

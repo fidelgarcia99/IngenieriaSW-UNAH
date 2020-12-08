@@ -41,6 +41,7 @@
                       <th>Deducciones</th>
                       <th>Bonos</th>
                       <th>Sueldo</th>
+                      <th>Total</th>
                       <th>Estado</th>
                     </tr>
                   </thead>
