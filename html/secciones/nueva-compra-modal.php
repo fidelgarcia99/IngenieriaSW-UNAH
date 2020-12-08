@@ -22,11 +22,15 @@
                                              <br>
                                              <h6>Fecha de Factura</h6>
                                              <div class="input-group">
-                                             <input type="date" id="numFactura" class="form-control" placeholder="Número de Factura" required autofocus>
+                                             <input type="date" id="fechaFactura" class="form-control" placeholder="Número de Factura" required autofocus>
                                              </div>
                                              <br>
                                              <div class="input-group">
                                                   <input type="number" id="ISV" class="form-control" placeholder="ISV" required autofocus>
+                                             </div>
+                                             <br>
+                                             <div class="input-group">
+                                                  <input type="number" id="descuento" class="form-control" placeholder="Descuento" required autofocus>
                                              </div>
                                              <br>
                                              <div class="input-group">
