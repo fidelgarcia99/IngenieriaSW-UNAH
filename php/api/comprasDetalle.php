@@ -31,7 +31,7 @@
            isset($_POST['descuento']) && $_POST['descuento']!='' &&
            isset($_POST['total']) && $_POST['total']!='' ){
 
-           $compraDeatlle = new Compra(
+           $compraDetalle = new Compra(
 
                         $_POST['numFactura'] ,
                         $_POST['producto'] ,
