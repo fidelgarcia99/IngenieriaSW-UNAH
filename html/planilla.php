@@ -6,7 +6,7 @@
   include_once("php/clases/class_planilla.php");
   include_once("php/clases/class_deducciones.php");
   include_once("php/clases/class_bonos.php");
-  //objeto Conexion 
+  //objeto Conexion
   $conexion = new Conexion();
 ?>
 <!DOCTYPE html>
@@ -56,7 +56,7 @@
 
       </div>
       <!-- End of Main Content -->
-      
+
       <!-- Footer -->
       <?php include(SECCIONES . 'footer.php')?>
       <!-- End of Footer -->
@@ -87,6 +87,7 @@
 <script src="js/planilla-controller.js"></script>
 <script src="js/deducciones-controller.js"></script>
 <script src="js/bonos-controller.js"></script>
+<script src="js/product-format.js"></script>
 
 </body>
 
