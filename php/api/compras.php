@@ -62,7 +62,7 @@
               $resultado = $conexion->ejecutarInstruccion("call DetalleProducto($id)");
             }
           }else{
-            $resultado = $conexion->ejecutarInstruccion("call Compras();");
+            $resultado = $conexion->ejecutarInstruccion("call Factura_Compras();");
           }
             $res = array(); //creamos un array
             while($row = mysqli_fetch_assoc($resultado))

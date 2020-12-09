@@ -26,8 +26,8 @@ class Compra{
 	}
 
 	public function registrarCompra($conexion){
-		return $conexion->ejecutarInstruccion("call SPnuevoingresar_facturacompras('$this->numFactura', '$this->nom_proveedor', 
-		                                        '$this->fechaFactura', '$this->ISV', '$this->descuento', '$this->total');");
+		return $conexion->ejecutarInstruccion("call SPnuevoingresar_facturacompras('$this->nom_proveedor', $this->total, 
+		                                        $this->ISV, $this->descuento, '$this->numFactura', '$this->fechaFactura');");
 	}
 
 	public static function llenarFacturaCompra($conexion){
@@ -40,7 +40,7 @@ class Compra{
 				if ($c==0) {
 					?>
 					<option value="<?php echo $fila_compra["idfactura"];?>">
-						<?php echo $fila_compra["num_Factura"];?>
+						<?php echo $fila_compra["num_factura"];?>
 
 					</option>
 
