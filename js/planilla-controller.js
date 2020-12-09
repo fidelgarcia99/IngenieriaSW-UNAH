@@ -35,7 +35,7 @@ function planilla(){
 			{"data":"fecha_nombramiento"},
 			{"data":"idEmpleado",
 				"render": function ( data, type, row ) {
-				return '<div class="text-center"><button type="button" onclick="deducciones('+data+', '+idPlanilla+')" class="btn btn-primary" data-toggle="modal" data-target="#deducciones">Deducciones</button></div>';}
+				return '<div class="text-center"><button type="button" onclick="deducciones('+data+', '+idPlanilla+');adelantos('+data+', '+idPlanilla+')" class="btn btn-primary" data-toggle="modal" data-target="#deducciones">Deducciones</button></div>';}
 			},
 			{"data":"idEmpleado",
 				"render": function ( data, type, row ) {
