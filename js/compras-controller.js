@@ -62,6 +62,49 @@ var registrarCompra = async function(){
       }
 }
 
+var registrarCompraDetalle = async function(){
+  let numFactura = document.getElementById('numFactura').value;
+  let producto = document.getElementById('producto').value;
+  let cantidad = document.getElementById('cantidad').value;
+  let precio = document.getElementById('precio').value;
+  let ISV = document.getElementById('ISV').value;
+  let descuento = document.getElementById('descuento').value;
+  let total = document.getElementById('total').value;
+
+
+      let compraDetalle = {
+        numFactura : numFactura,
+        producto : producto,
+        cantidad : cantidad,
+        precio : precio,
+        ISV : ISV,
+        descuento : descuento,
+        total : total
+      }
+
+        let respuesta=null;
+      if (modo) {
+        respuesta = await nuevoRegistro(compraDetalle, "comprasDetalle");
+    //  }else{
+      //  respuesta = await actualizaRegistro(cliente, "clientes");
+      }
+
+      if(respuesta!=null){
+        if(respuesta.res=='OK'){
+          document.getElementById('modal-success-message').innerHTML = respuesta.mensaje;
+          $('#nueva-compradetalle-modal').modal('hide');
+          $('#modal-success').modal('show');
+          setTimeout(()=>$('#modal-success').modal('hide'), 2000);
+          limpiarModal();
+          mostrarCompras();
+        }else{
+          document.getElementById('errorMessage').innerHTML=respuesta.mensaje;
+          document.getElementById('errorMessage').style='display:block';
+        }
+      }
+    }
+  
+    
 var limpiarModal = function(){
   document.getElementById('numFactura').value='';
   document.getElementById('nom_proveedor').value='';

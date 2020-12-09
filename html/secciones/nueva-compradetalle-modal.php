@@ -12,20 +12,20 @@
                                             
                                              <h6>Facturas</h6>
                                              <div class="form-label-group">
-                                                  <select class="form-control" id="nom_proveedor">
+                                                  <select class="form-control" id="numFactura">
                                                        <?php Compra::llenarFacturaCompra($conexion); ?>
                                                   </select>
                                              </div>
                                              <br>
                                              <h6>Producto</h6>
                                              <div class="form-label-group">
-                                                  <select class="form-control" id="nom_proveedor">
+                                                  <select class="form-control" id="producto">
                                                        <?php Compra::llenarProducto($conexion); ?>
                                                   </select>
                                              </div>
                                              <br>
                                              <div class="input-group">
-                                                  <input type="number" id="cant" class="form-control" placeholder="Cantidad" required autofocus>
+                                                  <input type="number" id="cantidad" class="form-control" placeholder="Cantidad" required autofocus>
                                              </div>
                                              <br>
                                              <div class="input-group">
@@ -52,7 +52,7 @@
                </div>
                <div class="modal-footer py-0">
                     <button type="button" class="btn btn-secondary" onclick="limpiarModal();" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="">Aceptar</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="registrarCompraDetalle()">Aceptar</button>
                </div>
           </div>
      </div>

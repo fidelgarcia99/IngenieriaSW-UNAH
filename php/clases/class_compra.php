@@ -6,6 +6,9 @@ class Compra{
      private $ISV;
      private $descuento;
 	private $total;
+	private $precio;
+	private $cantidad;
+	private $producto;
 	
 	public function __construct(
 		$numFactura = null,
@@ -13,7 +16,10 @@ class Compra{
 		$fechaFactura = null,
           $ISV = null,
           $descuento = null,
-		$total = null
+		$total = null,
+		$precio = null,
+		$cantidad = null,
+		$producto = null
 		
 	){
 		$this->numFactura = $numFactura;
@@ -22,12 +28,20 @@ class Compra{
           $this->ISV = $ISV;
           $this->descuento = $descuento;
 		$this->total = $total;
+		$this->precio = $precio;
+		$this->cantidad = $cantidad;
+		$this->producto = $producto;
 		
 	}
 
 	public function registrarCompra($conexion){
 		return $conexion->ejecutarInstruccion("call SPnuevoingresar_facturacompras('$this->nom_proveedor', $this->total, 
 		                                        $this->ISV, $this->descuento, '$this->numFactura', '$this->fechaFactura');");
+	}
+
+	public function registrarCompraDetalle($conexion){
+		return $conexion->ejecutarInstruccion("call SPnuevo_detalle_compra('$this->producto','$this->numFactura',  
+		                                        '$this->cantidad', $this->precio, $this->ISV, $this->descuento, $this->total);");
 	}
 
 	public static function llenarFacturaCompra($conexion){

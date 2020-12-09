@@ -22,26 +22,28 @@
     //Servicios web
     switch($_SERVER['REQUEST_METHOD']){
 
-        case 'POST':    //Crear compra
+        case 'POST':    //Crear compraDetalle
           if(isset($_POST['numFactura']) && $_POST['numFactura']!='' &&
-           isset($_POST['nom_proveedor']) && $_POST['nom_proveedor']!='' &&
-           isset($_POST['fechaFactura']) && $_POST['fechaFactura']!='' &&
+           isset($_POST['producto']) && $_POST['producto']!='' &&
+           isset($_POST['cantidad']) && $_POST['cantidad']!='' &&
+           isset($_POST['precio']) && $_POST['precio']!='' &&
            isset($_POST['ISV']) && $_POST['ISV']!='' &&
            isset($_POST['descuento']) && $_POST['descuento']!='' &&
            isset($_POST['total']) && $_POST['total']!='' ){
 
-           $compra = new Compra(
+           $compraDeatlle = new Compra(
 
                         $_POST['numFactura'] ,
-                        $_POST['nom_proveedor'] ,
-                        $_POST['fechaFactura'] ,
+                        $_POST['producto'] ,
+                        $_POST['cantidad'] ,
+                        $_POST['precio'] ,
                         $_POST['ISV'] ,
                         $_POST['descuento'] ,
                         $_POST['total']
                         );
 
-                      if($compra->registrarCompra($conexion)){
-                        echo '{"res":"OK","mensaje":"Compra creada."}';
+                      if($compraDetalle->registrarCompraDetalle($conexion)){
+                        echo '{"res":"OK","mensaje":"Detalle de compra registrado."}';
                       }else{
                         if(mysqli_errno($conexion->getLink()) == 1062)
                             echo '{"res":"fail","mensaje":"El Registro ya existe."}';
@@ -56,20 +58,7 @@
         break;
 
         case 'GET':     //Obtener cliente/s
-          if (isset($_GET['param']) && $_GET['param']!='') {
-            if ($_GET['param']=='id') {
-              $id = $_GET['value'];
-              $resultado = $conexion->ejecutarInstruccion("call detalle_compra($id)");
-            }
-          }else{
-            $resultado = $conexion->ejecutarInstruccion("call Factura_Compras();");
-          }
-            $res = array(); //creamos un array
-            while($row = mysqli_fetch_assoc($resultado))
-            {
-                $res[] = $row;
-            }
-            echo json_encode($res);
+          
         break;
 
         case 'PUT':     //Actualizar cliente
