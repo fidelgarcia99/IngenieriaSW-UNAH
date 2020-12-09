@@ -1,4 +1,4 @@
-<div class="modal fade" id="nueva-compra-modal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="nueva-compradetalle-modal" tabindex="-1" role="dialog" aria-hidden="true">
      <div class="modal-dialog" role="document">
           <div class="modal-content">
 
@@ -8,21 +8,28 @@
                               <div class="col">
                                    <div class="card card-signin flex-row">
                                         <div class="card-body">
-                                             <h5 class="card-title text-center" id="modal-titulo">Registrar Compra</h5>
-                                             <div class="input-group">
-                                                  <input type="number" id="numFactura" class="form-control" placeholder="Número de Factura" required autofocus>
-                                             </div>
-                                             <br>
-                                             <h6>Proveedor</h6>
+                                             <h5 class="card-title text-center" id="modal-titulo">Registrar Detalles de Compra</h5>
+                                            
+                                             <h6>Facturas</h6>
                                              <div class="form-label-group">
                                                   <select class="form-control" id="nom_proveedor">
-                                                       <?php Producto::llenarProveedor($conexion); ?>
+                                                       <?php Compra::llenarFacturaCompra($conexion); ?>
                                                   </select>
                                              </div>
                                              <br>
-                                             <h6>Fecha de Factura</h6>
+                                             <h6>Producto</h6>
+                                             <div class="form-label-group">
+                                                  <select class="form-control" id="nom_proveedor">
+                                                       <?php Compra::llenarProducto($conexion); ?>
+                                                  </select>
+                                             </div>
+                                             <br>
                                              <div class="input-group">
-                                             <input type="date" id="fechaFactura" class="form-control" placeholder="Número de Factura" required autofocus>
+                                                  <input type="number" id="cant" class="form-control" placeholder="Cantidad" required autofocus>
+                                             </div>
+                                             <br>
+                                             <div class="input-group">
+                                             <input type="number" id="precio" class="form-control" placeholder="Precio" required autofocus>
                                              </div>
                                              <br>
                                              <div class="input-group">
@@ -45,7 +52,7 @@
                </div>
                <div class="modal-footer py-0">
                     <button type="button" class="btn btn-secondary" onclick="limpiarModal();" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="registrarCompra();">Aceptar</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="">Aceptar</button>
                </div>
           </div>
      </div>

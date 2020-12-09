@@ -3,6 +3,7 @@
     require_once('../../vendor/autoload.php');
     require_once('../config.php');
     require_once("../clases/class_conexion.php");
+    include_once("../clases/class_compra.php");
     require_once("../clases/class_jwt.php");
     require_once("../verificaToken.php");
     $conexion = new Conexion();
@@ -21,8 +22,37 @@
     //Servicios web
     switch($_SERVER['REQUEST_METHOD']){
 
-        case 'POST':    //Crear cliente
+        case 'POST':    //Crear compra
+          if(isset($_POST['numFactura']) && $_POST['numFactura']!='' &&
+           isset($_POST['nom_proveedor']) && $_POST['nom_proveedor']!='' &&
+           isset($_POST['fechaFactura']) && $_POST['fechaFactura']!='' &&
+           isset($_POST['ISV']) && $_POST['ISV']!='' &&
+           isset($_POST['descuento']) && $_POST['descuento']!='' &&
+           isset($_POST['total']) && $_POST['total']!='' ){
 
+           $compra = new Compra(
+
+                        $_POST['numFactura'] ,
+                        $_POST['nom_proveedor'] ,
+                        $_POST['fechaFactura'] ,
+                        $_POST['ISV'] ,
+                        $_POST['descuento'] ,
+                        $_POST['total'],
+                        );
+
+                      if($compra->registrarCompra($conexion)){
+                        echo '{"res":"OK","mensaje":"Compra creada."}';
+                      }else{
+                        if(mysqli_errno($conexion->getLink()) == 1062)
+                            echo '{"res":"fail","mensaje":"El Registro ya existe."}';
+                        else{
+                          $res = array("res"=>"fail","mensaje"=>mysqli_error($conexion->getLink()));
+                          echo json_encode($res);
+                        }
+                      }
+                  }else{
+                    echo '{"res":"fail","mensaje":"Debe ingresar todos los campos."}';
+                  }
         break;
 
         case 'GET':     //Obtener cliente/s
@@ -49,4 +79,3 @@
         case 'DELETE':  //Eliminar cliente
 
     }
-?>
