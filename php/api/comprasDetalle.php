@@ -34,13 +34,16 @@
            $compraDetalle = new Compra(
 
                         $_POST['numFactura'] ,
-                        $_POST['producto'] ,
-                        $_POST['cantidad'] ,
-                        $_POST['precio'] ,
+                        null,
+                        null,
                         $_POST['ISV'] ,
                         $_POST['descuento'] ,
-                        $_POST['total']
+                        $_POST['total'],
+                        $_POST['precio'] ,
+                        $_POST['cantidad'] ,
+                        $_POST['producto'] 
                         );
+
 
                       if($compraDetalle->registrarCompraDetalle($conexion)){
                         echo '{"res":"OK","mensaje":"Detalle de compra registrado."}';

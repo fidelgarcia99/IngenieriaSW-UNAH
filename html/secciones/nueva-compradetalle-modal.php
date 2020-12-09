@@ -12,36 +12,36 @@
                                             
                                              <h6>Facturas</h6>
                                              <div class="form-label-group">
-                                                  <select class="form-control" id="numFactura">
+                                                  <select class="form-control" id="numFacturaDetalle">
                                                        <?php Compra::llenarFacturaCompra($conexion); ?>
                                                   </select>
                                              </div>
                                              <br>
                                              <h6>Producto</h6>
                                              <div class="form-label-group">
-                                                  <select class="form-control" id="producto">
+                                                  <select class="form-control" id="productoDetalle">
                                                        <?php Compra::llenarProducto($conexion); ?>
                                                   </select>
                                              </div>
                                              <br>
                                              <div class="input-group">
-                                                  <input type="number" id="cantidad" class="form-control" placeholder="Cantidad" required autofocus>
+                                                  <input type="number" id="cantidadDetalle" class="form-control" placeholder="Cantidad" required autofocus>
                                              </div>
                                              <br>
                                              <div class="input-group">
-                                             <input type="number" id="precio" class="form-control" placeholder="Precio" required autofocus>
+                                             <input type="number" id="precioDetalle" class="form-control" placeholder="Precio" required autofocus>
                                              </div>
                                              <br>
                                              <div class="input-group">
-                                                  <input type="number" id="ISV" class="form-control" placeholder="ISV" required autofocus>
+                                                  <input type="number" id="ISVDetalle" class="form-control" placeholder="ISV" required autofocus>
                                              </div>
                                              <br>
                                              <div class="input-group">
-                                                  <input type="number" id="descuento" class="form-control" placeholder="Descuento" required autofocus>
+                                                  <input type="number" id="descuentoDetalle" class="form-control" placeholder="Descuento" required autofocus>
                                              </div>
                                              <br>
                                              <div class="input-group">
-                                                  <input type="number" id="total" class="form-control" placeholder="Total" required autofocus>
+                                                  <input type="number" id="totalDetalle" class="form-control" placeholder="Total" required autofocus>
                                              </div>
 
                                         </div>

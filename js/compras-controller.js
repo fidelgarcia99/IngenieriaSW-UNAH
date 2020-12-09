@@ -63,24 +63,26 @@ var registrarCompra = async function(){
 }
 
 var registrarCompraDetalle = async function(){
-  let numFactura = document.getElementById('numFactura').value;
-  let producto = document.getElementById('producto').value;
-  let cantidad = document.getElementById('cantidad').value;
-  let precio = document.getElementById('precio').value;
-  let ISV = document.getElementById('ISV').value;
-  let descuento = document.getElementById('descuento').value;
-  let total = document.getElementById('total').value;
+  let numFacturaDetalle = document.getElementById('numFacturaDetalle').value;
+  let productoDetalle = document.getElementById('productoDetalle').value;
+  let cantidadDetalle = document.getElementById('cantidadDetalle').value;
+  let precioDetalle = document.getElementById('precioDetalle').value;
+  let ISVDetalle = document.getElementById('ISVDetalle').value;
+  let descuentoDetalle = document.getElementById('descuentoDetalle').value;
+  let totalDetalle = document.getElementById('totalDetalle').value;
 
 
       let compraDetalle = {
-        numFactura : numFactura,
-        producto : producto,
-        cantidad : cantidad,
-        precio : precio,
-        ISV : ISV,
-        descuento : descuento,
-        total : total
+        numFactura : numFacturaDetalle,
+        producto : productoDetalle,
+        cantidad : cantidadDetalle,
+        precio : precioDetalle,
+        ISV : ISVDetalle,
+        descuento : descuentoDetalle,
+        total : totalDetalle
       }
+
+      console.log(compraDetalle);
 
         let respuesta=null;
       if (modo) {

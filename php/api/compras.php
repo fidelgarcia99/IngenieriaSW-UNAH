@@ -59,7 +59,7 @@
           if (isset($_GET['param']) && $_GET['param']!='') {
             if ($_GET['param']=='id') {
               $id = $_GET['value'];
-              $resultado = $conexion->ejecutarInstruccion("call detalle_compra($id)");
+              $resultado = $conexion->ejecutarInstruccion("call DetalleProducto($id)");
             }
           }else{
             $resultado = $conexion->ejecutarInstruccion("call Factura_Compras();");
