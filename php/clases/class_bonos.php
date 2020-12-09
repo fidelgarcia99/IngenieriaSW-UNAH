@@ -97,7 +97,7 @@
 			VALUES ('$idEmpleado','$idPersona','$idBono','$estado','$idPlanilla')
 			");
 
-			$conexion->ejecutarInstruccion("CALL SPsueldo_total($idEmpleado, $idPlanilla)");
+			$conexion->ejecutarInstruccion("CALL SPsueldo_total($idEmpleado)");
 		}
 
 		public static function selectEmpleados($conexion){
