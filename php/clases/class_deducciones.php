@@ -99,7 +99,7 @@
 			VALUES ('$idEmpleado','$idPersona','$idDeduccion','$fecha','$estado','$idPlanilla')
 			");
 
-			$conexion->ejecutarInstruccion("CALL SPsueldo_total($idEmpleado, $idPlanilla)");
+			$conexion->ejecutarInstruccion("CALL SPsueldo_total($idEmpleado)");
         }
 
 		public static function selectEmpleados($conexion){
