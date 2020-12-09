@@ -147,5 +147,35 @@
 			$conexion->liberarResultado($sql);
 
 		}
+
+		public static function adelantos($conexion, $idEmpleado, $idPlanilla){
+
+			$sql = $conexion->ejecutarInstruccion("CALL AdelantoProductos($idEmpleado, $idPlanilla)");
+	
+			$registros = $conexion->cantidadRegistros($sql);
+	
+			if ($registros > 0) {
+				while ($row = $conexion->obtenerFila($sql)) {	
+					?>
+						<tr>
+							<td><?php echo $row["descp_gral"];?></td>
+							<td><?php echo $row["fechaRegistro"];?></td>
+							<td><?php echo $row["monto_adelanto"];?></td>
+							
+						</tr>
+					<?php	
+				}
+			}else{
+				?>
+				<tr>
+					<td><?php echo "No tiene adelantos!";?></td>
+				</tr>
+			<?php	
+			}
+	
+			 $conexion->liberarResultado($sql);
+	
+		}
 	}
+	
 ?>
