@@ -80,6 +80,7 @@ $conexion = new Conexion();?>
   <!-- Page level custom scripts -->
   <script src="<?php echo JS?>product-format.js"></script>
   <script src="<?php echo JS?>axios-calls.js"></script>
+  <script src="<?php echo JS?>shortcuts.js"></script>
   <script src="<?php echo JS?>facturacion-controller.js"></script>
 
 </body>
