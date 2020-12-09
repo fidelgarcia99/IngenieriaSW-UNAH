@@ -24,7 +24,7 @@
                                         <button type="button" class="btn btn-secondary">Consultar Precio Ctrl+2</button>
                                       </li>
                                       <li class="nav-item mx-1">
-                                        <button type="button" class="btn btn-secondary">Adelanto Empleados Ctrl+3</button>
+                                        <button type="button" onclick="adelantoEmpleado();" class="btn btn-secondary">Adelanto Empleados Ctrl+3</button>
                                       </li>
                                     </ul>
                                   </div>
@@ -111,7 +111,7 @@
                            <div class="input-group-prepend">
                              <div class="input-group-text">SubTotal</div>
                            </div>
-                           <input type="number" class="form-control input-sm" id="nFactura" value="00.00" readonly>
+                           <input type="number" class="form-control input-sm" id="input-subtotal" value="00.00" readonly>
                          </div>
                     </div>
                </div>
@@ -121,7 +121,7 @@
                            <div class="input-group-prepend">
                              <div class="input-group-text">Descuento</div>
                            </div>
-                           <input type="number" class="form-control input-sm" id="nFactura" value="00000" readonly>
+                           <input type="number" class="form-control input-sm" id="input-descuento" value="00.00" readonly>
                          </div>
                     </div>
                </div>
@@ -131,7 +131,7 @@
                            <div class="input-group-prepend">
                              <div class="input-group-text">IVS</div>
                            </div>
-                           <input type="numbre" class="form-control input-sm" id="nFactura" value="00000" readonly>
+                           <input type="numbre" class="form-control input-sm" id="input-ivs" value="00.00" readonly>
                          </div>
                     </div>
                </div>
@@ -141,7 +141,7 @@
                            <div class="input-group-prepend">
                              <div class="input-group-text">Total</div>
                            </div>
-                           <input type="number" class="form-control input-sm" id="nFactura" value="00000" readonly>
+                           <input type="number" class="form-control input-sm" id="input-total" value="00.00" readonly>
                          </div>
                     </div>
                </div>
@@ -149,3 +149,4 @@
      </div>
 
 </div>
+<?php include(SECCIONES . 'success-modal.php') ?>

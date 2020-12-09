@@ -1,4 +1,8 @@
 var carrito = Array();
+var subtotal = 0;
+var descuento = 0;
+var total = 0;
+var ivs = 0;
 
 function scan(event){
 
@@ -37,6 +41,8 @@ function buscaProducto(barcode){
       element['Precio'] = parseFloat(element['Precio']);
       element['Descuento'] = parseFloat(element['Descuento']);
       element['Descripcion']=formatDescrip(element['Descripcion'],element['Tipo']);
+      element['Id'] = parseInt(element['Id']);
+      element['Total']=0;
 
       if (carrito.length>0) {
         let alreadyExist = false;
@@ -52,6 +58,7 @@ function buscaProducto(barcode){
       }else{
         carrito.push(element);
       }
+      calcuarTotal();
     });
     renderTabla();
   }).catch(err=>{
@@ -65,6 +72,7 @@ function eliminaProducto(barcode){
       carrito.splice(i,1);
     }
   });
+  calcuarTotal();
   renderTabla();
 }
 
@@ -131,13 +139,13 @@ function mouseOutRow(row){
 
 function addRow(element){
   let fila=`<td><input type="number" class="form-control" min="1" value="${element['Cantidad']}" onchange="cambiarCantidad('${element['Barcode']}',this)" style="width:80px;"></td>`;
-  let boton=`<button class="btn btn-danger" onclick="eliminaProducto(${element['Barcode']})" style="width:50px;"><i class="fas fa-trash"></i></button>`;
+  let boton=`<button class="btn btn-danger" onclick="eliminaProducto('${element['Barcode']}')" style="width:50px;"><i class="fas fa-trash"></i></button>`;
     fila+=`
         <td>${element['Barcode']}</td>
         <td>${element['Descripcion']}</td>
         <td>${element['Precio']}</td>
         <td>${element['Descuento']}</td>
-        <td>${element['Precio'] * element['Cantidad']}</td>
+        <td>${element['Total']}</td>
         <td>${boton}</td>
     `;
   tbody.innerHTML+=`
@@ -154,12 +162,11 @@ tbody.innerHTML='';
 
 function cambiarCantidad(barcode, input){
   carrito.forEach((item, i) => {
-console.log(item['Barcode']);
-console.log(barcode);
     if(item['Barcode']==barcode){
       item['Cantidad'] = parseInt(input.value);
     }
   });
+  calcuarTotal();
   renderTabla();
 }
 
@@ -178,8 +185,75 @@ function onfocusOutNombre(object){
 }
 
 function adelantoEmpleado(){
-  data = {};
-  nuevoRegistro(data,"facturacion");
+carrito.forEach((item, i) => {
+  data = {
+    idEmpleado:parseInt(document.getElementById('nombreCliente').value),
+    idProducto:parseInt(item['Id']),
+    monto:item['Total'],
+    cantidad:item['Cantidad']
+  };
+
+  let respuesta=actualizaRegistro(data,"deducciones");
+
+  respuesta.then(res=>{
+    if(res!=null){
+      if(res.res=='OK'){
+        document.getElementById('modal-success-message').innerHTML = res.mensaje;
+        $('#modal-success').modal('show');
+        setTimeout(()=>$('#modal-success').modal('hide'), 2000);
+        limpiarFactura();
+      }else if(res.res=='fail'){
+        console.error(res.mensaje);
+      }
+    }else{
+      console.error('El servidor no ha devuelto nada.');
+    }
+  }).catch(err=>{
+    console.error(error);
+  });
+
+
+});
+
+}
+
+function limpiarFactura(){
+  document.getElementById('nombreCliente').value='';
+  document.getElementById('RTNCliente').value='';
+  document.getElementById('input-codigo').value='';
+  document.getElementById('input-total').value = '00.00';
+  document.getElementById('input-descuento').value = '00.00';
+  document.getElementById('input-ivs').value = '00.00';
+  document.getElementById('input-subtotal').value = '00.00';
+  total=0;
+  descuento=0;
+  subtotal=0;
+  ivs = 0;
+  carrito = [];
+  renderTabla();
+}
+
+function calcuarTotal(){
+  let totalt = 0;
+  let descuentot = 0;
+
+  carrito.forEach((item, i) => {
+    let d = item['Precio'] * (item['Descuento']/100);
+    item['Total'] = Math.round(((item['Precio'] - d ) * item['Cantidad'])*100)/100;
+
+    descuentot += d * item['Cantidad'];
+    totalt += item['Total'];
+  });
+
+  total = Math.round(totalt*100)/100;
+  descuento = Math.round(descuentot*100)/100;
+  ivs = Math.round((total-total/1.15)*100)/100;
+
+  document.getElementById('input-subtotal').value = Math.round((total-ivs)*100)/100;
+  document.getElementById('input-ivs').value = ivs;
+  document.getElementById('input-descuento').value = descuento;
+  document.getElementById('input-total').value = total;
+
 }
 
 siscan();
