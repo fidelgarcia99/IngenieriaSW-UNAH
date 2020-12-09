@@ -21,7 +21,7 @@
                                         <button type="button" class="btn btn-secondary">Nueva Factura Ctrl+1</button>
                                       </li>
                                       <li class="nav-item mx-1">
-                                        <button type="button" class="btn btn-secondary">Consultar Precio Ctrl+2</button>
+                                        <button type="button" class="btn btn-secondary" data-target="#nuevoConsulta">Consultar Precio Ctrl+2</button>
                                       </li>
                                       <li class="nav-item mx-1">
                                         <button type="button" onclick="adelantoEmpleado();" class="btn btn-secondary">Adelanto Empleados Ctrl+3</button>

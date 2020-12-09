@@ -256,6 +256,11 @@ function calcuarTotal(){
 
 }
 
+function cambioPrecio()
+        {
+            document.getElementById('inputPrecioVenta').value=document.getElementById('select-productos').value;
+        }
+
 siscan();
 shortcut.add("Ctrl+1", adelantoEmpleado);
 shortcut.add("Ctrl+2", adelantoEmpleado);
