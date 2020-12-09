@@ -37,7 +37,7 @@
                         $_POST['fechaFactura'] ,
                         $_POST['ISV'] ,
                         $_POST['descuento'] ,
-                        $_POST['total'],
+                        $_POST['total']
                         );
 
                       if($compra->registrarCompra($conexion)){

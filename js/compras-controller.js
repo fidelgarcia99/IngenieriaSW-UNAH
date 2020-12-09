@@ -37,7 +37,7 @@ var registrarCompra = async function(){
         fechaFactura : fechaFactura,
         ISV : ISV,
         descuento : descuento,
-        total : total,
+        total : total
       }
 
         let respuesta=null;
@@ -46,7 +46,7 @@ var registrarCompra = async function(){
     //  }else{
       //  respuesta = await actualizaRegistro(cliente, "clientes");
       }
-    
+
       if(respuesta!=null){
         if(respuesta.res=='OK'){
           document.getElementById('modal-success-message').innerHTML = respuesta.mensaje;
@@ -69,10 +69,7 @@ var limpiarModal = function(){
   document.getElementById('ISV').value='';
   document.getElementById('descuento').value='';
   document.getElementById('total').value='';
-  document.getElementById('errorMessage').style="display:none";
   document.getElementById('modal-titulo').innerHTML="Nueva Compra";
-  document.getElementById('btnEdit').disabled=true;
-  document.getElementById('btnDelete').disabled=true;
   modo=true;
   confirm=false;
   selectId=null;
