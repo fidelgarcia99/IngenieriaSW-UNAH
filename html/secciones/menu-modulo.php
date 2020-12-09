@@ -30,7 +30,8 @@
     break;
     case 'compras':
     echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nueva-compra-modal"><i class="fas fa-user-plus"></i></button>';
-
+    echo '<button type="button" class="btn btn-warning mx-1" data-toggle="modal" data-target="#nueva-compradetalle-modal"><i class="fas fa-info-circle"></i></button>';
+   
     break;
   }
 

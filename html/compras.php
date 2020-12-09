@@ -5,6 +5,7 @@ if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::Ge
 }
 include("php/clases/class_conexion.php");
 include_once("php/clases/class_producto.php");
+include_once("php/clases/class_compra.php");
 $conexion = new Conexion()
 ?>
 <!DOCTYPE html>
@@ -44,6 +45,8 @@ $conexion = new Conexion()
         <?php include(SECCIONES . 'detalle-compra-modal.php')?>
         
         <?php include(SECCIONES . 'nueva-compra-modal.php')?>
+
+        <?php include(SECCIONES . 'nueva-compradetalle-modal.php')?>
 
 
       </div>
