@@ -30,7 +30,7 @@
 
               <div class="card-body">
                 <div class="table-responsive">
-                
+
                   <table class="table table-bordered" id="dataTablePlanilla" width="100%" cellspacing="0">
                     <thead>
                       <tr>
@@ -45,10 +45,10 @@
                         <th>Estado</th>
                       </tr>
                     </thead>
-                    
+
                     <tbody id="tplanilla">
                     <!-- contenido de la tabla planilla -->
-                    
+
                     </tbody>
                   </table>
                 </div>
@@ -90,7 +90,7 @@
                 </tr>
               </thead>
             <tbody class="tdeducciones">
-              
+
             </tbody>
             </table>
           </div>
@@ -100,12 +100,13 @@
               <thead>
                 <tr>
                   <th>Descripcion</th>
-                  <th>Fecha</th>
+                  <th>Cantidad</th>
                   <th>Monto</th>
+                  <th>Fecha</th>
                 </tr>
               </thead>
             <tbody class="tadelantos">
-                
+
             </tbody>
             </table>
           </div>
@@ -137,10 +138,10 @@
             <th>Fecha</th>
               <th>Monto</th>
             </tr>
-              
+
             </thead>
             <tbody class="tbonos">
-              
+
             </tbody>
           </table>
 

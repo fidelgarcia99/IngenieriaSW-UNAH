@@ -159,9 +159,9 @@
 					?>
 						<tr>
 							<td class="descp_gral"><?php echo $row["descp_gral"];?></td>
-							<td><?php echo $row["fechaRegistro"];?></td>
+							<td><?php echo $row["cantidad"];?></td>
 							<td><?php echo $row["monto_adelanto"];?></td>
-
+							<td><?php echo $row["fechaRegistro"];?></td>
 						</tr>
 					<?php
 				}
