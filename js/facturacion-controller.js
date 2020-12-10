@@ -12,10 +12,8 @@ function formatearProductos(){
 }
 
 function scan(event){
-
   if (window.event.keyCode==112) {
     window.event.preventDefault();
-    alert('hola');
   }
   if (event.keyCode >47 && event.keyCode<58) {
     document.getElementById('input-codigo').value+=event.key;
@@ -26,9 +24,9 @@ function scan(event){
 
 function enter(event){
   if(event.keyCode == 13){
-    let code = document.getElementById('input-codigo');
-    buscaProducto(code.value);
-    code.value='';
+      let code = document.getElementById('input-codigo');
+      buscaProducto(code.value);
+      code.value='';
   }
 }
 
@@ -195,7 +193,7 @@ function adelantoEmpleado(){
   if (carrito.length>0) {
     carrito.forEach((item, i) => {
       data = {
-        idEmpleado:document.getElementById('nombreCliente').value,
+        idEmpleado:document.getElementById('RTNCliente').value,
         idProducto:parseInt(item['Id']),
         monto:item['Total'],
         cantidad:item['Cantidad']
@@ -273,10 +271,18 @@ function cambioPrecio(){
   document.getElementById('inputPrecioVenta').value=document.getElementById('select-productos').value;
 }
 
+function escanearID(){
+  let cadenas = document.getElementById('nombreCliente').value.split(",");
+  if (cadenas.length>7) {
+    document.getElementById('RTNCliente').value=cadenas[2];
+    document.getElementById('nombreCliente').value= cadenas[3] + " " + cadenas[4] + " " + cadenas[5] + " " + cadenas[6];
+    cadenas = null;
+  }
+}
 
 cambioPrecio();
 formatearProductos();
 siscan();
-shortcut.add("Ctrl+1", adelantoEmpleado);
+shortcut.add("Ctrl+1", escanearID);
 shortcut.add("Ctrl+2", ()=>{$('#nuevoConsulta').modal('show')});
 shortcut.add("Ctrl+3", adelantoEmpleado);

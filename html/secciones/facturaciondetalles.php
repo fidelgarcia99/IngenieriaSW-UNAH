@@ -67,7 +67,7 @@
                                        <div class="input-group-prepend">
                                          <div class="input-group-text">Cliente</div>
                                        </div>
-                                       <input type="text" id="nombreCliente" class="form-control" required value="Consumidor Final" onfocusin="onfocusInNombre(this)" onfocusout="onfocusOutNombre(this)">
+                                       <input type="text" id="nombreCliente" class="form-control" required value="Consumidor Final" onkeypress="escanearID();" onfocusin="onfocusInNombre(this)" onfocusout="onfocusOutNombre(this)">
                                      </div>
                                    </div>
                                    <div class="col-md-5">
