@@ -447,11 +447,6 @@ const editarRegistro = function(){
 }
 
 const limpiarModal = function(){
-  document.getElementById('select-categorias').selectedIndex = 0;
-  document.getElementById('input-barcode').value = '';
-  document.getElementById('select-contenedor').selectedIndex = 0;
-  document.getElementById('select-marcas').selectedIndex = 0;
-
   var opcion = document.getElementById('select-categorias').options[document.getElementById('select-categorias').selectedIndex].text;
 
     switch (opcion) {
@@ -492,9 +487,14 @@ const limpiarModal = function(){
         document.getElementById('input-descripcion').selectedIndex = 0;
       break;
     }
-  document.getElementById('btnEdit').disabled=true;
-  document.getElementById('btnDelete').disabled=true;
-  document.getElementById('select-categorias').disabled = false;
+    document.getElementById('select-categorias').disabled = false;
+    document.getElementById('select-categorias').selectedIndex = 0;
+    document.getElementById('input-barcode').value = '';
+    document.getElementById('select-contenedor').selectedIndex = 0;
+    document.getElementById('select-marcas').selectedIndex = 0;
+    document.getElementById('btnEdit').disabled=true;
+    document.getElementById('btnDelete').disabled=true;
+
   selectId=null;
   confirm=false;
   modo=true;
