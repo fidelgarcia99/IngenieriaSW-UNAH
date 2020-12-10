@@ -45,8 +45,13 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 					if($resultado){
 						echo '{"res":"OK","mensaje":"Adelanto registrado."}';
 					}else{
-							 $res = array("res"=>"fail","mensaje"=>mysqli_error($conexion->getLink()));
-							 echo json_encode($res);
+						if (mysqli_error($conexion->getLink()) == "Column 'idEmpleado' cannot be null") {
+							$res = array("res"=>"fail","mensaje"=>"Debe ingresar el numero de identidad del empleado.");
+							echo json_encode($res);
+						}else{
+							$res = array("res"=>"fail","mensaje"=>mysqli_error($conexion->getLink()));
+							echo json_encode($res);
+						}							 
 					}
 			}else{
 				echo '{"res":"fail","mensaje":"Debe ingresar todos los campos."}';

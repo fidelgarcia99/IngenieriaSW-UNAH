@@ -192,36 +192,42 @@ function onfocusOutNombre(object){
 }
 
 function adelantoEmpleado(){
-carrito.forEach((item, i) => {
-  data = {
-    idEmpleado:document.getElementById('nombreCliente').value,
-    idProducto:parseInt(item['Id']),
-    monto:item['Total'],
-    cantidad:item['Cantidad']
-  };
+  if (carrito.length>0) {
+    carrito.forEach((item, i) => {
+      data = {
+        idEmpleado:document.getElementById('nombreCliente').value,
+        idProducto:parseInt(item['Id']),
+        monto:item['Total'],
+        cantidad:item['Cantidad']
+      };
 
-  let respuesta=actualizaRegistro(data,"deducciones");
+      let respuesta=actualizaRegistro(data,"deducciones");
 
-  respuesta.then(res=>{
-    if(res!=null){
-      if(res.res=='OK'){
-        document.getElementById('modal-success-message').innerHTML = res.mensaje;
-        $('#modal-success').modal('show');
-        setTimeout(()=>$('#modal-success').modal('hide'), 2000);
-        limpiarFactura();
-      }else if(res.res=='fail'){
-        console.error(res.mensaje);
-      }
-    }else{
-      console.error('El servidor no ha devuelto nada.');
-    }
-  }).catch(err=>{
-    console.error(error);
-  });
-
-
-});
-
+      respuesta.then(res=>{
+        if(res!=null){
+          if(res.res=='OK'){
+            document.getElementById('modal-success-message').innerHTML = res.mensaje;
+            $('#modal-success').modal('show');
+            setTimeout(()=>$('#modal-success').modal('hide'), 2000);
+            limpiarFactura();
+          }else if(res.res=='fail'){
+            console.log(res.mensaje);
+            document.getElementById('div-error').innerHTML = res.mensaje;
+            document.getElementById('div-error').style="display:block";
+            setTimeout(()=>{document.getElementById('div-error').style="display:none"; }, 2000);
+          }
+        }else{
+          console.error('El servidor no ha devuelto nada.');
+        }
+      }).catch(err=>{
+        console.error(error);
+      });
+    });
+  }else{
+    document.getElementById('div-error').innerHTML = "Debe ingresar por lo menos un producto";
+    document.getElementById('div-error').style="display:block";
+    setTimeout(()=>{document.getElementById('div-error').style="display:none"; }, 2000);
+  }
 }
 
 function limpiarFactura(){

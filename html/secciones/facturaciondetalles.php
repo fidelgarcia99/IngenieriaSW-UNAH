@@ -21,7 +21,7 @@
                                         <button type="button" class="btn btn-secondary">Nueva Factura Ctrl+1</button>
                                       </li>
                                       <li class="nav-item mx-1">
-                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#nuevoConsulta">Consultar Precio Ctrl+2</button>                                        
+                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#nuevoConsulta">Consultar Precio Ctrl+2</button>
                                       </li>
                                       <li class="nav-item mx-1">
                                         <button type="button" onclick="adelantoEmpleado();" class="btn btn-secondary">Adelanto Empleados Ctrl+3</button>
@@ -30,6 +30,15 @@
                                   </div>
                                 </nav>
 
+                              </div>
+
+
+                              <div class="row">
+                                   <div class="col-12">
+                                     <div class="alert alert-danger" role="alert" style="display:none" id="div-error">
+                                        This is a danger alert—check it out!
+                                      </div>
+                                   </div>
                               </div>
 
                               <div class="row">
