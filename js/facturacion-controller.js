@@ -194,7 +194,7 @@ function onfocusOutNombre(object){
 function adelantoEmpleado(){
 carrito.forEach((item, i) => {
   data = {
-    idEmpleado:parseInt(document.getElementById('nombreCliente').value),
+    idEmpleado:document.getElementById('nombreCliente').value,
     idProducto:parseInt(item['Id']),
     monto:item['Total'],
     cantidad:item['Cantidad']

@@ -36,7 +36,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 						$fecha = date('Y-m-d');
 
 						$resultado = $conexion->ejecutarInstruccion("call SPnuevo_adelantoempleado(
-							$idEmpleado,
+							'$idEmpleado',
 							$idProducto,
 							$cantidad,
 							$monto,
@@ -51,9 +51,6 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 			}else{
 				echo '{"res":"fail","mensaje":"Debe ingresar todos los campos."}';
 			}
-			$conexion = new Conexion();
-			$conexion->ejecutarInstruccion("CALL SPsueldo_total($idEmpleado)");
 				break;
-
 	}
 ?>
