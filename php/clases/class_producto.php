@@ -143,5 +143,23 @@ class Producto{
 			$conexion->liberarResultado($result);
 	}
 
+	public static function llenarProductos($conexion)
+	{
+		$result = $conexion->ejecutarInstruccion("select * from producto;");
+
+		while ($fila_producto = $conexion->obtenerFila($result)) {
+			if ($c == 0) {
+			?>
+				<option value="<?php echo $fila_producto["precioVenta"]; ?>">
+					<?php echo $fila_producto["descp_gral"]; ?>
+
+				</option>
+
+<?php
+			}
+		}
+
+		$conexion->liberarResultado($result);
+	}
 }
 ?>

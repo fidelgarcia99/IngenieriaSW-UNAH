@@ -9,7 +9,7 @@ if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="cajero" || JWTokens::GetDat
 
 include("php/clases/class_conexion.php");
 //se incluye la clase empleados parapoder llamar sus funciones desde el index
-include_once("php/clases/class_cliente.php");
+include_once("php/clases/class_producto.php");
 //objeto Conexion
 $conexion = new Conexion();?>
 
@@ -49,10 +49,11 @@ $conexion = new Conexion();?>
 
         <!-------------------------- Begin Page Content ------------------------------>
 
-        <?php include(SECCIONES . 'facturaciondetalles.php')?>
+      <?php include(SECCIONES . 'facturaciondetalles.php')?>
 
       </div>
       <?php include(SECCIONES . 'modal-cliente-rtn.php') ?>
+      <?php include(SECCIONES . 'modal-consulta-precio.php') ?>
       <!-- End of Main Content -->
 
       <!-- Footer -->

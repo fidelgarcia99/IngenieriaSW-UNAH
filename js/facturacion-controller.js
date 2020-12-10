@@ -4,6 +4,13 @@ var descuento = 0;
 var total = 0;
 var ivs = 0;
 
+function formatearProductos(){
+  let opciones = document.getElementById('select-productos');
+  for (var i = 0; i < opciones.options.length; i++) {
+    opciones.options[i].text = formatDescrip(opciones.options[i].text);
+  }
+}
+
 function scan(event){
 
   if (window.event.keyCode==112) {
@@ -256,7 +263,14 @@ function calcuarTotal(){
 
 }
 
+function cambioPrecio(){
+  document.getElementById('inputPrecioVenta').value=document.getElementById('select-productos').value;
+}
+
+
+cambioPrecio();
+formatearProductos();
 siscan();
 shortcut.add("Ctrl+1", adelantoEmpleado);
-shortcut.add("Ctrl+2", adelantoEmpleado);
+shortcut.add("Ctrl+2", ()=>{$('#nuevoConsulta').modal('show')});
 shortcut.add("Ctrl+3", adelantoEmpleado);
