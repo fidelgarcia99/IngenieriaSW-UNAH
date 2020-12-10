@@ -12,16 +12,17 @@
 
     verificaToken();
 
-    if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
-      echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
-      exit;
-    }
-
     $_POST = json_decode(file_get_contents('php://input'),true);
     //Servicios web
     switch($_SERVER['REQUEST_METHOD'])
     {
         case 'POST':    //Crear producto
+
+        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+          echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
+          exit;
+        }
+
         if(isset($_POST['descripcion']) && $_POST['descripcion']!='' &&
            isset($_POST['barcode']) && isset($_POST['marca']) &&
            isset($_POST['contenedor']) && $_POST['contenedor']!='' &&
@@ -74,6 +75,12 @@
         break;
 
         case 'PUT':     //Actualizar producto
+
+        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+          echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
+          exit;
+        }
+
         if(isset($_POST['descripcion']) && $_POST['descripcion']!='' &&
            isset($_POST['barcode']) && isset($_POST['marca']) &&
            isset($_POST['contenedor']) && $_POST['contenedor']!='' &&
@@ -101,6 +108,12 @@
         break;
 
         case 'DELETE':  //Eliminar producto
+
+        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+          echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
+          exit;
+        }
+
         if (isset($_POST['id']) && $_POST['id']!='') {
           if (Producto::eliminarProducto($conexion,$_POST['id'])) {
               echo '{"res":"OK","mensaje":"Producto Eliminado"}';
