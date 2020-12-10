@@ -75,7 +75,7 @@
                                        <div class="input-group-prepend">
                                          <div class="input-group-text">RTN</div>
                                        </div>
-                                       <input type="number" id="RTNCliente" class="form-control" required>
+                                       <input type="number" id="RTNCliente" class="form-control" onfocusin="noscan()" onfocusout="siscan()" required>
                                      </div>
                                    </div>
                                    <div class="col-2 mx-0 px-0">
