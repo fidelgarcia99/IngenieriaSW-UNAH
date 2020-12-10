@@ -51,7 +51,8 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 			}else{
 				echo '{"res":"fail","mensaje":"Debe ingresar todos los campos."}';
 			}
-
+			$conexion = new Conexion();
+			$conexion->ejecutarInstruccion("CALL SPsueldo_total($idEmpleado)");
 				break;
 
 	}
