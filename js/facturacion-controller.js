@@ -143,7 +143,7 @@ function mouseOutRow(row){
 }
 
 function addRow(element){
-  let fila=`<td><input type="number" class="form-control" min="1" value="${element['Cantidad']}" onchange="cambiarCantidad('${element['Barcode']}',this)" style="width:80px;"></td>`;
+  let fila=`<td><input type="number" class="form-control" min="1" value="${element['Cantidad']}" onchange="cambiarCantidad('${element['Barcode']}',this)" onfocusin="noscan()" onfocusout="siscan()"  style="width:80px;"></td>`;
   let boton=`<button class="btn btn-danger" onclick="eliminaProducto('${element['Barcode']}')" style="width:50px;"><i class="fas fa-trash"></i></button>`;
     fila+=`
         <td>${element['Barcode']}</td>
@@ -196,7 +196,8 @@ function adelantoEmpleado(){
         idEmpleado:document.getElementById('RTNCliente').value,
         idProducto:parseInt(item['Id']),
         monto:item['Total'],
-        cantidad:item['Cantidad']
+        cantidad:item['Cantidad'],
+        producto:item['Descripcion']
       };
 
       let respuesta=actualizaRegistro(data,"deducciones");
@@ -207,12 +208,10 @@ function adelantoEmpleado(){
             document.getElementById('modal-success-message').innerHTML = res.mensaje;
             $('#modal-success').modal('show');
             setTimeout(()=>$('#modal-success').modal('hide'), 2000);
-            limpiarFactura();
           }else if(res.res=='fail'){
-            console.log(res.mensaje);
             document.getElementById('div-error').innerHTML = res.mensaje;
             document.getElementById('div-error').style="display:block";
-            setTimeout(()=>{document.getElementById('div-error').style="display:none"; }, 2000);
+            setTimeout(()=>{document.getElementById('div-error').style="display:none"; }, 6000);
           }
         }else{
           console.error('El servidor no ha devuelto nada.');
@@ -221,6 +220,7 @@ function adelantoEmpleado(){
         console.error(error);
       });
     });
+    limpiarFactura();
   }else{
     document.getElementById('div-error').innerHTML = "Debe ingresar por lo menos un producto";
     document.getElementById('div-error').style="display:block";

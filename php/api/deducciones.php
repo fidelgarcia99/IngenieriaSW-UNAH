@@ -33,26 +33,36 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 						$idProducto = $_POST["idProducto"];
 						$monto = $_POST["monto"];
 						$cantidad = $_POST["cantidad"];
+						$producto = $_POST["producto"];
 						$fecha = date('Y-m-d');
 
-						$resultado = $conexion->ejecutarInstruccion("call SPnuevo_adelantoempleado(
-							'$idEmpleado',
-							$idProducto,
-							$cantidad,
-							$monto,
-							'$fecha');");
+						$resultado = $conexion->ejecutarInstruccion("call Stock($idProducto)");
+						$row = mysqli_fetch_assoc($resultado);
 
-					if($resultado){
-						echo '{"res":"OK","mensaje":"Adelanto registrado."}';
-					}else{
-						if (mysqli_error($conexion->getLink()) == "Column 'idEmpleado' cannot be null") {
-							$res = array("res"=>"fail","mensaje"=>"Debe ingresar el numero de identidad del empleado.");
-							echo json_encode($res);
+						if ($cantidad <= $row['cantidad']) {
+							$conexion = new Conexion();
+							$resultado = $conexion->ejecutarInstruccion("call SPnuevo_adelantoempleado(
+								'$idEmpleado',
+								$idProducto,
+								$cantidad,
+								$monto,
+								'$fecha');");
+
+						if($resultado){
+							echo '{"res":"OK","mensaje":"Adelanto registrado."}';
 						}else{
-							$res = array("res"=>"fail","mensaje"=>mysqli_error($conexion->getLink()));
+							if (mysqli_error($conexion->getLink()) == "Column 'idEmpleado' cannot be null") {
+								$res = array("res"=>"fail","mensaje"=>"Debe ingresar el numero de identidad del empleado.");
+								echo json_encode($res);
+							}else{
+								$res = array("res"=>"fail","mensaje"=>mysqli_error($conexion->getLink()));
+								echo json_encode($res);
+							}
+						}
+						}else{
+							$res = array("res"=>"fail","mensaje"=>"Cantidad de $producto insuficiente.");
 							echo json_encode($res);
-						}							 
-					}
+						}
 			}else{
 				echo '{"res":"fail","mensaje":"Debe ingresar todos los campos."}';
 			}
