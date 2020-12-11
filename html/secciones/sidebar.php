@@ -92,7 +92,7 @@
         <!-- Nav Item - Tables -->
         <li class="nav-item">
           <a class="nav-link" href="?view=proveedores">
-            <i class="fas fa-users"></i>
+            <i class="fas fa-address-book"></i>
             <span>Proveedores</span></a>
         </li>
         ';

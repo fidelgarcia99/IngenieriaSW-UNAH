@@ -121,6 +121,7 @@
                              <div class="input-group-text">SubTotal</div>
                            </div>
                            <input type="number" class="form-control input-sm" id="input-subtotal" value="00.00" readonly>
+                           <div class="input-group-text">Lps.</div>
                          </div>
                     </div>
                </div>
@@ -131,6 +132,7 @@
                              <div class="input-group-text">Descuento</div>
                            </div>
                            <input type="number" class="form-control input-sm" id="input-descuento" value="00.00" readonly>
+                           <div class="input-group-text">Lps.</div>
                          </div>
                     </div>
                </div>
@@ -141,6 +143,7 @@
                              <div class="input-group-text">IVS</div>
                            </div>
                            <input type="numbre" class="form-control input-sm" id="input-ivs" value="00.00" readonly>
+                           <div class="input-group-text">Lps.</div>
                          </div>
                     </div>
                </div>
@@ -151,6 +154,7 @@
                              <div class="input-group-text">Total</div>
                            </div>
                            <input type="number" class="form-control input-sm" id="input-total" value="00.00" readonly>
+                           <div class="input-group-text">Lps.</div>
                          </div>
                     </div>
                </div>

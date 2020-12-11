@@ -117,9 +117,9 @@ async function guardarCliente(){
         $('#modal-success').modal('show');
         setTimeout(()=>$('#modal-success').modal('hide'), 2000);
       }else{
-        document.getElementById('errorMessage').innerHTML=respuesta.mensaje;
-        document.getElementById('errorMessage').style='display:block';
-        setTimeout(()=>{document.getElementById('errorMessage').style='display:none';}, 2000);
+        document.getElementById('div-error').innerHTML=respuesta.mensaje;
+        document.getElementById('div-error').style='display:block';
+        setTimeout(()=>{document.getElementById('div-error').style='display:none';}, 2000);
       }
     }
   }

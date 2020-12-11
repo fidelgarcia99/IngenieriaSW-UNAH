@@ -24,14 +24,12 @@
 
     break;
     case 'inventario':
-    echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevoProductoModal"><i class="fas fa-user-plus"></i></button>';
-    echo '<button type="button" class="btn btn-warning mx-1" onclick="editarRegistro()" disabled id="btnEdit"><i class="fas fa-user-edit"></i></button>';
-    echo '<button type="button" class="btn btn-danger mx-1" onclick="eliminarRegistro()" disabled id="btnDelete"><i class="fas fa-user-minus"></i></button>';
+    echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nuevoProductoModal"><i class="fas fa-plus-square"></i></button>';
+    echo '<button type="button" class="btn btn-warning mx-1" onclick="editarRegistro()" disabled id="btnEdit"><i class="fas fa-edit"></i></button>';
+    echo '<button type="button" class="btn btn-danger mx-1" onclick="eliminarRegistro()" disabled id="btnDelete"><i class="fas fa-trash-alt"></i></button>';
     break;
     case 'compras':
-    echo '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nueva-compra-modal"><i class="fas fa-user-plus"></i></button>';
-    echo '<button type="button" class="btn btn-warning mx-1" data-toggle="modal" data-target="#nueva-compradetalle-modal"><i class="fas fa-info-circle"></i></button>';
-   
+    echo '<a href="?view=nueva-compra" class="btn btn-primary"><i class="fas fa-cart-plus"></i></a>';    
     break;
   }
 
