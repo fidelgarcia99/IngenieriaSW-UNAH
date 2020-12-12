@@ -58,25 +58,15 @@
               $value = $_GET['value'];
               $resultado = $conexion->ejecutarInstruccion("call Proveedor($value);");
             }
-
-                $res = array(); //creamos un array
-
-                while($row = mysqli_fetch_assoc($resultado))
-                {
-                    $res[] = $row;
-                }
-                echo json_encode($res);
             }else{
                 $resultado = $conexion->ejecutarInstruccion("call Proveedores();");
-
-                $res = array(); //creamos un array
-
-                while($row = mysqli_fetch_assoc($resultado))
-                {
-                    $res[] = $row;
-                }
-                echo json_encode($res);
             }
+            $res = array(); //creamos un array
+            while($row = mysqli_fetch_assoc($resultado))
+            {
+                $res[] = $row;
+            }
+            echo json_encode($res);
         break;
 
         case 'PUT':     //Actualizar usuario
