@@ -96,6 +96,8 @@
 			INSERT INTO empleado_x_bono(Empleado_idEmpleado, Empleado_Persona_idPersona, Bono_idBono, estado_bono, Planilla_idPlanilla) 
 			VALUES ('$idEmpleado','$idPersona','$idBono','$estado','$idPlanilla')
 			");
+
+			$conexion->ejecutarInstruccion("CALL SPsueldo_total($idEmpleado)");
 		}
 
 		public static function selectEmpleados($conexion){

@@ -11,7 +11,7 @@
                     <!-- Background image for card set in CSS! -->
                  </div>
                  <div class="card-body">
-                   <h5 class="card-title text-center">Nuevo Proveedor</h5>
+                   <h5 class="card-title text-center" id="modal-titulo">Nuevo Proveedor</h5>
                    <form class="form-signin">
                      <div class="form-label-group">
                        <input type="text" id="nombreP" class="form-control" placeholder="Nombre" required autofocus>

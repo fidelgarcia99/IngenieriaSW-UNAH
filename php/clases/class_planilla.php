@@ -10,7 +10,8 @@
 						nombre_cargo,
 						fecha_nombramiento,
 						idEmpleado,
-						sueldo_emp,
+						TRUNCATE(sueldo_emp,2) as sueldo_emp,
+						sueldo_total,
 						fechainicio,
 						fechafin,
 						idPlanilla,
@@ -122,6 +123,8 @@
 					INSERT INTO empleado_x_planilla(Empleado_idEmpleado, Empleado_Persona_idPersona, Planilla_idPlanilla)
 					VALUES('$idEmpleado','$idPersona','$idPlanilla');
 				");
+				
+				$conexion->ejecutarInstruccion("CALL SPsueldo_total($idEmpleado, $idPlanilla)");
 			}
 		}
 

@@ -1,13 +1,13 @@
 <?php include(SECCIONES . 'valida-acceso.php');
 if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
   header('Location: ?view=401');
+ 
 }
-
 include("php/clases/class_conexion.php");
-//se incluye la clase empleados parapoder llamar sus funciones desde el index
-include_once("php/clases/class_cliente.php");
-//objeto Conexion
-$conexion = new Conexion()?>
+include_once("php/clases/class_producto.php");
+include_once("php/clases/class_compra.php");
+$conexion = new Conexion()
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +16,6 @@ $conexion = new Conexion()?>
 
   <!-- Custom styles for this page -->
   <link href="<?php echo VENDOR?>datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-  <link href="<?php echo CSS ?>clientes.css" rel="stylesheet">
   <link href="<?php echo CSS ?>modales.style.css" rel="stylesheet">
 </head>
 
@@ -39,14 +38,16 @@ $conexion = new Conexion()?>
     <?php include(SECCIONES . 'topnav.php')?>
         <!-- End of Topbar -->
 
-        <!-------------------------- Begin Page Content ------------------------------>
-
-         <!-- Registro Modal -->
-         <?php include(SECCIONES . 'nuevo-cliente-modal.php') ?>
-
         <!-- Begin Page Content -->
         <?php include(SECCIONES . 'tabla.php')?>
         <!-- /.container-fluid -->
+
+        <?php include(SECCIONES . 'detalle-compra-modal.php')?>
+        
+        <?php include(SECCIONES . 'nueva-compra-modal.php')?>
+
+        <?php include(SECCIONES . 'nueva-compradetalle-modal.php')?>
+
 
       </div>
       <!-- End of Main Content -->
@@ -78,8 +79,9 @@ $conexion = new Conexion()?>
   <script src="<?php echo VENDOR?>datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
+  <script src="<?php echo JS ?>product-format.js"></script>
   <script src="<?php echo JS?>axios-calls.js"></script>
-  <script src="<?php echo JS?>clientes-controller.js"></script>
+  <script src="<?php echo JS?>compras-controller.js"></script>
 </body>
 
 </html>

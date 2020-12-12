@@ -1,9 +1,9 @@
 <?php
-	class Deduccion{	
+	class Deduccion{
 		public static function deducciones($conexion, $idEmpleado, $idPlanilla){
 
 			$sql = $conexion->ejecutarInstruccion("
-				SELECT  
+				SELECT
 						valor,
 						H.fechainicio,
 						I.descripcion
@@ -21,35 +21,35 @@
 				ON(H.idDeduccion=G.Deduccion_idDeduccion)
 				INNER JOIN tipodeduccion as I
 				ON(H.TipoDeduccion_idTipoDeduccion=I.idTipoDeduccion)
-				WHERE idEmpleado = '$idEmpleado' AND G.Planilla_idPlanilla = '$idPlanilla' AND idPlanilla = '$idPlanilla' 
+				WHERE idEmpleado = '$idEmpleado' AND G.Planilla_idPlanilla = '$idPlanilla' AND idPlanilla = '$idPlanilla'
 
 			");
 
 			$registros = $conexion->cantidadRegistros($sql);
 
 			if ($registros > 0) {
-				while ($fila_personas = $conexion->obtenerFila($sql)) {	
+				while ($fila_personas = $conexion->obtenerFila($sql)) {
 					?>
 						<tr>
 							<td><?php echo $fila_personas["descripcion"];?></td>
 							<td><?php echo $fila_personas["fechainicio"];?></td>
 							<td><?php echo $fila_personas["valor"];?></td>
-							
+
 						</tr>
-					<?php	
+					<?php
 				}
 			}else{
 				?>
 				<tr>
 					<td><?php echo "No tiene deducciones!";?></td>
 				</tr>
-			<?php	
+			<?php
 			}
 
 			 $conexion->liberarResultado($sql);
 
-        }	
-        
+        }
+
 		public static function guardarDeduccion($conexion, $idEmpleado, $inicio, $fin, $monto, $tipo){
 			$guardar = $conexion->ejecutarInstruccion("
 				INSERT INTO deduccion(fechainicio, fechafin, valor, TipoDeduccion_idTipoDeduccion)
@@ -68,7 +68,7 @@
 			  }
 
 			$sql = $conexion->ejecutarInstruccion("
-				SELECT idPlanilla 
+				SELECT idPlanilla
 				FROM planilla
 				WHERE estado_planilla = 'N';
 			");
@@ -76,7 +76,7 @@
 			$idPlanilla = $res["idPlanilla"];
 
 			$sql2 = $conexion->ejecutarInstruccion("
-				SELECT idDeduccion 
+				SELECT idDeduccion
 				FROM deduccion
 				ORDER BY idDeduccion DESC
 				LIMIT 1;
@@ -85,7 +85,7 @@
 			$idDeduccion = $res2["idDeduccion"];
 
 			$sql3 = $conexion->ejecutarInstruccion("
-				SELECT Persona_idPersona 
+				SELECT Persona_idPersona
 				FROM empleado
 				WHERE idEmpleado = '$idEmpleado';
 			");
@@ -95,16 +95,18 @@
 			$fecha = null;
 			$estado = null;
 			$conexion->ejecutarInstruccion("
-			INSERT INTO empleado_x_deduccion(Empleado_idEmpleado, Empleado_Persona_idPersona, Deduccion_idDeduccion, fecha_emp_deduc, estado_emp_deduc, Planilla_idPlanilla) 
+			INSERT INTO empleado_x_deduccion(Empleado_idEmpleado, Empleado_Persona_idPersona, Deduccion_idDeduccion, fecha_emp_deduc, estado_emp_deduc, Planilla_idPlanilla)
 			VALUES ('$idEmpleado','$idPersona','$idDeduccion','$fecha','$estado','$idPlanilla')
 			");
+
+			$conexion->ejecutarInstruccion("CALL SPsueldo_total($idEmpleado)");
         }
-		
+
 		public static function selectEmpleados($conexion){
 
 			$personas = $conexion->ejecutarInstruccion("
-				SELECT  pnombre, 
-						papellido, 	
+				SELECT  pnombre,
+						papellido,
 						num_identidad,
 						idEmpleado
 				FROM persona as A
@@ -119,9 +121,9 @@
 					-
 					<?php echo $fila_personas["num_identidad"];?>
 				</option>
-				<?php	
+				<?php
 			}
-			
+
 			$conexion->liberarResultado($personas);
 
 		}
@@ -139,11 +141,41 @@
 				<option value="<?php echo $tipos["idTipoDeduccion"];?>">
 					<?php echo $tipos["descripcion"];?>
 				</option>
-				<?php	
+				<?php
 			}
-			
+
 			$conexion->liberarResultado($sql);
 
 		}
+
+		public static function adelantos($conexion, $idEmpleado, $idPlanilla){
+
+			$sql = $conexion->ejecutarInstruccion("CALL AdelantoProductos($idEmpleado, $idPlanilla)");
+
+			$registros = $conexion->cantidadRegistros($sql);
+
+			if ($registros > 0) {
+				while ($row = $conexion->obtenerFila($sql)) {
+					?>
+						<tr>
+							<td class="descp_gral"><?php echo $row["descp_gral"];?></td>
+							<td><?php echo $row["cantidad"];?></td>
+							<td><?php echo $row["monto_adelanto"];?></td>
+							<td><?php echo $row["fechaRegistro"];?></td>
+						</tr>
+					<?php
+				}
+			}else{
+				?>
+				<tr>
+					<td><?php echo "No tiene adelantos!";?></td>
+				</tr>
+			<?php
+			}
+
+			 $conexion->liberarResultado($sql);
+
+		}
 	}
+
 ?>

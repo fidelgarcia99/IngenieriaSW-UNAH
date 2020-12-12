@@ -1,11 +1,35 @@
 var modo = true
-var temp=null;
+var id=null;
+var confirm=false;
 
-var mostrarUsuarios = function(){
-  renderTabla(null,null,"usuarios");
+function selectRow(idRow,row){
+  if(id==null){
+    id=idRow;
+    document.getElementById('btnEdit').disabled=false;
+    document.getElementById('btnDelete').disabled=false;
+  }else if(id==idRow){
+    id=null;
+    document.getElementById('btnEdit').disabled=true;
+    document.getElementById('btnDelete').disabled=true;
+  }
 }
 
-var editarRegistro = function(id){
+function mouseOverRow(row){
+  if(id==null)
+  row.style="background-color:cornsilk;cursor:pointer";
+}
+
+function mouseOutRow(row){
+  if(id==null)
+  row.style="background-color:white;";
+}
+
+var mostrarUsuarios = function(){
+  tabla=document.getElementById('dataTable');
+  renderTabla(null,null,"usuarios",tabla);
+}
+
+var editarRegistro = function(){
   let usuario = obtenerRegistros('id', id, 'usuarios');
   usuario.then(user=>{
     if(user!=null){
@@ -17,7 +41,6 @@ var editarRegistro = function(id){
       document.getElementById('inputConfirmPassword').value='';
       document.getElementById('modal-titulo').innerHTML = "Editar Usuario";
       modo = false
-      temp=id;
       $('#nuevoUsuarioModal').modal('show');
     }else{
       console.error('El servidor no ha devuelto un resultado');
@@ -27,8 +50,30 @@ var editarRegistro = function(id){
   });
 }
 
+var eliminarRegistro = async function(){
+  if (confirm) {
+    let data = {id:id}
+    let respuesta = await eliminarRegistroId(data,"usuarios");
+    if(respuesta!=null){
+      if(respuesta.res=='OK'){
+        document.getElementById('modal-success-message').innerHTML = respuesta.mensaje;
+        $('#modal-confirm').modal('hide');
+        $('#modal-success').modal('show');
+        setTimeout(()=>$('#modal-success').modal('hide'), 2000);
+      }else{
+        console.error('El Servidor no ha devuelto nada.');
+      }
+      limpiarModal();
+      mostrarUsuarios();
+    }
+  }else{
+      document.getElementById('modal-confirm-msj').innerHTML=`Esta a punto de eliminar el registro con Id:${id}.`;
+      $('#modal-confirm').modal('show');
+  }
+}
+
 var mostrarTiposUsuarios = function(){
-  var dataa = obtenerRegistros('tipo',null,"usuarios");
+  var dataa = obtenerRegistros("retorno","tipo","usuarios");
  dataa.then((data)=>{
    var opciones = "<option value='-1' selected disable>--- Seleccione un Tipo de Usuario ---</option>";
    data.forEach((item, i) => {
@@ -63,7 +108,7 @@ var registraUsuario = async function(){
 
     if(passwd == cpasswd){
         let usuario = {
-          id:temp,
+          id:id,
           username : username,
           idEmpleado : empleado,
           tipo: tipo,
@@ -193,8 +238,13 @@ var limpiarModal = function(){
   document.getElementById('inputPassword').classList='form-control';
   document.getElementById('inputConfirmPassword').classList='form-control';
   document.getElementById('modal-titulo').innerHTML = "Nuevo Usuario";
+  document.getElementById('btnEdit').disabled=true;
+  document.getElementById('btnDelete').disabled=true;
+  id=null;
   modo=true;
+  confirm=false;
 }
+
 mostrarUsuarios();
 mostrarTiposUsuarios();
 mostrarEmpleados();

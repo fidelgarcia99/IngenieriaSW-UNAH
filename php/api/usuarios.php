@@ -12,6 +12,11 @@
 
     verificaToken();
 
+    if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+      echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
+      exit;
+    }
+
     $_POST = json_decode(file_get_contents('php://input'),true);
 
     //Servicios web
@@ -47,35 +52,26 @@
         break;
 
         case 'GET':     //Obtener usuario/s
-        if(isset($_GET['id']) && $_GET['id']!=''){ // Pasan un ID?
-          $id = $_GET['id'];
-            $resultado = $conexion->ejecutarInstruccion("call Usuario($id);");
-          }else{
-              //Pasan un parametro?
-            $resultado=null;
-            if(isset($_GET['param'])){
-              switch ($_GET['param']) {
-                case 'tipo':
-                  $resultado = $conexion->ejecutarInstruccion('
-                    SELECT tipo
-                    FROM tipousuario
-                  ');
-                break;
-              }
-            }else{
-              //Entonces que retorne todo
-                $resultado = $conexion->ejecutarInstruccion('call Usuarios();');
-            }
-          }
+        if (isset($_GET['param']) && isset($_GET['value'])) {
+
+             // Pasan un ID?
+             if ($_GET['param'] == "id") {
+               $value = $_GET['value'];
+               $resultado = $conexion->ejecutarInstruccion("call Usuario($value);");
+             }elseif ($_GET['param'] == "retorno" && $_GET['value']=="tipo") {
+               $resultado = $conexion->ejecutarInstruccion("call TipoUsuario();");
+             }
+           }else{
+             $resultado = $conexion->ejecutarInstruccion('call Usuarios();');
+           }
+
           // Preparamos el json a retornar
-          if($resultado!=null and $resultado){
             $res = array(); //creamos un array
             while($row = mysqli_fetch_assoc($resultado))
             {
                 $res[] = $row;
             }
             echo json_encode($res);
-          }
         break;
 
         case 'PUT':     //Actualizar usuario
@@ -108,7 +104,15 @@
         break;
 
         case 'DELETE':  //Eliminar usuario
-            echo '{"res":"delete"}';
+        if (isset($_POST['id']) && $_POST['id']!='') {
+          if (Usuario::eliminarUsuario($conexion,$_POST['id'])) {
+              echo '{"res":"OK","mensaje":"Usuario Eliminado"}';
+          }else{
+            $res = array("res"=>"fail","mensaje"=>mysqli_error);
+          }
+        }else{
+          echo '{"res":"fail","mensaje":"Debe especificar un id"}';
+        }
         break;
     }
 ?>

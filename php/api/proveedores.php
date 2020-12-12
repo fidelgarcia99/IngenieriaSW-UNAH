@@ -12,12 +12,17 @@
 
     verificaToken();
 
+    if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+      echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
+      exit;
+    }
+
+    $_POST = json_decode(file_get_contents('php://input'),true);
+
     //Servicios web
     switch($_SERVER['REQUEST_METHOD'])
     {
         case 'POST':
-            $_POST = json_decode(file_get_contents('php://input'),true);
-            
             if(isset($_POST['nombreP']) && $_POST['nombreP']!='' &&
                isset($_POST['direccionP']) && $_POST['direccionP']!='' &&
                isset($_POST['telefonoP']) && $_POST['telefonoP']!='' &&
@@ -48,27 +53,61 @@
         break;
 
         case 'GET':
-            if(isset($_GET['id'])){
-
-            }else{
-                $resultado = $conexion->ejecutarInstruccion('call Proveedores();');
-
-                $res = array(); //creamos un array
-
-                while($row = mysqli_fetch_assoc($resultado))
-                {
-                    $res[] = $row;
-                }
-                echo json_encode($res);
+          if(isset($_GET['param']) && isset($_GET['value'])){
+            if ($_GET['param'] == "id") {
+              $value = $_GET['value'];
+              $resultado = $conexion->ejecutarInstruccion("call Proveedor($value);");
             }
+            }else{
+                $resultado = $conexion->ejecutarInstruccion("call Proveedores();");
+            }
+            $res = array(); //creamos un array
+            while($row = mysqli_fetch_assoc($resultado))
+            {
+                $res[] = $row;
+            }
+            echo json_encode($res);
         break;
 
         case 'PUT':     //Actualizar usuario
-            echo '{"res":"put"}';
+          if(isset($_POST['nombreP']) && $_POST['nombreP']!='' &&
+          isset($_POST['direccionP']) && $_POST['direccionP']!='' &&
+          isset($_POST['telefonoP']) && $_POST['telefonoP']!='' &&
+          isset($_POST['correoP']) && $_POST['correoP']!=''){
+
+          $proveedor = new Proveedor(
+                        $_POST['nombreP'] ,
+                        $_POST['direccionP'],
+                        $_POST['telefonoP'],
+                        $_POST['correoP']
+                      );
+
+          if($proveedor->actualizarProveedor($conexion, $_POST['id'])){
+            echo '{"res":"OK","mensaje":"Proveedor Actualizado."}';
+          }else{
+            if(mysqli_errno($conexion->getLink()) == 1062)
+            echo '{"res":"fail","mensaje":"Ocurrio un problema"}';
+            else{
+               $res = array("res"=>"fail","mensaje"=>mysqli_error($conexion->getLink()));
+               echo json_encode($res);
+            }
+          }
+
+       }else{
+         echo '{"res":"fail","mensaje":"Debe ingresar todos los campos."}';
+       }
         break;
 
         case 'DELETE':  //Eliminar usuario
-            echo '{"res":"delete"}';
+        if (isset($_POST['id']) && $_POST['id']!='') {
+          if (Proveedor::eliminarProveedor($conexion,$_POST['id'])) {
+              echo '{"res":"OK","mensaje":"Proveedor Eliminado"}';
+          }else{
+            $res = array("res"=>"fail","mensaje"=>mysqli_error);
+          }
+        }else{
+          echo '{"res":"fail","mensaje":"Debe especificar un id"}';
+        }
         break;
     }
 ?>

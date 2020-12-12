@@ -6,7 +6,7 @@ function deducciones(idEmpleado, idPlanilla){
 		data: datos,
 		method: "GET",
 		success:function(resultado){
-			
+
 				$(".tdeducciones").html(resultado);
 			},
 		error:function(){
@@ -42,4 +42,37 @@ function guardarDeduccion(){
 			alert("error");
 		}
 	});
+}
+
+function adelantos(idEmpleado, idPlanilla){
+	var datos = "idEmpleado="+idEmpleado+
+				"&idPlanilla="+idPlanilla;
+
+	$.ajax({
+		url: "php/api/adelantos.php",
+		data: datos,
+		method: "GET",
+		success:function(resultado){
+				$(".tadelantos").html(resultado);
+				$('.tadelantos .descp_gral').each(function() {
+       		$(this).html(formatDescrip($(this).html()));
+		 		});
+			},
+		error:function(){
+			alert("error");
+		}
+	});
+}
+
+function cambiarTabla(tabla){
+	if (tabla == 'Deducciones') {
+		$(".titulo-tabla").html(tabla);
+		$(".tabla-deducciones").css('display', 'block');
+		$(".tabla-adelantos").css('display', 'none');
+	}
+	if (tabla == 'Adelantos') {
+		$(".titulo-tabla").html(tabla);
+		$(".tabla-adelantos").css('display', 'block');
+		$(".tabla-deducciones").css('display', 'none');
+	}
 }

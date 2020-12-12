@@ -5,7 +5,9 @@
 #modal-success-message{
   text-align: center;
 }
-
+.modal-dialog{
+  max-width: 50%;
+}
 #modal-success .modal-dialog{
   max-width: 20%;
   padding-top: 10%;
@@ -13,7 +15,9 @@
 #modal-success .modal-content{
   max-width: 100%;
 }
-#modal-confirm-msj{
+#modal-confirm-msj
+#modal-confirm-despedir-msj
+#modal-confirm-pagar-planilla-msj {
   text-align: center;
 }
 
@@ -24,6 +28,23 @@
 #modal-confirm .modal-content{
   max-width: 100%;
 }
+
+#modal-confirm-despedir .modal-dialog{
+  max-width: 20%;
+  padding-top: 10%;
+}
+#modal-confirm-despedir .modal-content{
+  max-width: 100%;
+}
+
+#modal-confirm-pagar-planilla .modal-dialog{
+  max-width: 20%;
+  padding-top: 10%;
+}
+#modal-confirm-pagar-planilla .modal-content{
+  max-width: 100%;
+}
+
 .modal-footer{
   justify-content: space-between ;
 }
