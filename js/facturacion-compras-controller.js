@@ -55,6 +55,46 @@ function buscaProducto(barcode){
   });
 }
 
+async function registrarCompra(){
+  let numFactura = document.getElementById('input-numero-factura').value;
+  let nom_proveedor = document.getElementById('select-proveedor').value;
+  let fechaFactura = document.getElementById('input-fecha').value;
+
+if (validaCampos2()) {
+
+        let compra = {
+          numFactura : numFactura,
+          nom_proveedor : nom_proveedor,
+          fechaFactura : fechaFactura,
+          isv : Math.round(isv*100)/100,
+          descuento : descuento,
+          total : total,
+          carrito:carrito
+        }
+
+          let respuesta= await nuevoRegistro(compra, "compras");
+
+        if(respuesta!=null){
+          if(respuesta.res=='OK'){
+            document.getElementById('modal-success-message').innerHTML = respuesta.mensaje;
+            $('#nueva-compra-modal').modal('hide');
+            $('#modal-success').modal('show');
+            setTimeout(()=>$('#modal-success').modal('hide'), 2000);
+            limpiarModal();
+            mostrarCompras();
+          }else{
+            document.getElementById('div-error').innerHTML=respuesta.mensaje;
+            document.getElementById('div-error').style='display:block';
+            setTimeout(()=>{document.getElementById('div-error').style='display:none';}, 4000);
+          }
+        }
+}else{
+  document.getElementById('div-error').innerHTML=respuesta.mensaje;
+  document.getElementById('div-error').style='display:block';
+  setTimeout(()=>{document.getElementById('div-error').style='display:none';}, 4000);
+}
+}
+
 function validaCampos(){
   let barcode = document.getElementById('input-codigo').value;
   let cantidad = document.getElementById('input-cantidad').value;
@@ -74,26 +114,43 @@ function validaCampos(){
   return false;
 }
 
+function validaCampos2(){
+  let numFactura = document.getElementById('input-numero-factura').value;
+  let nom_proveedor = document.getElementById('select-proveedor').value;
+  let fechaFactura = document.getElementById('input-fecha').value;
+
+  if (numFactura!="" && nom_proveedor>"0" && fechaFactura != "" && carrito.length>0) {
+  document.getElementById('btn-guardar').disabled  = false;
+    return true;
+  }
+  document.getElementById('btn-guardar').disabled  = true;
+    return false
+}
+
 function añadirProducto(){
-  if (validaCampos())
-  {
+  if (validaCampos())  {
     let barcode = document.getElementById('input-codigo').value;
     let cantidad = parseInt(document.getElementById('input-cantidad').value);
     let unidades = parseInt(document.getElementById('input-unidades').value);
     let costo = Math.round((parseInt(document.getElementById('input-precio-compra').value) / unidades)*100)/100;
     let descuento = parseInt(document.getElementById('input-descuento').value);
     let precio = parseInt(document.getElementById('input-precio-venta').value);
+    let total = Math.round(costo*cantidad-descuento);
+    let isv = Math.round((total - (total/1.15))*100)/100;
+
     carrito.push({
       barcode:barcode,
       cantidad:cantidad,
-      costo:costo,
-      descuento:descuento,
-      precio:precio,
-      total:costo*cantidad - descuento
+      costo:Math.round(costo),
+      descuento:Math.round(descuento),
+      precio:Math.round(precio),
+      isv:Math.round(isv),
+      total:Math.round(total)
     });
     calcuarTotal();
     renderTabla();
     limpiarFormulario();
+    validaCampos2();
   }else{
     if (parseInt(costo)==0) {
     document.getElementById('div-error').innerHTML="Debe especificar el costo del producto.";
@@ -166,9 +223,17 @@ function cambiarCantidad(){
 }
 
 function limpiarFactura(){
-  document.getElementById('nombreCliente').value='';
-  document.getElementById('RTNCliente').value='';
+  document.getElementById('input-numero-factura').value='';
+  document.getElementById('select-proveedor').value=-1;
+  document.getElementById('input-fecha').value='';
   document.getElementById('input-codigo').value='';
+  document.getElementById('input-descripcion').value='';
+  document.getElementById('input-paquetes').value='';
+  document.getElementById('input-unidades').value='';
+  document.getElementById('input-cantidad').value='';
+  document.getElementById('input-precio-compra').value='';
+  document.getElementById('input-precio-venta').value='';
+  document.getElementById('input-descuento').value='';
   document.getElementById('input-total').value = '00.00';
   document.getElementById('input-descuento').value = '00.00';
   document.getElementById('input-ivs').value = '00.00';
@@ -204,4 +269,18 @@ function cambioPrecio(){
   document.getElementById('inputPrecioVenta').value=document.getElementById('select-productos').value;
 }
 
+function mostrarEmpleados(){
+  var dataa = obtenerRegistros(null,null,"proveedores");
+ dataa.then((data)=>{
+   var opciones = "";
+   data.forEach((item, i) => {
+     opciones+=`
+     <option value="${i+1}">${item['Nombre']}</option>
+     `;
+   });
+ document.getElementById('select-proveedor').innerHTML=opciones;
+ });
+}
+
+mostrarEmpleados();
 siscan();

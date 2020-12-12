@@ -24,7 +24,7 @@
                                        <div class="input-group-prepend">
                                          <div class="input-group-text">No. Factura</div>
                                        </div>
-                                       <input type="text" id="input-numero-factura" class="form-control" onfocusin="noscan()" onfocusout="siscan()" required>
+                                       <input type="text" id="input-numero-factura" class="form-control" onchange="validaCampos2()" onfocusin="noscan()" onfocusout="siscan()" required>
                                      </div>
                                    </div>
                                    <div class="col-md-6">
@@ -32,7 +32,7 @@
                                        <div class="input-group-prepend">
                                          <div class="input-group-text">Proveedor</div>
                                        </div>
-                                       <select class="form-control" id="select-proveedor"></select>
+                                       <select class="form-control" id="select-proveedor" onchange="validaCampos2()"></select>
                                      </div>
                                    </div>
                               </div>
@@ -42,7 +42,7 @@
                                     <div class="input-group-prepend">
                                       <div class="input-group-text">Fecha</div>
                                     </div>
-                                    <input type="date" id="input-fecha" class="form-control" onfocusin="noscan()" onfocusout="siscan()" required>
+                                    <input type="date" id="input-fecha" class="form-control" onchange="validaCampos2()" onfocusin="noscan()" onfocusout="siscan()" required>
                                   </div>
                                 </div>
                               </div>
@@ -169,7 +169,7 @@
                          </div>
                     </div>
                </div>
-               <div class="row">
+               <div class="row mb-2">
                  <div class="col-4">
                       <div class="input-group mb-2">
                         <div class="input-group-prepend">
@@ -189,6 +189,26 @@
                       </div>
                  </div>
                </div>
+               <div class="row">
+                 <div class="col-1">
+                      <div class="input-group mb-2">
+                        <button type="button" id="btn-guardar" class="btn btn-success" onclick="registrarCompra()" disabled><i class="fas fa-save"></i> Guardar</button>
+                      </div>
+                 </div>
+                 <div class="col-9">
+                 </div>
+                 <div class="col-1">
+                      <div class="input-group mb-2">
+                        <a href="?view=compras" class="btn btn-primary"><i class="fas fa-arrow-alt-circle-left"></i> Regresar</a>
+                      </div>
+                 </div>
+                 <div class="col-1">
+                      <div class="input-group mb-2">
+                        <button type="button" id="btn-limpiar" class="btn btn-warning" onclick="limpiarFactura()"><i class="fas fa-eraser"></i> Limpiar</button>
+                      </div>
+                 </div>
+               </div>
+
           </div>
      </div>
 
