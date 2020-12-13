@@ -47,7 +47,7 @@
                                           <div class="input-group-prepend">
                                             <div class="input-group-text">Factura No.</div>
                                           </div>
-                                          <input type="text" class="form-control input-sm" id="nFactura" value="00000" readonly>
+                                          <input type="text" class="form-control input-sm" id="input-numero-factura" value="000" readonly>
                                         </div>
                                    </div>
                                    <div class="col-5">
@@ -67,7 +67,7 @@
                                        <div class="input-group-prepend">
                                          <div class="input-group-text">Cliente</div>
                                        </div>
-                                       <input type="text" id="nombreCliente" class="form-control" required value="Consumidor Final" onkeypress="escanearID();" onfocusin="onfocusInNombre(this)" onfocusout="onfocusOutNombre(this)">
+                                       <input type="text" id="input-cliente" class="form-control" required value="Consumidor Final" onchange="validaCampos()" onkeypress="escanearID(event);" onfocusin="onfocusInNombre(this)" onfocusout="onfocusOutNombre(this)">
                                      </div>
                                    </div>
                                    <div class="col-md-5">
@@ -75,7 +75,7 @@
                                        <div class="input-group-prepend">
                                          <div class="input-group-text">RTN</div>
                                        </div>
-                                       <input type="number" id="RTNCliente" class="form-control" onfocusin="noscan()" onfocusout="siscan()" required>
+                                       <input type="number" id="input-rtn" class="form-control" onfocusin="noscan()" onfocusout="siscan()" required>
                                      </div>
                                    </div>
                                    <div class="col-2 mx-0 px-0">
@@ -157,6 +157,25 @@
                            <div class="input-group-text">Lps.</div>
                          </div>
                     </div>
+               </div>
+               <div class="row">
+                 <div class="col-1">
+                      <div class="input-group mb-2">
+                        <button type="button" id="btn-guardar" class="btn btn-success" onclick="registrarVenta()" disabled><i class="fas fa-save"></i> Guardar</button>
+                      </div>
+                 </div>
+                 <div class="col-9">
+                 </div>
+                 <div class="col-1">
+                      <div class="input-group mb-2">
+                        <a href="?view=compras" class="btn btn-primary"><i class="fas fa-arrow-alt-circle-left"></i> Regresar</a>
+                      </div>
+                 </div>
+                 <div class="col-1">
+                      <div class="input-group mb-2">
+                        <button type="button" id="btn-limpiar" class="btn btn-warning" onclick="limpiarFactura()"><i class="fas fa-eraser"></i> Limpiar</button>
+                      </div>
+                 </div>
                </div>
           </div>
      </div>

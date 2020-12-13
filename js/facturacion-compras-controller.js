@@ -24,8 +24,7 @@ function scan(event){
 
 function enter(event){
   if(event.keyCode == 13){
-      let code = document.getElementById('input-codigo');
-      buscaProducto(code.value);
+      buscaProducto();
   }
 }
 
@@ -37,22 +36,25 @@ function siscan(){
   document.getElementById('page-top').addEventListener("keypress",scan);
 }
 
-function buscaProducto(barcode){
-  let producto = obtenerRegistros("barcode",barcode,"inventario");
-  producto.then(data=>{
-    data.forEach(element => {
-      document.getElementById('input-descripcion').value = formatDescrip(element['Descripcion'],element['Tipo']);
-      document.getElementById('input-paquetes').value=1;
-      document.getElementById('input-unidades').value=1;
-      document.getElementById('input-cantidad').value=1;
-      document.getElementById('input-precio-compra').value=0;
-      document.getElementById('input-precio-venta').value=element['Precio'];
-      document.getElementById('input-descuento').value=0;
-      validaCampos();
+function buscaProducto(){
+  let barcode = document.getElementById('input-codigo').value;
+  if (barcode!='') {
+    let producto = obtenerRegistros("barcode",barcode,"inventario");
+    producto.then(data=>{
+      data.forEach(element => {
+        document.getElementById('input-descripcion').value = formatDescrip(element['Descripcion'],element['Tipo']);
+        document.getElementById('input-paquetes').value=1;
+        document.getElementById('input-unidades').value=1;
+        document.getElementById('input-cantidad').value=1;
+        document.getElementById('input-precio-compra').value=0;
+        document.getElementById('input-precio-venta').value=element['Precio'];
+        document.getElementById('input-descuento').value=0;
+        validaCampos();
+      });
+    }).catch(err=>{
+      console.error(err);
     });
-  }).catch(err=>{
-    console.error(err);
-  });
+  }
 }
 
 async function registrarCompra(){
@@ -80,8 +82,7 @@ if (validaCampos2()) {
             $('#nueva-compra-modal').modal('hide');
             $('#modal-success').modal('show');
             setTimeout(()=>$('#modal-success').modal('hide'), 2000);
-            limpiarModal();
-            mostrarCompras();
+            limpiarFactura();
           }else{
             document.getElementById('div-error').innerHTML=respuesta.mensaje;
             document.getElementById('div-error').style='display:block';
@@ -175,7 +176,7 @@ function limpiarFormulario(){
 
 function eliminaProducto(barcode){
   carrito.forEach((item, i) => {
-    if(item['Barcode']==barcode){
+    if(item['barcode']==barcode){
       carrito.splice(i,1);
     }
   });
@@ -193,7 +194,7 @@ function mouseOutRow(row){
 
 function addRow(element){
   let fila='';
-  let boton=`<button class="btn btn-danger" onclick="eliminaProducto('${element['Barcode']}')" style="width:50px;"><i class="fas fa-trash"></i></button>`;
+  let boton=`<button class="btn btn-danger" onclick="eliminaProducto('${element['barcode']}')" style="width:50px;"><i class="fas fa-trash"></i></button>`;
     fila+=`
         <td>${element['cantidad']}</td>
         <td>${element['barcode']}</td>
