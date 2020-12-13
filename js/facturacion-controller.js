@@ -2,7 +2,7 @@ var carrito = Array();
 var subtotal = 0;
 var descuento = 0;
 var total = 0;
-var ivs = 0;
+var isv = 0;
 
 function formatearProductos(){
   let opciones = document.getElementById('select-productos');
@@ -66,9 +66,50 @@ function buscaProducto(barcode){
       calcuarTotal();
     });
     renderTabla();
+    validaCampos();
   }).catch(err=>{
     console.error(err);
   });
+}
+
+async function registrarVenta(){
+  let numFactura = document.getElementById('input-numero-factura').value;
+  let cliente = document.getElementById('input-cliente').value;
+  let rtn = document.getElementById('input-rtn').value;
+
+if (validaCampos()) {
+
+        let venta = {
+          numFactura : numFactura,
+          cliente:cliente,
+          rtn:rtn,
+          subtotal:subtotal,
+          isv:isv,
+          descuento : descuento,
+          total : total,
+          carrito:carrito
+        }
+        console.log(venta);
+          let respuesta= await nuevoRegistro(venta, "ventas");
+
+        if(respuesta!=null){
+          if(respuesta.res=='OK'){
+            document.getElementById('modal-success-message').innerHTML = respuesta.mensaje;
+            $('#nueva-compra-modal').modal('hide');
+            $('#modal-success').modal('show');
+            setTimeout(()=>$('#modal-success').modal('hide'), 2000);
+            limpiarFactura();
+          }else{
+            document.getElementById('div-error').innerHTML=respuesta.mensaje;
+            document.getElementById('div-error').style='display:block';
+            setTimeout(()=>{document.getElementById('div-error').style='display:none';}, 4000);
+          }
+        }
+}else{
+  document.getElementById('div-error').innerHTML=respuesta.mensaje;
+  document.getElementById('div-error').style='display:block';
+  setTimeout(()=>{document.getElementById('div-error').style='display:none';}, 4000);
+}
 }
 
 function eliminaProducto(barcode){
@@ -271,13 +312,27 @@ function cambioPrecio(){
   document.getElementById('inputPrecioVenta').value=document.getElementById('select-productos').value;
 }
 
-function escanearID(){
-  let cadenas = document.getElementById('nombreCliente').value.split(",");
-  if (cadenas.length>7) {
-    document.getElementById('RTNCliente').value=cadenas[2];
-    document.getElementById('nombreCliente').value= cadenas[3] + " " + cadenas[4] + " " + cadenas[5] + " " + cadenas[6];
-    cadenas = null;
+function escanearID(event){
+  if (event.keyCode == 13 && document.getElementById('input-cliente').value!='') {
+    let cadenas = document.getElementById('nombreCliente').value.split(",");
+    if (cadenas.length>7) {
+      document.getElementById('RTNCliente').value=cadenas[2];
+      document.getElementById('nombreCliente').value= cadenas[3] + " " + cadenas[4] + " " + cadenas[5] + " " + cadenas[6];
+      cadenas = null;
+    }
   }
+}
+
+function validaCampos(){
+  let numFactura = document.getElementById('input-numero-factura').value;
+  let cliente = document.getElementById('input-cliente').value;
+  let rtn = document.getElementById('input-rtn').value;
+  if (numFactura!='' && cliente!='' && carrito.length>0) {
+    document.getElementById('btn-guardar').disabled = false;
+    return true;
+  }
+  document.getElementById('btn-guardar').disabled = true;
+  return false;
 }
 
 cambioPrecio();

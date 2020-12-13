@@ -22,10 +22,10 @@
     switch($_SERVER['REQUEST_METHOD']){
         case 'POST':    //Crear compra
           if(isset($_POST['numFactura']) && $_POST['numFactura']!='' &&
-           isset($_POST['nom_proveedor']) && $_POST['nom_proveedor']!='' &&
-           isset($_POST['fechaFactura']) && $_POST['fechaFactura']!='' &&
+           isset($_POST['cliente']) && $_POST['cliente']!='' &&
+           isset($_POST['subtotal']) && $_POST['subtotal']!='' &&
            isset($_POST['isv']) && $_POST['isv']!='' &&
-           isset($_POST['descuento']) &&
+           isset($_POST['descuento']) && isset($_POST['rtn']) &&
            isset($_POST['total']) && $_POST['total']!='' &&
            isset($_POST['carrito']) && $_POST['carrito']!='' ){
 
@@ -41,11 +41,11 @@
              echo json_encode($res);exit;
            }
 
-            $sql = 'call SPnuevoingresar_facturacompras('.$_POST['nom_proveedor'].','.$_POST['total'].',
+            $sql = 'call SPnueva_venta('.$_POST['nom_proveedor'].','.$_POST['total'].',
             '.$_POST['isv'].','.$_POST['descuento'].',"'.$_POST['numFactura'].'","'.$_POST['fechaFactura'].'");';
 
             foreach ($_POST['carrito'] as $key) {
-              $sql.= 'call SPnuevo_detalle_compra("'.$key['barcode'].'" , "'.$_POST['numFactura'].'" , '.$key['cantidad'].',
+              $sql.= 'call SPnueva_detalle_venta("'.$key['barcode'].'" , "'.$_POST['numFactura'].'" , '.$key['cantidad'].',
                '.$key['precio'].' , '.$key['costo'].' , '.$key['isv'].' , '.$key['descuento'].' , '.$key['total'].');';
             }
 
