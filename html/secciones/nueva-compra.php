@@ -56,7 +56,12 @@
                                        <input type="number" id="input-codigo" class="form-control" onchange="validaCampos()" onkeypress="enter(event)" onfocusin="noscan()" onfocusout="siscan()" required>
                                      </div>
                                    </div>
-                                   <div class="col-md-2">
+                                   <div class="col-md-1">
+                                     <div class="input-group">
+                                       <button type="button" class="btn btn-primary" onclick="buscaProducto();" id="btn-buscar">Buscar</button>
+                                     </div>
+                                   </div>
+                                   <div class="col-md-1">
                                      <div class="input-group">
                                        <button type="button" class="btn btn-success" onclick="añadirProducto();" id="btn-agregar" disabled>Agregar</button>
                                      </div>
