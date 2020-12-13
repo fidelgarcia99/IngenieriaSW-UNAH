@@ -80,8 +80,7 @@ if (validaCampos2()) {
             $('#nueva-compra-modal').modal('hide');
             $('#modal-success').modal('show');
             setTimeout(()=>$('#modal-success').modal('hide'), 2000);
-            limpiarModal();
-            mostrarCompras();
+            limpiarFactura();            
           }else{
             document.getElementById('div-error').innerHTML=respuesta.mensaje;
             document.getElementById('div-error').style='display:block';
