@@ -1,7 +1,7 @@
 function selectRow(idRow,row){
     tabla=document.getElementById('detalle-compra-tabla');
     document.getElementById('modal-titulo').innerHTML='Detalles de Factura';
-    renderTabla('id',idRow,'compras',tabla);
+    renderTabla('id',idRow,'ventas',tabla);
     $('#detalle-compra-modal').modal('show');
 }
 
@@ -15,7 +15,7 @@ function mouseOutRow(row){
 
 function mostrarVentas(){
   var tabla = document.getElementById('dataTable');
-  renderTabla(null,null,"compras",tabla);
+  renderTabla(null,null,"ventas",tabla);
 }
 
 mostrarVentas();

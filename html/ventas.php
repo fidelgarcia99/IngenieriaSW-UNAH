@@ -58,6 +58,7 @@ if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::Ge
   <!-- Logout Modal-->
   <?php include(SECCIONES . 'logout-modal.php')?>
 
+  <?php include(SECCIONES . 'detalle-compra-modal.php')?>
   <!-- Scripts-->
   <?php include(SECCIONES . 'scripts-generales.php')?>
   <!------------>
