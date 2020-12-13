@@ -43,6 +43,26 @@
     </li>
     ';
   }
+  if ((JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+    echo '
+    <!-- Nav Item - Tables -->
+    <li class="nav-item">
+      <a class="nav-link" href="?view=ventas">
+        <i class="fas fa-receipt"></i>
+        <span>Ventas</span></a>
+    </li>
+    ';
+}
+  if ((JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+    echo '
+    <!-- Nav Item - Tables -->
+    <li class="nav-item">
+      <a class="nav-link" href="?view=facturacion">
+        <i class="fas fa-receipt"></i>
+        <span>Nueva Factura</span></a>
+    </li>
+    ';
+}
 
   if ((JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
     echo '
@@ -98,16 +118,7 @@
         ';
       }
 
-        if ((JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
-          echo '
-          <!-- Nav Item - Tables -->
-          <li class="nav-item">
-            <a class="nav-link" href="?view=facturacion">
-              <i class="fas fa-receipt"></i>
-              <span>Nueva Factura</span></a>
-          </li>
-          ';
-  }
+
 ?>
 <!-- Divider -->
 <hr class="sidebar-divider d-none d-md-block">
