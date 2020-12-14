@@ -38,15 +38,15 @@
            $result = mysqli_begin_transaction($conexion->getLink());
            if (!$result) {
              $res = array("res"=>"fail","mensaje"=>"Tuvimos un problema: (". mysqli_errno($conexion->getLink()) . ") " . mysqli_error($conexion->getLink()));
-             echo json_encode($res);exit;
+
            }
 
-            $sql = 'call SPnueva_venta('.$_POST['nom_proveedor'].','.$_POST['total'].',
-            '.$_POST['isv'].','.$_POST['descuento'].',"'.$_POST['numFactura'].'","'.$_POST['fechaFactura'].'");';
+            $sql = 'call SPnueva_venta("'.$_POST['numFactura'].'","'.date('Y-m-d').'","'.JWTokens::GetData($_COOKIE['token'])['username'].'",
+            "'.$_POST['cliente'].'","'.$_POST['rtn'].'",'.$_POST['subtotal'].','.$_POST['isv'].','.$_POST['descuento'].','.$_POST['total'].');';
 
             foreach ($_POST['carrito'] as $key) {
-              $sql.= 'call SPnueva_detalle_venta("'.$key['barcode'].'" , "'.$_POST['numFactura'].'" , '.$key['cantidad'].',
-               '.$key['precio'].' , '.$key['costo'].' , '.$key['isv'].' , '.$key['descuento'].' , '.$key['total'].');';
+              $sql.= 'call SPnuevo_detalle_venta("'.$key['Barcode'].'" , "'.$_POST['numFactura'].'" , '.$key['Cantidad'].',
+               '.$key['Precio'].' , '.$key['ISV'].' , '.$key['Descuento'].' , '.$key['Total'].');';
             }
 
             mysqli_multi_query($conexion->getLink(), $sql);
