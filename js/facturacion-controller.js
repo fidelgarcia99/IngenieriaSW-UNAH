@@ -48,6 +48,7 @@ function buscaProducto(barcode){
       element['Descripcion']=formatDescrip(element['Descripcion'],element['Tipo']);
       element['Id'] = parseInt(element['Id']);
       element['Total']=0;
+      element['ISV']=0;
 
       if (carrito.length>0) {
         let alreadyExist = false;
@@ -76,11 +77,14 @@ async function registrarVenta(){
   let numFactura = document.getElementById('input-numero-factura').value;
   let cliente = document.getElementById('input-cliente').value;
   let rtn = document.getElementById('input-rtn').value;
+  let correlativo = parseInt(numFactura.split("-")[3]);
+
 
 if (validaCampos()) {
 
         let venta = {
           numFactura : numFactura,
+          correlativo:correlativo,
           cliente:cliente,
           rtn:rtn,
           subtotal:subtotal,
@@ -89,7 +93,7 @@ if (validaCampos()) {
           total : total,
           carrito:carrito
         }
-        console.log(venta);
+
           let respuesta= await nuevoRegistro(venta, "ventas");
 
         if(respuesta!=null){
@@ -97,7 +101,7 @@ if (validaCampos()) {
             document.getElementById('modal-success-message').innerHTML = respuesta.mensaje;
             $('#nueva-compra-modal').modal('hide');
             $('#modal-success').modal('show');
-            setTimeout(()=>$('#modal-success').modal('hide'), 2000);
+            setTimeout(()=>{$('#modal-success').modal('hide');nuevaFactura();}, 2000);
             limpiarFactura();
           }else{
             document.getElementById('div-error').innerHTML=respuesta.mensaje;
@@ -270,8 +274,9 @@ function adelantoEmpleado(){
 }
 
 function limpiarFactura(){
-  document.getElementById('nombreCliente').value='';
-  document.getElementById('RTNCliente').value='';
+  document.getElementById('input-numero-factura').value='';
+  document.getElementById('input-cliente').value='Consumidor Final';
+  document.getElementById('input-rtn').value='';
   document.getElementById('input-codigo').value='';
   document.getElementById('input-total').value = '00.00';
   document.getElementById('input-descuento').value = '00.00';
@@ -280,9 +285,24 @@ function limpiarFactura(){
   total=0;
   descuento=0;
   subtotal=0;
-  ivs = 0;
+  isv = 0;
   carrito = [];
   renderTabla();
+}
+
+function nuevaFactura(){
+  let respuesta = obtenerRegistros('factura', null, 'ventas');
+  respuesta.then(res => {
+    if (res!=null) {
+      limpiarFactura();
+      document.getElementById('input-numero-factura').value = res.mensaje
+    }else{
+      document.getElementById('div-error').innerHTML=res.mensaje;
+      document.getElementById('div-error').style='display:block';
+    }
+  }).catch(err=>{
+    console.error(err);
+  });
 }
 
 function calcuarTotal(){
@@ -292,6 +312,7 @@ function calcuarTotal(){
   carrito.forEach((item, i) => {
     let d = item['Precio'] * (item['Descuento']/100);
     item['Total'] = Math.round(((item['Precio'] - d ) * item['Cantidad'])*100)/100;
+    item['ISV'] = Math.round((item['Total'] - (item['Total']/1.15))*100)/100;
 
     descuentot += d * item['Cantidad'];
     totalt += item['Total'];
@@ -299,10 +320,11 @@ function calcuarTotal(){
 
   total = Math.round(totalt*100)/100;
   descuento = Math.round(descuentot*100)/100;
-  ivs = Math.round((total-total/1.15)*100)/100;
+  isv = Math.round((total-total/1.15)*100)/100;
+  subtotal = total - isv;
 
-  document.getElementById('input-subtotal').value = Math.round((total-ivs)*100)/100;
-  document.getElementById('input-ivs').value = ivs;
+  document.getElementById('input-subtotal').value = Math.round((total-isv)*100)/100;
+  document.getElementById('input-ivs').value = isv;
   document.getElementById('input-descuento').value = descuento;
   document.getElementById('input-total').value = total;
 
@@ -338,6 +360,7 @@ function validaCampos(){
 cambioPrecio();
 formatearProductos();
 siscan();
-shortcut.add("Ctrl+1", escanearID);
+nuevaFactura();
+shortcut.add("Ctrl+1", nuevaFactura);
 shortcut.add("Ctrl+2", ()=>{$('#nuevoConsulta').modal('show')});
 shortcut.add("Ctrl+3", adelantoEmpleado);

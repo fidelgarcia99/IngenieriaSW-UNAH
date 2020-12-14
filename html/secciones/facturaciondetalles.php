@@ -47,7 +47,7 @@
                                           <div class="input-group-prepend">
                                             <div class="input-group-text">Factura No.</div>
                                           </div>
-                                          <input type="text" class="form-control input-sm" id="input-numero-factura" value="000" readonly>
+                                          <input type="text" class="form-control input-sm" id="input-numero-factura" readonly>
                                         </div>
                                    </div>
                                    <div class="col-5">
