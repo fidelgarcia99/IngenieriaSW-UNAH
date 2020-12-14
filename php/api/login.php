@@ -15,11 +15,16 @@
             $passwd = sha1(mysqli_real_escape_string($conexion->getLink(),$_POST['password']));
 
             $sql = '
-            SELECT CONCAT(p.pnombre," ",p.papellido) as nombre, u.nombre_usuario as username, tu.tipo as tipo
+            SELECT
+              CONCAT(p.pnombre," ",p.papellido) as nombre,
+               u.nombre_usuario as username,
+                tu.tipo as tipo,
+                CONCAT(uc.establecimiento, "-", uc.caja) as ubicacion
             FROM usuario as u
             inner join empleado as e on e.idEmpleado = u.Empleado_idEmpleado
             inner join persona as p on p.idPersona = e.Persona_idPersona
             inner join tipousuario as tu on tu.idtipousuario = u.idtipousuario
+            inner join ubicacion_correlativa as uc on uc.idUsuario = u.idUsuario
             WHERE nombre_usuario = "'.$user.'" AND password = "'.$passwd.'"';
 
             $result = $conexion->ejecutarInstruccion($sql);
@@ -32,7 +37,8 @@
                $token = JWTokens::generaToken([
                 'nombre' => $filas['nombre'],
                 'username' => $filas['username'],
-                'tipo' => $filas['tipo']
+                'tipo' => $filas['tipo'],
+                'ubicacion' => $filas['ubicacion']
                 ]);
 
                 $_SESSION['token'] = $token;

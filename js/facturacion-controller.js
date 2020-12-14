@@ -77,11 +77,14 @@ async function registrarVenta(){
   let numFactura = document.getElementById('input-numero-factura').value;
   let cliente = document.getElementById('input-cliente').value;
   let rtn = document.getElementById('input-rtn').value;
+  let correlativo = parseInt(numFactura.split("-")[3]);
+
 
 if (validaCampos()) {
 
         let venta = {
           numFactura : numFactura,
+          correlativo:correlativo,
           cliente:cliente,
           rtn:rtn,
           subtotal:subtotal,
@@ -90,7 +93,7 @@ if (validaCampos()) {
           total : total,
           carrito:carrito
         }
-        
+
           let respuesta= await nuevoRegistro(venta, "ventas");
 
         if(respuesta!=null){
@@ -98,7 +101,7 @@ if (validaCampos()) {
             document.getElementById('modal-success-message').innerHTML = respuesta.mensaje;
             $('#nueva-compra-modal').modal('hide');
             $('#modal-success').modal('show');
-            setTimeout(()=>$('#modal-success').modal('hide'), 2000);
+            setTimeout(()=>{$('#modal-success').modal('hide');nuevaFactura();}, 2000);
             limpiarFactura();
           }else{
             document.getElementById('div-error').innerHTML=respuesta.mensaje;
@@ -287,6 +290,21 @@ function limpiarFactura(){
   renderTabla();
 }
 
+function nuevaFactura(){
+  let respuesta = obtenerRegistros('factura', null, 'ventas');
+  respuesta.then(res => {
+    if (res!=null) {
+      limpiarFactura();
+      document.getElementById('input-numero-factura').value = res.mensaje
+    }else{
+      document.getElementById('div-error').innerHTML=res.mensaje;
+      document.getElementById('div-error').style='display:block';
+    }
+  }).catch(err=>{
+    console.error(err);
+  });
+}
+
 function calcuarTotal(){
   let totalt = 0;
   let descuentot = 0;
@@ -342,6 +360,7 @@ function validaCampos(){
 cambioPrecio();
 formatearProductos();
 siscan();
-shortcut.add("Ctrl+1", escanearID);
+nuevaFactura();
+shortcut.add("Ctrl+1", nuevaFactura);
 shortcut.add("Ctrl+2", ()=>{$('#nuevoConsulta').modal('show')});
 shortcut.add("Ctrl+3", adelantoEmpleado);

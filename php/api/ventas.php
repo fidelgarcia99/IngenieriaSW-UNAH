@@ -11,7 +11,7 @@
 
     verificaToken();
 
-    if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+    if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="cajero" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
       echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
       exit;
     }
@@ -32,7 +32,6 @@
           $result = mysqli_autocommit($conexion->getLink(), FALSE);
            if (!$result) {
              $res = array("res"=>"fail","mensaje"=>"Tuvimos un problema: (". mysqli_errno($conexion->getLink()) . ") " . mysqli_error($conexion->getLink()));
-             echo json_encode($res);exit;
            }
 
            $result = mysqli_begin_transaction($conexion->getLink());
@@ -48,6 +47,8 @@
               $sql.= 'call SPnuevo_detalle_venta("'.$key['Barcode'].'" , "'.$_POST['numFactura'].'" , '.$key['Cantidad'].',
                '.$key['Precio'].' , '.$key['ISV'].' , '.$key['Descuento'].' , '.$key['Total'].');';
             }
+
+            $sql.='call SPactualiza_numeracion_correlativa('.$_POST['correlativo'].',"'.date('Y-m-d').'");';
 
             mysqli_multi_query($conexion->getLink(), $sql);
 
@@ -80,6 +81,24 @@
             if ($_GET['param']=='id') {
               $id = $_GET['value'];
               $resultado = $conexion->ejecutarInstruccion("call DetalleVenta($id)");
+            }
+            if ($_GET['param']=='factura') {
+              $fecha = date('Y-m-d');
+              $resultado = $conexion->ejecutarInstruccion("call NumeracionCorrelativa($fecha)");
+              $row = mysqli_fetch_assoc($resultado);
+              if ($row!=null) {
+                $num = strlen(strval($row['actual']));
+                $ceros ='';
+                for ($i=0; $i < 8-$num; $i++) {
+                  $ceros = $ceros . '0';
+                }
+                $res = array("res"=>"OK","mensaje"=>JWTokens::GetData($_COOKIE['token'])['ubicacion'] . "-01-" . $ceros . $row['actual']);
+              }else{
+                $res = array("res"=>"fail","mensaje"=>"No hay mas numeros de factura disponibles");
+              }
+
+              echo json_encode($res);
+              exit;
             }
           }else{
             $resultado = $conexion->ejecutarInstruccion("call Ventas();");
