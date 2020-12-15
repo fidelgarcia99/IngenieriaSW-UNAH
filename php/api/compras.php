@@ -12,16 +12,15 @@
 
     verificaToken();
 
-    if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
-      echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
-      exit;
-    }
-
     $_POST = json_decode(file_get_contents('php://input'),true);
 
     //Servicios web
     switch($_SERVER['REQUEST_METHOD']){
         case 'POST':    //Crear compra
+        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+          echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
+          exit;
+        }
           if(isset($_POST['numFactura']) && $_POST['numFactura']!='' &&
            isset($_POST['nom_proveedor']) && $_POST['nom_proveedor']!='' &&
            isset($_POST['fechaFactura']) && $_POST['fechaFactura']!='' &&
@@ -77,6 +76,10 @@
         break;
 
         case 'GET':     //Obtener cliente/s
+        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+          echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
+          exit;
+        }
           if (isset($_GET['param']) && $_GET['param']!='') {
             if ($_GET['param']=='id') {
               $id = $_GET['value'];

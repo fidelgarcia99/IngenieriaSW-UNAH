@@ -12,46 +12,49 @@
 
     verificaToken();
 
-    if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
-      echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
-      exit;
-    }
-
     $_POST = json_decode(file_get_contents('php://input'),true);
 
     //Servicios web
     switch($_SERVER['REQUEST_METHOD'])
     {
         case 'POST':    //Crear usuario
-            if(isset($_POST['username']) && $_POST['username']!='' &&
-               isset($_POST['idEmpleado']) && $_POST['idEmpleado']!='' &&
-               isset($_POST['tipo']) && $_POST['tipo']!='' &&
-               isset($_POST['passwd']) && $_POST['passwd']!=''){
+        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+          echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
+          exit;
+        }
+        if(isset($_POST['username']) && $_POST['username']!='' &&
+           isset($_POST['idEmpleado']) && $_POST['idEmpleado']!='' &&
+           isset($_POST['tipo']) && $_POST['tipo']!='' &&
+           isset($_POST['passwd']) && $_POST['passwd']!=''){
 
-               $usuario = new Usuario(
-                             $_POST['username'] ,
-                             sha1($_POST['passwd']),
-                             $_POST['idEmpleado'],
-                             $_POST['tipo']
-                           );
+           $usuario = new Usuario(
+                         $_POST['username'] ,
+                         sha1($_POST['passwd']),
+                         $_POST['idEmpleado'],
+                         $_POST['tipo']
+                       );
 
-               if($usuario->registraUsuario($conexion)){
-                 echo '{"res":"OK","mensaje":"Usuario creado."}';
-               }else{
-                 if(mysqli_errno($conexion->getLink()) == 1062)
-                 echo '{"res":"fail","mensaje":"Nombre de usuario en uso."}';
-                 else{
-                    $res = array("res"=>"fail","mensaje"=>mysqli_error($conexion->getLink()));
-                    echo json_encode($res);
-                 }
-               }
+           if($usuario->registraUsuario($conexion)){
+             echo '{"res":"OK","mensaje":"Usuario creado."}';
+           }else{
+             if(mysqli_errno($conexion->getLink()) == 1062)
+             echo '{"res":"fail","mensaje":"Nombre de usuario en uso."}';
+             else{
+                $res = array("res"=>"fail","mensaje"=>mysqli_error($conexion->getLink()));
+                echo json_encode($res);
+             }
+           }
 
-            }else{
-              echo '{"res":"fail","mensaje":"Debe ingresar todos los campos."}';
-            }
+        }else{
+          echo '{"res":"fail","mensaje":"Debe ingresar todos los campos."}';
+        }
         break;
 
         case 'GET':     //Obtener usuario/s
+        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+          echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
+          exit;
+        }
         if (isset($_GET['param']) && isset($_GET['value'])) {
 
              // Pasan un ID?
@@ -75,6 +78,10 @@
         break;
 
         case 'PUT':     //Actualizar usuario
+        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+          echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
+          exit;
+        }
         if(isset($_POST['username']) && $_POST['username']!='' &&
            isset($_POST['idEmpleado']) && $_POST['idEmpleado']!='' &&
            isset($_POST['tipo']) && $_POST['tipo']!='' &&
@@ -104,6 +111,10 @@
         break;
 
         case 'DELETE':  //Eliminar usuario
+        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+          echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
+          exit;
+        }
         if (isset($_POST['id']) && $_POST['id']!='') {
           if (Usuario::eliminarUsuario($conexion,$_POST['id'])) {
               echo '{"res":"OK","mensaje":"Usuario Eliminado"}';

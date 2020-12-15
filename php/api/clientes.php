@@ -12,17 +12,16 @@
 
     verificaToken();
 
-    if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
-      echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
-      exit;
-    }
-
     $_POST = json_decode(file_get_contents('php://input'),true);
 
     //Servicios web
     switch($_SERVER['REQUEST_METHOD']){
 
         case 'POST':    //Crear cliente
+        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+          echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
+          exit;
+        }
         if(isset($_POST['ciudad']) && $_POST['ciudad']!='' &&
            isset($_POST['pnombre']) && $_POST['pnombre']!='' &&
            isset($_POST['snombre']) && isset($_POST['sapellido']) &&
@@ -61,6 +60,10 @@
         break;
 
         case 'GET':     //Obtener cliente/s
+        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+          echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
+          exit;
+        }
             if(isset($_GET['param']) && isset($_GET['value'])){
               $id = $_GET['value'];
               $resultado = $conexion->ejecutarInstruccion("call Cliente($id);");
@@ -76,6 +79,10 @@
         break;
 
         case 'PUT':     //Actualizar cliente
+        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+          echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
+          exit;
+        }
         if(isset($_POST['ciudad']) && $_POST['ciudad']!='' &&
            isset($_POST['pnombre']) && $_POST['pnombre']!='' &&
            isset($_POST['snombre']) && isset($_POST['sapellido']) &&
@@ -105,6 +112,10 @@
         break;
 
         case 'DELETE':  //Eliminar cliente
+        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+          echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
+          exit;
+        }
         if (isset($_POST['id']) && $_POST['id']!='') {
           if (Cliente::eliminarCliente($conexion,$_POST['id'])) {
               echo '{"res":"OK","mensaje":"Cliente Eliminado"}';

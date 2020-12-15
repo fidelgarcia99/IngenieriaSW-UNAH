@@ -1,5 +1,5 @@
 <?php include(SECCIONES . 'valida-acceso.php');
-if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="admin" || JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor")) {
   header('Location: ?view=401');
 }
 ?>

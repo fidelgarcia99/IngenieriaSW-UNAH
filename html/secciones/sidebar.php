@@ -96,7 +96,7 @@
     </li>
     ';
 }
-    if ((JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+    if ((JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
       echo '
       <!-- Nav Item - Usuarios -->
       <li class="nav-item">

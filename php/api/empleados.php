@@ -12,15 +12,14 @@
 
     verificaToken();
 
-    if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
-      echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
-      exit;
-    }
-
     //Servicios web
     switch($_SERVER['REQUEST_METHOD'])
     {
         case 'POST':    //Crear producto
+        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+          echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
+          exit;
+        }
         $_POST = json_decode(file_get_contents('php://input'),true);
 
         if(isset($_POST['ciudad']) && $_POST['ciudad']!='' &&
@@ -63,7 +62,10 @@
         break;
 
         case 'GET':     //Obtener producto/s
-         
+        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+          echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
+          exit;
+        }
           if(isset($_GET['param']) && isset($_GET['value'])){
             if ($_GET['param'] == "id") {
               $value = $_GET['value'];
@@ -93,6 +95,10 @@
         break;
 
         case 'PUT':     //Actualizar producto
+        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+          echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
+          exit;
+        }
           $_POST = json_decode(file_get_contents('php://input'),true);
 
           if(isset($_POST['ciudad']) && $_POST['ciudad']!='' &&
@@ -103,7 +109,7 @@
              isset($_POST['direccion']) && $_POST['direccion']!='' &&
              isset($_POST['telefono']) && $_POST['telefono']!='' &&
              isset($_POST['cargo']) && $_POST['cargo']!=''){
-  
+
              $empleado = new Empleado(
                            $_POST['pnombre'] ,
                            $_POST['snombre'] ,
@@ -117,7 +123,7 @@
                            $_POST['cargo'],
                            date('Y-m-d')
                          );
-  
+
              if($empleado->actualizarEmpleado($conexion, $_POST['id'])){
                echo '{"res":"OK","mensaje":"Empleado actualizado."}';
              }else{
@@ -128,13 +134,17 @@
                   echo json_encode($res);
                }
              }
-  
+
           }else{
             echo '{"res":"fail","mensaje":"Debe ingresar todos los campos."}';
           }
         break;
 
         case 'DELETE':  //Eliminar producto
+        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+          echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
+          exit;
+        }
           $_POST = json_decode(file_get_contents('php://input'),true);
 
           $empleado = new Empleado();

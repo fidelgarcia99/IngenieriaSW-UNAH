@@ -12,17 +12,16 @@
 
     verificaToken();
 
-    if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
-      echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
-      exit;
-    }
-
     $_POST = json_decode(file_get_contents('php://input'),true);
 
     //Servicios web
     switch($_SERVER['REQUEST_METHOD'])
     {
         case 'POST':
+        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+          echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
+          exit;
+        }
             if(isset($_POST['nombreP']) && $_POST['nombreP']!='' &&
                isset($_POST['direccionP']) && $_POST['direccionP']!='' &&
                isset($_POST['telefonoP']) && $_POST['telefonoP']!='' &&
@@ -53,6 +52,10 @@
         break;
 
         case 'GET':
+        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+          echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
+          exit;
+        }
           if(isset($_GET['param']) && isset($_GET['value'])){
             if ($_GET['param'] == "id") {
               $value = $_GET['value'];
@@ -70,6 +73,10 @@
         break;
 
         case 'PUT':     //Actualizar usuario
+        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+          echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
+          exit;
+        }
           if(isset($_POST['nombreP']) && $_POST['nombreP']!='' &&
           isset($_POST['direccionP']) && $_POST['direccionP']!='' &&
           isset($_POST['telefonoP']) && $_POST['telefonoP']!='' &&
@@ -99,6 +106,10 @@
         break;
 
         case 'DELETE':  //Eliminar usuario
+        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+          echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
+          exit;
+        }
         if (isset($_POST['id']) && $_POST['id']!='') {
           if (Proveedor::eliminarProveedor($conexion,$_POST['id'])) {
               echo '{"res":"OK","mensaje":"Proveedor Eliminado"}';

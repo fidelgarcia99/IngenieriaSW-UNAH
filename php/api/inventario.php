@@ -18,7 +18,7 @@
     {
         case 'POST':    //Crear producto
 
-        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
           echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
           exit;
         }
@@ -76,7 +76,7 @@
 
         case 'PUT':     //Actualizar producto
 
-        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
           echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
           exit;
         }
@@ -109,7 +109,7 @@
 
         case 'DELETE':  //Eliminar producto
 
-        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="supervisor" || JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
+        if (!(JWTokens::GetData($_COOKIE['token'])['tipo']=="admin")) {
           echo '{"res":"fail","mensaje":"401: Acceso no autorizado"}';
           exit;
         }
